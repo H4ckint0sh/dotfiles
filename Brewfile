@@ -54,7 +54,7 @@ brew 'yarn'
 cask "hammerspoon"
 cask 'docker'
 cask 'firefox'
-cask 'google-chrome'
+#cask 'google-chrome'
 cask "appcleaner"
 cask "spotify"
 cask 'the-unarchiver'
@@ -62,5 +62,5 @@ cask 'visual-studio-code'
 cask 'transmission'
 
 # Fonts
-cask 'font-sf-mono-nerd-font-ligaturized'
+#cask 'font-sf-mono-nerd-font-ligaturized'
 
