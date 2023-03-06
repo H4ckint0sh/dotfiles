@@ -6,7 +6,10 @@ brew upgrade
 
 brew bundle
 
-rm ~/.zshrc
+FILE=~/.zshrc
+if test -f "$FILE"; then
+    rm $FILE
+fi
 
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
