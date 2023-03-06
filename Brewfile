@@ -13,7 +13,6 @@ tap "jesseduffield/lazygit"
 # Binaries
 brew 'bash' # Latest Bash version
 brew 'coreutils' # Those that come with macOS are outdated
-brew 'ffmpeg'
 brew "fzf"
 brew "thefuck"
 brew 'tldr'
