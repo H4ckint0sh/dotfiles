@@ -7,11 +7,6 @@ This is a quick overview of my dotfiles for MacOS.
 
 ## Setup
 
-1. Install this font [Liga SFMono Nerd Font](https://github.com/epk/SF-Mono-Nerd-Font)
-2. Run the `./macsetup` this will install brew and all the `Brewfile` packages.
-3. Run the `./linkfolders` this will export which folder needs to be linked.
-4. Run the `./install` this will link all the configs.
-
 ```
 git clone --recursive git@github.com:H4ckint0sh/dotfiles.git ~/.dotfiles
 ~/.dotfiles/quickstart.sh
