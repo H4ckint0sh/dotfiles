@@ -25,6 +25,7 @@ brew 'helix'
 brew "diff-so-fancy"
 brew "luajit", args: ["HEAD"]
 brew "neovim"
+brew "stow"
 brew "tmux"
 brew "gitmux"
 brew "ripgrep"
