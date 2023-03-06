@@ -19,8 +19,6 @@ sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.
 brew services start yabai
 brew services start skhd
 
-. ./bin/helper && create_spaces
-
 # Thanks to Mathias Bynens!
 # ~/.macos — https://mths.be/macos
 
