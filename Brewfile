@@ -48,7 +48,6 @@ brew 'php'
 brew "python@3.9"
 brew 'mysql'
 brew 'nginx'
-brew 'node'
 brew 'yarn'
 
 # Apps
