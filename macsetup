@@ -6,11 +6,7 @@ brew upgrade
 
 brew bundle
 
-sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-
 rm ~/.zshrc
-rm ~/.config/ranger/rc.conf
-rm ~/.config/ranger/rifle.conf
 
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
@@ -19,6 +15,5 @@ sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.
 
 brew services start yabai
 brew services start skhd
-brew services start spacebar
 
 . ./bin/helper && create_spaces
