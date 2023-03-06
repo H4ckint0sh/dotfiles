@@ -12,6 +12,11 @@ This is a quick overview of my dotfiles for MacOS.
 3. Run the `./linkfolders` this will export which folder needs to be linked.
 4. Run the `./install` this will link all the configs.
 
+```
+git clone --recursive git@github.com:H4ckint0sh/dotfiles.git ~/.dotfiles
+~/.dotfiles/quickstart.sh
+```
+
 In case you want to remove the configurations just run `./cleanenv` this will unlink the configs.
 
 ## Apps
