@@ -1,0 +1,68 @@
+[[language]]
+name = "html"
+formatter = { command = 'prettier', args = ["--parser", "html"] }
+indent = { tab-width = 4, unit = "\t" }
+
+[[language]]
+name = "json"
+formatter = { command = 'prettier', args = ["--parser", "json"] }
+indent = { tab-width = 4, unit = "\t" }
+
+[[language]]
+name = "css"
+formatter = { command = 'prettier', args = ["--parser", "css"] }
+indent = { tab-width = 4, unit = "\t" }
+
+[[language]]
+name = "javascript"
+formatter = { command = 'prettier', args = ["--parser", "typescript"] }
+indent = { tab-width = 4, unit = "\t" }
+auto-format = true
+
+[[language]]
+name = "typescript"
+formatter = { command = 'prettier', args = ["--parser", "typescript"] }
+indent = { tab-width = 4, unit = "\t" }
+auto-format = true
+
+[[language]]
+name = "tsx"
+formatter = { command = 'prettier', args = ["--stdin-filename", "file.tsx"] }
+indent = { tab-width = 4, unit = "\t" }
+auto-format = true
+
+# Toml
+[[language]]
+name = "toml"
+scope = "source.toml"
+roots = ["*.toml"]
+auto-format = true
+injection-regex = "toml"
+file-types = ["toml"]
+comment-token = "#"
+language-server = { command = "taplo", args = ["lsp", "stdio"] }
+indent = { tab-width = 2, unit = "  " }
+
+[[grammar]]
+name = "toml"
+source = { git = "https://github.com/ikatyang/tree-sitter-toml", rev = "7cff70bbcbbc62001b465603ca1ea88edd668704" }
+
+# Yaml
+[[language]]
+name = "yaml"
+scope = "source.yaml"
+file-types = ["yml", "yaml"]
+roots = []
+comment-token = "#"
+indent = { tab-width = 2, unit = "  " }
+language-server = { command = "yaml-language-server", args = ["--stdio"] }
+
+[[language]]
+name = "lua"
+roots = [".luarc.json", ".luacheckrc", ".stylua.toml", "selene.toml", ".git"]
+#language-server = { command = "luahelper-lsp", args = ["-mode", "1", "-logflag", "1"] }
+language-server = { command = "lua-language-server" }
+# ref https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/server_configurations/sumneko_lua.lua
+# https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#sumneko_lua
+# https://learnxinyminutes.com/docs/toml/
+config = { "telemetry" = { "enable" = false } }

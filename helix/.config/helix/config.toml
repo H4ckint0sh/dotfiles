@@ -1,0 +1,63 @@
+theme = "onedark"
+
+[editor]
+line-number = "relative"
+mouse = false
+auto-format = true
+bufferline = "multiple"
+color-modes = true
+
+
+[editor.lsp]
+auto-signature-help = false
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+select = "underline"
+
+[editor.file-picker]
+hidden = false
+
+[editor.soft-wrap]
+enable = true
+max-wrap = 25         # increase value to reduce forced mid-word wrapping
+max-indent-retain = 0
+wrap-indicator = ""   # set wrap-indicator to "" to hide it
+
+
+[editor.indent-guides]
+render = true
+character = "┊" # Some characters that work well: "▏", "┆", "┊", "⸽"
+skip-levels = 1
+
+[keys.insert]
+C-space = "signature_help"
+
+[keys.normal]
+C-s = ":w"
+# C-o = ":open ~/.config/helix/config.toml"
+C-A-j = [
+  'ensure_selections_forward',
+  'extend_to_line_bounds',
+  'extend_char_right',
+  'extend_char_left',
+  'delete_selection',
+  'add_newline_below',
+  'move_line_down',
+  'replace_with_yanked',
+]
+C-A-k = [
+  'ensure_selections_forward',
+  'extend_to_line_bounds',
+  'extend_char_right',
+  'extend_char_left',
+  'delete_selection',
+  'move_line_up',
+  'add_newline_above',
+  'move_line_up',
+  'replace_with_yanked',
+]
+C-x = ":buffer-close"
+tab = ":buffer-next"
+S-tab = ":buffer-previous"

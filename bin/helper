@@ -1,0 +1,29 @@
+#!/bin/bash
+
+set -ex
+
+reset_spaces() {
+  delete_spaces
+  greate_spaces
+}
+
+delete_spaces() {
+  SPACES=$(yabai -m query --spaces | jq -r '.[]."index"' | tail -n 1)
+
+  for i in `seq 1 $SPACES`; do
+    yabai -m space --destroy
+  done
+}
+
+create_spaces() {
+  SPACES=$(yabai -m query --spaces | jq -r '.[]."index"' | tail -n 1)
+
+  if [[ $SPACES -lt 7 ]]; then
+    NUM_SPACES_TO_CREATE=$(echo 7 - $SPACES| bc)
+
+    for i in `seq 1 $NUM_SPACES_TO_CREATE`; do
+      yabai -m space --create
+    done
+
+  fi
+}
