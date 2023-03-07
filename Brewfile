@@ -4,7 +4,6 @@ tap 'epk/epk'
 tap 'arl/arl'
 tap 'homebrew/cask-versions'
 tap "koekeishiya/formulae"
-tap 'shaunsingh/SFMono-Nerd-Font-Ligaturized'
 tap 'homebrew/bundle'
 tap "homebrew/services"
 tap "homebrew/core"
@@ -63,5 +62,4 @@ cask 'visual-studio-code'
 cask 'transmission'
 
 # Fonts
-#cask 'font-sf-mono-nerd-font-ligaturized'
-
+cask 'font-sf-mono-nerd-font'
