@@ -24,7 +24,7 @@ window:
 
 font:
   normal:
-    family: Liga SFMono Nerd Font
+    family: SFMono Nerd Font
     style: Medium
   size: 12  
   builtin_box_drawing: true
