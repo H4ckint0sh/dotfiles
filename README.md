@@ -6,10 +6,8 @@ This is my dotfiles for MacOS.
 
 ## Setup
 
-```
-
 ### Install
-
+```
 git clone --recursive git@github.com:H4ckint0sh/dotfiles.git ~/.dotfiles
 cd ~/.dotfiles
 chmod +x quickstart.sh
