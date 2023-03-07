@@ -26,10 +26,14 @@ indent = { tab-width = 4, unit = "\t" }
 auto-format = true
 
 [[language]]
+name = "markdown"
+formatter = { command = "prettier", args = ["--parser", "markdown"] }
+
+[[language]]
 name = "tsx"
-formatter = { command = 'prettier', args = ["--stdin-filename", "file.tsx"] }
-indent = { tab-width = 4, unit = "\t" }
+formatter = { command = 'prettier', args = ["--stdin-filepath", "file.tsx"] }
 auto-format = true
+indent = { tab-width = 4, unit = "\t" }
 
 # Toml
 [[language]]
