@@ -1,0 +1,15 @@
+gui:
+  expandFocusedSidePanel: true
+  sidePanelWidth: 0.30
+  theme:
+    selectedLineBgColor:
+      - black
+      - bold
+  showIcons: true
+  showBottomLine: true
+os:
+  editCommand: "nvim"
+git:
+  paging:
+    colorArg: always
+    pager: diff-so-fancy
