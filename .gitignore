@@ -1,3 +1,4 @@
 *.lock.json
 *.pyc
 .DS_Store
+/helix/.config/helix/runtime
