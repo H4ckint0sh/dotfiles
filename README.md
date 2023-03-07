@@ -2,7 +2,7 @@
 
 This is my dotfiles for MacOS.
 
-![Alacritty](screenshots/Screenshot.pn)
+![Alacritty](screenshots/Screenshot.png)
 
 ## Setup
 
