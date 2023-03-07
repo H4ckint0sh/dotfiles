@@ -1,9 +1,8 @@
 # .dotfiles
 
-This is a quick overview of my dotfiles for MacOS.
+This is my dotfiles for MacOS.
 
-![empty desktop]()
-![nvim]()
+![Alacritty](screenshots/Screenshot.png)
 
 ## Setup
 
