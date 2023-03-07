@@ -6,14 +6,15 @@ This is my dotfiles for MacOS.
 
 ## Setup
 
+### Install
 ```
 git clone --recursive git@github.com:H4ckint0sh/dotfiles.git ~/.dotfiles
 cd ~/.dotfiles
 chmod +x quickstart.sh
 sh quickstart.sh
 ```
-
-In case you want to remove the configurations just run `./cleanenv` this will unlink the configs.
+### Uninstall
+Run `./cleanenv` to unlink the configs.
 
 ## Apps
 
