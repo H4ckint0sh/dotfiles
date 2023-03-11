@@ -19,11 +19,37 @@ formatter = { command = 'prettier', args = ["--parser", "typescript"] }
 indent = { tab-width = 4, unit = "\t" }
 auto-format = true
 
+[language.config]
+hostInfo = "helix"
+locale = "en-US"
+
+[language.config.javascript.inlayHints]
+includeInlayEnumMemberValueHints = true
+includeInlayFunctionLikeReturnTypeHints = true
+includeInlayFunctionParameterTypeHints = true
+includeInlayParameterNameHints = "all"                       # 'none' | 'literals' | 'all';
+includeInlayParameterNameHintsWhenArgumentMatchesName = true
+includeInlayPropertyDeclarationTypeHints = true
+includeInlayVariableTypeHints = true
+
 [[language]]
 name = "typescript"
 formatter = { command = 'prettier', args = ["--parser", "typescript"] }
 indent = { tab-width = 4, unit = "\t" }
 auto-format = true
+
+[language.config]
+hostInfo = "helix"
+locale = "en-US"
+
+[language.config.typescript.inlayHints]
+includeInlayEnumMemberValueHints = true
+includeInlayFunctionLikeReturnTypeHints = true
+includeInlayFunctionParameterTypeHints = true
+includeInlayParameterNameHints = "all"                       # 'none' | 'literals' | 'all';
+includeInlayParameterNameHintsWhenArgumentMatchesName = true
+includeInlayPropertyDeclarationTypeHints = true
+includeInlayVariableTypeHints = true
 
 [[language]]
 name = "markdown"
@@ -34,6 +60,35 @@ name = "tsx"
 formatter = { command = 'prettier', args = ["--stdin-filepath", "file.tsx"] }
 auto-format = true
 indent = { tab-width = 4, unit = "\t" }
+
+[language.config]
+hostInfo = "helix"
+locale = "en-US"
+
+[language.config.typescript.inlayHints]
+includeInlayEnumMemberValueHints = true
+includeInlayFunctionLikeReturnTypeHints = true
+includeInlayFunctionParameterTypeHints = true
+includeInlayParameterNameHints = "all"                       # 'none' | 'literals' | 'all';
+includeInlayParameterNameHintsWhenArgumentMatchesName = true
+includeInlayPropertyDeclarationTypeHints = true
+includeInlayVariableTypeHints = true
+
+[[language]]
+name = "jsx"
+
+[language.config]
+hostInfo = "helix"
+locale = "en-US"
+
+[language.config.javascript.inlayHints]
+includeInlayEnumMemberValueHints = true
+includeInlayFunctionLikeReturnTypeHints = true
+includeInlayFunctionParameterTypeHints = true
+includeInlayParameterNameHints = "all"                       # 'none' | 'literals' | 'all';
+includeInlayParameterNameHintsWhenArgumentMatchesName = true
+includeInlayPropertyDeclarationTypeHints = true
+includeInlayVariableTypeHints = true
 
 # Toml
 [[language]]
