@@ -7,9 +7,10 @@ auto-format = true
 bufferline = "multiple"
 color-modes = true
 
-
 [editor.lsp]
 auto-signature-help = false
+display-messages = true
+display-inlay-hints = true
 
 [editor.cursor-shape]
 insert = "bar"
