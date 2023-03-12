@@ -137,6 +137,12 @@ alias gup='git branch --set-upstream-to=origin/$(git-current-branch) $(git-curre
 
 source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/local/share/zsh-history-substring-search/zsh-history-substring-search.zsh
+
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+
+export HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND="bg=white,fg=black,bold"
 
 #PATH ------------------------------------------------------------------------
 export PATH="$DOTFILES/bin:$PATH"
