@@ -1,5 +1,9 @@
 #! /bin/sh
 
+echo "deleting all .DS_Store files"
+find . -name ".DS_Store" -type f -delete
+
+echo "stowing ..."
 pushd $DOTFILES
 for folder in $(echo $STOW_FOLDERS | sed "s/,/ /g")
 do
