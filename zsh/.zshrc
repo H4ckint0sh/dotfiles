@@ -97,6 +97,7 @@ git_page_maybe() {
 # OTHER ALIASES----------------------------------------------------------------
 alias c="clear"
 alias ls="lsd"
+alias lsla="lsd -la"
 
 # GIT ALIASES -----------------------------------------------------------------
 alias gc='git commit'
