@@ -22,6 +22,7 @@ brew "gh"
 brew "git"
 brew "helix"
 brew "diff-so-fancy"
+brew "findutils"
 brew "luajit", args: ["HEAD"]
 brew "neovim"
 brew "stow"
