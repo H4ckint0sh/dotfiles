@@ -3,6 +3,7 @@ export DOTFILES=$HOME/.dotfiles
 
 # Set helix as EDITOR
 export EDITOR=hx
+export OPENAI_API_KEY=$(security find-generic-password -s 'openapi token' -w)
 
 export ZSH_CUSTOM=$DOTFILES
 
@@ -35,6 +36,14 @@ BRANCH_FORMAT="}$BRANCH_PREFIX}$BRANCH_REF}$BRANCH_HASH}$BRANCH_DATE}$BRANCH_AUT
 
 
 # FUNCTIONS --------------------------------------------------------------
+
+function fcd() {
+    cd "$(find -type d | fzf)"
+}
+
+function fo() {
+    open "$(find -type f | fzf)"
+}
 
 show_git_head() {
     pretty_git_log -1
@@ -98,6 +107,7 @@ git_page_maybe() {
 alias c="clear"
 alias ls="lsd"
 alias lsla="lsd -la"
+alias gpath="find -type f | fzf | sed 's/^..//' | tr -d '\n' | pbcopy"
 
 # GIT ALIASES -----------------------------------------------------------------
 alias gc='git commit'
@@ -162,6 +172,8 @@ export PATH="/usr/local/bin:$PATH"
 export PATH="/usr/local/opt/llvm/bin:$PATH"
 export PATH="/Users/ali/.cargo/bin:$PATH"
 export PATH=$HOME/.tmux/plugins/t-smart-tmux-session-manager/bin:$PATH
+export PATH="/usr/local/opt/findutils/libexec/gnubin:$PATH"
+
 
 # NVM
 export NVM_DIR="$HOME/.nvm"
