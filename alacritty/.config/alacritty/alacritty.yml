@@ -24,7 +24,7 @@ window:
 
 font:
   normal:
-    family: Liga SFMono Nerd Font
+    family: SFMono Nerd Font
     style: Regular
   size: 13
   builtin_box_drawing: true
@@ -97,6 +97,9 @@ key_bindings:
   - { key: Up, mods: Command, chars: "\x02\x0b" }
   - { key: LBracket, mods: Alt, chars: "[" } # Fix LBracket two times
   - { key: RBracket, mods: Alt, chars: "]" } # Fix RBracket cursor up in joshuto home
+  - { key: Key2, mods: Alt, chars: "@"}
+  - { key: LBracket, mods: Alt|Shift, chars: "{"}
+  - { key: RBracket, mods: Alt|Shift, chars: "}"}
   - { key: Tab, mods: Control, chars: "\x02\x6f" } # Cycle trough panes
   - { key: Tab, mods: Control|Shift, chars: "\x02\x20" } # Cycle trough Layouts
   - { key: A, mods: Command, chars: "\x02\x61" } # AppLauncher
