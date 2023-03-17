@@ -95,14 +95,18 @@ key_bindings:
   - { key: Right, mods: Command, chars: "\x02\x0c" }
   - { key: Down, mods: Command, chars: "\x02\x0a" }
   - { key: Up, mods: Command, chars: "\x02\x0b" }
-  - { key: LBracket, mods: Alt, chars: "[" } # Fix LBracket two times
-  - { key: RBracket, mods: Alt, chars: "]" } # Fix RBracket cursor up in joshuto home
-  - { key: Key2, mods: Alt, chars: "@"}
-  - { key: LBracket, mods: Alt|Shift, chars: "{"}
-  - { key: RBracket, mods: Alt|Shift, chars: "}"}
   - { key: Tab, mods: Control, chars: "\x02\x6f" } # Cycle trough panes
   - { key: Tab, mods: Control|Shift, chars: "\x02\x20" } # Cycle trough Layouts
   - { key: A, mods: Command, chars: "\x02\x61" } # AppLauncher
   - { key: B, mods: Command, chars: "\x02\x21" } # Break Pane out of Window
   - { key: N, mods: Command, chars: "\x02\x7b" } # Swap with prevous pane
-  - { key: P, mods: Command, chars: "\x02\x7d" } # Swap with next pane
+  - { key: P, mods: Command, chars: "\x02\x7d" } # Swap with next pane  
+  - { key: LBracket, mods: Alt, chars: "[" } # [
+  - { key: RBracket, mods: Alt, chars: "]" } # ]
+  - { key: Key2, mods: Alt, chars: "@"} # @
+  - { key: Key4, mods: Alt, chars: "$"} # $
+  - { key: Backslash, mods: Alt, chars: "|"} # |
+  - { key: Backslash, mods: Alt|Shift, chars: "\\"} # \
+  - { key: LBracket, mods: Alt|Shift, chars: "{"} # {
+  - { key: RBracket, mods: Alt|Shift, chars: "}"} # }
+
