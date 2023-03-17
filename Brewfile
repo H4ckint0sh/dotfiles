@@ -21,6 +21,7 @@ brew "neofetch"
 brew "gh"
 brew "git"
 brew "helix"
+brew "xplr"
 brew "diff-so-fancy"
 brew "findutils"
 brew "luajit", args: ["HEAD"]
