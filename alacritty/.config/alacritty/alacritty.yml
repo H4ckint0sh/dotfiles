@@ -26,11 +26,11 @@ font:
   normal:
     family: SFMono Nerd Font
     style: Regular
-  size: 13
+  size: 13  
   builtin_box_drawing: true
   offset:
     x: 0
-    y: 5
+    y: 3
 
 # Colors (One Dark)
 # Colors (One Dark)
