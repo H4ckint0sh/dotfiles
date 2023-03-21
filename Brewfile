@@ -14,6 +14,7 @@ brew "bash" # Latest Bash version
 brew "coreutils" # Those that come with macOS are outdated
 brew "fzf"
 brew "thefuck"
+brew "chafa"
 brew "tldr"
 brew "bat"
 brew "lsd"
