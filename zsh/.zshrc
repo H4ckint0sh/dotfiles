@@ -37,12 +37,11 @@ BRANCH_FORMAT="}$BRANCH_PREFIX}$BRANCH_REF}$BRANCH_HASH}$BRANCH_DATE}$BRANCH_AUT
 
 # FUNCTIONS --------------------------------------------------------------
 
-function fcd() {
-    cd "$(find -type d | fzf)"
-}
-
 function fo() {
-    open "$(find -type f | fzf)"
+    hx $(find -type f | fzf -m --preview="bat --color=always --style=numbers --line-range=:500 {}")
+}
+function fcd() {
+    cd && cd "$(find -type d | fzf --preview="et -I -H {}" --bind="space:toggle-preview" --preview-window=:hidden)"
 }
 
 show_git_head() {
