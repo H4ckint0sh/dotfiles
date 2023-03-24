@@ -44,6 +44,22 @@ function fcd() {
     cd && cd "$(find -type d | fzf --preview="et -I -H {}" --bind="space:toggle-preview" --preview-window=:hidden)"
 }
 
+function fm() {
+    find -type d | \
+    fzf \
+    --bind "enter:become(hx {})" \
+    --bind "del:execute(rm -ri {})" \
+    --bind "?:toggle-preview" \
+    --bind "ctrl-d:change-prompt(Dirs > )" \
+    --bind "ctrl-d:+reload(find -type d)" \
+    --bind "ctrl-d:+change-preview(et -I {})" \
+    --bind "ctrl-f:change-prompt(Files > )" \
+    --bind "ctrl-f:+reload(find -type f)" \
+    --bind "ctrl-f:+change-preview(bat {})" \
+    --header "CTRL+R to delete | ENTER to run nvim | DEL to delete | CTRL-D to display directories | CTRL-F to display files" \
+    --height 50% --border --margin 5% --preview-window hidden --preview "et -I {}" --prompt "Dirs > "
+}
+
 show_git_head() {
     pretty_git_log -1
     git show -p --pretty="tformat:"
