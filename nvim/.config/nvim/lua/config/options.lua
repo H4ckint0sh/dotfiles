@@ -1,5 +1,5 @@
 local options = {
-  cmdheight      = 2,                       --- Give more space for displaying messages
+	cmdheight      = 1,                    --- Give more space for displaying messages
 	clipboard      = "unnamed,unnamedplus", --- Copy-paste between vim and everything else
 	completeopt    = "menu,menuone,noselect", --- Better autocompletion
 	cursorline     = false,                --- Highlight of current line
