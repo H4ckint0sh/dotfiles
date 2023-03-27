@@ -3,7 +3,7 @@ local opts = { silent = true, noremap = true }
 local silent = { silent = true }
 
 --Remap space as leader key
-keymap("i", "<Space>", "<Nop>", opts)
+keymap("", "<Space>", "<Nop>", opts)
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 -- Normal --
@@ -27,7 +27,7 @@ keymap(
     ":lua require('plugins.telescope').project_files()<cr>",
     opts
 )
-keymap("n", "<leader>F", ":Telescope live_grep<cr>", opts)
+keymap("n", "<leader>F", ":lua require('plugins.telescope.pickers.multi-rg')()<cr>", opts)
 keymap("n", "<leader>P", ":lua require('telescope').extensions.projects.projects()<cr>", opts)
 keymap("n", "<leader>pc", ":PackerCompile<CR>", opts)
 keymap("n", "<leader>pi", ":PackerInstall<CR>", opts)
