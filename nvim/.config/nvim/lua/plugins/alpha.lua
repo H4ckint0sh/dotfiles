@@ -140,7 +140,7 @@ end
 local function footer()
   local plugins = require("lazy").stats().count
   local v = vim.version()
-  local h4ckint0sh_version = line_from(config_dir .. "/.h4ckintosh.version")
+  local h4ckint0sh_version = line_from(config_dir .. "/.h4ckint0sh.version")
   return string.format(" v%d.%d.%d   %d   %s ", v.major, v.minor, v.patch, plugins, h4ckint0sh_version[1])
 end
 
@@ -169,7 +169,7 @@ local opts = {
   layout = {
     {type = "padding", val = 3},
     section.header,
-    {type = "padding", val = 1},
+    {type = "padding", val = 3},
     section.hi_top_section,
     section.hi_middle_section,
     section.hi_bottom_section,
