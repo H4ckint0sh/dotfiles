@@ -24,7 +24,7 @@ keymap("n", "<leader>h", ":nohlsearch<CR>", opts)
 keymap(
     "n",
     "<leader>f",
-    ":lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false})<cr>",
+    ":lua require('plugins.telescope').project_files(require('telescope.themes').get_dropdown{previewer = false})<cr>",
     opts
 )
 keymap("n", "<leader>F", ":Telescope live_grep<cr>", opts)

@@ -38,7 +38,7 @@ function main() {
 
   while [ true ]; do
     msg
-    read -p $'Do you wish to install Ecovim now? \e[33m[y/n]\e[0m: ' yn
+    read -p $'Do you wish to install H4ckint0sh now? \e[33m[y/n]\e[0m: ' yn
     case $yn in
         [Yy]* ) break;;
         [Nn]* ) exit;;
@@ -182,14 +182,14 @@ function remove_current_repo() {
 }
 
 function clone_repo() {
-  msg "${BOLD}Cloning Ecovim configuration... ${NC}" "1"
+  msg "${BOLD}Cloning H4ckint0sh configuration... ${NC}" "1"
   if ! git clone --branch "$GIT_BRANCH" \
     --depth 1 "https://github.com/${GIT_REMOTE}" "$CONFIG_DIR"; then
     echo "Failed to clone repository. Installation failed."
     exit 1
   fi
   echo -e "${GREEN}${BOLD}Done${NC}"
-  msg "${BOLD}Moving to Ecovim directory... ${NC}"
+  msg "${BOLD}Moving to H4ckint0sh directory... ${NC}"
   cd $CONFIG_DIR
   echo "${GREEN}${BOLD}Done${NC}"
 }
@@ -219,22 +219,17 @@ function setup() {
 
 function finish () {
   touch /tmp/first-ecovim-run
-  msg "${BOLD}${GREEN}Thank you for installing my ${BLUE}Ecovim${NC}${BOLD}${GREEN} config! Please support me by giving a star :)${NC}" 1
-  echo -e "${BOLD}${GREEN}Do not forget to use a font with glyphs (icons) support [https://github.com/ryanoasis/nerd-fonts].\nI recommend Fira Code for Ecovim setup.${NC}"
+  msg "${BOLD}${GREEN}Thank you for installing my ${BLUE}H4ckint0sh${NC}${BOLD}${GREEN} config! Please support me by giving a star :)${NC}" 1
+  echo -e "${BOLD}${GREEN}Do not forget to use a font with glyphs (icons) support [https://github.com/ryanoasis/nerd-fonts].\nI recommend Fira Code for H4ckint0sh setup.${NC}"
 }
 
 
 function print_logo() {
   echo -e "${BLUE}"
   cat <<'EOF' 
-       ████████                           ██            
-      ░██░░░░░                           ░░             
-      ░██        █████   ██████  ██    ██ ██ ██████████ 
-      ░███████  ██░░░██ ██░░░░██░██   ░██░██░░██░░██░░██
-      ░██░░░░  ░██  ░░ ░██   ░██░░██ ░██ ░██ ░██ ░██ ░██
-      ░██      ░██   ██░██   ░██ ░░████  ░██ ░██ ░██ ░██
-      ░████████░░█████ ░░██████   ░░██   ░██ ███ ░██ ░██
-      ░░░░░░░░  ░░░░░   ░░░░░░     ░░    ░░ ░░░  ░░  ░░ 
+    █▄█ █▄ ▄▀▀ █▄▀ █ █▄ █ ▀█▀ █▀█ ▄▀▀ █▄█
+    █ █  █ ▀▄▄ █ █ █ █ ▀█  █  █▄█ ▄██ █ █ 
+
 EOF
   echo -e "${NC}"
 }
