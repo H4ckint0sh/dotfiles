@@ -84,7 +84,7 @@ local handlers = {
 	["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = H4ckint0sh.ui.float.border }),
 	["textDocument/publishDiagnostics"] = vim.lsp.with(
 		vim.lsp.diagnostic.on_publish_diagnostics,
-		{ virtual_text = H4ckint0sh.lsp.virtual_text }
+		{ virtual_text = false }
 	),
 	["textDocument/definition"] = function(err, result, method, ...)
 		if vim.tbl_islist(result) and #result > 1 then
