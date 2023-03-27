@@ -4,7 +4,6 @@ local options = {
   completeopt    = "menu,menuone,noselect", --- Better autocompletion
   cursorline     = false,                    --- Highlight of current line
   emoji          = false,                   --- Fix emoji display
-  expandtab      = true,                    --- Use spaces instead of tabs
   foldcolumn     = "0",
   foldnestmax    = 0,
   foldlevel      = 99,                      --- Using ufo provider need a large value
@@ -45,6 +44,7 @@ local options = {
   fileencoding   = "utf-8",                 --- The encoding written to file
   incsearch      = true,                    --- Start searching before pressing enter
   showmode       = false,                   --- Don't show things like -- INSERT -- anymore
+	expandtab      = false,                 --- Use spaces instead of tabs
 }
 
 local globals = {
