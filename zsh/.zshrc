@@ -47,7 +47,7 @@ function fcd() {
 function fm() {
     find -type d | \
     fzf \
-    --bind "enter:become(hx {})" \
+    --bind "enter:become(nvim {})" \
     --bind "del:execute(rm -ri {})" \
     --bind "?:toggle-preview" \
     --bind "ctrl-d:change-prompt(Dirs > )" \
