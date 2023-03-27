@@ -3,7 +3,7 @@ local opts = { silent = true, noremap = true }
 local silent = { silent = true }
 
 --Remap space as leader key
-keymap("", "<Space>", "<Nop>", opts)
+keymap("i", "<Space>", "<Nop>", opts)
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 -- Normal --
@@ -24,7 +24,7 @@ keymap("n", "<leader>h", ":nohlsearch<CR>", opts)
 keymap(
     "n",
     "<leader>f",
-    ":lua require('plugins.telescope').project_files(require('telescope.themes').get_dropdown{previewer = false})<cr>",
+    ":lua require('plugins.telescope').project_files()<cr>",
     opts
 )
 keymap("n", "<leader>F", ":Telescope live_grep<cr>", opts)
