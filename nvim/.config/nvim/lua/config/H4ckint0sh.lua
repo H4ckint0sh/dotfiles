@@ -28,7 +28,7 @@ H4ckint0sh = {
 			patterns = { ".git", "package.json", "_darcs", ".bzr", ".svn", "Makefile" }, -- Default
 		},
 		zen = {
-			kitty_enabled = true,
+			kitty_enabled = false,
 			enabled = true, -- sync after change
 		},
 	},
@@ -38,6 +38,6 @@ H4ckint0sh = {
 		path = "relative", -- absolute/relative
 	},
 	lsp = {
-		virtual_text = true, -- show virtual text (errors, warnings, info) inline messages
+		virtual_text = false, -- show virtual text (errors, warnings, info) inline messages
 	},
 }

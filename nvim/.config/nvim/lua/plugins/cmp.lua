@@ -219,7 +219,7 @@ cmp.setup({
 	},
 	window = {
 		completion = cmp.config.window.bordered({
-			winhighlight = "NormalFloat:NormalFloat,FloatBorder:FloatBorder",
+			scrollbar = false,
 		}),
 		documentation = cmp.config.window.bordered({
 			winhighlight = "NormalFloat:NormalFloat,FloatBorder:FloatBorder",
