@@ -123,7 +123,7 @@ return {
 			"hrsh7th/cmp-cmdline",
 			"hrsh7th/cmp-calc",
 			"saadparwaiz1/cmp_luasnip",
-			{ "L3MON4D3/LuaSnip", dependencies = "rafamadriz/friendly-snippets" },
+			{ "L3MON4D3/LuaSnip",    dependencies = "rafamadriz/friendly-snippets" },
 			{ "tzachar/cmp-tabnine", build = "./install.sh" },
 			{
 				"David-Kunz/cmp-npm",
@@ -198,7 +198,7 @@ return {
 	},
 
 	-- General
-	{ "AndrewRadev/switch.vim", lazy = false },
+	{ "AndrewRadev/switch.vim",            lazy = false },
 	-- { "AndrewRadev/splitjoin.vim", lazy = false },
 	{
 		"Wansmer/treesj",
@@ -226,9 +226,9 @@ return {
 			require("plugins.toggleterm")
 		end,
 	},
-	{ "tpope/vim-repeat", lazy = false },
-	{ "tpope/vim-speeddating", lazy = false },
-	{ "dhruvasagar/vim-table-mode", ft = { "markdown" } },
+	{ "tpope/vim-repeat",            lazy = false },
+	{ "tpope/vim-speeddating",       lazy = false },
+	{ "dhruvasagar/vim-table-mode",  ft = { "markdown" } },
 	{
 		"mg979/vim-visual-multi",
 		keys = {
@@ -306,9 +306,7 @@ return {
 	{
 		"rcarriga/nvim-notify",
 		config = function()
-			require("notify").setup({
-				background_colour = "#000000",
-			})
+			require("plugins.notify")
 		end,
 		init = function()
 			local banned_messages = {
@@ -322,7 +320,7 @@ return {
 						return
 					end
 				end
-				require("notify")(msg, ...)
+				require("plugins.notify")(msg, ...)
 			end
 		end,
 	},
@@ -361,7 +359,7 @@ return {
 			require("plugins.session-manager")
 		end,
 	},
-	{ "kylechui/nvim-surround", lazy = false, config = true },
+	{ "kylechui/nvim-surround",         lazy = false, config = true },
 	{
 		"sunjon/shade.nvim",
 		config = function()

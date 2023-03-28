@@ -9,10 +9,10 @@ vim.g.maplocalleader = " "
 -- Normal --
 keymap("n", "<leader>a", ":Alpha<cr>", opts)
 keymap(
-    "n",
-    "<leader>b",
-    ":lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false})<cr>",
-    opts
+	"n",
+	"<leader>b",
+	":lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false})<cr>",
+	opts
 )
 keymap("n", "<leader>x", ":bdelete!<CR>", opts)
 keymap("n", "<Tab>", ":bnext<CR>", opts)
@@ -22,12 +22,12 @@ keymap("n", "<leader>w", ":w!<CR>", opts)
 keymap("n", "<leader>q", ":q!<CR>", opts)
 keymap("n", "<leader>h", ":nohlsearch<CR>", opts)
 keymap(
-    "n",
-    "<leader>f",
-    ":lua require('plugins.telescope').project_files()<cr>",
-    opts
+	"n",
+	"<leader>f",
+	":lua require('plugins.telescope').project_files()<cr>",
+	opts
 )
-keymap("n", "<leader>F", ":lua require('plugins.telescope.pickers.multi-rg')()<cr>", opts)
+keymap("n", "<Leader>F", ":lua require('plugins.telescope.pickers.multi-rg')()<CR>")
 keymap("n", "<leader>P", ":lua require('telescope').extensions.projects.projects()<cr>", opts)
 keymap("n", "<leader>pc", ":PackerCompile<CR>", opts)
 keymap("n", "<leader>pi", ":PackerInstall<CR>", opts)
@@ -96,7 +96,7 @@ keymap("i", "<C-s>", "<ESC> :w<CR>", silent)
 
 -- Find word/file across project
 keymap("n", "<Leader>pf",
-    "<CMD>lua require('plugins.telescope').project_files({ default_text = vim.fn.expand('<cword>'), initial_mode = 'normal' })<CR>")
+	"<CMD>lua require('plugins.telescope').project_files({ default_text = vim.fn.expand('<cword>'), initial_mode = 'normal' })<CR>")
 keymap("n", "<Leader>pw", "<CMD>lua require('telescope.builtin').grep_string({ initial_mode = 'normal' })<CR>")
 
 -- Don't yank on delete char
@@ -128,13 +128,13 @@ keymap("x", "ga", "<Plug>(EasyAlign)", silent)
 -- Manually invoke speeddating in case switch.vim didn't work
 keymap("n", "<C-a>", ":if !switch#Switch() <bar> call speeddating#increment(v:count1) <bar> endif<CR>", silent)
 keymap("n", "<C-x>", ":if !switch#Switch({'reverse': 1}) <bar> call speeddating#increment(-v:count1) <bar> endif<CR>",
-    silent)
+	silent)
 
 -- Open links under cursor in browser with gx
 if vim.fn.has('macunix') == 1 then
-    keymap("n", "gx", "<cmd>silent execute '!open ' . shellescape('<cWORD>')<CR>", silent)
+	keymap("n", "gx", "<cmd>silent execute '!open ' . shellescape('<cWORD>')<CR>", silent)
 else
-    keymap("n", "gx", "<cmd>silent execute '!xdg-open ' . shellescape('<cWORD>')<CR>", silent)
+	keymap("n", "gx", "<cmd>silent execute '!xdg-open ' . shellescape('<cWORD>')<CR>", silent)
 end
 
 -- Refactor with spectre
@@ -153,14 +153,14 @@ keymap("v", "<leader>cf", "<cmd>'<.'>lua vim.lsp.buf.range_formatting()<CR>", si
 keymap("n", "<leader>cl", "<cmd>lua vim.diagnostic.open_float({ border = 'rounded', max_width = 100 })<CR>", silent)
 keymap("n", "L", "<cmd>lua vim.lsp.buf.signature_help()<CR>", silent)
 keymap("n", "<leader>dn", "<cmd>lua vim.diagnostic.goto_next({ float = { border = 'rounded', max_width = 100 }})<CR>",
-    silent)
+	silent)
 keymap("n", "<leader>dp", "<cmd>lua vim.diagnostic.goto_prev({ float = { border = 'rounded', max_width = 100 }})<CR>",
-    silent)
+	silent)
 keymap("n", "K", function()
-    local winid = require('ufo').peekFoldedLinesUnderCursor()
-    if not winid then
-        vim.lsp.buf.hover()
-    end
+	local winid = require('ufo').peekFoldedLinesUnderCursor()
+	if not winid then
+		vim.lsp.buf.hover()
+	end
 end)
 
 -- Comment Box

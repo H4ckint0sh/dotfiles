@@ -192,14 +192,14 @@ cmp.setup({
 			-- Limits LSP results to specific types based on line context (FIelds, Methods, Variables)
 			entry_filter = limit_lsp_types,
 		},
-		{ name = "npm", priority = 9 },
-		{ name = "copilot", priority = 8 },
+		{ name = "npm",         priority = 9 },
+		{ name = "copilot",     priority = 8 },
 		{ name = "cmp_tabnine", priority = 7, max_num_results = 3 },
-		{ name = "luasnip", priority = 7, max_item_count = 5 },
-		{ name = "buffer", priority = 7, keyword_length = 5, option = buffer_option, max_item_count = 5 },
-		{ name = "nvim_lua", priority = 5 },
-		{ name = "path", priority = 4 },
-		{ name = "calc", priority = 3 },
+		{ name = "luasnip",     priority = 7, max_item_count = 5 },
+		{ name = "buffer",      priority = 7, keyword_length = 5, option = buffer_option, max_item_count = 5 },
+		{ name = "nvim_lua",    priority = 5 },
+		{ name = "path",        priority = 4 },
+		{ name = "calc",        priority = 3 },
 	},
 	sorting = {
 		comparators = {
@@ -225,6 +225,7 @@ cmp.setup({
 			winhighlight = "NormalFloat:NormalFloat,FloatBorder:FloatBorder",
 		}),
 	},
+	completion = { completeopt = 'menu,menuone,noinsert' },
 	experimental = {
 		ghost_text = true,
 	},
