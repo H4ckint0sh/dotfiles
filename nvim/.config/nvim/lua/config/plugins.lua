@@ -320,7 +320,7 @@ return {
 						return
 					end
 				end
-				require("plugins.notify")(msg, ...)
+				require("notify")(msg, ...)
 			end
 		end,
 	},
