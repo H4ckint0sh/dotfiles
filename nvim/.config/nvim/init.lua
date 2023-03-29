@@ -14,4 +14,6 @@ require('lsp.config')
 require('lsp.setup')
 require('lsp.functions')
 
+require('internal.statusline')
+
 require('snippets.react')

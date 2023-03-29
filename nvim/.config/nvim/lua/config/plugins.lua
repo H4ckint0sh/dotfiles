@@ -288,13 +288,6 @@ return {
 		end,
 	},
 	{
-		"nvim-lualine/lualine.nvim",
-		config = function()
-			require("plugins.lualine")
-		end,
-		event = "VeryLazy",
-	},
-	{
 		"romgrk/barbar.nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		event = "BufAdd",
