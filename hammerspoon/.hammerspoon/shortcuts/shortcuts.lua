@@ -21,5 +21,5 @@ hs.hotkey.bind({ "alt", "shift" }, "S", open_app({ "Spotify" }))
 
 hs.hotkey.bind({ "alt", "shift" }, "T", open_app({ "Microsoft Teams" }))
 hs.hotkey.bind({ "alt", "shift" }, "O", open_app({ "Microsoft Outlook" }))
-hs.hotkey.bind({ "alt", "shift" }, "C", open_app({ "Chromium" }))
+hs.hotkey.bind({ "alt", "shift" }, "E", open_app({ "Microsoft Edge" }))
 hs.hotkey.bind({ "alt", "shift" }, "V", open_app({ "Visual Studio Code" }))
