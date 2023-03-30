@@ -21,7 +21,7 @@ yabai -m config normal_window_opacity 1.0
 yabai -m config window_border off
 yabai -m config window_border_width 2
 yabai -m config active_window_border_color 0xffe1e3e4
-yabai -m config normal_window_border_color 0xff2a2f38
+yabai -m config normal_window_border_color 0xff494d64a
 yabai -m config insert_feedback_color 0xff9dd274
 yabai -m config split_ratio 0.50
 yabai -m config auto_balance off
@@ -41,12 +41,10 @@ yabai -m config right_padding 5
 yabai -m config window_gap 5
 
 # apps to not manage (ignore)
-yabai -m rule --add app="^System Settings$" manage=off
-yabai -m rule --add app="^Archive Utility$" manage=off
-yabai -m rule --add app="Raycast" manage=off
-yabai -m rule --add app="IINA" manage=off
-yabai -m rule --add app="Preview" manage=off
-yabai -m rule --add app="Fig" manage=off
-yabai -m rule --add app="Transmission" manage=off
+yabai -m rule --add app="^(Raycast |Calculator|Software Update|Dictionary|VLC|System Preferences|System Settings|IINA|Photo Booth|Archive Utility|Preview|App Store|Fig|Alfred|Activity Monitor|Transmission|Archive Utility)$" manage=off
+yabai -m rule --add label="Finder" app="^Finder$" title="(Co(py|nnect)|Move|Info|Pref)" manage=off
+yabai -m rule --add label="Safari" app="^Safari$" title="^(General|(Tab|Password|Website|Extension)s|AutoFill|Se(arch|curity)|Privacy|Advance)$" manage=off
+yabai -m rule --add label="About This Mac" app="System Information" title="About This Mac" manage=off
+yabai -m rule --add label="Select file to save to" app="^Inkscape$" title="Select file to save to" manage=off
 
 echo "yabai configuration loaded.."
