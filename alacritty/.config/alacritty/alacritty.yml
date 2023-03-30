@@ -98,6 +98,7 @@ key_bindings:
   - { key: Tab, mods: Control, chars: "\x02\x6f" } # Cycle trough panes
   - { key: Tab, mods: Control|Shift, chars: "\x02\x20" } # Cycle trough Layouts
   - { key: A, mods: Command, chars: "\x02\x61" } # AppLauncher
+  - { key: O, mods: Command, chars: "\x02u" }
   - { key: B, mods: Command, chars: "\x02\x21" } # Break Pane out of Window
   - { key: N, mods: Command, chars: "\x02\x7b" } # Swap with prevous pane
   - { key: P, mods: Command, chars: "\x02\x7d" } # Swap with next pane  
