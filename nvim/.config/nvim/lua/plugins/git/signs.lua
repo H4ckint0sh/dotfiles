@@ -77,6 +77,8 @@ signs.setup {
     map({ 'n', 'v' }, '<leader>ghs', gs.stage_hunk)
     map({ 'n', 'v' }, '<leader>ghr', gs.reset_hunk)
     map('n', '<leader>ghS', gs.stage_buffer)
+    map('n', '<leader>nh', gs.next_hunk)
+    map('n', '<leader>ph', gs.prev_hunk)
     map('n', '<leader>ghu', gs.undo_stage_hunk)
     map('n', '<leader>ghR', gs.reset_buffer)
     map('n', '<leader>ghp', gs.preview_hunk)
