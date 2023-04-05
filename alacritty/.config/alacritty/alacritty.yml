@@ -15,8 +15,8 @@ selection:
 window:
   opacity: .95
   padding:
-    x: 5
-    y: 5
+    x: 0
+    y: 0
   dynamic_padding: true
   decorations: buttonless
   option_as_alt: OnlyRight
@@ -30,7 +30,7 @@ font:
   builtin_box_drawing: true
   offset:
     x: 0
-    y: 3
+    y: 8
 
 # Colors (One Dark)
 # Colors (One Dark)
@@ -87,7 +87,7 @@ key_bindings:
   - { key: Right, mods: Command|Shift, chars: "\x02n" }
   - { key: T, mods: Command, chars: "\x02c" }
   - { key: E, mods: Command, chars: "\x02\x65" }
-  - { key: U, mods: Command, chars: "\x02\x75" } # Create Layout
+  - { key: I, mods: Command, chars: "\x02\x69" } # Create Layout
   - { key: J, mods: Command, chars: "\x02\x54" }
   - { key: W, mods: Command, chars: "\x02x" }
   - { key: Z, mods: Command, chars: "\x02z" }
