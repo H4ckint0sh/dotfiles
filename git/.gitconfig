@@ -1,7 +1,7 @@
 # This is Git's per-user configuration file.
-[user]
-	name = Alijan Adeli
-	email = alijan.adeli@consid.se
+# [user]
+# 	name = Alijan Adeli
+# 	email = alijan.adeli@consid.se
 # Please adapt and uncomment the following lines:
 #	name = Alijan Adeli
 #	email = ali@MacBook-Pro-som-tillhor-Alijan.local
@@ -13,3 +13,5 @@
 
 [credential]
 	helper = osxkeychain
+[init]
+	defautBranch = main
