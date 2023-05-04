@@ -15,8 +15,8 @@ selection:
 window:
   opacity: .95
   padding:
-    x: 0
-    y: 0
+    x: 8
+    y: 3
   dynamic_padding: true
   decorations: buttonless
   option_as_alt: OnlyRight
