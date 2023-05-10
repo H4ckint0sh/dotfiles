@@ -341,13 +341,6 @@ return {
 		ft = { "markdown" },
 	},
 	{
-		"declancm/cinnamon.nvim",
-		disable = true,
-		config = function()
-			require("plugins.cinnamon")
-		end,
-	},
-	{
 		"airblade/vim-rooter",
 		setup = function()
 			vim.g.rooter_patterns = H4ckint0sh.plugins.rooter.patterns
