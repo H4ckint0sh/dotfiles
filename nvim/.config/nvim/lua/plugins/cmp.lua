@@ -1,10 +1,7 @@
 local lspkind = require("lspkind")
 local types = require("cmp.types")
 
-local cmp_tabnine_status_ok, tabnine = pcall(require, "cmp_tabnine.config")
-if not cmp_tabnine_status_ok then
-	return
-end
+local _, tabnine = pcall(require, "cmp_tabnine.config")
 
 local cmp_status_ok, cmp = pcall(require, "cmp")
 if not cmp_status_ok then
@@ -63,6 +60,38 @@ local function limit_lsp_types(entry, ctx)
 	return true
 end
 
+local has_words_before = function()
+	if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then
+		return false
+	end
+	local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+	return col ~= 0 and vim.api.nvim_buf_get_text(0, line - 1, 0, line - 1, col, {})[1]:match("^%s*$") == nil
+end
+
+--- Get completion context, i.e., auto-import/target module location.
+--- Depending on the LSP this information is stored in different parts of the
+--- lsp.CompletionItem payload. The process to find them is very manual: log the payloads
+--- And see where useful information is stored.
+---@param completion lsp.CompletionItem
+---@param source cmp.Source
+---@see Astronvim, because i just discovered they're already doing this thing, too
+--  https://github.com/AstroNvim/AstroNvim
+local function get_lsp_completion_context(completion, source)
+	local ok, source_name = pcall(function()
+		return source.source.client.config.name
+	end)
+	if not ok then
+		return nil
+	end
+	if source_name == "tsserver" then
+		return completion.detail
+	elseif source_name == "pyright" then
+		if completion.labelDetails ~= nil then
+			return completion.labelDetails.description
+		end
+	end
+end
+
 -- ╭──────────────────────────────────────────────────────────╮
 -- │ Setup                                                    │
 -- ╰──────────────────────────────────────────────────────────╯
@@ -70,6 +99,7 @@ local source_mapping = {
 	npm = H4ckint0sh.icons.terminal .. "NPM",
 	cmp_tabnine = H4ckint0sh.icons.light,
 	Copilot = H4ckint0sh.icons.copilot,
+	Codeium = H4ckint0sh.icons.codeium,
 	nvim_lsp = H4ckint0sh.icons.paragraph .. "LSP",
 	buffer = H4ckint0sh.icons.buffer .. "BUF",
 	nvim_lua = H4ckint0sh.icons.bomb,
@@ -108,10 +138,16 @@ cmp.setup({
 			i = cmp.mapping.abort(),
 			c = cmp.mapping.close(),
 		}),
-		["<CR>"] = cmp.mapping.confirm({ select = H4ckint0sh.plugins.completion.select_first_on_enter }),
+		["<CR>"] = cmp.mapping.confirm({
+			-- this is the important line for Copilot
+			behavior = cmp.ConfirmBehavior.Replace,
+			select = H4ckint0sh.plugins.completion.select_first_on_enter,
+		}),
 		["<Tab>"] = cmp.mapping(function(fallback)
 			if cmp.visible() then
 				cmp.select_next_item()
+			elseif cmp.visible() and has_words_before() then
+				cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
 			elseif luasnip.expandable() then
 				luasnip.expand()
 			elseif luasnip.expand_or_jumpable() then
@@ -161,28 +197,41 @@ cmp.setup({
 		}),
 	}),
 	formatting = {
-		format = lspkind.cmp_format({
-			mode = "symbol_text",
-			max_width = 50,
-			symbol_map = source_mapping,
-			before = function(entry, vim_item)
-				vim_item.kind = lspkind.symbolic(vim_item.kind, { with_text = true })
-				local menu = source_mapping[entry.source.name]
-				local maxwidth = 50
+		format = function(entry, vim_item)
+			-- Set the highlight group for the Codeium source
+			if entry.source.name == "codeium" then
+				vim_item.kind_hl_group = "CmpItemKindCopilot"
+			end
 
-				if entry.source.name == "cmp_tabnine" then
-					if entry.completion_item.data ~= nil and entry.completion_item.data.detail ~= nil then
-						menu = menu .. entry.completion_item.data.detail
-					else
-						menu = menu .. "TBN"
-					end
+			-- Get the item with kind from the lspkind plugin
+			local item_with_kind = require("lspkind").cmp_format({
+				mode = "symbol_text",
+				maxwidth = 50,
+				symbol_map = source_mapping,
+			})(entry, vim_item)
+
+			item_with_kind.kind = lspkind.symbolic(item_with_kind.kind, { with_text = true })
+			item_with_kind.menu = source_mapping[entry.source.name]
+			item_with_kind.menu = vim.trim(item_with_kind.menu or "")
+			item_with_kind.abbr = string.sub(item_with_kind.abbr, 1, item_with_kind.maxwidth)
+
+			if entry.source.name == "cmp_tabnine" then
+				if entry.completion_item.data ~= nil and entry.completion_item.data.detail ~= nil then
+					item_with_kind.kind = " " .. lspkind.symbolic("Event", { with_text = false }) .. " TabNine"
+					item_with_kind.menu = item_with_kind.menu .. entry.completion_item.data.detail
+				else
+					item_with_kind.kind = " " .. lspkind.symbolic("Event", { with_text = false }) .. " TabNine"
+					item_with_kind.menu = item_with_kind.menu .. " TBN"
 				end
+			end
 
-				vim_item.menu = menu
-				vim_item.abbr = string.sub(vim_item.abbr, 1, maxwidth)
-				return vim_item
-			end,
-		}),
+			local completion_context = get_lsp_completion_context(entry.completion_item, entry.source)
+			if completion_context ~= nil and completion_context ~= "" then
+				item_with_kind.menu = item_with_kind.menu .. [[ -> ]] .. completion_context
+			end
+
+			return item_with_kind
+		end,
 	},
 	-- You should specify your *installed* sources.
 	sources = {
@@ -193,7 +242,8 @@ cmp.setup({
 			entry_filter = limit_lsp_types,
 		},
 		{ name = "npm",         priority = 9 },
-		{ name = "copilot",     priority = 8 },
+		{ name = "codeium",     priority = 9 },
+		{ name = "copilot",     priority = 9 },
 		{ name = "cmp_tabnine", priority = 7, max_num_results = 3 },
 		{ name = "luasnip",     priority = 7, max_item_count = 5 },
 		{ name = "buffer",      priority = 7, keyword_length = 5, option = buffer_option, max_item_count = 5 },
@@ -206,6 +256,7 @@ cmp.setup({
 			deprioritize_snippet,
 			cmp.config.compare.exact,
 			cmp.config.compare.locality,
+			require("copilot_cmp.comparators").prioritize,
 			cmp.config.compare.score,
 			cmp.config.compare.recently_used,
 			cmp.config.compare.offset,
@@ -219,48 +270,29 @@ cmp.setup({
 	},
 	window = {
 		completion = cmp.config.window.bordered({
-			scrollbar = false,
+			winhighlight = "NormalFloat:NormalFloat,FloatBorder:FloatBorder",
 		}),
 		documentation = cmp.config.window.bordered({
 			winhighlight = "NormalFloat:NormalFloat,FloatBorder:FloatBorder",
 		}),
 	},
-	completion = { completeopt = 'menu,menuone,noinsert' },
 	experimental = {
 		ghost_text = true,
 	},
 })
 
 -- ╭──────────────────────────────────────────────────────────╮
--- │ Cmdline Setup                                            │
--- ╰──────────────────────────────────────────────────────────╯
-
--- `/` cmdline setup.
-cmp.setup.cmdline("/", {
-	mapping = cmp.mapping.preset.cmdline(),
-	sources = {
-		{ name = "buffer" },
-	},
-})
--- `:` cmdline setup.
-cmp.setup.cmdline(":", {
-	mapping = cmp.mapping.preset.cmdline(),
-	sources = cmp.config.sources({
-		{ name = "path" },
-	}, {
-		{ name = "cmdline" },
-	}),
-})
-
--- ╭──────────────────────────────────────────────────────────╮
 -- │ Tabnine Setup                                            │
 -- ╰──────────────────────────────────────────────────────────╯
-tabnine:setup({
-	max_lines = 1000,
-	max_num_results = 3,
-	sort = true,
-	show_prediction_strength = true,
-	run_on_every_keystroke = true,
-	snipper_placeholder = "..",
-	ignored_file_types = {},
-})
+if H4ckint0sh.plugins.ai.tabnine.enabled then
+	tabnine:setup({
+		max_lines = 1000,
+		max_num_results = 3,
+		sort = true,
+		show_prediction_strength = true,
+		run_on_every_keystroke = true,
+		snipper_placeholder = "..",
+		ignored_file_types = {},
+	})
+end
+

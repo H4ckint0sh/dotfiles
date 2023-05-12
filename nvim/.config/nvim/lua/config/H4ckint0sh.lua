@@ -16,6 +16,20 @@ H4ckint0sh = {
 		},
 	},
 	plugins = {
+		ai = {
+			chatgpt = {
+				enabled = false,
+			},
+			codeium = {
+				enabled = true,
+			},
+			copilot = {
+				enabled = true,
+			},
+			tabnine = {
+				enabled = false,
+			},
+		},
 		completion = {
 			select_first_on_enter = false,
 		},

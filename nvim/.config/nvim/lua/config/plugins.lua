@@ -457,6 +457,18 @@ return {
 		},
 	},
 
+	--  AI
+	{
+		"jcdickinson/codeium.nvim",
+		event = "InsertEnter",
+		cmd = "Codeium",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"hrsh7th/nvim-cmp",
+		},
+		config = true,
+	},
+
 	-- Git
 	{
 		"lewis6991/gitsigns.nvim",
