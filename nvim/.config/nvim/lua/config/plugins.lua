@@ -224,9 +224,9 @@ return {
 		},
 		cmd = { "Glance" },
 		keys = {
-			{ "gd", "<cmd>Glance definitions<CR>", desc = "LSP Definition" },
-			{ "gr", "<cmd>Glance references<CR>", desc = "LSP References" },
-			{ "gm", "<cmd>Glance implementations<CR>", desc = "LSP Implementations" },
+			{ "gd", "<cmd>Glance definitions<CR>",      desc = "LSP Definition" },
+			{ "gr", "<cmd>Glance references<CR>",       desc = "LSP References" },
+			{ "gm", "<cmd>Glance implementations<CR>",  desc = "LSP Implementations" },
 			{ "gy", "<cmd>Glance type_definitions<CR>", desc = "LSP Type Definitions" },
 		},
 	},
@@ -347,7 +347,7 @@ return {
 						return
 					end
 				end
-			return require("notify")(msg, ...)
+				return require("notify")(msg, ...)
 			end
 		end,
 	},
