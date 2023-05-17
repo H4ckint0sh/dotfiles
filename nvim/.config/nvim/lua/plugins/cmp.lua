@@ -277,8 +277,10 @@ cmp.setup({
 		}),
 	},
 	experimental = {
-		ghost_text = true,
-	},
+		ghost_text = {
+			hl_group = 'Comment',
+		},
+	}
 })
 
 -- ╭──────────────────────────────────────────────────────────╮
@@ -295,4 +297,3 @@ if H4ckint0sh.plugins.ai.tabnine.enabled then
 		ignored_file_types = {},
 	})
 end
-
