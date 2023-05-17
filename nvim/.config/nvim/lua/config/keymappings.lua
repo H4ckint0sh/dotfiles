@@ -14,7 +14,7 @@ keymap(
 	":lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false})<cr>",
 	opts
 )
-keymap("n", "<leader>x", ":bdelete!<CR>", opts)
+keymap("n", "<leader>x", "::lua require('mini.bufremove').delete(0, false)<CR>", opts)
 keymap("n", "<Tab>", ":BufferLineCycleNext<CR>", opts)
 keymap("n", "<S-Tab>", ":BufferLineCyclePrev<CR>", opts)
 keymap("n", "<leader>e", "<cmd>lua require('nvim-tree.api').tree.toggle()<CR>", opts)
