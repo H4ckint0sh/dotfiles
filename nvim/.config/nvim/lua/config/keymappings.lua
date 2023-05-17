@@ -15,7 +15,7 @@ keymap(
 	opts
 )
 keymap("n", "<leader>x", ":bdelete!<CR>", opts)
-keymap("n", "<Tab>", ":bnext<CR>", opts)
+keymap("n", "<Tab>", ":bNext<CR>", opts)
 keymap("n", "<S-Tab>", ":bprevious<CR>", opts)
 keymap("n", "<leader>e", "<cmd>lua require('nvim-tree.api').tree.toggle()<CR>", opts)
 keymap("n", "<leader>w", ":w!<CR>", opts)
@@ -29,10 +29,6 @@ keymap(
 )
 keymap("n", "<Leader>F", ":lua require('plugins.telescope.pickers.multi-rg')()<CR>")
 keymap("n", "<leader>P", ":lua require('telescope').extensions.projects.projects()<cr>", opts)
-keymap("n", "<leader>pc", ":PackerCompile<CR>", opts)
-keymap("n", "<leader>pi", ":PackerInstall<CR>", opts)
-keymap("n", "<leader>ps", ":PackerSync<CR>", opts)
-keymap("n", "<leader>pu", ":PackerUpdate<CR>", opts)
 
 -- Better window navigation
 keymap("n", "<C-h>", "<C-w>h", opts)
