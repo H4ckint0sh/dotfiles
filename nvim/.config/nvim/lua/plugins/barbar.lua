@@ -34,11 +34,11 @@ require 'bufferline'.setup {
 			[vim.diagnostic.severity.INFO] = { enabled = false },
 			[vim.diagnostic.severity.HINT] = { enabled = false },
 		},
-		gitsigns = {
-			added = { enabled = true, icon = '+' },
-			changed = { enabled = true, icon = '~' },
-			deleted = { enabled = true, icon = '-' },
-		},
+		-- gitsigns = {
+		-- 	added = { enabled = true, icon = '+' },
+		-- 	changed = { enabled = true, icon = '~' },
+		-- 	deleted = { enabled = true, icon = '-' },
+		-- },
 		filetype = {
 			-- Sets the icon's highlight group.
 			-- If false, will use nvim-web-devicons colors
@@ -94,4 +94,3 @@ require 'bufferline'.setup {
 	-- where X is the buffer number. But only a static string is accepted here.
 	no_name_title = nil,
 }
-
