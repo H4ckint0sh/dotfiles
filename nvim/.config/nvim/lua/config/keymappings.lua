@@ -15,8 +15,8 @@ keymap(
 	opts
 )
 keymap("n", "<leader>x", ":bdelete!<CR>", opts)
-keymap("n", "<Tab>", ":bNext<CR>", opts)
-keymap("n", "<S-Tab>", ":bprevious<CR>", opts)
+keymap("n", "<Tab>", ":BufferLineCycleNext<CR>", opts)
+keymap("n", "<S-Tab>", ":BufferLineCyclePrev<CR>", opts)
 keymap("n", "<leader>e", "<cmd>lua require('nvim-tree.api').tree.toggle()<CR>", opts)
 keymap("n", "<leader>w", ":w!<CR>", opts)
 keymap("n", "<leader>q", ":q!<CR>", opts)
