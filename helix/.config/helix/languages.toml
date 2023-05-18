@@ -1,127 +1,96 @@
 [[language]]
-name = "html"
-formatter = { command = 'prettier', args = ["--parser", "html"] }
+language-servers = [{except-features = ["format"], name = "typescript-language-server"}, "tailwindcss", "eslint"]
+name = "typescript"
+scope = "source.ts"
+injection-regex = "(ts|typescript)"
+file-types = ["ts", "mts", "cts"]
+formatter = { command = 'prettier', args = ["--stdin-filepath", "file.ts"] }
 indent = { tab-width = 4, unit = "\t" }
+auto-format = true
 
 [[language]]
-name = "json"
-formatter = { command = 'prettier', args = ["--parser", "json"] }
+language-servers = [{except-features = ["format"], name = "typescript-language-server"}, "tailwindcss", "eslint"]
+name = "javascript"
+scope = "source.js"
+injection-regex = "(js|javascript)"
+file-types = ["js", "mjs", "cjs"]
+formatter = { command = 'prettier', args = ["--stdin-filepath", "file.js"] }
+indent = { tab-width = 4, unit = "\t" }
+auto-format = true
+
+[[language]]
+language-servers = [{except-features = ["format"], name = "typescript-language-server"}, "tailwindcss", "eslint"]
+name = "jsx"
+scope = "source.jsx"
+injection-regex = "jsx"
+file-types = ["jsx"]
+formatter = { command = 'prettier', args = ["--stdin-filepath", "file.jsx"] }
+indent = { tab-width = 4, unit = "\t" }
+auto-format = true
+
+[[language]]
+language-servers = [{except-features = ["format"], name = "typescript-language-server"}, "tailwindcss" , "eslint"]
+name = "tsx"
+scope = "source.tsx"
+injection-regex = "(tsx)" # |typescript
+file-types = ["tsx"]
+formatter = { command = 'prettier', args = ["--stdin-filepath", "file.tsx"] }
+indent = { tab-width = 4, unit = "\t" }
+auto-format = true
+
+[[language]]
+name = "html"
+scope = "text.html.basic"
+injection-regex = "html"
+file-types = ["html"]
+language-servers = ["tailwindcss","vscode-html-language-server"]
+auto-format = true
 indent = { tab-width = 4, unit = "\t" }
 
 [[language]]
 name = "css"
-formatter = { command = 'prettier', args = ["--parser", "css"] }
-indent = { tab-width = 4, unit = "\t" }
-
-[[language]]
-name = "javascript"
-formatter = { command = 'prettier', args = ["--parser", "typescript"] }
-indent = { tab-width = 4, unit = "\t" }
-auto-format = true
-
-[language.config]
-hostInfo = "helix"
-locale = "en-US"
-
-[language.config.javascript.inlayHints]
-includeInlayEnumMemberValueHints = true
-includeInlayFunctionLikeReturnTypeHints = true
-includeInlayFunctionParameterTypeHints = true
-includeInlayParameterNameHints = "all"                       # 'none' | 'literals' | 'all';
-includeInlayParameterNameHintsWhenArgumentMatchesName = true
-includeInlayPropertyDeclarationTypeHints = true
-includeInlayVariableTypeHints = true
-
-[[language]]
-name = "typescript"
-formatter = { command = 'prettier', args = ["--parser", "typescript"] }
-indent = { tab-width = 4, unit = "\t" }
-auto-format = true
-
-[language.config]
-hostInfo = "helix"
-locale = "en-US"
-
-[language.config.typescript.inlayHints]
-includeInlayEnumMemberValueHints = true
-includeInlayFunctionLikeReturnTypeHints = true
-includeInlayFunctionParameterTypeHints = true
-includeInlayParameterNameHints = "all"                       # 'none' | 'literals' | 'all';
-includeInlayParameterNameHintsWhenArgumentMatchesName = true
-includeInlayPropertyDeclarationTypeHints = true
-includeInlayVariableTypeHints = true
-
-[[language]]
-name = "markdown"
-formatter = { command = "prettier", args = ["--parser", "markdown"] }
-
-[[language]]
-name = "tsx"
-formatter = { command = 'prettier', args = ["--stdin-filepath", "file.tsx"] }
+scope = "source.css"
+injection-regex = "css"
+file-types = ["css"]
+language-servers = ["tailwindcss", "vscode-css-language-server"]
 auto-format = true
 indent = { tab-width = 4, unit = "\t" }
 
-[language.config]
-hostInfo = "helix"
-locale = "en-US"
+[language-server.tailwindcss]
+command = "tailwindcss-language-server" 
+args = ["--stdio"]
 
-[language.config.typescript.inlayHints]
-includeInlayEnumMemberValueHints = true
-includeInlayFunctionLikeReturnTypeHints = true
-includeInlayFunctionParameterTypeHints = true
-includeInlayParameterNameHints = "all"                       # 'none' | 'literals' | 'all';
-includeInlayParameterNameHintsWhenArgumentMatchesName = true
-includeInlayPropertyDeclarationTypeHints = true
-includeInlayVariableTypeHints = true
+[language-server.eslint]
+args = ["--stdio"]
+command = "vscode-eslint-language-server"
 
-[[language]]
-name = "jsx"
+[language-server.eslint.config]
+format = true
+nodePath = ""
+onIgnoredFiles = "off"
+quiet = false
+rulesCustomizations = []
+run = "onType"
+validate = "on"
 
-[language.config]
-hostInfo = "helix"
-locale = "en-US"
+[language-server.eslint.config.codeAction]
+[language-server.eslint.config.codeAction.disableRuleComment]
+enable = true
+location = "separateLine"
 
-[language.config.javascript.inlayHints]
-includeInlayEnumMemberValueHints = true
-includeInlayFunctionLikeReturnTypeHints = true
-includeInlayFunctionParameterTypeHints = true
-includeInlayParameterNameHints = "all"                       # 'none' | 'literals' | 'all';
-includeInlayParameterNameHintsWhenArgumentMatchesName = true
-includeInlayPropertyDeclarationTypeHints = true
-includeInlayVariableTypeHints = true
+[language-server.eslint.config.codeAction.showDocumentation]
+enable = true
 
-# Toml
-[[language]]
-name = "toml"
-scope = "source.toml"
-roots = ["*.toml"]
-auto-format = true
-injection-regex = "toml"
-file-types = ["toml"]
-comment-token = "#"
-language-server = { command = "taplo", args = ["lsp", "stdio"] }
-indent = { tab-width = 2, unit = "  " }
+[language-server.eslint.config.codeActionOnSave]
+enable = true
+mode = "all"
 
-[[grammar]]
-name = "toml"
-source = { git = "https://github.com/ikatyang/tree-sitter-toml", rev = "7cff70bbcbbc62001b465603ca1ea88edd668704" }
+[language-server.eslint.config.workingDirectory]
+mode = "location"
 
-# Yaml
-[[language]]
-name = "yaml"
-scope = "source.yaml"
-file-types = ["yml", "yaml"]
-roots = []
-comment-token = "#"
-indent = { tab-width = 2, unit = "  " }
-language-server = { command = "yaml-language-server", args = ["--stdio"] }
+[language-server.typescript-language-server]
+args = ["--stdio"]
+command = "typescript-language-server"
 
-[[language]]
-name = "lua"
-roots = [".luarc.json", ".luacheckrc", ".stylua.toml", "selene.toml", ".git"]
-#language-server = { command = "luahelper-lsp", args = ["-mode", "1", "-logflag", "1"] }
-language-server = { command = "lua-language-server" }
-# ref https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/server_configurations/sumneko_lua.lua
-# https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#sumneko_lua
-# https://learnxinyminutes.com/docs/toml/
-config = { "telemetry" = { "enable" = false } }
+[language-server.typescript-language-server.config]
+documentFormatting = false

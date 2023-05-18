@@ -124,6 +124,7 @@ alias ls="lsd"
 alias lsla="lsd -la"
 alias gpath="find -type f | fzf | sed 's/^..//' | tr -d '\n' | pbcopy"
 alias kp="ps aux | fzf | awk '{print \$2}' | xargs kill"
+alias delds="find . -name ".DS_Store" -type f -delete"
 
 # GIT ALIASES -----------------------------------------------------------------
 alias gc='git commit'
