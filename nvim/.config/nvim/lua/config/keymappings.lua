@@ -35,6 +35,7 @@ keymap("n", "<C-h>", "<C-w>h", opts)
 keymap("n", "<C-j>", "<C-w>j", opts)
 keymap("n", "<C-k>", "<C-w>k", opts)
 keymap("n", "<C-l>", "<C-w>l", opts)
+
 -- Resize with arrows
 keymap("n", "<C-Up>", ":resize -2<CR>", opts)
 keymap("n", "<C-Down>", ":resize +2<CR>", opts)
@@ -75,7 +76,9 @@ keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", opts)
 
 
 -- H to move to the first non-blank character of the line
+-- L to move to the last non-blank character of the line
 keymap("n", "H", "^", silent)
+keymap("n", "L", "$", silent)
 
 
 -- Keep visual mode indenting
@@ -147,7 +150,7 @@ keymap("n", "<leader>cr", "<cmd>lua vim.lsp.buf.rename()<CR>", silent)
 keymap("n", "<leader>cf", "<cmd>lua vim.lsp.buf.format({ async = true })<CR>", silent)
 keymap("v", "<leader>cf", "<cmd>'<.'>lua vim.lsp.buf.range_formatting()<CR>", silent)
 keymap("n", "<leader>cl", "<cmd>lua vim.diagnostic.open_float({ border = 'rounded', max_width = 100 })<CR>", silent)
-keymap("n", "L", "<cmd>lua vim.lsp.buf.signature_help()<CR>", silent)
+keymap("n", "nh", "<cmd>lua vim.lsp.buf.signature_help()<CR>", silent)
 keymap("n", "<leader>dn", "<cmd>lua vim.diagnostic.goto_next({ float = { border = 'rounded', max_width = 100 }})<CR>",
 	silent)
 keymap("n", "<leader>dp", "<cmd>lua vim.diagnostic.goto_prev({ float = { border = 'rounded', max_width = 100 }})<CR>",

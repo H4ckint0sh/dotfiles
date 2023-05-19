@@ -307,10 +307,11 @@ return {
 		disable = not H4ckint0sh.plugins.zen.enabled,
 	},
 	{
-		"ggandor/lightspeed.nvim",
-		keys = "s",
+		"ggandor/leap.nvim",
+		event = "VeryLazy",
+		name = "leap",
 		config = function()
-			require("plugins.lightspeed")
+			require("leap").add_default_mappings()
 		end,
 	},
 	{
