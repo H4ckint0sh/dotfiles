@@ -27,7 +27,7 @@ keymap(
 	":lua require('plugins.telescope').project_files()<cr>",
 	opts
 )
-keymap("n", "<Leader>F", ":lua require('plugins.telescope.pickers.multi-rg')()<CR>")
+keymap("n", "<Leader>F", "<CMD>lua require('plugins.telescope.pickers.multi-rg')()<CR>")
 keymap("n", "<leader>P", ":lua require('telescope').extensions.projects.projects()<cr>", opts)
 
 -- Better window navigation
