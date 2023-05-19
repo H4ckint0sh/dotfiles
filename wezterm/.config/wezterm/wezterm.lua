@@ -5,6 +5,7 @@ local config = {
 	window_background_opacity = 0.95,
 	send_composed_key_when_left_alt_is_pressed = true,
 	send_composed_key_when_right_alt_is_pressed = true,
+	window_close_confirmation = 'NeverPrompt',
 	enable_tab_bar = false,
 	window_decorations = "RESIZE",
 	font = wezterm.font("SFMono Nerd Font", { weight = "Regular" }),
