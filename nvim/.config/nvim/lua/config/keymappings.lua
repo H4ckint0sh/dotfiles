@@ -79,6 +79,23 @@ keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", opts)
 -- L to move to the last non-blank character of the line
 keymap("n", "H", "^", silent)
 keymap("n", "L", "$", silent)
+keymap("n", "m", "%", silent)
+
+-- Half-page jumps, cursos stays in the center
+keymap("n", "<C-d>", "<C-d>zz", silent)
+keymap("n", "<C-u>", "<C-u>zz", silent)
+
+-- Search result stays in the center
+keymap("n", "n", "nzzzv", silent)
+keymap("n", "N", "Nzzzv", silent)
+
+-- Paste over something, the thing that gets deleted goes to the void register
+-- keymap("x", "<leader>p", [["_dP]], silent)
+
+-- Leader + y or Y will paste into system clipboard
+-- This means that you can quickly use two clipboards (vim and system)
+-- keymap({ "n", "v" }, "<leader>y", [["+y]], silent)
+-- keymap("n", "<leader>Y", [["+Y]], silent)
 
 
 -- Keep visual mode indenting
