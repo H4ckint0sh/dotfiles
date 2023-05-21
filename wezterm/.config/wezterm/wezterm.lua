@@ -12,9 +12,13 @@ local config = {
 	font_size = 13.0,
 	line_height = 1.1,
 	native_macos_fullscreen_mode = true,
-
 	keys = {
 
+		{
+			key = "P",
+			mods = "CTRL|SHIFT",
+			action = wezterm.action.DisableDefaultAssignment,
+		},
 		{
 			key = "k",
 			mods = "CMD",

@@ -58,9 +58,7 @@ keymap("n", "<A-k>", "<Esc>:m .-2<CR>==gi", opts)
 -- Move text up and down
 keymap("v", "<A-j>", ":m .+1<CR>==", opts)
 keymap("v", "<A-k>", ":m .-2<CR>==", opts)
-keymap("v", "p", '"_dP', opts)
 
--- Visual Block --
 -- Move text up and down
 keymap("x", "J", ":move '>+1<CR>gv-gv", opts)
 keymap("x", "K", ":move '<-2<CR>gv-gv", opts)
@@ -85,18 +83,13 @@ keymap("n", "m", "%", silent)
 keymap("n", "<C-d>", "<C-d>zz", silent)
 keymap("n", "<C-u>", "<C-u>zz", silent)
 
+-- Contol p/P will not paste last deleted text
+keymap("n", "C-p>", '"0P', { noremap = true })
+keymap("n", "<C-P>", '"0p', { noremap = true })
+
 -- Search result stays in the center
 keymap("n", "n", "nzzzv", silent)
 keymap("n", "N", "Nzzzv", silent)
-
--- Paste over something, the thing that gets deleted goes to the void register
--- keymap("x", "<leader>p", [["_dP]], silent)
-
--- Leader + y or Y will paste into system clipboard
--- This means that you can quickly use two clipboards (vim and system)
--- keymap({ "n", "v" }, "<leader>y", [["+y]], silent)
--- keymap("n", "<leader>Y", [["+Y]], silent)
-
 
 -- Keep visual mode indenting
 keymap("v", "<", "<gv", silent)
@@ -120,9 +113,6 @@ keymap("n", "x", '"_x', silent)
 keymap("n", "X", '"_X', silent)
 keymap("v", "x", '"_x', silent)
 keymap("v", "X", '"_X', silent)
-
--- Don't yank on visual paste
-keymap("v", "p", '"_dP', silent)
 
 -- Avoid issues because of remapping <c-a> and <c-x> below
 vim.cmd [[
