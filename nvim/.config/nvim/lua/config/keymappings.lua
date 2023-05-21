@@ -72,6 +72,9 @@ keymap("t", "<C-j>", "<C-\\><C-N><C-w>j", opts)
 keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", opts)
 keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", opts)
 
+-- Simpler command mode
+keymap("n", ",", ":", { noremap = true })
+
 
 -- H to move to the first non-blank character of the line
 -- L to move to the last non-blank character of the line
