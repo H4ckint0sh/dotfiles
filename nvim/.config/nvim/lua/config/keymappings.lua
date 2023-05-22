@@ -30,6 +30,14 @@ keymap(
 keymap("n", "<Leader>F", "<CMD>lua require('plugins.telescope.pickers.multi-rg')()<CR>")
 keymap("n", "<leader>P", ":lua require('telescope').extensions.projects.projects()<cr>", opts)
 
+keymap('n', '<leader>sw', '<leader>saiw', { remap = true })
+keymap('n', '<leader>sW', '<leader>saiW', { remap = true })
+-- Replace qoutes
+local qoutes = { "'", '"', '`' }
+for _, char in ipairs(qoutes) do
+	keymap('n', "<leader>" .. char, '<leader>srq' .. char, { remap = true }) -- <leader>{char} to replace sandwich to {char}
+end
+
 -- Better window navigation
 keymap("n", "<C-h>", "<C-w>h", opts)
 keymap("n", "<C-j>", "<C-w>j", opts)

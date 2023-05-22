@@ -393,7 +393,13 @@ return {
 			require("plugins.session-manager")
 		end,
 	},
-	{ "kylechui/nvim-surround",         lazy = false, config = true },
+	{
+		"kylechui/nvim-surround",
+		lazy = false,
+		config = function()
+			require("plugins.nvim-surround")
+		end,
+	},
 	{
 		"sunjon/shade.nvim",
 		config = function()
