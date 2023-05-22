@@ -1,15 +1,17 @@
 [[language]]
-language-servers = [{except-features = ["format"], name = "typescript-language-server"}, "tailwindcss", "eslint"]
 name = "typescript"
 scope = "source.ts"
 injection-regex = "(ts|typescript)"
+language-servers = [{except-features = ["format"], name = "typescript-language-server"}, "tailwindcss-react", "eslint"]
+roots = ["tailwind.config.js","tailwind.config.cjs", ".prettierrc.json"]
 file-types = ["ts", "mts", "cts"]
 formatter = { command = 'prettier', args = ["--stdin-filepath", "file.ts"] }
 indent = { tab-width = 4, unit = "\t" }
 auto-format = true
 
 [[language]]
-language-servers = [{except-features = ["format"], name = "typescript-language-server"}, "tailwindcss", "eslint"]
+language-servers = [{except-features = ["format"], name = "typescript-language-server"}, "tailwindcss-react", "eslint"]
+roots = ["tailwind.config.js","tailwind.config.cjs", ".prettierrc.json"]
 name = "javascript"
 scope = "source.js"
 injection-regex = "(js|javascript)"
@@ -19,7 +21,8 @@ indent = { tab-width = 4, unit = "\t" }
 auto-format = true
 
 [[language]]
-language-servers = [{except-features = ["format"], name = "typescript-language-server"}, "tailwindcss", "eslint"]
+language-servers = [{except-features = ["format"], name = "typescript-language-server"}, "tailwindcss-react", "eslint"]
+roots = ["tailwind.config.js","tailwind.config.cjs", ".prettierrc.json"]
 name = "jsx"
 scope = "source.jsx"
 injection-regex = "jsx"
@@ -29,7 +32,8 @@ indent = { tab-width = 4, unit = "\t" }
 auto-format = true
 
 [[language]]
-language-servers = [{except-features = ["format"], name = "typescript-language-server"}, "tailwindcss" , "eslint"]
+language-servers = [{except-features = ["format"], name = "typescript-language-server"}, "tailwindcss-react" , "eslint"]
+roots = ["tailwind.config.js","tailwind.config.cjs", ".prettierrc.json"]
 name = "tsx"
 scope = "source.tsx"
 injection-regex = "(tsx)" # |typescript
@@ -43,7 +47,8 @@ name = "html"
 scope = "text.html.basic"
 injection-regex = "html"
 file-types = ["html"]
-language-servers = ["tailwindcss","vscode-html-language-server"]
+language-servers = ["tailwindcss-react","vscode-html-language-server"]
+roots = ["tailwind.config.js","tailwind.config.cjs", ".prettierrc.json"]
 auto-format = true
 indent = { tab-width = 4, unit = "\t" }
 
@@ -52,13 +57,17 @@ name = "css"
 scope = "source.css"
 injection-regex = "css"
 file-types = ["css"]
-language-servers = ["tailwindcss", "vscode-css-language-server"]
+language-servers = ["tailwindcss-react", "vscode-css-language-server"]
+roots = ["tailwind.config.js","tailwind.config.cjs", ".prettierrc.json"]
 auto-format = true
 indent = { tab-width = 4, unit = "\t" }
 
-[language-server.tailwindcss]
-command = "tailwindcss-language-server" 
+[language-server.tailwindcss-react]
+language-id = "javascriptreact"
+command = "hx-tw"
+config = { }
 args = ["--stdio"]
+timeout = 3
 
 [language-server.eslint]
 args = ["--stdio"]

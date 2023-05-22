@@ -48,8 +48,10 @@ keymap("i", "jk", "<ESC>", opts)
 -- Stay in indent mode
 keymap("v", "<", "<gv", opts)
 keymap("v", ">", ">gv", opts)
--- Outline toggle
---keymap("n", "<leader>gg", ":FloatermNew lazygit<CR>", opts)
+
+-- surround-nvim
+keymap("n", '<Leader>"', 'ysiW"', { remap = true })
+keymap("n", "<Leader>'", "ysiW'", { remap = true })
 
 -- Move text up and down
 keymap("n", "<A-j>", "<Esc>:m .+1<CR>==gi", opts)
@@ -81,6 +83,7 @@ keymap("n", ",", ":", { noremap = true })
 keymap("n", "H", "^", silent)
 keymap("n", "L", "$", silent)
 keymap("n", "m", "%", silent)
+keymap("n", "R", ":%s///gI<left><left><left>", silent)
 
 -- Half-page jumps, cursos stays in the center
 keymap("n", "<C-d>", "<C-d>zz", silent)
