@@ -91,7 +91,7 @@ keymap("n", ",", ":", { noremap = true })
 keymap("n", "H", "^", silent)
 keymap("n", "L", "$", silent)
 keymap("n", "m", "%", silent)
-keymap("n", "R", ":%s///gI<left><left><left>", silent)
+keymap("n", "R", ":%s///gI<left><left><left>", { noremap = true })
 
 -- Half-page jumps, cursos stays in the center
 keymap("n", "<C-d>", "<C-d>zz", silent)
