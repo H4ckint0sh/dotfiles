@@ -4,5 +4,11 @@
     "vim",
     "bit",
     "require"
-  ]
+  ],
+    "workspace.library": [
+        "/Users/ali/.local/share/nvim/lazy/neodev.nvim/types/stable",
+        "/usr/local/Cellar/neovim/0.9.0/share/nvim/runtime/lua",
+        "/Users/ali/Desktop/projects/dotfiles/nvim/.config/nvim/lua",
+        "/Users/ali/.local/share/nvim/mason/packages/lua-language-server/libexec/meta/6e20446f"
+    ]
 }

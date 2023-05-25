@@ -122,7 +122,7 @@ local normal_mode_mappings = {
 	},
 	b = {
 		b = { '<cmd>BufferLineMovePrev<CR>', 'Move back' },
-		c = { '<cmd>BufferCloseAllButCurrent<CR>', 'Close but current' },
+		c = { '<cmd>lua require("utils").closeOtherBuffers()<CR>', 'Close but current' },
 		d = { '<cmd>BufferOrderByDirectory<CR>', 'Order by directory' },
 		f = { '<cmd>bfirst<CR>', 'First buffer' },
 		l = { '<cmd>BufferLineCloseLeft<CR>', 'Close Left' },
