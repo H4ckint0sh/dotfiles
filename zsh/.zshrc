@@ -2,8 +2,8 @@
 export DOTFILES=$HOME/.dotfiles
 
 # Set helix as EDITOR
-export EDITOR=hx
-export OPENAI_API_KEY=$(security find-generic-password -s 'openapi token' -w)
+export EDITOR=nvim
+# export OPENAI_API_KEY=$(security find-generic-password -s 'openapi token' -w)
 
 export ZSH_CUSTOM=$DOTFILES
 export LANG=en_US.UTF-8
@@ -200,3 +200,4 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
 
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
