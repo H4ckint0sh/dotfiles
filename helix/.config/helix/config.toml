@@ -66,3 +66,6 @@ C-x = ":buffer-close"
 tab = ":buffer-next"
 S-tab = ":buffer-previous"
 X = ["extend_line_up", "extend_to_line_bounds"]
+
+[keys.normal.space]
+i = ":toggle lsp.display-inlay-hints"
