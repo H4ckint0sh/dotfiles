@@ -1,105 +1,96 @@
-[[language]]
-name = "typescript"
-scope = "source.ts"
-injection-regex = "(ts|typescript)"
-language-servers = [{except-features = ["format"], name = "typescript-language-server"}, "tailwindcss-react", "eslint"]
-roots = ["tailwind.config.js","tailwind.config.cjs", ".prettierrc.json"]
-file-types = ["ts", "mts", "cts"]
-formatter = { command = 'prettier', args = ["--stdin-filepath", "file.ts"] }
-indent = { tab-width = 4, unit = "\t" }
-auto-format = true
+ [[language]]
+ name = "typescript"
+ scope = "source.ts"
+ injection-regex = "(ts|typescript)"
+ file-types = ["ts", "mts", "cts"]
+ language-id = "typescript"
+ shebangs = []
+ roots = []
+ language-servers = [  "typescript-language-server", "tailwindcss-react", "eslint"]
+ formatter = { command = 'prettier', args = ["--stdio"] }
+ indent = { tab-width = 4, unit = "\t" }
+ auto-format = true
 
-[[language]]
-language-servers = [{except-features = ["format"], name = "typescript-language-server"}, "tailwindcss-react", "eslint"]
-roots = ["tailwind.config.js","tailwind.config.cjs", ".prettierrc.json"]
-name = "javascript"
-scope = "source.js"
-injection-regex = "(js|javascript)"
-file-types = ["js", "mjs", "cjs"]
-formatter = { command = 'prettier', args = ["--stdin-filepath", "file.js"] }
-indent = { tab-width = 4, unit = "\t" }
-auto-format = true
 
-[[language]]
-language-servers = [{except-features = ["format"], name = "typescript-language-server"}, "tailwindcss-react", "eslint"]
-roots = ["tailwind.config.js","tailwind.config.cjs", ".prettierrc.json"]
-name = "jsx"
-scope = "source.jsx"
-injection-regex = "jsx"
-file-types = ["jsx"]
-formatter = { command = 'prettier', args = ["--stdin-filepath", "file.jsx"] }
-indent = { tab-width = 4, unit = "\t" }
-auto-format = true
+ [[language]]
+ name = "tsx"
+ scope = "source.tsx"
+ injection-regex = "(tsx)" # |typescript
+ language-id = "typescriptreact"
+ file-types = ["tsx"]
+ roots = []
+ language-servers = [ "typescript-language-server", "tailwindcss-react", "eslint"]
+ formatter = { command = 'prettier', args = ["--stdin-filepath", "file.tsx"] }
+ indent = { tab-width = 4, unit = "\t" }
+ auto-format = true
 
-[[language]]
-language-servers = [{except-features = ["format"], name = "typescript-language-server"}, "tailwindcss-react" , "eslint"]
-roots = ["tailwind.config.js","tailwind.config.cjs", ".prettierrc.json"]
-name = "tsx"
-scope = "source.tsx"
-injection-regex = "(tsx)" # |typescript
-file-types = ["tsx"]
-formatter = { command = 'prettier', args = ["--stdin-filepath", "file.tsx"] }
-indent = { tab-width = 4, unit = "\t" }
-auto-format = true
+ [[language]]
+ name = "jsx"
+ scope = "source.jsx"
+ injection-regex = "jsx"
+ language-id = "javascriptreact"
+ file-types = ["jsx"]
+ roots = []
+ comment-token = "//"
+ language-servers = [ "typescript-language-server", "tailwindcss-react", "eslint"]
+ grammar = "javascript"
+ formatter = { command = 'prettier', args = ["--stdin-filepath", "file.jsx"] }
+ indent = { tab-width = 4, unit = "\t" }
+ auto-format = true
 
-[[language]]
-name = "html"
-scope = "text.html.basic"
-injection-regex = "html"
-file-types = ["html"]
-language-servers = ["tailwindcss-react","vscode-html-language-server"]
-roots = ["tailwind.config.js","tailwind.config.cjs", ".prettierrc.json"]
-auto-format = true
-indent = { tab-width = 4, unit = "\t" }
+ [[language]]
+ name = "javascript"
+ scope = "source.js"
+ injection-regex = "(js|javascript)"
+ language-id = "javascript"
+ file-types = ["js", "mjs", "cjs"]
+ shebangs = ["node"]
+ roots = []
+ comment-token = "//"
+ language-servers = [ "typescript-language-server", "tailwindcss-react", "eslint"]
+ formatter = { command = 'prettier', args = ["--stdio"] }
+ indent = { tab-width = 4, unit = "\t" }
+ auto-format = true
 
-[[language]]
-name = "css"
-scope = "source.css"
-injection-regex = "css"
-file-types = ["css"]
-language-servers = ["tailwindcss-react", "vscode-css-language-server"]
-roots = ["tailwind.config.js","tailwind.config.cjs", ".prettierrc.json"]
-auto-format = true
-indent = { tab-width = 4, unit = "\t" }
+ [[language]]
+ name = "json"
+ scope = "source.json"
+ injection-regex = "json"
+ file-types = ["json", "jsonc", "arb", "ipynb", "geojson"]
+ roots = []
+ language-servers = [ "vscode-json-language-server" ]
+ formatter = { command = 'prettier', args = ["--stdio"] }
+ indent = { tab-width = 4, unit = "\t" }
+ auto-format = true
 
-[language-server.tailwindcss-react]
-language-id = "javascriptreact"
-command = "hx-tw"
-config = { }
-args = ["--stdio"]
-timeout = 3
+ [language-server.eslint]
+ args = ["--stdio"]
+ command = "vscode-eslint-language-server"
 
-[language-server.eslint]
-args = ["--stdio"]
-command = "vscode-eslint-language-server"
+ [language-server.eslint.config]
+ # format = true
+ # nodePath = ""
+ # onIgnoredFiles = "off"
+ # packageManager = "npm"
+ # quiet = false
+ # rulesCustomizations = []
+ # run = "onType"
+ # useESLintClass = false
+ # validate = "on"
+ # codeAction = { disableRuleComment = { enable = true, location = "separateLine" }, showDocumentation = { enable = true } }
+ # codeActionOnSave = { mode = "all" }
+ # experimental = { }
+ # problems = { shortenToSingleLine = false }
+ # workingDirectory = { mode = "auto" }
 
-[language-server.eslint.config]
-format = true
-nodePath = ""
-onIgnoredFiles = "off"
-quiet = false
-rulesCustomizations = []
-run = "onType"
-validate = "on"
+ [language-server.tailwindcss-react]
+ language-id = "typescriptreact"
+ command = "hx-tw"
+ config = { }
+ args = ["--stdio"]
+ timeout = 3
 
-[language-server.eslint.config.codeAction]
-[language-server.eslint.config.codeAction.disableRuleComment]
-enable = true
-location = "separateLine"
+ [language-server.typescript-language-server.config]
+ documentFormatting = false
 
-[language-server.eslint.config.codeAction.showDocumentation]
-enable = true
 
-[language-server.eslint.config.codeActionOnSave]
-enable = true
-mode = "all"
-
-[language-server.eslint.config.workingDirectory]
-mode = "location"
-
-[language-server.typescript-language-server]
-args = ["--stdio"]
-command = "typescript-language-server"
-
-[language-server.typescript-language-server.config]
-documentFormatting = false
