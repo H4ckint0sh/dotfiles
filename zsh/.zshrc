@@ -6,8 +6,8 @@ export EDITOR=nvim
 # export OPENAI_API_KEY=$(security find-generic-password -s 'openapi token' -w)
 
 export ZSH_CUSTOM=$DOTFILES
-export LANG=en_US.UTF-8
-export LC_ALL=$LANG
+# export LANG=en_US.UTF-8
+# export LC_ALL=$LANG
 
 # zoxide
 eval "$(zoxide init zsh)"
@@ -190,14 +190,14 @@ export PATH="/usr/local/Cellar/llvm/15.0.5/bin:$PATH"
 export PATH="/usr/local/bin:$PATH"
 export PATH="/usr/local/opt/llvm/bin:$PATH"
 export PATH="/Users/ali/.cargo/bin:$PATH"
-export PATH=$HOME/.tmux/plugins/t-smart-tmux-session-manager/bin:$PATH
+export PATH="$HOME/.tmux/plugins/t-smart-tmux-session-manager/bin:$PATH"
 export PATH="/usr/local/opt/findutils/libexec/gnubin:$PATH"
+export PATH="/usr/local/sbin:$PATH"
+export PATH="/Users/ali/.nvm/versions/node/v18.16.0/bin:$PATH"
+
 
 
 # NVM
 export NVM_DIR="$HOME/.nvm"
-[ -s "/usr/local/opt/nvm/nvm.sh" ] && \. "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
-[ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
-
-
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
