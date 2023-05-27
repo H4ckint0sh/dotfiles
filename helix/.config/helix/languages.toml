@@ -1,11 +1,5 @@
  [[language]]
  name = "typescript"
- scope = "source.ts"
- injection-regex = "(ts|typescript)"
- file-types = ["ts", "mts", "cts"]
- language-id = "typescript"
- shebangs = []
- roots = []
  language-servers = [  "typescript-language-server", "tailwindcss-react", "eslint"]
  formatter = { command = 'prettier', args = ["--stdin-filepath", "file.ts"] }
  indent = { tab-width = 4, unit = "\t" }
@@ -14,11 +8,6 @@
 
  [[language]]
  name = "tsx"
- scope = "source.tsx"
- injection-regex = "(tsx)" # |typescript
- language-id = "typescriptreact"
- file-types = ["tsx"]
- roots = []
  language-servers = [ "typescript-language-server", "tailwindcss-react", "eslint"]
  formatter = { command = 'prettier', args = ["--stdin-filepath", "file.tsx"] }
  indent = { tab-width = 4, unit = "\t" }
@@ -26,12 +15,6 @@
 
  [[language]]
  name = "jsx"
- scope = "source.jsx"
- injection-regex = "jsx"
- language-id = "javascriptreact"
- file-types = ["jsx"]
- roots = []
- comment-token = "//"
  language-servers = [ "typescript-language-server", "tailwindcss-react", "eslint"]
  grammar = "javascript"
  formatter = { command = 'prettier', args = ["--stdin-filepath", "file.jsx"] }
@@ -40,13 +23,6 @@
 
  [[language]]
  name = "javascript"
- scope = "source.js"
- injection-regex = "(js|javascript)"
- language-id = "javascript"
- file-types = ["js", "mjs", "cjs"]
- shebangs = ["node"]
- roots = []
- comment-token = "//"
  language-servers = [ "typescript-language-server", "tailwindcss-react", "eslint"]
  formatter = { command = 'prettier', args = ["--stdio"] }
  indent = { tab-width = 4, unit = "\t" }
@@ -54,10 +30,6 @@
 
  [[language]]
  name = "json"
- scope = "source.json"
- injection-regex = "json"
- file-types = ["json", "jsonc", "arb", "ipynb", "geojson"]
- roots = []
  language-servers = [ "vscode-json-language-server" ]
  formatter = { command = 'prettier', args = ["--stdio"] }
  indent = { tab-width = 4, unit = "\t" }
