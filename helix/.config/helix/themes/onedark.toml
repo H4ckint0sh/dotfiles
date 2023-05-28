@@ -10,7 +10,7 @@
 "function" = { fg = "blue" }
 "function.builtin" = { fg = "blue" }
 "function.macro" = { fg = "purple", modifiers = ["italic"] }
-"keyword" = { fg = "purple" }
+"keyword" = { fg = "purple", modifiers = ["italic"] }
 "keyword.control" = { fg = "purple", modifiers = ["italic"] }
 "keyword.storage" = { fg = "purple", modifiers = ["italic"] }
 "keyword.directive" = { fg = "purple" }
