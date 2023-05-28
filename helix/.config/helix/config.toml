@@ -29,7 +29,7 @@ wrap-indicator = ""   # set wrap-indicator to "" to hide it
 
 [editor.indent-guides]
 render = true
-character = "┊" # Some characters that work well: "▏", "┆", "┊", "⸽"
+character = "▏" # Some characters that work well: "▏", "┆", "┊", "⸽"
 skip-levels = 1
 
 [keys.insert]
@@ -41,6 +41,7 @@ X = ["extend_line_up", "extend_to_line_bounds"]
 [keys.normal]
 C-s = ":w"
 # C-o = ":open ~/.config/helix/config.toml"
+C-q = ":quit"
 C-A-j = [
   'ensure_selections_forward',
   'extend_to_line_bounds',
