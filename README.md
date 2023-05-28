@@ -19,7 +19,7 @@ Run `./cleanenv` to unlink the configs.
 ## Apps
 
 - Terminal emulator: [Kitty](https://sw.kovidgoyal.net/kitty)
-- Shell: [Zsh](https://www.zsh.org)
+- Shell: [Fish](https://fishshell.com)
 - Window manager: [Yabai](https://github.com/koekeishiya/yabai)
 - Shortcuts: [Skhd](https://github.com/koekeishiya/skhd)
 - Text editor: [Helix](https://helix-editor.com)
