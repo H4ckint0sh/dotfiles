@@ -14,6 +14,10 @@ source ./linkfolders
 echo "installing files and folders ..."
 source ./install
 
+# fisher https://github.com/jorgebucaran/fisher
+curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher
+fisher install FabioAntunes/fish-nvm edc/bass franciscolourenco/done
+
 echo "Installing nvm"
 mkdir ~/.nvm
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
