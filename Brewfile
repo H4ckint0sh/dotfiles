@@ -22,7 +22,7 @@ brew "lsd"
 brew "neofetch"
 brew "gh"
 brew "git"
-brew "xplr"
+brew "cmake"
 brew "diff-so-fancy"
 brew "findutils"
 brew "luajit", args: ["HEAD"]
