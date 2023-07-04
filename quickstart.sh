@@ -16,7 +16,7 @@ source ./install
 
 echo "Installing nvm"
 mkdir ~/.nvm
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
 nvm install 'lts/*'
 
 echo "Installing 
