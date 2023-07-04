@@ -51,4 +51,4 @@ SETUVAR fish_pager_color_selected_background:\x2d\x2dbackground\x3dbrblack
 SETUVAR fish_pager_color_selected_completion:\x1d
 SETUVAR fish_pager_color_selected_description:\x1d
 SETUVAR fish_pager_color_selected_prefix:\x1d
-SETUVAR fish_user_paths:/Users/ali/\x2envm/versions/node/v18\x2e16\x2e0/bin\x1e/Users/ali/bin\x1e/Users/ali/\x2etmux/plugins/t\x2dsmart\x2dtmux\x2dsession\x2dmanager/bin\x1e/Users/ali/\x2edotfiles\x1e/Users/ali/\x2ecargo/bin\x1e/usr/local/sbin\x1e/usr/local/bin
+SETUVAR fish_user_paths:/opt/homebrew/bin\x1e/Users/ali/\x2envm/versions/node/v18\x2e16\x2e0/bin\x1e/Users/ali/bin\x1e/Users/ali/\x2etmux/plugins/t\x2dsmart\x2dtmux\x2dsession\x2dmanager/bin\x1e/Users/ali/\x2edotfiles\x1e/Users/ali/\x2ecargo/bin\x1e/usr/local/sbin\x1e/usr/local/bin
