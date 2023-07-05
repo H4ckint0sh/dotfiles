@@ -67,6 +67,3 @@ brew "yarn"
 #cask "transmission"
 #cask "kitty"
 #cask "raycast"
-
-# Fonts
-cask "font-sf-mono-nerd-font"
