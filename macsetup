@@ -1,7 +1,5 @@
 #! /bin/sh
 
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-
 brew update
 brew upgrade
 
@@ -11,9 +9,6 @@ FILE=~/.zshrc
 if test -f "$FILE"; then
     rm $FILE
 fi
-
-brew services start yabai
-brew services start skhd
 
 # Thanks to Mathias Bynens!
 # ~/.macos — https://mths.be/macos
