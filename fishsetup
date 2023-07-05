@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-# shellcheck source=./functions.sh
-source ./functions.sh
+# shellcheck source=./functions
+source ./functions
 
 echo "🐟 configuring fish"
 fish_path=$(which fish)
@@ -21,7 +21,7 @@ if ! fish -c "type fisher >/dev/null"; then
 fi
 
 plugins=(
-  jorgebucaran/fisher
+jorgebucaran/fisher
   FabioAntunes/fish-nvm 
   edc/bass 
   franciscolourenco/done
@@ -37,10 +37,10 @@ rm -f ~/.config/fish/fish_plugins
 echo
 
 echo "rebuilding list of plugins"
-for plugin in "${plugins[@]}"; do
-  echo "$plugin"
-  fish -c "fisher install $plugin"
-done
+# for plugin in "${plugins[@]}"; do
+#   echo "$plugin"
+#   fish -c "fisher install $plugin"
+# done
 
 
 echo

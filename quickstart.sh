@@ -2,8 +2,8 @@
 
 set -e
 
-# shellcheck source=./functions.sh
-source ./functions.sh
+# shellcheck source=./functions
+source ./functions
 
 if running_macos; then
   # Prevent sleeping during script execution, as long as the machine is on AC power
@@ -18,26 +18,22 @@ if ! brew_available; then
   load_brew_shellenv
 fi
 
-echo "Brewing cli and development packages  ..."
-source ./macsetup
-
-# Check for packages availibility of apps before installing them
-for pkg in hammerspoon docker firefox appcleaner spotify the-unarchiver transmission kitty raycast; do
-    if brew list -1 | grep -q "^${pkg}\$"; then
-        echo "Package '$pkg' is installed"
-    else
-        echo "Package '$pkg' is not installed"
-    fi
-done
-
+if brew_available; then
+  echo "Brewing..."
+  source ./macsetup
+fi
 
 if fish_available; then
-  ./fish.sh
+  source ./fishsetup
 fi
 
 if running_macos; then
   load_brew_shellenv
+fi
 
+if running_macos; then
+  echo "deleting all .DS_Store files"
+  find . -name ".DS_Store" -type f -delete
 fi
 
 echo "linking your files ..."
@@ -46,14 +42,30 @@ source ./linkfolders
 echo "installing files and folders ..."
 source ./install
 
-echo "Installing nvm"
-mkdir ~/.nvm
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
-nvm install 'lts/*'
+echo "checking if ~/.nvm directory exists ..."
+DIR=~/.nvm
+if [ -d "$DIR" ];
+then
+    echo "$DIR directory exists, aborting nvm installation."
+else
+	echo "$DIR directory does not exist, installing nvm ..."
+  mkdir ~/.nvm
+  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+  nvm install 'lts/*'
+fi
 
-echo "Installing tmux plugins"
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-~/.tmux/plugins/tpm/bin/install_plugins
+
+echo "checking if ~/.tmux/plugins/tpm directory exists ..."
+DIR=~/.tmux/plugins/tpm
+if [ -d "$DIR" ];
+then
+    echo "$DIR directory exists, aborting nvm installation."
+else
+	echo "$DIR directory does not exist, installing tmux plugins ..."
+  git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+  ~/.tmux/plugins/tpm/bin/install_plugins
+fi
+
 
 echo "installing rust"
 curl https://sh.rustup.rs -sSf | sh
@@ -66,11 +78,8 @@ for app in "Activity Monitor" \
     "Contacts" \
     "Dock" \
     "Finder" \
-    "Google Chrome Canary" \
-    "Google Chrome" \
     "Mail" \
     "Messages" \
-    "Opera" \
     "Photos" \
     "Safari" \
     "SystemUIServer" \
