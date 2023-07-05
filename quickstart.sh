@@ -18,8 +18,18 @@ if ! brew_available; then
   load_brew_shellenv
 fi
 
-echo "Brewing ..."
+echo "Brewing cli and development packages  ..."
 source ./macsetup
+
+# Check for packages availibility of apps before installing them
+for pkg in hammerspoon docker firefox appcleaner spotify the-unarchiver transmission kitty raycast; do
+    if brew list -1 | grep -q "^${pkg}\$"; then
+        echo "Package '$pkg' is installed"
+    else
+        echo "Package '$pkg' is not installed"
+    fi
+done
+
 
 if fish_available; then
   ./fish.sh
