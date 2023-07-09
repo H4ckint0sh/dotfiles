@@ -39,7 +39,7 @@ C-space = "signature_help"
 X = ["extend_line_up", "extend_to_line_bounds"]
 
 [keys.normal]
-C-s = ":w"
+C-A-s = ":w"
 # C-o = ":open ~/.config/helix/config.toml"
 C-q = ":quit"
 C-A-j = [
@@ -63,7 +63,7 @@ C-A-k = [
   'move_line_up',
   'replace_with_yanked',
 ]
-C-x = ":buffer-close"
+C-A-x = ":buffer-close"
 tab = ":buffer-next"
 S-tab = ":buffer-previous"
 X = ["extend_line_up", "extend_to_line_bounds"]
