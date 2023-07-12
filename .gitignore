@@ -2,23 +2,11 @@
 *.pyc
 .DS_Store
 /helix/.config/helix/runtime
-.config/fish/fish_variables
-.config/fish/functions/fzf_key_bindings.fish
+/fish/.config/fish/fish_variables
 .npmrc
 .ssh
 .yarnrc
 dist
-Library/Application Support/zoxide/db.zo
-Library/Group Containers/com.apple.PreviewLegacySignaturesConversion/Library/Preferences/com.apple.PreviewLegacySignaturesConversion.plist
-Library/Preferences/com.adobe.illustrator.plist
-Library/Preferences/com.adobe.Photoshop.plist
-Library/Preferences/com.apple.dt.Xcode.plist
-Library/Preferences/com.apple.Music.eq.plist
-Library/Preferences/com.apple.Music.plist
-Library/Preferences/com.apple.symbolichotkeys.plist
-Library/Preferences/com.apple.Terminal.plist
-Library/Preferences/com.raycast.macos.plist
-Library/Preferences/com.spotify.client.plist
 logs
 npm-debug.log
 pids
