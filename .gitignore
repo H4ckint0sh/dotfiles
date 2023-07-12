@@ -2,7 +2,8 @@
 *.pyc
 .DS_Store
 /helix/.config/helix/runtime
-/fish/.config/fish/conf.d/fish_variables
+/fish/.config/fish/fish_variables
+/fish/.config/fish/fish_plugins
 .npmrc
 .ssh
 .yarnrc
@@ -11,4 +12,4 @@ logs
 npm-debug.log
 pids
 run
-/lazygit/Library/Application\Support/lazygit/state.yml
+/lazygit/Library/Application Support/lazygit/state.yml
