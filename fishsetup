@@ -21,10 +21,9 @@ if ! fish -c "type fisher >/dev/null"; then
 fi
 
 plugins=(
-jorgebucaran/fisher
+  jorgebucaran/fisher
   FabioAntunes/fish-nvm 
   edc/bass 
-  franciscolourenco/done
 )
 
 echo "previous plugins:"
@@ -37,10 +36,10 @@ rm -f ~/.config/fish/fish_plugins
 echo
 
 echo "rebuilding list of plugins"
-# for plugin in "${plugins[@]}"; do
-#   echo "$plugin"
-#   fish -c "fisher install $plugin"
-# done
+for plugin in "${plugins[@]}"; do
+  echo "$plugin"
+  fish -c "fisher install $plugin"
+done
 
 
 echo
