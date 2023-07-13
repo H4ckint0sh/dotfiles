@@ -33,12 +33,11 @@ brew "ripgrep"
 brew "starship"
 brew "wget"
 brew "fish"
-brew "fisher"
 brew "yarn"
 brew "nvm"
 brew "zoxide"
 brew "jesseduffield/lazygit/lazygit"
-#brew "H4ckint0sh/formulae/hyabai --HEAD"
+brew "H4ckint0sh/formulae/hyabai", args: ["HEAD"]
 brew "koekeishiya/formulae/skhd"
 brew "grep"
 brew "jq" # Used for spatie/visit
