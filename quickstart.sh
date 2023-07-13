@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -e
+# set -e
 
 # shellcheck source=./functions
 source ./functions
