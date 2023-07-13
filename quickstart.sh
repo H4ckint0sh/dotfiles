@@ -59,9 +59,9 @@ echo "checking if ~/.tmux/plugins/tpm directory exists ..."
 DIR=~/.tmux/plugins/tpm
 if [ -d "$DIR" ];
 then
-    echo "$DIR directory exists, aborting nvm installation."
+  echo "$DIR directory exists, aborting tmux plugins installation."
 else
-	echo "$DIR directory does not exist, installing tmux plugins ..."
+  echo "$DIR directory does not exist, installing tmux plugins ..."
   git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
   ~/.tmux/plugins/tpm/bin/install_plugins
 fi
@@ -70,22 +70,7 @@ fi
 echo "installing rust"
 curl https://sh.rustup.rs -sSf | sh
 
-echo "Restarting affected apps"
-for app in "Activity Monitor" \
-    "Address Book" \
-    "Calendar" \
-    "cfprefsd" \
-    "Contacts" \
-    "Dock" \
-    "Finder" \
-    "Mail" \
-    "Messages" \
-    "Photos" \
-    "Safari" \
-    "SystemUIServer" \
-    "Terminal" \
-    "Transmission"; do
-    killall "${app}" &> /dev/null
-done
+echo "Kill affected applications"
+for app in Safari Finder Dock Mail SystemUIServer; do killall "$app" >/dev/null 2>&1; done
 
 echo "Done. Note that some of these changes require a logout/restart to take effect."
