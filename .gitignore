@@ -3,9 +3,7 @@
 .DS_Store
 /helix/.config/helix/runtime
 /fish/.config/fish/fish_variables
-/fish/.config/fish/fish_plugins
 .npmrc
-.ssh
 .yarnrc
 dist
 logs
