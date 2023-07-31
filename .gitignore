@@ -13,3 +13,4 @@ npm-debug.log
 pids
 run
 /lazygit/Library/Application Support/lazygit/state.yml
+fish/.config/fish/conf.d/nvm.fish
