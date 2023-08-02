@@ -1,15 +1,14 @@
  [[language]]
  name = "typescript"
  language-servers = [  "typescript-language-server", "tailwindcss-react", "eslint"]
- formatter = { command = 'prettier', args = ["--stdin-filepath", "file.ts"] }
+ formatter = { command = 'prettier', args = ["--parser", "typescript"] }
  indent = { tab-width = 4, unit = "\t" }
  auto-format = true
-
 
  [[language]]
  name = "tsx"
  language-servers = [ "typescript-language-server", "tailwindcss-react", "eslint"]
- formatter = { command = 'prettier', args = ["--stdin-filepath", "file.tsx"] }
+ formatter = { command = 'prettier', args = ["--stdin-filename", "file.tsx"] }
  indent = { tab-width = 4, unit = "\t" }
  auto-format = true
 
@@ -17,30 +16,48 @@
  name = "jsx"
  language-servers = [ "typescript-language-server", "tailwindcss-react", "eslint"]
  grammar = "javascript"
- formatter = { command = 'prettier', args = ["--stdin-filepath", "file.jsx"] }
+ formatter = { command = 'prettier', args = ["--stdin-filename", "file.jsx"] }
  indent = { tab-width = 4, unit = "\t" }
  auto-format = true
 
  [[language]]
  name = "javascript"
  language-servers = [ "typescript-language-server", "tailwindcss-react", "eslint"]
- formatter = { command = 'prettier', args = ["--stdio"] }
+ formatter = { command = 'prettier', args = ["--parser", "typescript"] }
  indent = { tab-width = 4, unit = "\t" }
  auto-format = true
 
  [[language]]
  name = "json"
  language-servers = [ "vscode-json-language-server" ]
- formatter = { command = 'prettier', args = ["--stdio"] }
+ formatter = { command = 'prettier', args = ["--parser", "json"] }
  indent = { tab-width = 4, unit = "\t" }
  auto-format = true
+
+ [language-server.vscode-json-language-server.config]
+ json = { validate = { enable = true }, format = { enable = true } }
+ provideFormatter = true
+
+ [language-server.vscode-css-language-server.config]
+ css = { validate = { enable = true } }
+ scss = { validate = { enable = true } }
+ less = { validate = { enable = true } }
+ provideFormatter = true
+
+ [[language]]
+ name = "html"
+ formatter = { command = 'npx', args = ["prettier", "--parser", "html"] }
+ 
+ [[language]]
+ name = "css"
+ formatter = { command = 'npx', args = ["prettier", "--parser", "css"] }
 
  [language-server.eslint]
  args = ["--stdio"]
  command = "vscode-eslint-language-server"
 
  [language-server.eslint.config]
- format = true
+ format = false
  nodePath = ""
  onIgnoredFiles = "off"
  packageManager = "npm"
