@@ -23,10 +23,6 @@ if brew_available; then
   source ./macsetup
 fi
 
-if fish_available; then
-  source ./fishsetup
-fi
-
 if running_macos; then
   load_brew_shellenv
 fi

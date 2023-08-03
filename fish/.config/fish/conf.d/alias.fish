@@ -1,1 +1,0 @@
-alias pn pnpm

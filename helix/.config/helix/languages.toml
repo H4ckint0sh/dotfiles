@@ -47,10 +47,12 @@
  [[language]]
  name = "html"
  formatter = { command = 'npx', args = ["prettier", "--parser", "html"] }
+ language-servers = [ "vscode-html-language-server", "tailwindcss-react"]
  
  [[language]]
  name = "css"
  formatter = { command = 'npx', args = ["prettier", "--parser", "css"] }
+ language-servers = [ "vscode-css-language-server", "tailwindcss-react"]
 
  [language-server.eslint]
  args = ["--stdio"]
@@ -73,11 +75,8 @@
  workingDirectory = { mode = "auto" }
 
  [language-server.tailwindcss-react]
- language-id = "typescriptreact"
  command = "hx-tw"
- config = { }
  args = ["--stdio"]
- timeout = 3
 
  [language-server.typescript-language-server.config]
  documentFormatting = false

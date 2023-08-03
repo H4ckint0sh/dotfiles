@@ -13,10 +13,6 @@ fzf_available() {
   command_available fzf
 }
 
-fish_available() {
-  command_available fish
-}
-
 brew_available() {
   command_available brew
 }
