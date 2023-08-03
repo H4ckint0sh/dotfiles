@@ -1,14 +1,14 @@
  [[language]]
  name = "typescript"
  language-servers = [  "typescript-language-server", "tailwindcss-react", "eslint"]
- formatter = { command = 'prettier', args = ["--parser", "typescript"] }
+ formatter = { command = 'npx', args = ["prettier", "--parser", "typescript"] }
  indent = { tab-width = 4, unit = "\t" }
  auto-format = true
 
  [[language]]
  name = "tsx"
  language-servers = [ "typescript-language-server", "tailwindcss-react", "eslint"]
- formatter = { command = 'prettier', args = ["--stdin-filename", "file.tsx"] }
+ formatter = { command = 'npx', args = ["prettier", "--parser", "typescript"] }
  indent = { tab-width = 4, unit = "\t" }
  auto-format = true
 
@@ -16,21 +16,21 @@
  name = "jsx"
  language-servers = [ "typescript-language-server", "tailwindcss-react", "eslint"]
  grammar = "javascript"
- formatter = { command = 'prettier', args = ["--stdin-filename", "file.jsx"] }
+ formatter = { command = 'npx', args = ["prettier", "--parser", "typescript"] }
  indent = { tab-width = 4, unit = "\t" }
  auto-format = true
 
  [[language]]
  name = "javascript"
  language-servers = [ "typescript-language-server", "tailwindcss-react", "eslint"]
- formatter = { command = 'prettier', args = ["--parser", "typescript"] }
+ formatter = { command = 'npx', args = ["prettier", "--parser", "typescript"] }
  indent = { tab-width = 4, unit = "\t" }
  auto-format = true
 
  [[language]]
  name = "json"
  language-servers = [ "vscode-json-language-server" ]
- formatter = { command = 'prettier', args = ["--parser", "json"] }
+ formatter = { command = 'npx', args = ["prettier", "--parser", "json"] }
  indent = { tab-width = 4, unit = "\t" }
  auto-format = true
 
@@ -59,10 +59,10 @@
  command = "vscode-eslint-language-server"
 
  [language-server.eslint.config]
- format = false
+ format = true
  nodePath = ""
  onIgnoredFiles = "off"
- packageManager = "npm"
+ packageManager = "yarn"
  quiet = false
  rulesCustomizations = []
  run = "onType"
@@ -73,6 +73,7 @@
  experimental = { }
  problems = { shortenToSingleLine = false }
  workingDirectory = { mode = "auto" }
+
 
  [language-server.tailwindcss-react]
  command = "hx-tw"
