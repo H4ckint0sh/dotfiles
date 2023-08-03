@@ -10,14 +10,6 @@ export ZSH_CUSTOM=$DOTFILES
 # export LANG=en_US.UTF-8
 # export LC_ALL=$LANG
 
-# zoxide
-eval "$(zoxide init zsh)"
-
-# TheFuck
-eval $(thefuck --alias)
-
-# Starship
-eval "$(starship init zsh)"
 
 # Git Stuff
 LOG_HASH="%C(always,yellow)%h%C(always,reset)"
@@ -193,7 +185,16 @@ export PATH="/usr/local/opt/llvm/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/.tmux/plugins/t-smart-tmux-session-manager/bin:$PATH"
 export PATH="/usr/local/opt/findutils/libexec/gnubin:$PATH"
-export PATH="/$HOME/.nvm/versions/node/v18.17.0/bin:$PATH"
+export PATH="/$HOME/.nvm/versions/node/v16.20.1/bin:$PATH"
+
+# zoxide
+eval "$(zoxide init zsh)"
+
+# TheFuck
+eval $(thefuck --alias)
+
+# Starship
+eval "$(starship init zsh)"
 
 # NVM
 export NVM_DIR="$HOME/.nvm"
