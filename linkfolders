@@ -1,6 +1,6 @@
 #! /bin/sh
 if [[ -z $STOW_FOLDERS ]]; then
-    STOW_FOLDERS="yabai,lazygit,kitty,skhd,tmux,zsh,neofetch,starship,helix,hammerspoon,gitmux,git,mybin,felix"
+    STOW_FOLDERS="yabai,ssh,lazygit,kitty,skhd,tmux,zsh,neofetch,starship,helix,hammerspoon,gitmux,git,mybin,felix"
 fi
 
 if [[ -z $DOTFILES ]]; then
