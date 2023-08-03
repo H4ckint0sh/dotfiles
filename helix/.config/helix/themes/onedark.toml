@@ -81,10 +81,8 @@
 "ui.text" = { fg = "white" }
 "ui.text.focus" = { fg = "white", bg = "light-black", modifiers = ["bold"] }
 
-"ui.help" = { fg = "white", bg = "transparent" }
-"ui.popup" = { bg = "transparent" }
-"ui.window" = { fg = "transparent" }
-"ui.menu" = { fg = "white", bg = "transparent" }
+"ui.help" = { fg = "white"}
+"ui.menu" = { fg = "white"}
 "ui.menu.selected" = { fg = "black", bg = "blue" }
 "ui.menu.scroll" = { fg = "white", bg = "light-gray" }
 
