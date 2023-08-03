@@ -2,9 +2,6 @@
 *.pyc
 .DS_Store
 /helix/.config/helix/runtime
-/fish/.config/fish/fish_variables
-/fish/.config/fish/completions
-/fish/.config/fish/functions
 .npmrc
 .yarnrc
 dist
