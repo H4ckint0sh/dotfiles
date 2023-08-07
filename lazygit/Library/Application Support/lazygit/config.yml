@@ -70,7 +70,7 @@ git:
     # displays the whole git graph by default in the commits panel (equivalent to passing the `--all` argument to `git log`)
     showWholeGraph: true
 os:
-  editCommand: "nvim"
+  editCommand: "hx"
   editCommandTemplate: "{{editor}} {{filename}}"
   openCommand: ""
 refresher:
