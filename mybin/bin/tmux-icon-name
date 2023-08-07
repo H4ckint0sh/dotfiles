@@ -8,28 +8,22 @@ case $NAME in
         echo ""
         ;;
     fish|zsh|bash)
-        echo ""
+        echo ""
         ;;
     nvim|vim|lvim)
         echo ""
         ;;
     hx)
-        echo ""
+        echo "󰪸"
         ;;
     lazygit|git)
         echo ""
         ;;
     node)
-        echo ""
+        echo "󰎙"
         ;;
     ruby)
         echo ""
-        ;;
-    go)
-        echo "ﳑ"
-        ;;
-    joshuto)
-        echo ""
         ;;
     al)
         echo ""
