@@ -37,11 +37,6 @@ C-space = "signature_help"
 
 [keys.select]
 X = ["extend_line_up", "extend_to_line_bounds"]
-
-[keys.normal]
-C-g = ":sh tmux popup -B -d \"#{pane_current_path}\" -xC -yC -w90% -h90% -E lazygit"
-C-e = ":sh tmux popup -b rounded -d \"#{pane_current_path}\" -xC -yC -w90% -h90% -E fx"
-C-q = ":quit"
 C-j = [
   'ensure_selections_forward',
   'extend_to_line_bounds',
@@ -63,6 +58,11 @@ C-k = [
   'move_line_up',
   'replace_with_yanked',
 ]
+
+[keys.normal]
+C-g = ":sh tmux popup -B -d \"#{pane_current_path}\" -xC -yC -w90% -h90% -E lazygit"
+C-e = ":sh tmux popup -b rounded -d \"#{pane_current_path}\" -xC -yC -w90% -h90% -E fx"
+C-q = ":quit"
 tab = ":buffer-next"
 S-tab = ":buffer-previous"
 X = ["extend_line_up", "extend_to_line_bounds"]
@@ -73,5 +73,6 @@ F = "file_picker_in_current_directory"
 q = ":q"
 x = ":bc"
 "," = ":w"
-"'" = ":q!"
+"!" = ":q!"
 l = ":log-open"
+k = ":reload-all"
