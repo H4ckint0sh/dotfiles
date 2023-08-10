@@ -42,7 +42,7 @@ function fcd() {
 function fm() {
     find -type d | \
     fzf \
-    --bind "enter:become(nvim {})" \
+    --bind "enter:become(hx {})" \
     --bind "del:execute(rm -ri {})" \
     --bind "?:toggle-preview" \
     --bind "ctrl-d:change-prompt(Dirs > )" \
@@ -51,7 +51,7 @@ function fm() {
     --bind "ctrl-f:change-prompt(Files > )" \
     --bind "ctrl-f:+reload(find -type f)" \
     --bind "ctrl-f:+change-preview(bat {})" \
-    --header "CTRL+R to delete | ENTER to run nvim | DEL to delete | CTRL-D to display directories | CTRL-F to display files" \
+    --header "CTRL+R to delete | ENTER to run hx | DEL to delete | CTRL-D to display directories | CTRL-F to display files" \
     --height 50% --border --margin 5% --preview-window hidden --preview "et -I {}" --prompt "Dirs > "
 }
 
@@ -146,7 +146,7 @@ alias gla=pretty_git_log_all
 alias git-current-branch="git branch | grep \* | cut -d ' ' -f2"
 alias grc='git rebase --continue'
 alias gra='git rebase --abort'
-alias gec='git status | grep "both modified:" | cut -d ":" -f 2 | trim | xargs nvim -'
+alias gec='git status | grep "both modified:" | cut -d ":" -f 2 | trim | xargs hx -'
 alias gcan='gc --amend --no-edit'
 
 alias gp="git push -u 2>&1 | tee >(cat) | grep \"pull/new\" | awk '{print \$2}' | xargs open"
@@ -203,4 +203,3 @@ source <(command fx --init)
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-export EDITOR=nvim 
