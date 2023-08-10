@@ -76,8 +76,10 @@
 
 
  [language-server.tailwindcss-react]
+ language-id = "typescriptreact"
  command = "hx-tw"
  args = ["--stdio"]
+ config = {}
 
  [language-server.typescript-language-server.config]
  documentFormatting = false
