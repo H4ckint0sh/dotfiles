@@ -1,4 +1,4 @@
-theme = "onedark"
+theme = "tokyonight"
 
 [editor]
 line-number = "relative"
@@ -75,4 +75,4 @@ x = ":bc"
 "," = ":w"
 "!" = ":q!"
 l = ":log-open"
-k = ":reload-all"
+o = ":reload-all"
