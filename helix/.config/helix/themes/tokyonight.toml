@@ -2,6 +2,7 @@
 
 "comment" = { fg = "comment", modifiers = ["italic"] }
 "constant" = { fg = "orange" }
+"constructor" = { fg = "yellow" }
 "constant.character.escape" = { fg = "magenta" }
 "function" = { fg = "blue", modifiers = ["italic"] }
 "function.macro" = { fg = "cyan" }
