@@ -60,8 +60,6 @@ C-k = [
 ]
 
 [keys.normal]
-C-g = ":sh tmux popup -B -d \"#{pane_current_path}\" -xC -yC -w90% -h90% -E lazygit"
-C-e = ":sh tmux popup -b rounded -d \"#{pane_current_path}\" -xC -yC -w90% -h90% -E fx"
 C-q = ":quit"
 tab = ":buffer-next"
 S-tab = ":buffer-previous"
