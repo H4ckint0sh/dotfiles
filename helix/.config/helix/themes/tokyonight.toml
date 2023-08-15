@@ -7,7 +7,7 @@
 "function" = { fg = "blue", modifiers = ["italic"] }
 "function.macro" = { fg = "cyan" }
 "keyword" = { fg = "cyan", modifiers = ["italic"] }
-"keyword.control" = { fg = "magenta" }
+"keyword.control" = { fg = "magenta", modifiers = ["italic"] }
 "keyword.control.import" = { fg = "cyan", modifiers = ["italic"]}
 "keyword.operator" = { fg = "turquoise" }
 "keyword.function" = { fg = "magenta", modifiers = ["italic"] }
@@ -20,7 +20,7 @@
 "namespace" = { fg = "blue" }
 "variable" = { fg = "white" }
 "variable.builtin" = { fg = "red" }
-"variable.other.member" = { fg = "green" }
+"variable.other.member" = { fg = "green", modifiers = ["italic"] }
 "variable.parameter" = { fg = "yellow", modifiers = ["italic"] }
 
 "diff.plus" = { fg = "green" }
@@ -28,13 +28,13 @@
 "diff.minus" = { fg = "red" }
 
 "ui.background" = {}
-"ui.cursor" = { modifiers = ["reversed"] }
+"ui.cursor" = { fg = "turquoise", modifiers = ["reversed"] }
 "ui.cursor.match" = { fg = "orange", modifiers = ["bold"] }
 "ui.cursor.primary" = { modifiers = ["reversed"] }
-"ui.cursorline.primary" = { bg = "background_menu" }
+"ui.cursorline.primary" = { bg = "turquoise" }
 "ui.help" = { fg = "foreground" }
 "ui.linenr" = { fg = "comment" }
-"ui.linenr.selected" = { fg = "foreground" }
+"ui.linenr.selected" = { fg = "turquoise" }
 "ui.menu" = { fg = "foreground" }
 "ui.menu.selected" = { bg = "background_highlight" }
 "ui.popup" = { fg = "foreground" }
