@@ -41,10 +41,10 @@
 "ui.selection" = { bg = "background_highlight" }
 "ui.selection.primary" = { bg = "background_highlight" }
 "ui.statusline" = { fg = "foreground" }
-"ui.statusline.inactive" = { fg = "comment"}
-"ui.statusline.normal" = { fg = "black", bg = "blue" }
-"ui.statusline.insert" = { fg = "black", bg = "green" }
-"ui.statusline.select" = { fg = "black", bg = "magenta" }
+"ui.statusline.inactive" = { fg = "comment" }
+"ui.statusline.normal" = { fg = "black", bg = "blue" , modifiers =["italic"] }
+"ui.statusline.insert" = { fg = "black", bg = "turquoise" , modifiers =["italic"] }
+"ui.statusline.select" = { fg = "black", bg = "magenta" , modifiers =["italic"] }
 "ui.text" = { fg = "foreground" }
 "ui.text.focus" = { fg = "cyan" }
 "ui.virtual.ruler" = { bg = "foreground_gutter" }
