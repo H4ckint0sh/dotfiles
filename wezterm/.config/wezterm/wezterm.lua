@@ -1,16 +1,18 @@
 local wezterm = require("wezterm")
 
 local config = {
-	color_scheme = "OneDark (base16)",
+	color_scheme = 'Tokyo Night Storm',
 	window_background_opacity = 0.95,
 	send_composed_key_when_left_alt_is_pressed = true,
 	send_composed_key_when_right_alt_is_pressed = true,
 	window_close_confirmation = 'NeverPrompt',
 	enable_tab_bar = false,
 	window_decorations = "RESIZE",
-	font = wezterm.font("SFMono Nerd Font", { weight = "Regular" }),
-	font_size = 13.0,
-	line_height = 1.1,
+	font = wezterm.font("Dank Mono", { weight = "Regular" }),
+	front_end = "WebGpu",
+	font_size = 14.0,
+	line_height = 1.3,
+	freetype_load_flags = 'NO_HINTING',
 	native_macos_fullscreen_mode = true,
 	keys = {
 
