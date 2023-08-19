@@ -34,6 +34,11 @@
  indent = { tab-width = 4, unit = "\t" }
  auto-format = true
 
+ [[language]]
+ name = "lua"
+ indent = { tab-width = 4, unit = "\t" }
+ auto-format = true
+
  [language-server.vscode-json-language-server.config]
  json = { validate = { enable = true }, format = { enable = true } }
  provideFormatter = true
