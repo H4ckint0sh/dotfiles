@@ -7,7 +7,7 @@
 
  [[language]]
  name = "tsx"
- language-servers = [ "typescript-language-server", "tailwindcss-react", "eslint"]
+ language-servers = [ "typescript-language-server", "tailwindcss-react", "eslint", "snippets-ls"]
  formatter = { command = 'npx', args = ["prettier", "--parser", "typescript"] }
  indent = { tab-width = 4, unit = "\t" }
  auto-format = true
@@ -81,6 +81,11 @@
  args = ["--stdio"]
  config = {}
 
+ [language-server.snippets-ls]
+ language-id = "typescriptreact"
+ command = "snippets-ls"
+ args = ["-config", "/Users/ali/.config/helix/snippets.json"]
+
  [language-server.typescript-language-server.config]
  documentFormatting = false
  hostInfo = "helix"
@@ -93,6 +98,9 @@
  includeInlayParameterNameHintsWhenArgumentMatchesName = true
  includeInlayPropertyDeclarationTypeHints = true
  includeInlayVariableTypeHints = true
+
+ [language-server.typescript-language-server.config.completions]
+completeFunctionCalls = true
 
  [language-server.typescript-language-server.config.javascript.inlayHints]
  includeInlayEnumMemberValueHints = true
