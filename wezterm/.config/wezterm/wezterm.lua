@@ -8,7 +8,7 @@ local config = {
 	window_close_confirmation = 'NeverPrompt',
 	enable_tab_bar = false,
 	window_decorations = "RESIZE",
-	font = wezterm.font("Dank Mono", { weight = "Regular" }),
+	font = wezterm.font("DankMono Nerd Font", { weight = "Regular" }),
 	front_end = "WebGpu",
 	font_size = 14.0,
 	line_height = 1.3,
