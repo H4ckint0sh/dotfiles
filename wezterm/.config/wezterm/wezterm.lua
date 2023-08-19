@@ -206,7 +206,10 @@ local config = {
 			mods = "CMD",
 			action = wezterm.action.SendString "\x02\x7d",
 		},
-
+		{
+			key = "f",
+			mods = "CMD",
+			action = wezterm.action.SendString '\x02\x06'	},
 	},
 }
 
