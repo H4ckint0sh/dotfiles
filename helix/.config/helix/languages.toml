@@ -7,7 +7,7 @@
 
  [[language]]
  name = "tsx"
- language-servers = [ "typescript-language-server", "tailwindcss-react", "eslint", "snippets-ls"]
+ language-servers = [ "typescript-language-server", "tailwindcss-react", "eslint"]
  formatter = { command = 'npx', args = ["prettier", "--parser", "typescript"] }
  indent = { tab-width = 4, unit = "\t" }
  auto-format = true
