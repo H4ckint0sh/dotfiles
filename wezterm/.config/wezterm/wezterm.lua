@@ -5,17 +5,23 @@ local config = {
 	window_background_opacity = 0.95,
 	send_composed_key_when_left_alt_is_pressed = true,
 	send_composed_key_when_right_alt_is_pressed = true,
+	-- Disable deafault keybindings
+	disable_default_key_bindings = true,
 	window_close_confirmation = 'NeverPrompt',
 	enable_tab_bar = false,
 	window_decorations = "RESIZE",
 	font = wezterm.font("DankMono Nerd Font", { weight = "Regular" }),
 	front_end = "WebGpu",
 	font_size = 14.0,
-	line_height = 1.3,
+	line_height = 1.1,
 	freetype_load_flags = 'NO_HINTING',
 	native_macos_fullscreen_mode = true,
 	keys = {
-
+		{ key = "0", mods = "CMD", action = wezterm.action.ResetFontSize },
+		{ key = "-", mods = "CMD", action = wezterm.action.DecreaseFontSize },
+		{ key = "+", mods = "CMD", action = wezterm.action.IncreaseFontSize },
+		{ key = "q", mods = "CMD", action = wezterm.action.QuitApplication },
+		{ key = "v", mods = "CMD", action = wezterm.action.PasteFrom 'Clipboard' },
 		{
 			key = "P",
 			mods = "CTRL|SHIFT",
@@ -209,7 +215,8 @@ local config = {
 		{
 			key = "f",
 			mods = "CMD",
-			action = wezterm.action.SendString '\x02\x06'	},
+			action = wezterm.action.SendString '\x02\x06'
+		},
 	},
 }
 
