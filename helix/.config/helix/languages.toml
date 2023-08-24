@@ -82,7 +82,7 @@
 
  [language-server.tailwindcss-react]
  language-id = "typescriptreact"
- command = "hx-tw"
+ command = "tailwindcss-language-server"
  args = ["--stdio"]
  config = {}
 
