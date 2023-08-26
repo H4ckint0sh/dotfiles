@@ -10,6 +10,17 @@ export ZSH_CUSTOM=$DOTFILES
 # export LANG=en_US.UTF-8
 # export LC_ALL=$LANG
 
+# fzf
+export FZF_DEFAULT_OPTS='
+    --reverse
+    --ansi
+    --color=fg:#a9b1d6,hl:#ff9e64
+    --color=fg+:#89ddff,hl+:#ff9e64
+    --color=info:#7aa2f7,prompt:#7aa2f7,pointer:#89ddff
+    --color=marker:#ff9e64,spinner:#a9b1d6,header:#73daca
+'
+  
+
 
 # Git Stuff
 LOG_HASH="%C(always,yellow)%h%C(always,reset)"
