@@ -14,13 +14,12 @@ export ZSH_CUSTOM=$DOTFILES
 export FZF_DEFAULT_OPTS='
     --reverse
     --ansi
-    --color=fg:#a9b1d6,hl:#ff9e64
-    --color=fg+:#89ddff,hl+:#ff9e64
-    --color=info:#7aa2f7,prompt:#7aa2f7,pointer:#89ddff
-    --color=marker:#ff9e64,spinner:#a9b1d6,header:#73daca
+    --header-first
+    --bind=tab:down,btab:up
+    --margin=2%
+    --padding=3%,2%
+    --color=dark,fg:#565f89,hl:#a9b1d6,fg+:#a9b1d6,hl+:#ff9e64,info:#7aa2f7,prompt:#7aa2f7,pointer:#89ddff,marker:#ff9e64,spinner:#a9b1d6,header:#9ece6a,border:#a9b1d6,separator:#a9b1d6,scrollbar:#a9b1d6,label:#a9b1d6
 '
-  
-
 
 # Git Stuff
 LOG_HASH="%C(always,yellow)%h%C(always,reset)"
