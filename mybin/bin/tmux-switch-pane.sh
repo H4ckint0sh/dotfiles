@@ -2,7 +2,7 @@
 
 # customizable
 LIST_DATA="#{window_name} #{pane_title} #{pane_current_path} #{pane_current_command}"
-FZF_COMMAND="fzf-tmux -p --delimiter=: --with-nth 4 --color=hl:2"
+FZF_COMMAND="fzf-tmux -p --delimiter=: --with-nth 4 --border-label=Tmux-Pane_Switcher"
 
 # do not change
 TARGET_SPEC="#{session_name}:#{window_id}:#{pane_id}:"
