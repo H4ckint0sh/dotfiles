@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+# live-grep: interactive search, output is "file:line" pairs
+FILE_PATHS=$(live-grep --exit-on-execution | tr '\n' ' ' | sed 's/ *$//')
+
+if [[ -n "$FILE_PATHS" ]]; then
+	#Select the above pane
+	tmux select-pane -U
+	
+  # Send ":" to start command input in Helix
+	tmux send-keys ":"
+
+  # Send the "open" command with file path(s) to the pane and simulate Enter
+	tmux send-keys "open $FILE_PATHS" C-m
+fi
