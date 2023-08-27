@@ -1,3 +1,15 @@
+
+ [[language]]
+ name = "rust"
+
+ [language-server.rust-analyzer.config]
+ check = { command = "clippy", features = "all" }
+ diagnostics = { experimental = { enable = true } }
+ hover = { actions = { enable = true } }
+ typing = { autoClosingAngleBrackets = { enable = true } }
+ cargo = { allFeatures = true }
+ procMacro = { enable = true }
+
  [[language]]
  name = "typescript"
  language-servers = [  "typescript-language-server", "tailwindcss-react", "eslint"]
