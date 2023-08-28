@@ -22,6 +22,9 @@ case $NAME in
     node)
         echo "󰎙"
         ;;
+    nnn)
+        echo "󱏒"
+        ;;
     ruby)
         echo ""
         ;;
