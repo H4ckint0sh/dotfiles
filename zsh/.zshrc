@@ -6,6 +6,9 @@ export DOTFILES=$HOME/.dotfiles
 export EDITOR=hx
 # export OPENAI_API_KEY=$(security find-generic-password -s 'openapi token' -w)
 
+# nnn
+export NNN_OPENER=nnn-hx.sh
+
 export ZSH_CUSTOM=$DOTFILES
 # export LANG=en_US.UTF-8
 # export LC_ALL=$LANG
