@@ -6,6 +6,11 @@ export DOTFILES=$HOME/.dotfiles
 export EDITOR=hx
 # export OPENAI_API_KEY=$(security find-generic-password -s 'openapi token' -w)
 
+# nnn
+export NNN_OPENER=nnn-hx
+BLK="04" CHR="04" DIR="0c" EXE="00" REG="00" HARDLINK="00" SYMLINK="06" MISSING="00" ORPHAN="01" FIFO="0F" SOCK="0F" OTHER="02"
+export NNN_FCOLORS="$BLK$CHR$DIR$EXE$REG$HARDLINK$SYMLINK$MISSING$ORPHAN$FIFO$SOCK$OTHER"
+
 export ZSH_CUSTOM=$DOTFILES
 # export LANG=en_US.UTF-8
 # export LC_ALL=$LANG
@@ -124,9 +129,9 @@ git_page_maybe() {
 }
 
 # OTHER ALIASES----------------------------------------------------------------
+alias nc="nnn -c"
+alias ls="nnn -de"
 alias c="clear"
-alias ls="lsd"
-alias lsla="lsd -la"
 alias gpath="find -type f | fzf | sed 's/^..//' | tr -d '\n' | pbcopy"
 alias kp="ps aux | fzf | awk '{print \$2}' | xargs kill"
 alias delds="find . -name ".DS_Store" -type f -delete"

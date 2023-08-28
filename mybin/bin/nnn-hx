@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+
+set -x
+ 
+FPATH="$1"
+ 
+ 
+# Right pane indx
+I=$(tmux display -p -t '{right-of}' '#{pane_index}')
+
+if [ -z "$I" ]; then
+
+  # split horizontally and run helix command
+  tmux split-window -h -d -l 85% hx
+
+  NI=$(tmux display -p -t '{right-of}' '#{pane_index}')
+
+  # Send ":" to start command input in Helix
+	tmux send-keys -t $NI ":"
+
+  # Send the "open" command with file path(s) to the pane and simulate Enter
+	tmux send-keys -t $NI "open $FPATH" C-m
+
+  # Select the left pane
+  tmux select-pane -L
+
+else
+
+  # Send ":" to start command input in Helix
+	tmux send-keys -t $I ":"
+
+  # Send the "open" command with file path(s) to the pane and simulate Enter
+	tmux send-keys -t $I "open $FPATH" C-m
+
+  # Select the left pane
+  tmux select-pane -L
+
+fi
+
