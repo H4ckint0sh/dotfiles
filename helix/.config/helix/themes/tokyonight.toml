@@ -28,7 +28,7 @@
 "diff.minus" = { fg = "red" }
 
 "ui.background" = {}
-"ui.cursor" = { fg = "turquoise", modifiers = ["reversed"] }
+"ui.cursor" = { modifiers = ["slow_blink"] }
 "ui.cursor.match" = { fg = "orange", modifiers = ["bold"] }
 "ui.cursor.primary" = { modifiers = ["reversed"] }
 "ui.cursorline.primary" = { bg = "turquoise" }
