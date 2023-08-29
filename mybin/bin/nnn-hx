@@ -11,7 +11,7 @@ I=$(tmux display -p -t '{right-of}' '#{pane_index}')
 if [ -z "$I" ]; then
 
   # split horizontally and run helix command
-  tmux split-window -h -d -l 85% hx
+  tmux split-window -h -d -l 80% hx
 
   NI=$(tmux display -p -t '{right-of}' '#{pane_index}')
 
