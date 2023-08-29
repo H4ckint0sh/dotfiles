@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 
 # live-grep: interactive search, output is "file:line" pairs
-FILE_PATHS=$(live-grep --exit-on-execution | tr '\n' ' ' | sed 's/ *$//')
+file_paths=$(live-grep --exit-on-execution | tr '\n' ' ' | sed 's/ *$//')
 
-if [[ -n "$FILE_PATHS" ]]; then
+if [[ -n "$file_paths" ]]; then
+
 	#Select the above pane
 	tmux select-pane -U
 	
@@ -11,5 +12,5 @@ if [[ -n "$FILE_PATHS" ]]; then
 	tmux send-keys ":"
 
   # Send the "open" command with file path(s) to the pane and simulate Enter
-	tmux send-keys "open $FILE_PATHS" C-m
+	tmux send-keys "open $file_paths" C-m
 fi
