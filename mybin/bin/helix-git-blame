@@ -19,7 +19,7 @@ LINE=$(echo $RES | choose 1)
 # Run git blame and fzf commands
 git blame -L $LINE,+100 $FILE --color-by-age --color-lines | 
   fzf --ansi \
-      --border \
+      --border none \
       --delimiter ':' \
       --height '100%' \
       --multi \
