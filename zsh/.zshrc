@@ -19,11 +19,12 @@ export ZSH_CUSTOM=$DOTFILES
 export FZF_DEFAULT_OPTS='
     --reverse
     --border=sharp
+    --preview-window=border-sharp
     --ansi
     --header-first
     --bind=tab:down,btab:up
     --padding=3%,2%
-    --color=dark,fg:#565f89,hl:#a9b1d6,fg+:#a9b1d6,hl+:#ff9e64,info:#7aa2f7,prompt:#7aa2f7,pointer:#89ddff,marker:#ff9e64,spinner:#a9b1d6,header:#9ece6a,border:#a9b1d6,separator:#a9b1d6,scrollbar:#a9b1d6,label:#a9b1d6
+    --color=dark,fg:#565f89,bg+:-1,hl:#a9b1d6,fg+:#a9b1d6,hl+:#ff9e64,info:#7aa2f7,prompt:#7aa2f7,pointer:#89ddff,marker:#ff9e64,spinner:#a9b1d6,header:#9ece6a,border:#a9b1d6,separator:#a9b1d6,scrollbar:#a9b1d6,label:#a9b1d6
 '
 
 # Git Stuff

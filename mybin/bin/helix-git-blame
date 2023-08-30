@@ -14,7 +14,7 @@ line_number=$(echo $status_line| choose 1)
 # Run git blame and fzf commands
 git blame -L $line_number,+100 $file_name --color-by-age --color-lines | 
   fzf --ansi \
-      --border \
+      --border none \
       --delimiter ':' \
       --height '100%' \
       --multi \
