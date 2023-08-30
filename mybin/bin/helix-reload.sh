@@ -1,26 +1,23 @@
 #!/bin/bash
 
-list_data="#{pane_index} #{pane_current_command}"
+# Data to be listed
+LIST_DATA="#{pane_index} #{pane_current_command}"
 
+# Find pane id where helix is running
+HELIX_PANE_INDEX=$(tmux list-panes -a -F "$LIST_DATA" | grep "hx" | awk '{print $1}')
 
-helix_pane_index=$(tmux list-panes -a -F "$list_data" | grep "hx" | awk '{print $1}')
-
-if [ -n "$helix_pane_index" ]; then
+# Send reload command if such a pane exists
+if [ -n "$HELIX_PANE_INDEX" ]; then
 
   # change to helix pane
-  tmux select-pane -t $helix_pane_index
+  tmux select-pane -t $HELIX_PANE_INDEX
 
   # Send ":" to start command input in Helix
   tmux send-keys ":"
 
-  # Send the "reload" command to the pane and simulate Enter
+  # Send the "open" command with file path(s) to the pane and simulate Enter
   tmux send-keys "reload-all" C-m
 
-else  
-
-  # Helix is not running
-  echo "Helix is not runnning"
-  
 fi
 
 
