@@ -23,6 +23,9 @@ IFS=$'\n' readarray -t selected_matches < <(
       --delimiter ':' \
       --height '100%' \
       --multi \
+      --bind ctrl-a:select-all \
+      --header '<ctrl-a to select-all>  <ctrl-x to clear-selection>' \
+      --bind ctrl-x:clear-selection \
       --print-query --exit-0 \
       --preview 'bat {1} --highlight-line {2}' \
       --preview-window 'right,+{2}+3/3,~3' \
