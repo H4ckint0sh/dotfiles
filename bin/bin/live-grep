@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-CATPPUCCIN_MAUVE='#c6a0f6'
 # Colors
 ORANGE='#ff9e64'
 FOREGROUND='#a9b1d6'

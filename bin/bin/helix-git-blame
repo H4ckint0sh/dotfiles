@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-set-x
-
 # Get pane index of top pane
 TOP_PANE_INDEX=$(tmux display -p -t '{up-of}' '#{pane_index}')
 
