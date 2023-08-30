@@ -1,12 +1,13 @@
 #!/usr/bin/env bash
 
+CATPPUCCIN_MAUVE='#c6a0f6'
 # Colors
 ORANGE='#ff9e64'
 FOREGROUND='#a9b1d6'
 
 # Key bindings
-FILE_PATH='ctrl-y:execute(echo -n {1}:{2} | pbcopy)'
-KEYS="$FILE_PATH"
+COPY_FILE_PATH='ctrl-y:execute(echo -n {1}:{2} | pbcopy)'
+KEYS="$COPY_FILE_PATH"
 
 # Optional flag for execution and exit behavior
 if [[ $1 == '--exit-on-execution' ]]; then
@@ -14,7 +15,7 @@ if [[ $1 == '--exit-on-execution' ]]; then
   shift # remove the flag from the arguments so it's not passed to the `rg` command
 fi
 
-SELECTED_MATCHES=$'\n' readarray -t selected_matches < <(
+IFS=$'\n' readarray -t selected_matches < <(
   rg --color=always --line-number --no-heading --smart-case "${*:-}" |
     fzf --ansi \
       --border none \
@@ -30,8 +31,8 @@ SELECTED_MATCHES=$'\n' readarray -t selected_matches < <(
 )
 
 # Print the file path and line number of each match
-for LINE in "${SELECTED_MATCHES[@]:1}"; do
-  FILE=$(echo "$LINE" | cut -d: -f1)
-  LINE_NUMBER=$(echo "$LINE" | cut -d: -f2)
-  echo "$FILE:$LINE_NUMBER"
+for line in "${selected_matches[@]:1}"; do
+  file=$(echo "$line" | cut -d: -f1)
+  line_number=$(echo "$line" | cut -d: -f2)
+  echo "$file:$line_number"
 done
