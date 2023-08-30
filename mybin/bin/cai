@@ -2,19 +2,19 @@
 
 set -eo pipefail
 
-icon_path=/Applications/Alacritty.app/Contents/Resources/alacritty.icns
-if [ ! -f "$icon_path" ]; then
+ICON_PATH=/Applications/Alacritty.app/Contents/Resources/alacritty.icns
+if [ ! -f "$ICON_PATH" ]; then
   echo "Can't find existing icon, make sure Alacritty is installed"
   exit 1
 fi
 
 echo "Backing up existing icon"
-hash="$(shasum $icon_path | head -c 10)"
-mv "$icon_path" "$icon_path.backup-$hash"
+HASH="$(shasum $ICON_PATH | head -c 10)"
+mv "$ICON_PATH" "$ICON_PATH.backup-$HASH"
 
 echo "Downloading replacement icon"
-icon_url=https://github.com/hmarr/dotfiles/files/8549877/alacritty.icns.gz
-curl -sL $icon_url | gunzip > "$icon_path"
+ICON_URL=https://github.com/hmarr/dotfiles/files/8549877/alacritty.icns.gz
+curl -sL $ICON_URL | gunzip > "$ICON_PATH"
 
 touch /Applications/Alacritty.app
 killall Finder

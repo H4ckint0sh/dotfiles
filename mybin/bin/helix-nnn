@@ -2,23 +2,23 @@
 
 # Custom n3 opener
 
-file_path="$1"
+FILE_PATH="$1"
  
 # Right pane indx
-right_pane_index=$(tmux display -p -t '{right-of}' '#{pane_index}')
+RIGHT_PANE_INDEX=$(tmux display -p -t '{right-of}' '#{pane_index}')
 
-if [ -z "$right_pane_index" ]; then
+if [ -z "$RIGHT_PANE_INDEX" ]; then
 
   # split horizontally and run helix command
   tmux split-window -h -d -l 80% hx
 
-  new_right_pane_index=$(tmux display -p -t '{right-of}' '#{pane_index}')
+  NEW_RIGHT_PANE_INDEX=$(tmux display -p -t '{right-of}' '#{pane_index}')
 
   # Send ":" to start command input in Helix
-	tmux send-keys -t $new_right_pane_index ":"
+	tmux send-keys -t $NEW_RIGHT_PANE_INDEX ":"
 
   # Send the "open" command with file path(s) to the pane and simulate Enter
-	tmux send-keys -t $new_right_pane_index "open $file_path" C-m
+	tmux send-keys -t $NEW_RIGHT_PANE_INDEX "open $FILE_PATH" C-m
 
   # Select the left pane
   tmux select-pane -L
@@ -26,10 +26,10 @@ if [ -z "$right_pane_index" ]; then
 else
 
   # Send ":" to start command input in Helix
-	tmux send-keys -t $right_pane_index ":"
+	tmux send-keys -t $RIGHT_PANE_INDEX ":"
 
   # Send the "open" command with file path(s) to the pane and simulate Enter
-	tmux send-keys -t $right_pane_index "open $file_path" C-m
+	tmux send-keys -t $RIGHT_PANE_INDEX "open $FILE_PATH" C-m
 
   # Select the left pane
   tmux select-pane -L
