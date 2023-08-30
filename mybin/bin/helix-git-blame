@@ -1,23 +1,18 @@
 #!/usr/bin/env bash
 
-# ~/bin/helix-git-blame
+# Get pane index of top pane
+top_pane_index=$(tmux display -p -t '{up-of}' '#{pane_index}')
 
-# Select original pane
-ORIGINAL_PANE=$(tmux select-pane -U)
+# Capture the content of the original pane
+top_pane_content=$(tmux capture-pane -p -t $top_pane_index)
 
-# Capture the output of the original pane
-PANE_OUTPUT=$(tmux capture-pane -p -t $ORIGINAL_PANE)
-
-# Back to the bottom pane 
-tmux select-pane -D
-
-# Extract file and line information
-RES=$(echo "$PANE_OUTPUT" | rg -e "(?:NOR|INS|SEL)\s+(\S*)\s[^│]* (\d+):*.*" -o --replace '$1 $2')
-FILE=$(echo $RES | choose 0)
-LINE=$(echo $RES | choose 1)
+# Extract file name and line numbe 
+status_line=$(echo "$top_pane_content" | rg -e "(?:NOR|INS|SEL)\s+(\S*)\s[^│]* (\d+):*.*" -o --replace '$1 $2')
+file_name=$(echo $status_line| choose 0)
+line_number=$(echo $status_line| choose 1)
 
 # Run git blame and fzf commands
-git blame -L $LINE,+100 $FILE --color-by-age --color-lines | 
+git blame -L $line_number,+100 $file_name --color-by-age --color-lines | 
   fzf --ansi \
       --border none \
       --delimiter ':' \

@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+# Get current pane content
+current_pane_content=$(tmux capture-pane -p)
+
+# Extract file and line information
+status_line=$(echo "$current_pane_content" | rg -e "(?:NOR|INS|SEL)\s+(\S*)\s[^│]* (\d+):*.*" -o --replace '$1 $2')
+file_name=$(echo $status_line| choose 0)
+line_number=$(echo $status_line| choose 1)
+
+# Open same file on sane line number in github
+gh browse $file_name:$line_number
