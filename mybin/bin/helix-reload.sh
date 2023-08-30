@@ -13,7 +13,7 @@ if [ -n "$helix_pane_index" ]; then
   # Send ":" to start command input in Helix
   tmux send-keys ":"
 
-  # Send the "open" command with file path(s) to the pane and simulate Enter
+  # Send the "reload" command to the pane and simulate Enter
   tmux send-keys "reload-all" C-m
 
 else  
