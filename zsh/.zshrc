@@ -1,4 +1,9 @@
 #@@ -1,203 +1 @@
+
+#job
+export PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
+export PUPPETEER_EXECUTABLE_PATH=`which chromium`k
+
 # Path to your dotfiles.
 export DOTFILES=$HOME/.dotfiles
 
@@ -23,7 +28,6 @@ export FZF_DEFAULT_OPTS='
     --ansi
     --header-first
     --scrollbar='▍' 
-    --padding=3%,2%
     --color=dark,fg:#565f89,bg+:-1,hl:#a9b1d6,fg+:#a9b1d6,hl+:#ff9e64,info:#7aa2f7,prompt:#7aa2f7,pointer:#89ddff,marker:#ff9e64,spinner:#a9b1d6,header:#9ece6a,border:#a9b1d6,separator:#a9b1d6,scrollbar:#a9b1d6,label:#a9b1d6
 '
 
