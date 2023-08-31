@@ -7,7 +7,7 @@ yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
 sudo yabai --load-sa
 
 # global settings
-yabai -m config mouse_follows_focus off
+yabai -m config mouse_follows_focus on
 yabai -m config window_border_blur off
 yabai -m config focus_follows_mouse off
 yabai -m config window_origin_display default
