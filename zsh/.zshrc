@@ -1,4 +1,9 @@
 #@@ -1,203 +1 @@
+
+#job
+export PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
+export PUPPETEER_EXECUTABLE_PATH=`which chromium`k
+
 # Path to your dotfiles.
 export DOTFILES=$HOME/.dotfiles
 
