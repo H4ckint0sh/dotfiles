@@ -26,7 +26,7 @@ IFS=$'\n' readarray -t selected_matches < <(
       --header '<ctrl-a to select-all>  <ctrl-x to clear-selection>' \
       --bind ctrl-x:clear-selection \
       --print-query --exit-0 \
-      --preview 'bat {1} --highlight-line {2}' \
+      --preview 'bat {1} --color=always --highlight-line {2}' \
       --preview-window 'right,+{2}+3/3,~3' \
       --scrollbar '▍' \
       --bind "$KEYS"
