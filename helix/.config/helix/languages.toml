@@ -11,6 +11,17 @@
  procMacro = { enable = true }
 
  [[language]]
+ name = "vue"
+ scope = "source.vue"
+ file-types = ["vue"]
+ injection-regex = "vue"
+ roots = ["package.json", "tailwind.config.js", "tailwind.config.cjs"]
+ language-servers = ["volar", "tailwindcss-vue"]
+ formatter = { command = "prettier", args = ["--parser", "vue"] }
+ indent = { tab-width = 4, unit = "\t" }
+ auto-format = true
+
+ [[language]]
  name = "typescript"
  language-servers = [  "typescript-language-server", "tailwindcss-react", "eslint"]
  formatter = { command = 'npx', args = ["prettier", "--parser", "typescript"] }
@@ -91,6 +102,17 @@
  problems = { shortenToSingleLine = false }
  workingDirectory = { mode = "auto" }
 
+ [language-server.volar]
+ command = "vue-language-server"
+ args = ["--stdio"]
+
+ [language-server.volar.config]
+ typescript = { tsdk = "/Users/ali/.nvm/versions/node/v16.20.1/lib/node_modules/typescript/lib" }
+
+ [language-server.tailwindcss-vue]
+ command = "tailwindcss-language-server"
+ args = ["--stdio"]
+ config = {}
 
  [language-server.tailwindcss-react]
  language-id = "typescriptreact"
