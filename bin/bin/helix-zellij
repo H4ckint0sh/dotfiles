@@ -116,12 +116,10 @@ function search_buf() {
 
 
 function git_status() {
-    zellij action toggle-fullscreen
     file=$(git status --short | \
          awk '{ printf("[%s] %s\n", $1, $2) }' | \
-         fzf --preview 'git diff --color {2}' --preview-window 'up,~4,+{2}+4/2' | \
+         fzf --preview 'git diff --color {2}' --preview-window 'right,~4,+{2}+4/2' | \
          awk '{ print $2 }')
-    zellij action toggle-fullscreen
     if [[ $file == "" ]]; then
         return 1
     fi
