@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+# Focus helix pane
+zellij action focus-previous-pane
+
+# Dump helix pane content
+zellij action dump-screen /tmp/screen-dump.txt
+
+# Get last 3 line of file and delete it
+HELIX_PANE_CONTENT=$(tail -n 3 /tmp/screen-dump.txt)
+rm /tmp/screen-dump.txt
+
+# focus blame pane
+zellij action focus-next-pane
+
+# Extract file name and line numbe 
+STATUS_LINE=$(echo "$HELIX_PANE_CONTENT" | rg -e "(?:NOR|INS|SEL)\s+(\S*)\s[^│]* (\d+):*.*" -o --replace '$1 $2')
+FILE_NAME=$(echo $STATUS_LINE| choose 0)
+LINE_NUMBER=$(echo $STATUS_LINE| choose 1)
+
+# Run git blame and fzf commands
+git blame -L $LINE_NUMBER,+100 $FILE_NAME --color-by-age --color-lines | 
+  fzf --ansi \
+      --border none \
+      --delimiter ':' \
+      --height '100%' \
+      --multi \
+      --print-query --exit-0 \
+      --scrollbar '▍'
+

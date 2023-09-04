@@ -4,10 +4,9 @@
 FILE_PATHS=$(live-grep --exit-on-execution | tr '\n' ' ' | sed 's/ *$//')
 
 if [[ -n "$FILE_PATHS" ]]; then
-  # Send ":" to start command input in Helix
 
-  # Toggle the floating pane
-  zellij action toggle-floating-panes
+  # focus helix pane
+  zellij action focus-previous-pane
 
   # Send the "open" command with the file path(s)
   zellij action write-chars ":open $FILE_PATHS"
@@ -15,9 +14,4 @@ if [[ -n "$FILE_PATHS" ]]; then
   # Send Enter
   zellij action write 13
 
-  # Toggle the floating pane
-  zellij action toggle-floating-panes
-
-  # Close the live-grep-pane
-  zellij action close-pane
 fi

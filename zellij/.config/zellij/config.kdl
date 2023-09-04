@@ -51,8 +51,7 @@ keybinds clear-defaults=true {
         bind  "g" {
             Run "lazygit" {
                 close_on_exit true
-                floating true
-            }; SwitchToMode "Normal";         
+            }; SwitchToMode "Normal"; ToggleFocusFullscreen;        
         }
     }
     move {
@@ -64,7 +63,7 @@ keybinds clear-defaults=true {
         bind "l" "Right" { MovePane "Right"; }
     }
     tab {
-        // bind "Ctrl t" { SwitchToMode "Normal"; }
+        bind "Ctrl t" { SwitchToMode "Normal"; }
         bind "r" { SwitchToMode "RenameTab"; TabNameInput 0; }
         bind "h" "Left" "Up" "k" { GoToPreviousTab; }
         bind "l" "Right" "Down" "j" { GoToNextTab; }

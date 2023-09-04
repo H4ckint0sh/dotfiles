@@ -78,9 +78,28 @@ q = ":q"
 x = ":bc"
 "," = ":w"
 "!" = ":q!"
-l = ":log-open"
 o = ":reload-all"
 # g = ":pipe-to tmux split-window -v helix-live-grep"
-g = [":pipe-to zellij run -f -c -- helix-livegrep-zellij"]
-B = ":pipe-to tmux split-window -v helix-git-blame"
+l = [":pipe-to zellij run -d down -c -- helix-livegrep-zellij"]
+g = ":sh lazygit-reload-helix"
+B = [":pipe-to zellij run -d down -c -- helix-blame-zellij"]
+# B = ":pipe-to tmux split-window -v helix-git-blame"
 H = ":sh helix-open-in-gh"
+
+[keys.normal.'space'.'space']
+# Interactive search in current working directory
+s = ":pipe-to helix-zellij search --current"
+# Interactive search in current working directory (include path name in the search)
+S = ":pipe-to helix-zellij search --current-inc-path"
+# Interactive search in current git directory
+w = ":pipe-to helix-zellij search --workspace"
+# Interactive search in current git directory (include path name in the search)
+W = ":pipe-to helix-zellij search --workspace-inc-path"
+# Interactive search in current buffer
+b = ":pipe-to helix-zellij search --buffer"
+# Git status
+m = ":pipe-to helix-zellij git --status"
+# Git blame
+B = ":pipe-to helix-zellij git --blame"
+# Git browse github repo using default browser
+O = ":pipe-to helix-zellij git --browse"
