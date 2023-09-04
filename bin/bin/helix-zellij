@@ -16,7 +16,7 @@ set -x
 # - `gh` for the `git` subcommand `--browse` option
 
 CANARY_FILE="/tmp/helix_zellij_canary"
-DUMP_FILE="/tmp/helix_zellij_dump.txt"
+DUMP_FILE="/tmp/helix_zellij_dump"
 
 # Opens a list of files.
 # Input files should be a space separated list of "<name>:<line>"
@@ -41,15 +41,13 @@ function saturating_sub() {
 }
 
 # Fetch file name and line number from the helix status bar.
-# Assumes the following helix configuration:
-# Doesn't work if the "spinner" is in action...
 function current_file_and_line() {
 
     # Select original pane
     zellij action focus-previous-pane
     # Capture output of the original pane
     zellij action dump-screen "$DUMP_FILE"
-    content=$(tail -n 2 /tmp/helix_zellij_dump.txt)
+    content=$(tail -n 2 /tmp/helix_zellij_dump)
 
     # Back to working pane
     zellij action focus-next-pane
@@ -64,25 +62,14 @@ function current_file_and_line() {
 }
 
 # Search in current working directory
-# First argument should be any extra option to pass to `ff` script (like "f")
 function search_cwd() {
-    opts="x"$1
 
-    zellij action toggle-fullscreen
-    file_paths=$(ff -$opts)
-    zellij action toggle-fullscreen
-
-    new_paths=""
-    for file in $file_paths; do
-        new_paths="${new_paths} ${PWD}/${file}"
-    done
-    file_paths=$new_paths
-
-    if [[ $file_paths == "" ]]; then
-        return 1
+    # live-grep: interactive search, output is "file:line" pairs
+    file_paths=$(live-grep --exit-on-execution | tr '\n' ' ' | sed 's/ *$//')
+    if [[ -n "$file_paths" ]]; then
+        open_files "$file_paths"
     fi
 
-    open_files "$file_paths"
 }
 
 # Search in git workspace
@@ -105,13 +92,41 @@ function search_buf() {
         echo "Can't search in scratch buffer"; sleep 2; return 1
     fi
 
-    zellij action toggle-fullscreen
-    fl=$(ff "$file")
-    zellij action toggle-fullscreen
-
-    if [[ "$fl" != "" ]]; then
-        open_files "$fl"
+    tmpfile=""
+    if [ ! -f $file ]; then
+        tmpfile=$(mktemp)
+        dd if=$file of="$tmpfile" bs=1M count=1 2>/dev/null
+        cat $tmpfile
+        file=$tmpfile
     fi
+
+    preview_cmd="bat --style=full --color=always --highlight-line {1} $file"
+    preview_win="right,~4,+{1}+4/2"
+    while true; do
+        result=$(bat --plain --color always $file | \
+            nl -ba -w1 -s": " | \
+            fzf --ansi +i --delimiter ':' \
+                --exact --no-sort --tac --nth "2.." \
+                --print-query --query="$query" \
+                --preview "$preview_cmd" \
+                --preview-window "$preview_win" | \
+            awk '{ print $1 }' |
+            sed 's/:$//')
+
+        if [[ $result == "" ]]; then
+            zellij action close-pane
+        fi
+
+        # Extract new query
+        query=$(echo "$result" | cut -d$'\n' -f1)
+        line=$(echo "$result" | cut -d$'\n' -f2)
+
+        fl="${file}:${line}"
+        echo $fl
+    done
+
+    rm -f $tmpfile
+
 }
 
 
