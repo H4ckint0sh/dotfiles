@@ -59,11 +59,7 @@ function current_file_and_line() {
     file=$(echo $status_line| choose 0)
     line=$(echo $status_line| choose 1)
 
-    filename=$(eval echo $filename)
-    # Fetch line number
-    line=$(echo $status_line | rev | cut -d' ' -f1 | rev | cut -d ':' -f1)
-    echo "$filename:$line"
-
+    echo "$file:$line"
 
 }
 
