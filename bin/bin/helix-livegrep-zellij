@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+# live-grep: interactive search, output is "file:line" pairs
+FILE_PATHS=$(live-grep --exit-on-execution | tr '\n' ' ' | sed 's/ *$//')
+
+if [[ -n "$FILE_PATHS" ]]; then
+  # Send ":" to start command input in Helix
+
+  # Toggle the floating pane
+  zellij action toggle-floating-panes
+
+  # Send the "open" command with the file path(s)
+  zellij action write-chars ":open $FILE_PATHS"
+
+  # Send Enter
+  zellij action write 13
+
+  # Toggle the floating pane
+  zellij action toggle-floating-panes
+
+  # Close the live-grep-pane
+  zellij action close-pane
+fi
