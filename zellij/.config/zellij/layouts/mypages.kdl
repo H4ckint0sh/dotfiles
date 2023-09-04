@@ -1,0 +1,19 @@
+layout {
+    tab name="My Pages" {
+        pane size=1 borderless=true {
+            plugin location="zellij:compact-bar"
+        }
+        pane  name="helix" {
+            command "hx"
+            focus true
+            cwd "/Users/ali/Desktop/projects/fe-mypages"
+        }
+        floating_panes {
+            pane  name="npm" {
+                command "npm"
+                args "run" "dev" 
+                cwd "/Users/ali/Desktop/projects/fe-mypages"
+            }
+        }
+    }
+}

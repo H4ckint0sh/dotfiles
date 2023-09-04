@@ -241,6 +241,48 @@ chars = "}"
 key = "RBracket"
 mods = "Alt|Shift"
 
+# Zellij
+
+[[keyboard.bindings]]
+chars = "\u0002p}"
+key = "P"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u0002t}"
+key = "T"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u0002h}"
+key = "M"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u0002n}"
+key = "R"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u0002o}"
+key = "S"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u0002os}"
+key = "S"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u0002pw}"
+key = "W"
+mods = "Command"
+
+[[keyboard.bindings]]
+chars = "\u0002pg}"
+key = "g"
+mods = "Command"
+
 [mouse]
 hide_when_typing = true
 
