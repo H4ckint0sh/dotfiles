@@ -2,14 +2,12 @@
 
 set -x
 
-#
 # Author: H4ckint0sh 
 #
 # Extensions used by Helix editor
 #
 # Depedencies:
 # - `zellij`
-# - `ff`: https://github.com/davxy/script-nest/blob/main/bin/ff
 # - `fzf` for the `search` subcommand
 # - `bat` for the `search --buffer` option
 # - `git` for the `git` subcommand
@@ -25,7 +23,6 @@ function open_files() {
     # Select original pana
     zellij action focus-previous-pane
     # Write down open command
-    # Looks like carriage return is the way to do this (line feed doesn't work)
     zellij action write-chars ":open $files"
     zellij action write 13
     # Move focus back to working pane
@@ -72,18 +69,6 @@ function search_cwd() {
 
 }
 
-# Search in git workspace
-function search_ws() {
-    wd=$(pwd)
-    ws=$(git rev-parse --show-toplevel 2>/dev/null)
-    if [ $? -ne 0 ]; then
-        echo "Not in a git working directory"; sleep 2; return 1
-    fi
-    cd $ws
-    search_cwd $1
-    cd $wd
-}
-
 # Seach in current buffer
 function search_buf() {
     fl=$(current_file_and_line)
@@ -128,7 +113,6 @@ function search_buf() {
     rm -f $tmpfile
 
 }
-
 
 function git_status() {
     file=$(git status --short | \
@@ -200,41 +184,6 @@ function git_browse() {
     sleep 1
 }
 
-function diff_with_saved() {
-    fl=$(current_file_and_line)
-    file=$(echo $fl | cut -d':' -f1)
-    line=$(echo $fl | cut -d':' -f2)
-
-    # Select original pane
-    zellij action focus-previous-pane
-
-    # Save buffer to a temporary file by copying buffer content to a scratch
-    # buffer and saving it to DUMP_FILE (this will left untouched the current
-    # buffer, with its pending changes as well)
-    zellij action write-chars "%y"
-    zellij action write-chars "${line}G"
-    zellij action write-chars ":new"
-    zellij action write 13
-    zellij action write-chars "p"
-    # Remove first empty line
-    zellij action write-chars "ggd"
-    # Write temporary buffer in DUMP_FILE
-    zellij action write-chars ":write! $DUMP_FILE"
-    zellij action write 13
-    # Close temporary file buffer
-    zellij action write-chars ":buffer-close"
-    zellij action write 13
-
-    # Back to working pane
-    zellij action focus-next-pane
-
-    if command -v delta &> /dev/null; then
-        delta --paging always $file $DUMP_FILE
-    else
-        diff -u --color $file $DUMP_FILE | bat --plain --paging always
-    fi
-}
-
 # Print help and sleep $1 seconds
 function help() {
     echo "Usage: helix-ext <command> [options]"
@@ -243,27 +192,15 @@ function help() {
     echo "- 'search'"
     echo "   -b, --buffer: search in current buffer content"
     echo "   -c, --current: search in current working directory"
-    echo "   -C, --current-inc-path: search in current working directory (include path)"
-    echo "   -w, --workspace: search in git workspace (requires to be in a git repo)"
-    echo "   -W, --workspace-inc-path: search in git workspace (include path)"
     echo "- 'git'"
     echo "   -s, --status: print working dir status"
     echo "   -b, --blame: print blame info for current file"
     echo "   -B, --browse: browse remote repo at current file and line"
-    echo "- 'diff'"
     exit 1
 }
 
 if [ ! -e "$CANARY_FILE" ]; then
-    # Be sure the parent process is Helix
-    # Get the parent process ID (PPID) of the current process
-    parent_pid=$PPID
-    # # Get the name of the parent process using the PPID
-    # parent_name=$(ps -o comm= -p "$parent_pid")
-    # if [[ $parent_name != "helix" ]]; then 
-    #     echo "This script should be called from Helix (got $parent_name)"
-    #     exit
-    # fi
+
     touch "$CANARY_FILE"
 
     direction="down"
@@ -282,15 +219,6 @@ case "$1" in
                 ;;
             "-c"|"--current")
                 search_cwd
-                ;;
-            "-C"|"--current-inc-path")
-                search_cwd "f"
-                ;;
-            "-w"|"--workspace")
-                search_ws
-                ;;
-            "-W"|"--workspace-inc-path")
-                search_ws "f"
                 ;;
             "*")
                 help 3

@@ -48,8 +48,7 @@ C-j = [
   'extend_to_line_bounds',
   'extend_char_right',
   'extend_char_left',
-  'delete_selection',
-  'add_newline_below',
+  'delete_selection','add_newline_below',
   'move_line_down',
   'replace_with_yanked',
 ]
@@ -79,27 +78,23 @@ x = ":bc"
 "," = ":w"
 "!" = ":q!"
 o = ":reload-all"
-# g = ":pipe-to tmux split-window -v helix-live-grep"
-l = [":pipe-to zellij run -d down -c -- helix-livegrep-zellij"]
-g = ":sh lazygit-reload-helix"
-B = [":pipe-to zellij run -d down -c -- helix-blame-zellij"]
-# B = ":pipe-to tmux split-window -v helix-git-blame"
-H = ":sh helix-open-in-gh"
 
+# Tmux 
+# g = ":pipe-to tmux split-window -v helix-live-grep"
+# B = ":pipe-to tmux split-window -v helix-git-blame"
+# H = ":sh helix-open-in-gh"
+
+# Zelllij
 [keys.normal.'space'.'space']
 # Interactive search in current working directory
-s = ":pipe-to helix-zellij search --current"
-# Interactive search in current working directory (include path name in the search)
-S = ":pipe-to helix-zellij search --current-inc-path"
-# Interactive search in current git directory
-w = ":pipe-to helix-zellij search --workspace"
-# Interactive search in current git directory (include path name in the search)
-W = ":pipe-to helix-zellij search --workspace-inc-path"
+l = ":pipe-to helix-zellij search --current"
 # Interactive search in current buffer
-b = ":pipe-to helix-zellij search --buffer"
+B = ":pipe-to helix-zellij search --buffer"
 # Git status
-m = ":pipe-to helix-zellij git --status"
+s = ":pipe-to helix-zellij git --status"
 # Git blame
-B = ":pipe-to helix-zellij git --blame"
+b = ":pipe-to helix-zellij git --blame"
 # Git browse github repo using default browser
-O = ":pipe-to helix-zellij git --browse"
+H = ":pipe-to helix-zellij git --browse"
+# lazygit
+g = ":sh lazygit-reload-helix"
