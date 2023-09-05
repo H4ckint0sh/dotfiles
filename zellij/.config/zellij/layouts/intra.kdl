@@ -5,17 +5,17 @@ layout {
         }
         children
     }
-    tab name="My Pages" {
+    tab name="Intra" {
         pane  name="helix" {
             command "hx"
             focus true
-            cwd "/Users/ali/Desktop/projects/fe-mypages"
+            cwd "/Users/ali/Desktop/projects/mkb-intranet-2021-frontend"
         }
         floating_panes {
             pane  name="npm" {
                 command "npm"
-                args "run" "dev" 
-                cwd "/Users/ali/Desktop/projects/fe-mypages"
+                args "run" "start" 
+                cwd "/Users/ali/Desktop/projects/mkb-intranet-2021-frontend"
             }
         }
     }
