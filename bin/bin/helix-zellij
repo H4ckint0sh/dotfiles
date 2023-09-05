@@ -242,9 +242,6 @@ case "$1" in
                 help 3
         esac
         ;;
-    "diff")
-        diff_with_saved
-        ;;
     *)
         help 3
         ;;
