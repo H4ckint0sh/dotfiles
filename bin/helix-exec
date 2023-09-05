@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# Run command on current file with helix using zellij
+# Requires https://github.com/helix-editor/helix/pull/6985
+# eg. echo current filename
+# :sh he echo
+set -euo pipefail
+# run command
+zellij action write-chars ':'
+# write shell command
+zellij action write-chars "sh $@ '"
+# ctrl +r to select registry
+zellij action write 18
+# paste from document path registry
+zellij action write-chars "%'"
+# enter
+zellij action write 13
