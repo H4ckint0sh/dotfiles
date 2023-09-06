@@ -26,7 +26,6 @@ Run `./cleanenv` to unlink the configs.
 - Terminal multiplexer: [Tmux](https://github.com/tmux/tmux)
 - Better cat: [Bat](https://github.com/sharkdp/bat)
 - Better ls: [Lsd](https://github.com/Peltoche/lsd)
-- Cli system info: [Neofetch](https://github.com/dylanaraps/neofetch)
 - Git TUI: [Lazygit](https://github.com/jesseduffield/lazygit)
 - Symlink manager: [Stow](https://www.gnu.org/software/stow/)
 
