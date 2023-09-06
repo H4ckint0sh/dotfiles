@@ -49,9 +49,7 @@ keybinds clear-defaults=true {
         bind "e" { TogglePaneEmbedOrFloating; SwitchToMode "Normal"; }
         bind "c" { SwitchToMode "RenamePane"; PaneNameInput 0;}
         bind  "g" {
-            Run "lazygit" {
-                close_on_exit true
-            }; SwitchToMode "Normal"; ToggleFocusFullscreen;        
+            Run "zt"; SwitchToMode "Normal";
         }
     }
     move {

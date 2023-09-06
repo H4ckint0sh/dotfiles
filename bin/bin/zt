@@ -1,0 +1,170 @@
+#!/usr/bin/env bash
+
+set -x
+
+# Determine if in zellij session
+not_in_zellij() {
+  [[ -z "$ZELLIJ" ]]
+}
+
+if not_in_zellij; then
+	ZELLIJ_RUNNING=1
+else
+	ZELLIJ_RUNNING=0
+fi
+
+# determine the user's current position relative zellij:
+# serverless - there is no running zellij server
+# attached   - the user is currently attached to the running zellij server
+# detached   - the user is currently not attached to the running zellij serve
+T_RUNTYPE="serverless"
+if [ "$ZELLIJ_RUNNING" -eq 0 ]; then
+	if [ "$ZELLIJ" ]; then # inside tmux
+		T_RUNTYPE="attached"
+	else # outside tmux
+		T_RUNTYPE="detached"
+	fi
+fi
+
+# display help text with an argument
+if [ "$1" = "-h" ] || [ "$1" == "--help" ]; then
+	printf "\n"
+	printf "\033[1m  zt - the smart zellij session manager\033[0m\n"
+	printf "\033[37m  https://github.com/joshmedeski/t-smart-zellij-session-manager\n"
+	printf "\n"
+	printf "\033[32m  Run interactive mode\n"
+	printf "\033[34m      tz\n"
+	printf "\033[34m        ctrl-s list only zellij sessions\n"
+	printf "\033[34m        ctrl-x list only zoxide results\n"
+	printf "\033[34m        ctrl-f list results from the find command\n"
+	printf "\n"
+	printf "\033[32m  Go to session (matches zellij session, zoxide result, or directory)\n"
+	printf "\033[34m      tz {name}\n"
+	printf "\n"
+	printf "\033[32m  Open popup (while in zellij)\n"
+
+	if [ "$ZELLIJ_RUNNING" -eq 0 ]; then
+		printf "\033[34m        ctrl-s list only zellij sessions\n"
+		printf "\033[34m        ctrl-x list only zoxide results\n"
+		printf "\033[34m        ctrl-f list results from the find command\n"
+	fi
+
+	printf "\n"
+	printf "\033[32m  Show help\n"
+	printf "\033[34m      zt -h\n"
+	printf "\033[34m      zt --help\n"
+	printf "\n"
+	exit 0
+fi
+
+HOME_REPLACER=""                                          # default to a noop
+echo "$HOME" | grep -E "^[a-zA-Z0-9\-_/.@]+$" &>/dev/null # chars safe to use in sed
+HOME_SED_SAFE=$?
+if [ $HOME_SED_SAFE -eq 0 ]; then # $HOME should be safe to use in sed
+	HOME_REPLACER="s|^$HOME/|~/|"
+fi
+
+
+BORDER_LABEL=" zt - smart zellij session manager "
+HEADER=" ^s sessions ^x zoxide ^f find"
+SESSION_BIND="ctrl-s:change-prompt(sessions> )+reload(zellij list-sessions)"
+ZOXIDE_BIND="ctrl-x:change-prompt(zoxide> )+reload(zoxide query -l | sed -e \"$HOME_REPLACER\")"
+TAB_BIND="tab:down,btab:up"
+
+
+get_sessions_by_mru() {
+	zellij list-sessions
+}
+
+if [ $# -eq 1 ]; then # argument provided
+	zoxide query "$1" &>/dev/null
+	ZOXIDE_RESULT_EXIT_CODE=$?
+	if [ $ZOXIDE_RESULT_EXIT_CODE -eq 0 ]; then # zoxide result found
+		RESULT=$(zoxide query "$1")
+	else # no zoxide result found
+		ls "$1" &>/dev/null
+		LS_EXIT_CODE=$?
+		if [ $LS_EXIT_CODE -eq 0 ]; then # directory found
+			RESULT=$1
+		else # no directory found
+			echo "No directory found."
+			exit 1
+		fi
+	fi
+else # argument not provided
+	case $T_RUNTYPE in
+	attached)
+		if [[ ! -v $FZF_ZELLIJ_OPTS ]]; then
+			FZF_ZELLIJ_OPTS="-p 53%,58%"
+		fi
+
+		RESULT=$(
+			(get_sessions_by_mru && (zoxide query -l | sed -e "$HOME_REPLACER")) | fzf-tmux \
+				--bind "$SESSION_BIND" \
+				--bind "$TAB_BIND" \
+				--bind "$ZOXIDE_BIND" \
+				--border-label "$BORDER_LABEL" \
+				--header "$HEADER" \
+				--no-sort \
+				--prompt "$PROMPT" \
+				$FZF_ZELLIJ_OPTS
+		)
+		;;
+	detached)
+		RESULT=$(
+			(get_sessions_by_mru && (zoxide query -l | sed -e "$HOME_REPLACER")) | fzf \
+				--bind "$SESSION_BIND" \
+				--bind "$TAB_BIND" \
+				--bind "$ZOXIDE_BIND" \
+				--border-label "$BORDER_LABEL" \
+				--header "$HEADER" \
+				--no-sort \
+				--prompt "$PROMPT"
+		)
+		;;
+	serverless)
+		RESULT=$(
+			(zoxide query -l | sed -e "$HOME_REPLACER") | fzf \
+				--bind "$TAB_BIND" \
+				--border-label "$BORDER_LABEL" \
+				--header " ^f find" \
+				--no-sort \
+				--prompt "$PROMPT"
+		)
+		;;
+	esac
+fi
+
+
+if [ "$RESULT" = "" ]; then # no result
+	exit 0                     # exit silently
+fi
+
+if [ $HOME_SED_SAFE -eq 0 ]; then
+	RESULT=$(echo "$RESULT" | sed -e "s|^~/|$HOME/|") # get real home path back
+fi
+
+zoxide add "$RESULT" &>/dev/null # add to zoxide database
+FOLDER=$(basename "$RESULT")
+SESSION_NAME=$(echo "$FOLDER" | sed 's/(current)//g' | tr -d '[:space:]' ' .:' '_')
+
+if [ "$T_RUNTYPE" != "serverless" ]; then
+	SESSION=$(zellij list-sessions | grep "^$SESSION_NAME") # find existing session
+fi
+
+if [ "$SESSION" = "" ]; then # session is missing
+	SESSION="$SESSION_NAME"
+	cd "$RESULT"
+  zellij attach --create "$FOLDER"
+fi
+
+case $T_RUNTYPE in # attach to session
+attached)
+	zellij attach "$SESSION"
+	;;
+detached) ;&
+serverless)
+	zellij attach "$SESSION"
+	;;
+esac
+

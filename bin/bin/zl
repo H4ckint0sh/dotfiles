@@ -1,0 +1,442 @@
+#!/usr/bin/env bash
+
+# == SETTINGS ==
+# Space separated list of the different main menu options.
+# This default includes all options.
+[[ -z "${ZELLIJ_LAUNCHER_MENU+x}" ]] &&
+	ZELLIJ_LAUNCHER_MENU="create attach kill reload exit sessions locations"
+
+# If your menu includes actions (create, kill, reload, exit),
+# they will be prepended with this string for clarity.
+[[ -z "${ZELLIJ_LAUNCHER_ACTION_PREFIX+x}" ]] &&
+	ZELLIJ_LAUNCHER_ACTION_PREFIX="$ "
+
+# Space separated string of directories to search when creating a new session.
+# Use $HOME instead of ~ and \$PWD instead of $PWD.
+[[ -z "${ZELLIJ_LAUNCHER_DIRS+x}" ]] &&
+	ZELLIJ_LAUNCHER_DIRS="\$PWD $HOME"
+
+# Minimum search depth (find -mindepth)
+[[ -z "${ZELLIJ_LAUNCHER_MIN_DIR_DEPTH+x}" ]] &&
+	ZELLIJ_LAUNCHER_MIN_DIR_DEPTH=0
+
+# Maximum search depth (find -maxdepth)
+[[ -z "${ZELLIJ_LAUNCHER_MAX_DIR_DEPTH+x}" ]] &&
+	ZELLIJ_LAUNCHER_MAX_DIR_DEPTH=3
+
+# Opts to pass to fzf in case you don't like this layout
+[[ -z "${ZELLIJ_LAUNCHER_FZF_OPTS+x}" ]] &&
+	ZELLIJ_LAUNCHER_FZF_OPTS="--layout=reverse --inline-info --border --header-first --cycle"
+
+# Let the user start a session even if already attached to one.
+# Be careful, you can break sessions if you recurse them!
+# For example: (main session > split > new session > attach to main session)
+[[ -z "${ZELLIJ_LAUNCHER_ALLOW_NEST+x}" ]] &&
+	ZELLIJ_LAUNCHER_ALLOW_NEST=1
+
+# If you open the launcher within an active Zellij session,
+# display the current session in the header/banner.
+# Only applies when ZELLIJ_LAUNCHER_ALLOW_NEST is enabled
+[[ -z "${ZELLIJ_LAUNCHER_SHOW_CURRENT+x}" ]] &&
+	ZELLIJ_LAUNCHER_SHOW_CURRENT=1
+
+# When enabled, detaching from a session and not selecting anything
+# in the main menu will return you to your last attached session.
+# Enabling this option forcibly adds exit to the main menu.
+[[ -z "${ZELLIJ_LAUNCHER_RETURN_TO_LAST+x}" ]] &&
+	ZELLIJ_LAUNCHER_RETURN_TO_LAST=1
+
+# When enabled, only show the exit action in the main menu when there are no
+# recent sessions.
+# This setting only takes effect when ZELLIJ_LAUNCHER_RETURN_TO_LAST
+# is enabled.
+[[ -z "${ZELLIJ_LAUNCHER_DYNAMIC_EXIT+x}" ]] &&
+	ZELLIJ_LAUNCHER_DYNAMIC_EXIT=1
+
+# Applied when selecting a folder in the main menu whose name is already an
+# active sessions.
+# If nested and the selected folder name is the attached session,
+# will automatically be set to rename.
+# Possible values: "attach" | "rename" | "ask"
+[[ -z "${ZELLIJ_LAUNCHER_FOLDER_BEHAVIOR+x}" ]] &&
+	ZELLIJ_LAUNCHER_FOLDER_BEHAVIOR="ask"
+
+# Text always displayed in menus.
+# I recommend keeping this so Zellij gets exposure :)
+[[ -z "${ZELLIJ_LAUNCHER_BANNER+x}" ]] &&
+	ZELLIJ_LAUNCHER_BANNER=" 
+███████╗███████╗██╗     ██╗     ██╗     ██╗
+╚══███╔╝██╔════╝██║     ██║     ██║     ██║
+  ███╔╝ █████╗  ██║     ██║     ██║     ██║
+ ███╔╝  ██╔══╝  ██║     ██║     ██║██   ██║
+███████╗███████╗███████╗███████╗██║╚█████╔╝
+╚══════╝╚══════╝╚══════╝╚══════╝╚═╝ ╚════╝ 
+ "
+
+# == UTIL FUNCTIONS ==
+zl_array_in() {
+	local IFS=$'\n'
+	local items=($1)
+	local item=$2
+	echo "${items[*]}" | grep -Fxq -- "$item"
+}
+
+zl_array_remove() {
+	local IFS=$'\n'
+	local items=($1)
+	local val=$2
+	for ((i = 0; i < "${#items[@]}"; i++)); do
+		[[ "${items[i]}" == "$val" ]] && unset 'items[i]'
+	done
+
+	items=("${items[@]}")
+	echo "${items[*]}"
+}
+
+zl_array_intersect() {
+	local IFS=$'\n'
+	local first=($1)
+	local second=($2)
+	local result=()
+
+	declare -A second_mask
+	for item in "${second[@]}"; do
+		second_mask["$item"]=1
+	done
+
+	for ((i = 0; i < "${#first[@]}"; i++)); do
+		[[ "${second_mask["${first[i]}"]}" == 1 ]] && result+=("${first[i]}")
+	done
+
+	echo "${result[*]}"
+}
+
+zl_array_subtract() {
+	local IFS=$'\n'
+	local minuend=($1)
+	local subtrahend=($2)
+	local result=()
+
+	declare -A subtrahend_mask
+	for item in "${subtrahend[@]}"; do
+		subtrahend_mask["$item"]=1
+	done
+
+	for ((i = 0; i < "${#minuend[@]}"; i++)); do
+		[[ "${subtrahend_mask["${minuend[i]}"]}" != 1 ]] &&
+			result+=("${minuend[i]}")
+	done
+
+	echo "${result[*]}"
+}
+
+zl_sessions_get() {
+	local IFS=$'\n'
+	local sessions
+	while read -r session; do
+		if [[ "$session" == *" (current)" ]]; then
+			continue
+		fi
+		sessions+=("$session")
+	done <<<"$(zellij ls)"
+
+	echo "${sessions[*]}"
+}
+
+zl_sessions_get_current() {
+	local IFS=$'\n'
+	local sessions
+	while read -r session; do
+		if [[ "$session" == *" (current)" ]]; then
+			echo "${session/ (current)/}"
+			break
+		fi
+	done <<<"$(zellij ls)"
+}
+
+zl_locations_get() {
+	local IFS=' '
+	local locations="${ZELLIJ_LAUNCHER_DIRS/\$PWD/$PWD}"
+	local locations=($locations)
+	local find_opts=(
+		"-mindepth" "$ZELLIJ_LAUNCHER_MIN_DIR_DEPTH"
+		"-maxdepth" "$ZELLIJ_LAUNCHER_MAX_DIR_DEPTH"
+		"-type" "d"
+	)
+
+	echo "$(find "${locations[@]}" "${find_opts[@]}")"
+}
+
+zl_header_get() {
+	local IFS=$'\n'
+	local fzf_opts=($2)
+	local header=($ZELLIJ_LAUNCHER_BANNER)
+	if [[ "$ZELLIJ_LAUNCHER_ALLOW_NEST" == 1 &&
+		"$ZELLIJ_LAUNCHER_SHOW_CURRENT" == 1 &&
+		-n "$1" ]]; then
+		header+=("Currently in session: $1"$'\n')
+	fi
+
+	if $(zl_array_in "${fzf_opts[*]}" "--layout=reverse"); then
+		echo "${header[*]}"
+		return 0
+	fi
+
+	local min=0
+	local max=$((${#header[@]} - 1))
+	while [[ min -lt max ]]; do
+		# Swap current first and last elements
+		local temp="${header[$min]}"
+		header[$min]="${header[$max]}"
+		header[$max]="$temp"
+
+		# Move closer
+		((min++, max--))
+	done
+
+	echo "${header[*]}"
+}
+
+zl_session_name() {
+	local location=$1
+	local sessions=($2)
+	local header=$3
+	local fzf_opts=($4)
+
+	local name="${location##*/}"
+	if $(zl_array_in "${sessions[*]}" "$name"); then
+		while $(zl_array_in "${sessions[*]}" "$name"); do
+			menu_list=("${header[@]}")
+			menu_list+=("Session name '$name' is already taken!")
+			menu_list+=("Taken names:")
+			menu_list+=("${sessions[@]}")
+			name=($(
+				echo "${menu_list[*]}" |
+					fzf --prompt="Session name: " \
+						--query="${location##*/}" \
+						"${fzf_opts_text[@]}"
+			))
+			name="${name[0]}"
+		done
+	fi
+
+	if [[ -z "$name" ]]; then
+		echo ""
+		return 0
+	fi
+
+	echo "$name"
+}
+
+# == MAIN FUNCTION ==
+zl() {
+	local $IFS
+	local save_ifs=$IFS
+	local prefix="$ZELLIJ_LAUNCHER_ACTION_PREFIX"
+	local init_fzf_opts=($ZELLIJ_LAUNCHER_FZF_OPTS)
+	local init_menu_sections=($ZELLIJ_LAUNCHER_MENU)
+	local recent_sessions=()
+
+	local IFS=$'\n'
+	local current_session="$(zl_sessions_get_current)"
+	local header=($(zl_header_get "$current_session" "${init_fzf_opts[*]}"))
+	local header_height="${#header[@]}"
+
+	local fzf_opts_select=("${init_fzf_opts[@]}" "--header-lines=$header_height")
+	local fzf_opts_text=("${fzf_opts_select[@]}" "--print-query" "--disabled")
+
+	while true; do
+		# get sessions here bc we need to pass them to other functions
+		local sessions=($(zl_sessions_get))
+		recent_sessions=($(zl_array_intersect "${recent_sessions[*]}" "${sessions[*]}"))
+		sessions=($(zl_array_subtract "${sessions[*]}" "${recent_sessions[*]}"))
+		sessions=("${recent_sessions[@]}" "${sessions[@]}")
+
+		local all_sessions=()
+		all_sessions+=("${sessions[@]}")
+		[[ -n "$current_session " ]] && all_sessions+=("$current_session")
+
+		local locations=($(zl_locations_get))
+
+		menu_sections=("${init_menu_sections[@]}")
+		[[ "$ZELLIJ_LAUNCHER_RETURN_TO_LAST" == 1 ]] &&
+			(! zl_array_in "${menu_sections[*]}" "exit") &&
+			menu_sections=("exit" "${init_menu_sections[@]}")
+
+		[[ "$ZELLIJ_LAUNCHER_RETURN_TO_LAST" == 1 ]] &&
+			[[ "$ZELLIJ_LAUNCHER_DYNAMIC_EXIT" == 1 ]] &&
+			[[ "${#recent_sessions[@]}" == 0 ]] &&
+			menu_sections=($(zl_array_remove "${menu_sections[*]}" "exit"))
+
+		# MAIN MENU
+		local menu_list=("${header[@]}")
+		for menu_section in "${menu_sections[@]}"; do
+			case "$menu_section" in
+			"exit")
+				menu_list+=("${prefix}Exit")
+				;;
+			"create")
+				menu_list+=("${prefix}Create new session")
+				;;
+			"attach")
+				menu_list+=("${prefix}Attach to session")
+				;;
+			"kill")
+				menu_list+=("${prefix}Kill session")
+				;;
+			"reload")
+				menu_list+=("${prefix}Reload menu")
+				;;
+			"sessions")
+				menu_list+=("${sessions[@]}")
+				;;
+			"locations")
+				menu_list+=("${locations[@]}")
+				;;
+			esac
+		done
+
+		local selection="$(
+			local IFS=$'\n'
+			echo "${menu_list[*]}" |
+				fzf "${fzf_opts_select[@]}"
+		)"
+
+		case "$selection" in
+		"")
+			[[ "$ZELLIJ_LAUNCHER_RETURN_TO_LAST" == 0 ]] && break
+			[[ "${#recent_sessions[@]}" == 0 ]] && break
+			zellij a "${recent_sessions[0]}"
+			continue
+			;;
+		"${prefix}Exit")
+			break
+			;;
+		"${prefix}Reload menu")
+			continue
+			;;
+		"${prefix}Attach to session")
+			menu_list=("${header[@]}")
+			menu_list+=("${sessions[@]}")
+			selection="$(
+				local IFS=$'\n'
+				echo "${menu_list[*]}" |
+					fzf "${fzf_opts_select[@]}"
+			)"
+
+			[[ -z "$selection" ]] && continue
+			recent_sessions=($(zl_array_remove "${recent_sessions[*]}" "$selection"))
+			recent_sessions=("$selection" "${recent_sessions[@]}")
+			zellij a "$selection"
+			continue
+			;;
+		"${prefix}Kill session")
+			menu_list=("${header[@]}")
+			menu_list+=("${all_sessions[@]}")
+			selection="$(
+				local IFS=$'\n'
+				echo "${menu_list[*]}" |
+					fzf "${fzf_opts_select[@]}"
+			)"
+
+			[[ -z "$selection" ]] && continue
+			local confirm="$(
+				echo "${header[*]}" |
+					fzf --prompt="Are you sure you want to kill $selection? (y/n): " \
+						"${fzf_opts_text[@]}"
+			)"
+
+			case "${confirm,,}" in
+			"y" | "yes")
+				zellij k "$selection"
+				;;
+			esac
+			continue
+			;;
+		"${prefix}Create new session")
+			menu_list=("${header[@]}")
+			menu_list+=("${locations[@]}")
+
+			selection="$(
+				echo "${menu_list[*]}" |
+					fzf "${fzf_opts_select[@]}"
+			)"
+
+			[[ -z "$selection" ]] && continue
+			local name="$(
+				zl_session_name "$selection" \
+					"${all_sessions[*]}" \
+					"${header[*]}" \
+					"${fzf_opts_text[*]}"
+			)"
+
+			[[ -z "$name" ]] && continue
+			recent_sessions=($(zl_array_remove "${recent_sessions[*]}" "$name"))
+			recent_sessions=("$name" "${recent_sessions[@]}")
+			local current_dir="$PWD"
+			cd "$selection" && zellij a -c "$name"
+			cd "$current_dir"
+			continue
+			;;
+		esac
+
+		if $(zl_array_in "${sessions[*]}" "$selection"); then
+			recent_sessions=($(zl_array_remove "${recent_sessions[*]}" "$selection"))
+			recent_sessions=("$selection" "${recent_sessions[@]}")
+			zellij a "$selection"
+			continue
+		fi
+
+		local location="$selection"
+		local name="${location##*/}"
+		if $(zl_array_in "${all_sessions[*]}" "$name"); then
+			local behavior="$ZELLIJ_LAUNCHER_FOLDER_BEHAVIOR"
+			if [[ "$current_session" == "$name" ]]; then
+				behavior="rename"
+			fi
+
+			if [[ "$behavior" == "ask" ]]; then
+				menu_list=("${header[@]}")
+				menu_list+=("${prefix}Attach to session")
+				menu_list+=("${prefix}Rename new session")
+				selection="$(
+					echo "${menu_list[*]}" |
+						fzf --prompt="'$name' is already an active session! " \
+							"${fzf_opts_select[@]}"
+				)"
+				case "$selection" in
+				"${prefix}Attach to session")
+					behavior="attach"
+					;;
+				"${prefix}Rename new session")
+					behavior="rename"
+					;;
+				esac
+			fi
+
+			case $behavior in
+			"attach")
+				recent_sessions=($(zl_array_remove "${recent_sessions[*]}" "$location"))
+				recent_sessions=("$location" "${recent_sessions[@]}")
+				zellij a "$name"
+				continue
+				;;
+			"rename")
+				local name="$(
+					zl_session_name "$location" \
+						"${all_sessions[*]}" \
+						"${header[*]}" \
+						"${fzf_opts_text[*]}"
+				)"
+				;;
+			esac
+		fi
+
+		[[ -z "$name" ]] && continue
+		recent_sessions=($(zl_array_remove "${recent_sessions[*]}" "$name"))
+		recent_sessions=("$name" "${recent_sessions[@]}")
+		local current_dir="$PWD"
+		cd "$location" && zellij a -c "$name"
+		cd "$current_dir"
+	done
+}
