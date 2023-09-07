@@ -48,8 +48,7 @@ C-j = [
   'extend_to_line_bounds',
   'extend_char_right',
   'extend_char_left',
-  'delete_selection',
-  'add_newline_below',
+  'delete_selection','add_newline_below',
   'move_line_down',
   'replace_with_yanked',
 ]
@@ -78,8 +77,27 @@ q = ":q"
 x = ":bc"
 "," = ":w"
 "!" = ":q!"
-l = ":log-open"
 o = ":reload-all"
-g = ":pipe-to tmux split-window -v helix-live-grep"
+
+# Tmux 
+[keys.normal.'space'.'t']
+l = ":pipe-to tmux split-window -v helix-live-grep"
 B = ":pipe-to tmux split-window -v helix-git-blame"
 H = ":sh helix-open-in-gh"
+
+# Zelllij
+[keys.normal.'space'.'space']
+# Interactive search in current working directory
+l = ":pipe-to helix-zellij search --current"
+# Interactive search in current buffer
+B = ":pipe-to helix-zellij search --buffer"
+# Git status
+s = ":pipe-to helix-zellij git --status"
+# Git blame
+b = ":pipe-to helix-zellij git --blame"
+# Git browse github repo using default browser
+H = ":pipe-to helix-zellij git --browse"
+# lazygit
+g = ":sh lazygit-reload-helix"
+# Session
+z = ":sh zellij run -f -c -- zt"

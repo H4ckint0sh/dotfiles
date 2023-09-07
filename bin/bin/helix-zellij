@@ -1,0 +1,251 @@
+#!/usr/bin/env bash
+# Author: H4ckint0sh 
+#
+# Extensions used by Helix editor
+#
+# Depedencies:
+# - `zellij`
+# - `fzf` for the `search` subcommand
+# - `bat` for the `search --buffer` option
+# - `git` for the `git` subcommand
+# - `gh` for the `git` subcommand `--browse` option
+
+CANARY_FILE="/tmp/helix_zellij_canary"
+DUMP_FILE="/tmp/helix_zellij_dump"
+
+# Opens a list of files.
+# Input files should be a space separated list of "<name>:<line>"
+function open_files() {
+    files=$1
+    # Select original pana
+    zellij action focus-previous-pane
+    # Write down open command
+    zellij action write-chars ":open $files"
+    zellij action write 13
+    # Move focus back to working pane
+    zellij action focus-next-pane
+}
+
+function saturating_sub() {
+    if (( $2 >= $1 )); then
+        echo 1
+    else
+        echo $(( $1 - $2 ))
+    fi
+}
+
+# Fetch file name and line number from the helix status bar.
+function current_file_and_line() {
+
+    # Select original pane
+    zellij action focus-previous-pane
+    # Capture output of the original pane
+    zellij action dump-screen "$DUMP_FILE"
+    content=$(tail -n 2 /tmp/helix_zellij_dump)
+
+    # Back to working pane
+    zellij action focus-next-pane
+
+    # Extract file name and line numbe 
+    status_line=$(echo "$content" | rg -e "(?:NOR|INS|SEL)\s+(\S*)\s[^│]* (\d+):*.*" -o --replace '$1 $2')
+    file=$(echo $status_line| choose 0)
+    line=$(echo $status_line| choose 1)
+
+    echo "$file:$line"
+
+}
+
+# Search in current working directory
+function search_cwd() {
+
+    # live-grep: interactive search, output is "file:line" pairs
+    file_paths=$(live-grep --exit-on-execution | tr '\n' ' ' | sed 's/ *$//')
+    if [[ -n "$file_paths" ]]; then
+        open_files "$file_paths"
+    fi
+
+}
+
+# Seach in current buffer
+function search_buf() {
+    fl=$(current_file_and_line)
+    file=$(echo $fl | cut -d':' -f1)
+    if [[ $file == "[scratch]" ]]; then
+        echo "Can't search in scratch buffer"; sleep 2; return 1
+    fi
+
+    tmpfile=""
+    if [ ! -f $file ]; then
+        tmpfile=$(mktemp)
+        dd if=$file of="$tmpfile" bs=1M count=1 2>/dev/null
+        cat $tmpfile
+        file=$tmpfile
+    fi
+
+    preview_cmd="bat --style=full --color=always --highlight-line {1} $file"
+    preview_win="right,~4,+{1}+4/2"
+    while true; do
+        result=$(bat --plain --color always $file | \
+            nl -ba -w1 -s": " | \
+            fzf --ansi +i --delimiter ':' \
+                --exact --no-sort --tac --nth "2.." \
+                --print-query --query="$query" \
+                --preview "$preview_cmd" \
+                --preview-window "$preview_win" | \
+            awk '{ print $1 }' |
+            sed 's/:$//')
+
+        if [[ $result == "" ]]; then
+            zellij action close-pane
+        fi
+
+        # Extract new query
+        query=$(echo "$result" | cut -d$'\n' -f1)
+        line=$(echo "$result" | cut -d$'\n' -f2)
+
+        fl="${file}:${line}"
+        echo $fl
+    done
+
+    rm -f $tmpfile
+
+}
+
+function git_status() {
+    file=$(git status --short | \
+         awk '{ printf("[%s] %s\n", $1, $2) }' | \
+         fzf --preview 'git diff --color {2}' --preview-window 'right,~4,+{2}+4/2' | \
+         awk '{ print $2 }')
+    if [[ $file == "" ]]; then
+        return 1
+    fi
+
+    open_files "${file}:1"
+}
+
+function git_blame() {
+    fl=$(current_file_and_line)
+    file=$(echo $fl | cut -d':' -f1)
+    line=$(echo $fl | cut -d':' -f2)
+    git ls-files --error-unmatch "$file" 2> /dev/null
+    if [ $? -ne 0 ]; then
+        echo "Not in a git working directory"; sleep 3; return 1
+    fi
+    start=$(saturating_sub $line 10)
+
+    # Run git blame and fzf commands
+    git blame -L $line,+100 $file --color-by-age --color-lines | 
+      fzf --ansi \
+          --border none \
+          --delimiter ':' \
+          --height '100%' \
+          --multi \
+          --print-query --exit-0 \
+          --scrollbar '▍'
+}
+
+function git_browse() {
+    fl=$(current_file_and_line)
+    file=$(echo $fl | cut -d':' -f1)
+
+    git ls-files --error-unmatch "$file" 2> /dev/null
+    if [ $? -ne 0 ]; then
+        # Not in a git working directory. Open the repo root
+        fl=""
+    fi
+
+    branch=$(git symbolic-ref --short HEAD)
+
+    remote=$(git config --get branch.${branch}.remote)
+    if [[ $remote == "" ]]; then
+        echo "Warning no 'remote' associated to track branch '$branch'."
+        echo "Available remotes:"
+        git remote -v | awk '{ 
+            if ($3 == "(fetch)") {
+                printf("  - \"%s\": %s\n", $1, $2) }
+            }
+        '
+        echo "Fix with: 'git branch --set-upstream-to=origin/main $branch'."
+        read -p "Enter remote to use [origin]: " remote
+        remote=${remote:-origin}
+    fi
+
+    remote_url=$(git remote get-url $remote)
+    if [[ $remote_url == "" ]]; then
+        echo "No remote url for $remote"
+        sleep 3
+        return 1
+    fi
+    gh browse "$fl" -b "$branch" -R "$remote_url"
+    # Necessary sleep...
+    sleep 1
+}
+
+# Print help and sleep $1 seconds
+function help() {
+    echo "Usage: helix-ext <command> [options]"
+    echo ""
+    echo "Commands:"
+    echo "- 'search'"
+    echo "   -b, --buffer: search in current buffer content"
+    echo "   -c, --current: search in current working directory"
+    echo "- 'git'"
+    echo "   -s, --status: print working dir status"
+    echo "   -b, --blame: print blame info for current file"
+    echo "   -B, --browse: browse remote repo at current file and line"
+    exit 1
+}
+
+if [ ! -e "$CANARY_FILE" ]; then
+
+    touch "$CANARY_FILE"
+
+    direction="down"
+    # Re-execute the script in a working pane
+    exec zellij run -n "helix-zellij" -d $direction -- helix-zellij $@
+fi
+
+# Remove the canary file
+rm "$CANARY_FILE"
+
+case "$1" in
+    "search") 
+        case $2 in
+            "-b"|"--buffer")
+                search_buf
+                ;;
+            "-c"|"--current")
+                search_cwd
+                ;;
+            "*")
+                help 3
+        esac
+        ;;
+    "git")
+        case $2 in
+            "-u"|"--gitui")
+                git_ui
+                ;;
+            "-s"|"--status")
+                git_status
+                ;;
+            "-b"|"--blame")
+                git_blame
+                ;;
+            "-B"|"--browse")
+                git_browse
+                ;;
+            "*")
+                help 3
+        esac
+        ;;
+    *)
+        help 3
+        ;;
+esac
+
+# Close working pane
+zellij action close-pane
+
+# Optionally remove temporary file
+rm -f $DUMP_FILE

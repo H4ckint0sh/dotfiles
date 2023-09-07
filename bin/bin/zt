@@ -1,0 +1,68 @@
+#!/usr/bin/env bash
+
+# Determine if in zellij session
+not_in_zellij() {
+  [[ -z "$ZELLIJ" ]]
+}
+
+HOME_REPLACER=""                                          # default to a noop
+echo "$HOME" | grep -E "^[a-zA-Z0-9\-_/.@]+$" &>/dev/null # chars safe to use in sed
+HOME_SED_SAFE=$?
+if [ $HOME_SED_SAFE -eq 0 ]; then # $HOME should be safe to use in sed
+	HOME_REPLACER="s|^$HOME/|~/|"
+fi
+
+BORDER_LABEL=" zt - smart zellij session starter "
+HEADER=" ^s sessions ^x zoxide ^f find"
+ZOXIDE_BIND="ctrl-x:change-prompt(zoxide> )+reload(zoxide query -l | sed -e \"$HOME_REPLACER\")"
+TAB_BIND="tab:down,btab:up"
+
+
+get_sessions_by_mru() {
+	zellij list-sessions
+}
+
+if [ $# -eq 1 ]; then # argument provided
+	zoxide query "$1" &>/dev/null
+	ZOXIDE_RESULT_EXIT_CODE=$?
+	if [ $ZOXIDE_RESULT_EXIT_CODE -eq 0 ]; then # zoxide result found
+		RESULT=$(zoxide query "$1")
+	else # no zoxide result found
+		ls "$1" &>/dev/null
+		LS_EXIT_CODE=$?
+		if [ $LS_EXIT_CODE -eq 0 ]; then # directory found
+			RESULT=$1
+		else # no directory found
+			echo "No directory found."
+			exit 1
+		fi
+	fi
+else # argument not provided
+		RESULT=$(
+			(zoxide query -l | sed -e "$HOME_REPLACER") | fzf \
+				--bind "$TAB_BIND" \
+				--border-label "$BORDER_LABEL" \
+				--header " ^f find" \
+				--no-sort \
+				--prompt "$PROMPT"
+		)
+fi
+
+if [ "$RESULT" = "" ]; then # no result
+	exit 0                    # exit silently
+fi
+
+if [ $HOME_SED_SAFE -eq 0 ]; then
+	RESULT=$(echo "$RESULT" | sed -e "s|^~/|$HOME/|") # get real home path back
+fi
+
+zoxide add "$RESULT" &>/dev/null # add to zoxide database
+FOLDER=$(basename "$RESULT")
+SESSION_NAME=$(echo "$FOLDER" | sed 's/(current)//g' | tr -d '[:space:]')
+
+if [ "$SESSION" = "" ]; then # create session
+	SESSION="$SESSION_NAME"
+	cd "$RESULT"
+  zellij -l ~/.config/zellij/layouts/ide.kdl attach --create "$FOLDER"
+fi
+
