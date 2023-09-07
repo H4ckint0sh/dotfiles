@@ -5,10 +5,6 @@ not_in_zellij() {
   [[ -z "$ZELLIJ" ]]
 }
 
-if ! not_in_zellij; then 
-	 { echo "This script needs to be executed outside of zellij"; exit $ERRCODE; }
-fi
-
 HOME_REPLACER=""                                          # default to a noop
 echo "$HOME" | grep -E "^[a-zA-Z0-9\-_/.@]+$" &>/dev/null # chars safe to use in sed
 HOME_SED_SAFE=$?

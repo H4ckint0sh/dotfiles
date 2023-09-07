@@ -12,7 +12,9 @@ export EDITOR=hx
 # export OPENAI_API_KEY=$(security find-generic-password -s 'openapi token' -w)
 
 # nnn
-export NNN_OPENER=zellij-nnn
+export NNN_OPENER="zellij-nnn"
+# export NNN_OPENER="tmux-nnn"
+
 BLK="04" CHR="04" DIR="0c" EXE="00" REG="00" HARDLINK="00" SYMLINK="06" MISSING="00" ORPHAN="01" FIFO="0F" SOCK="0F" OTHER="02"
 export NNN_FCOLORS="$BLK$CHR$DIR$EXE$REG$HARDLINK$SYMLINK$MISSING$ORPHAN$FIFO$SOCK$OTHER"
 export NNN_PLUG='f:fzopen;o:fzopen;a:openall;j:autojump;'
