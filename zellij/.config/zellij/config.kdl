@@ -212,7 +212,7 @@ pane_frames false
  themes {
      default {
          fg 169 177 214
-         bg 1
+         bg 36 40 59
          black 43 48 65
          red 249 51 87
          green 158 206 106
