@@ -1,7 +1,4 @@
 #!/usr/bin/env bash
-
-set -x
-
 # Author: H4ckint0sh 
 #
 # Extensions used by Helix editor
