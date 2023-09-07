@@ -1,0 +1,20 @@
+layout {
+    default_tab_template {
+        pane size=1 borderless=true {
+            plugin location="zellij:compact-bar"
+        }
+        children
+    }
+    tab name="IDE" {
+        pane  name="helix" {
+            command "hx"
+            focus true
+        }
+        floating_panes {
+                pane  name="terminal" {
+                width "50%"            
+                height "50%"
+            }
+        }
+    }
+}
