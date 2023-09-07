@@ -16,11 +16,5 @@ layout {
                 focus true
             }
         }
-        floating_panes {
-                pane  name="terminal" {
-                width "60%"            
-                height "60%"
-            }
-        }
     }
 }
