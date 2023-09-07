@@ -80,9 +80,10 @@ x = ":bc"
 o = ":reload-all"
 
 # Tmux 
-# g = ":pipe-to tmux split-window -v helix-live-grep"
-# B = ":pipe-to tmux split-window -v helix-git-blame"
-# H = ":sh helix-open-in-gh"
+[keys.normal.'space'.'t']
+l = ":pipe-to tmux split-window -v helix-live-grep"
+B = ":pipe-to tmux split-window -v helix-git-blame"
+H = ":sh helix-open-in-gh"
 
 # Zelllij
 [keys.normal.'space'.'space']

@@ -6,14 +6,20 @@ layout {
         children
     }
     tab name="IDE" {
-        pane  name="helix" {
-            command "hx"
-            focus true
+        pane split_direction="vertical" {
+            pane name="nnn" size="20%" {
+                command "nnn"
+                args "-c"
+            }
+            pane name="helix" size="80%" {
+                command "hx"
+                focus true
+            }
         }
         floating_panes {
                 pane  name="terminal" {
-                width "50%"            
-                height "50%"
+                width "60%"            
+                height "60%"
             }
         }
     }

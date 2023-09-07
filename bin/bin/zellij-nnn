@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+files=$1
+
+# Select helix pane
+zellij action move-focus right
+
+zellij action write 58 # :
+
+zellij action write-chars "open $files"
+zellij action write 13 # Enter
