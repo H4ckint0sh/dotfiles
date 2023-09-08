@@ -210,9 +210,9 @@ pane_frames false
 // Once these themes are defined, one of them should to be selected in the "theme" section of this file
 
  themes {
-     default {
+     ali {
          fg 169 177 214
-         bg 36 40 59
+         bg 65 72 104
          black 43 48 65
          red 249 51 87
          green 158 206 106
@@ -228,7 +228,7 @@ pane_frames false
 // Choose the theme that is specified in the themes section.
 // Default: "tokyonight-storm"
 //
-// theme "default"
+theme "ali"
 
 // The name of the default layout to load on startup
 // Default: "default"
