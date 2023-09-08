@@ -287,8 +287,8 @@ mods = "Command"
 
 [[keyboard.bindings]]
 chars = "\u0002pw}"
-key = "v"
-mods = "Command"
+key = "F12"
+mods = "None"
 
 [[keyboard.bindings]]
 chars = "\u0002pg}"
