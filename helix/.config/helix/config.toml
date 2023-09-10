@@ -98,6 +98,6 @@ b = ":pipe-to helix-zellij git --blame"
 # Git browse github repo using default browser
 H = ":pipe-to helix-zellij git --browse"
 # lazygit
-g = ":sh lazygit-reload-helix"
+g = ":sh zellij run -d down -c -- gitui"
 # Session
 z = ":sh zellij run -f -c -- zt"
