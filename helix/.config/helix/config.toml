@@ -89,6 +89,12 @@ H = ":sh helix-open-in-gh"
 [keys.normal.'space'.'space']
 # Interactive search in current working directory
 l = ":pipe-to helix-zellij search --current"
+# Interactive search in current working directory (include path name in the search)
+L = ":pipe-to helix-zellij search --current-inc-path"
+# Interactive search in current git directory
+w = ":pipe-to helix-zellij search --workspace"
+# Interactive search in current git directory (include path name in the search)
+W = ":pipe-to helix-zellij search --workspace-inc-path"
 # Interactive search in current buffer
 B = ":pipe-to helix-zellij search --buffer"
 # Git status

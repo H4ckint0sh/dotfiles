@@ -58,12 +58,34 @@ function current_file_and_line() {
 # Search in current working directory
 function search_cwd() {
 
-    # live-grep: interactive search, output is "file:line" pairs
-    file_paths=$(live-grep --exit-on-execution | tr '\n' ' ' | sed 's/ *$//')
-    if [[ -n "$file_paths" ]]; then
-        open_files "$file_paths"
+    opts="x"$1
+
+    file_paths=$(ff -$opts)
+
+    new_paths=""
+    for file in $file_paths; do
+        new_paths="${new_paths} ${PWD}/${file}"
+    done
+    file_paths=$new_paths
+
+    if [[ $file_paths == "" ]]; then
+        return 1
     fi
 
+    open_files "$file_paths"
+
+}
+
+# Search in git workspace
+function search_ws() {
+    wd=$(pwd)
+    ws=$(git rev-parse --show-toplevel 2>/dev/null)
+    if [ $? -ne 0 ]; then
+        echo "Not in a git working directory"; sleep 2; return 1
+    fi
+    cd $ws
+    search_cwd $1
+    cd $wd
 }
 
 # Seach in current buffer
@@ -74,41 +96,11 @@ function search_buf() {
         echo "Can't search in scratch buffer"; sleep 2; return 1
     fi
 
-    tmpfile=""
-    if [ ! -f $file ]; then
-        tmpfile=$(mktemp)
-        dd if=$file of="$tmpfile" bs=1M count=1 2>/dev/null
-        cat $tmpfile
-        file=$tmpfile
+    fl=$(ff "$file")
+
+    if [[ "$fl" != "" ]]; then
+        open_files "$fl"
     fi
-
-    preview_cmd="bat --style=full --color=always --highlight-line {1} $file"
-    preview_win="right,~4,+{1}+4/2"
-    while true; do
-        result=$(bat --plain --color always $file | \
-            nl -ba -w1 -s": " | \
-            fzf --ansi +i --delimiter ':' \
-                --exact --no-sort --tac --nth "2.." \
-                --print-query --query="$query" \
-                --preview "$preview_cmd" \
-                --preview-window "$preview_win" | \
-            awk '{ print $1 }' |
-            sed 's/:$//')
-
-        if [[ $result == "" ]]; then
-            zellij action close-pane
-        fi
-
-        # Extract new query
-        query=$(echo "$result" | cut -d$'\n' -f1)
-        line=$(echo "$result" | cut -d$'\n' -f2)
-
-        fl="${file}:${line}"
-        echo $fl
-    done
-
-    rm -f $tmpfile
-
 }
 
 function git_status() {
@@ -176,10 +168,49 @@ function git_browse() {
         sleep 3
         return 1
     fi
-    gh browse "$fl" -b "$branch" -R "$remote_url"
+    # Replace the first occurrence of "h4ckint0sh" or "aliade-consid" with "github.com"
+    url=$(echo "$remote_url" | sed 's/h4ckint0sh\|aliade-consid/github.com/' | sed '0,/github.com/s/github.com/h4ckint0sh/')
+    gh browse "$fl" -b "$branch" -R "$url"
     # Necessary sleep...
-    sleep 1
+    sleep 10
 }
+
+# function git_browse() {
+#     fl=$(current_file_and_line)
+#     file=$(echo $fl | cut -d':' -f1)
+
+#     git ls-files --error-unmatch "$file" 2> /dev/null
+#     if [ $? -ne 0 ]; then
+#         # Not in a git working directory. Open the repo root
+#         fl=""
+#     fi
+
+#     branch=$(git symbolic-ref --short HEAD)
+
+#     remote=$(git config --get branch.${branch}.remote)
+#     if [[ $remote == "" ]]; then
+#         echo "Warning no 'remote' associated to track branch '$branch'."
+#         echo "Available remotes:"
+#         git remote -v | awk '{ 
+#             if ($3 == "(fetch)") {
+#                 printf("  - \"%s\": %s\n", $1, $2) }
+#             }
+#         '
+#         echo "Fix with: 'git branch --set-upstream-to=origin/main $branch'."
+#         read -p "Enter remote to use [origin]: " remote
+#         remote=${remote:-origin}
+#     fi
+
+#     remote_url=$(git remote get-url $remote)
+#     if [[ $remote_url == "" ]]; then
+#         echo "No remote url for $remote"
+#         sleep 3
+#         return 1
+#     fi
+#     gh browse "$fl" -b "$branch" -R "$remote_url"
+#     # Necessary sleep...
+#     sleep 1
+# }
 
 # Print help and sleep $1 seconds
 function help() {
@@ -216,6 +247,15 @@ case "$1" in
                 ;;
             "-c"|"--current")
                 search_cwd
+                ;;
+             "-C"|"--current-inc-path")
+                search_cwd "f"
+                ;;
+            "-w"|"--workspace")
+                search_ws
+                ;;
+            "-W"|"--workspace-inc-path")
+                search_ws "f"
                 ;;
             "*")
                 help 3
