@@ -136,6 +136,37 @@ function git_blame() {
           --scrollbar '▍'
 }
 
+function diff_with_saved() {
+    fl=$(current_file_and_line)
+    file=$(echo $fl | cut -d':' -f1)
+    line=$(echo $fl | cut -d':' -f2)
+
+    # Save buffer to a temporary file by copying buffer content to a scratch
+    # buffer and saving it to DUMP_FILE (this will left untouched the current
+    # buffer, with its pending changes as well)
+    zellij action write-chars "%y"
+    zellij action write-chars "${line}G"
+    zellij action write-chars ":new"
+    zellij action write 13
+    zellij action write-chars "p"
+    # Remove first empty line
+    zellij action write-chars "ggd"
+    # Write temporary buffer in DUMP_FILE
+    zellij action write-chars ":write! $DUMP_FILE"
+    zellij action write 13
+    # Close temporary file buffer
+    zellij action write-chars ":buffer-close"
+    zellij action write 13
+
+    if command -v delta &> /dev/null; then
+        delta --paging always $file $DUMP_FILE
+    else
+        diff -u --color $file $DUMP_FILE | bat --plain --paging always
+    fi
+
+    rm -f $DUMP_FILE
+}
+
 function git_browse() {
     fl=$(current_file_and_line)
     file=$(echo $fl | cut -d':' -f1)
@@ -228,6 +259,9 @@ case "$1" in
             "*")
                 help 3
         esac
+        ;;
+    "diff")
+        diff_with_saved
         ;;
     *)
         help 3

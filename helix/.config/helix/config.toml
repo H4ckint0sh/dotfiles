@@ -105,3 +105,5 @@ b = ":pipe-to helix-zellij git --blame"
 H = ":pipe-to helix-zellij git --browse"
 # lazygit
 g = ":pipe-to helix-zellij git --lazygit"
+# Diff current buffer with content on disk
+d = ":pipe-to helix-zellij diff"
