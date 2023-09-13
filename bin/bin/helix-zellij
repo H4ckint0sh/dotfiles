@@ -153,6 +153,11 @@ function git_browse() {
     sleep 1
 }
 
+function lazygit_pane() {
+    # Run lazygit
+    lazygit
+}
+
 # Print help and sleep $1 seconds
 function help() {
     echo "Usage: helix-ext <command> [options]"
@@ -161,7 +166,11 @@ function help() {
     echo "- 'search'"
     echo "   -b, --buffer: search in current buffer content"
     echo "   -c, --current: search in current working directory"
+    echo "   -C, --current-inc-path: search in current working directory (include path)"
+    echo "   -w, --workspace: search in git workspace (requires to be in a git repo)"
+    echo "   -W, --workspace-inc-path: search in git workspace (include path)"
     echo "- 'git'"
+    echo "   -u, --ui: lazygit"
     echo "   -s, --status: print working dir status"
     echo "   -b, --blame: print blame info for current file"
     echo "   -B, --browse: browse remote repo at current file and line"
@@ -204,8 +213,8 @@ case "$1" in
         ;;
     "git")
         case $2 in
-            "-u"|"--gitui")
-                git_ui
+            "-u"|"--lazygit")
+                lazygit_pane
                 ;;
             "-s"|"--status")
                 git_status
