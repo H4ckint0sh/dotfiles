@@ -58,12 +58,34 @@ function current_file_and_line() {
 # Search in current working directory
 function search_cwd() {
 
-    # live-grep: interactive search, output is "file:line" pairs
-    file_paths=$(live-grep --exit-on-execution | tr '\n' ' ' | sed 's/ *$//')
-    if [[ -n "$file_paths" ]]; then
-        open_files "$file_paths"
+    opts="x"$1
+
+    file_paths=$(ff -$opts)
+
+    new_paths=""
+    for file in $file_paths; do
+        new_paths="${new_paths} ${PWD}/${file}"
+    done
+    file_paths=$new_paths
+
+    if [[ $file_paths == "" ]]; then
+        return 1
     fi
 
+    open_files "$file_paths"
+
+}
+
+# Search in git workspace
+function search_ws() {
+    wd=$(pwd)
+    ws=$(git rev-parse --show-toplevel 2>/dev/null)
+    if [ $? -ne 0 ]; then
+        echo "Not in a git working directory"; sleep 2; return 1
+    fi
+    cd $ws
+    search_cwd $1
+    cd $wd
 }
 
 # Seach in current buffer
@@ -74,41 +96,11 @@ function search_buf() {
         echo "Can't search in scratch buffer"; sleep 2; return 1
     fi
 
-    tmpfile=""
-    if [ ! -f $file ]; then
-        tmpfile=$(mktemp)
-        dd if=$file of="$tmpfile" bs=1M count=1 2>/dev/null
-        cat $tmpfile
-        file=$tmpfile
+    fl=$(ff "$file")
+
+    if [[ "$fl" != "" ]]; then
+        open_files "$fl"
     fi
-
-    preview_cmd="bat --style=full --color=always --highlight-line {1} $file"
-    preview_win="right,~4,+{1}+4/2"
-    while true; do
-        result=$(bat --plain --color always $file | \
-            nl -ba -w1 -s": " | \
-            fzf --ansi +i --delimiter ':' \
-                --exact --no-sort --tac --nth "2.." \
-                --print-query --query="$query" \
-                --preview "$preview_cmd" \
-                --preview-window "$preview_win" | \
-            awk '{ print $1 }' |
-            sed 's/:$//')
-
-        if [[ $result == "" ]]; then
-            zellij action close-pane
-        fi
-
-        # Extract new query
-        query=$(echo "$result" | cut -d$'\n' -f1)
-        line=$(echo "$result" | cut -d$'\n' -f2)
-
-        fl="${file}:${line}"
-        echo $fl
-    done
-
-    rm -f $tmpfile
-
 }
 
 function git_status() {
@@ -144,6 +136,37 @@ function git_blame() {
           --scrollbar '▍'
 }
 
+function diff_with_saved() {
+    fl=$(current_file_and_line)
+    file=$(echo $fl | cut -d':' -f1)
+    line=$(echo $fl | cut -d':' -f2)
+
+    # Save buffer to a temporary file by copying buffer content to a scratch
+    # buffer and saving it to DUMP_FILE (this will left untouched the current
+    # buffer, with its pending changes as well)
+    zellij action write-chars "%y"
+    zellij action write-chars "${line}G"
+    zellij action write-chars ":new"
+    zellij action write 13
+    zellij action write-chars "p"
+    # Remove first empty line
+    zellij action write-chars "ggd"
+    # Write temporary buffer in DUMP_FILE
+    zellij action write-chars ":write! $DUMP_FILE"
+    zellij action write 13
+    # Close temporary file buffer
+    zellij action write-chars ":buffer-close"
+    zellij action write 13
+
+    if command -v delta &> /dev/null; then
+        delta --paging always $file $DUMP_FILE
+    else
+        diff -u --color $file $DUMP_FILE | bat --plain --paging always
+    fi
+
+    rm -f $DUMP_FILE
+}
+
 function git_browse() {
     fl=$(current_file_and_line)
     file=$(echo $fl | cut -d':' -f1)
@@ -156,29 +179,14 @@ function git_browse() {
 
     branch=$(git symbolic-ref --short HEAD)
 
-    remote=$(git config --get branch.${branch}.remote)
-    if [[ $remote == "" ]]; then
-        echo "Warning no 'remote' associated to track branch '$branch'."
-        echo "Available remotes:"
-        git remote -v | awk '{ 
-            if ($3 == "(fetch)") {
-                printf("  - \"%s\": %s\n", $1, $2) }
-            }
-        '
-        echo "Fix with: 'git branch --set-upstream-to=origin/main $branch'."
-        read -p "Enter remote to use [origin]: " remote
-        remote=${remote:-origin}
-    fi
-
-    remote_url=$(git remote get-url $remote)
-    if [[ $remote_url == "" ]]; then
-        echo "No remote url for $remote"
-        sleep 3
-        return 1
-    fi
-    gh browse "$fl" -b "$branch" -R "$remote_url"
+    gh browse "$fl" -b "$branch"
     # Necessary sleep...
     sleep 1
+}
+
+function lazygit_pane() {
+    # Run lazygit
+    lazygit
 }
 
 # Print help and sleep $1 seconds
@@ -189,7 +197,11 @@ function help() {
     echo "- 'search'"
     echo "   -b, --buffer: search in current buffer content"
     echo "   -c, --current: search in current working directory"
+    echo "   -C, --current-inc-path: search in current working directory (include path)"
+    echo "   -w, --workspace: search in git workspace (requires to be in a git repo)"
+    echo "   -W, --workspace-inc-path: search in git workspace (include path)"
     echo "- 'git'"
+    echo "   -u, --ui: lazygit"
     echo "   -s, --status: print working dir status"
     echo "   -b, --blame: print blame info for current file"
     echo "   -B, --browse: browse remote repo at current file and line"
@@ -217,14 +229,23 @@ case "$1" in
             "-c"|"--current")
                 search_cwd
                 ;;
+             "-C"|"--current-inc-path")
+                search_cwd "f"
+                ;;
+            "-w"|"--workspace")
+                search_ws
+                ;;
+            "-W"|"--workspace-inc-path")
+                search_ws "f"
+                ;;
             "*")
                 help 3
         esac
         ;;
     "git")
         case $2 in
-            "-u"|"--gitui")
-                git_ui
+            "-u"|"--lazygit")
+                lazygit_pane
                 ;;
             "-s"|"--status")
                 git_status
@@ -238,6 +259,9 @@ case "$1" in
             "*")
                 help 3
         esac
+        ;;
+    "diff")
+        diff_with_saved
         ;;
     *)
         help 3

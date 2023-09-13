@@ -89,6 +89,12 @@ H = ":sh helix-open-in-gh"
 [keys.normal.'space'.'space']
 # Interactive search in current working directory
 l = ":pipe-to helix-zellij search --current"
+# Interactive search in current working directory (include path name in the search)
+L = ":pipe-to helix-zellij search --current-inc-path"
+# Interactive search in current git directory
+w = ":pipe-to helix-zellij search --workspace"
+# Interactive search in current git directory (include path name in the search)
+W = ":pipe-to helix-zellij search --workspace-inc-path"
 # Interactive search in current buffer
 B = ":pipe-to helix-zellij search --buffer"
 # Git status
@@ -98,6 +104,6 @@ b = ":pipe-to helix-zellij git --blame"
 # Git browse github repo using default browser
 H = ":pipe-to helix-zellij git --browse"
 # lazygit
-g = ":sh lazygit-reload-helix"
-# Session
-z = ":sh zellij run -f -c -- zt"
+g = ":pipe-to helix-zellij git --lazygit"
+# Diff current buffer with content on disk
+d = ":pipe-to helix-zellij diff"
