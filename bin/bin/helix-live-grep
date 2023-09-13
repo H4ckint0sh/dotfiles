@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # live-grep: interactive search, output is "file:line" pairs
-FILE_PATHS=$(live-grep --exit-on-execution | tr '\n' ' ' | sed 's/ *$//')
+FILE_PATHS=$(live-grep-tm --exit-on-execution | tr '\n' ' ' | sed 's/ *$//')
 
 if [[ -n "$FILE_PATHS" ]]; then
 
