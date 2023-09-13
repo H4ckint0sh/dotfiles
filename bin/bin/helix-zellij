@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+#
 # Author: H4ckint0sh 
 #
 # Extensions used by Helix editor
@@ -21,7 +22,7 @@ function open_files() {
     zellij action focus-previous-pane
     # Write down open command
     zellij action write-chars ":open $files"
-    zellij action write 13
+    zellij action write 13 # enter
     # Move focus back to working pane
     zellij action focus-next-pane
 }
@@ -60,19 +61,10 @@ function search_cwd() {
 
     opts="x"$1
 
-    file_paths=$(ff -$opts)
-
-    new_paths=""
-    for file in $file_paths; do
-        new_paths="${new_paths} ${PWD}/${file}"
-    done
-    file_paths=$new_paths
-
-    if [[ $file_paths == "" ]]; then
-        return 1
+    file_paths=$(live-grep -$opts | tr '\n' ' ' | sed 's/ *$//')
+    if [[ -n "$file_paths" ]]; then
+        open_files "$file_paths"
     fi
-
-    open_files "$file_paths"
 
 }
 
@@ -96,10 +88,12 @@ function search_buf() {
         echo "Can't search in scratch buffer"; sleep 2; return 1
     fi
 
-    fl=$(ff "$file")
+    result=$(live-grep "$file")
 
-    if [[ "$fl" != "" ]]; then
-        open_files "$fl"
+    line=$(echo "$result" | cut -d " " -f 2)
+
+    if [[ "$line" != "" ]]; then
+        open_files "${file}:${line}"
     fi
 }
 
