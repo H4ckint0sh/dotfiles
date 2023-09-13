@@ -148,69 +148,10 @@ function git_browse() {
 
     branch=$(git symbolic-ref --short HEAD)
 
-    remote=$(git config --get branch.${branch}.remote)
-    if [[ $remote == "" ]]; then
-        echo "Warning no 'remote' associated to track branch '$branch'."
-        echo "Available remotes:"
-        git remote -v | awk '{ 
-            if ($3 == "(fetch)") {
-                printf("  - \"%s\": %s\n", $1, $2) }
-            }
-        '
-        echo "Fix with: 'git branch --set-upstream-to=origin/main $branch'."
-        read -p "Enter remote to use [origin]: " remote
-        remote=${remote:-origin}
-    fi
-
-    remote_url=$(git remote get-url $remote)
-    if [[ $remote_url == "" ]]; then
-        echo "No remote url for $remote"
-        sleep 3
-        return 1
-    fi
-    # Replace the first occurrence of "h4ckint0sh" or "aliade-consid" with "github.com"
-    url=$(echo "$remote_url" | sed 's/h4ckint0sh\|aliade-consid/github.com/' | sed '0,/github.com/s/github.com/h4ckint0sh/')
-    gh browse "$fl" -b "$branch" -R "$url"
+    gh browse "$fl" -b "$branch"
     # Necessary sleep...
-    sleep 10
+    sleep 1
 }
-
-# function git_browse() {
-#     fl=$(current_file_and_line)
-#     file=$(echo $fl | cut -d':' -f1)
-
-#     git ls-files --error-unmatch "$file" 2> /dev/null
-#     if [ $? -ne 0 ]; then
-#         # Not in a git working directory. Open the repo root
-#         fl=""
-#     fi
-
-#     branch=$(git symbolic-ref --short HEAD)
-
-#     remote=$(git config --get branch.${branch}.remote)
-#     if [[ $remote == "" ]]; then
-#         echo "Warning no 'remote' associated to track branch '$branch'."
-#         echo "Available remotes:"
-#         git remote -v | awk '{ 
-#             if ($3 == "(fetch)") {
-#                 printf("  - \"%s\": %s\n", $1, $2) }
-#             }
-#         '
-#         echo "Fix with: 'git branch --set-upstream-to=origin/main $branch'."
-#         read -p "Enter remote to use [origin]: " remote
-#         remote=${remote:-origin}
-#     fi
-
-#     remote_url=$(git remote get-url $remote)
-#     if [[ $remote_url == "" ]]; then
-#         echo "No remote url for $remote"
-#         sleep 3
-#         return 1
-#     fi
-#     gh browse "$fl" -b "$branch" -R "$remote_url"
-#     # Necessary sleep...
-#     sleep 1
-# }
 
 # Print help and sleep $1 seconds
 function help() {
