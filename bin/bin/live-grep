@@ -42,7 +42,7 @@ function search_folder() {
     while true; do
         # Search using rg and fzf with preview
         IFS=$'\n' readarray -t selected_matches < <(
-          rg rg . --line-number --no-heading --glob '!.git' |
+          rg rg . --line-number --no-heading --glob '!.git' --glob '!package-lock.json' |
             fzf --ansi \
               --border none \
               --delimiter ':' \
