@@ -11,6 +11,9 @@ if [ $(ps ax | grep "[s]sh-agent" | wc -l) -eq 0 ] ; then
     fi
 fi
 
+# Yabai
+export YABAI_CERT=yabai-cert
+
 #job
 export PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
 export PUPPETEER_EXECUTABLE_PATH=`which chromium`k
