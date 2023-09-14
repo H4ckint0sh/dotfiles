@@ -284,7 +284,7 @@ default_layout "compact"
 // Path to the default editor to use to edit pane scrollbuffer
 // Default: $EDITOR or $VISUAL
 //
-// scrollback_editor "/usr/bin/vim"
+scrollback_editor "/Users/ali/.cargo/bin/hx"
 
 // When attaching to an existing session with other users,
 // should the session be mirrored (true)
