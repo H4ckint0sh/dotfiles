@@ -1,5 +1,16 @@
 #@@ -1,203 +1 @@
 
+if [ $(ps ax | grep "[s]sh-agent" | wc -l) -eq 0 ] ; then
+    eval $(ssh-agent -s) > /dev/null
+    if [ "$(ssh-add -l)" = "The agent has no identities." ] ; then
+        # Auto-add ssh keys to your ssh agent
+        # Example:
+        ssh-add --apple-use-keychain ~/.ssh/id_ed25519_github_consid > /dev/null 2>&1
+        ssh-add --apple-use-keychain ~/.ssh/id_ed25519_github > /dev/null 2>&1
+        ssh-add --apple-use-keychain ~/.ssh/id_rsa_devops > /dev/null 2>&1
+    fi
+fi
+
 #job
 export PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
 export PUPPETEER_EXECUTABLE_PATH=`which chromium`k
