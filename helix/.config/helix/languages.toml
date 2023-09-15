@@ -23,21 +23,21 @@
 
  [[language]]
  name = "typescript"
- language-servers = [  "typescript-language-server", "tailwindcss-react", "eslint"]
+ language-servers = [  "typescript-language-server", "tailwindcss-react", "eslint", "emmet-ls"]
  formatter = { command = 'npx', args = ["prettier", "--parser", "typescript"] }
  indent = { tab-width = 4, unit = "\t" }
  auto-format = true
 
  [[language]]
  name = "tsx"
- language-servers = [ "typescript-language-server", "tailwindcss-react", "eslint"]
+ language-servers = [ "typescript-language-server", "tailwindcss-react", "eslint", "emmet-ls"]
  formatter = { command = 'npx', args = ["prettier", "--parser", "typescript"] }
  indent = { tab-width = 4, unit = "\t" }
  auto-format = true
 
  [[language]]
  name = "jsx"
- language-servers = [ "typescript-language-server", "tailwindcss-react", "eslint"]
+ language-servers = [ "typescript-language-server", "tailwindcss-react", "eslint", "emmet-ls"]
  grammar = "javascript"
  formatter = { command = 'npx', args = ["prettier", "--parser", "typescript"] }
  indent = { tab-width = 4, unit = "\t" }
@@ -45,7 +45,7 @@
 
  [[language]]
  name = "javascript"
- language-servers = [ "typescript-language-server", "tailwindcss-react", "eslint"]
+ language-servers = [ "typescript-language-server", "tailwindcss-react", "eslint", "emmet-ls"]
  formatter = { command = 'npx', args = ["prettier", "--parser", "typescript"] }
  indent = { tab-width = 4, unit = "\t" }
  auto-format = true
@@ -75,12 +75,16 @@
  [[language]]
  name = "html"
  formatter = { command = 'npx', args = ["prettier", "--parser", "html"] }
- language-servers = [ "vscode-html-language-server", "tailwindcss-react"]
+ language-servers = [ "vscode-html-language-server", "tailwindcss-react", "emmet-ls"]
  
  [[language]]
  name = "css"
  formatter = { command = 'npx', args = ["prettier", "--parser", "css"] }
- language-servers = [ "vscode-css-language-server", "tailwindcss-react"]
+ language-servers = [ "vscode-css-language-server", "tailwindcss-react", "emmet-ls"]
+
+ [language-server.emmet-ls]
+ args = ["--stdio"]
+ command = "emmet-ls"
 
  [language-server.eslint]
  args = ["--stdio"]
@@ -139,7 +143,7 @@
  includeInlayVariableTypeHints = true
 
  [language-server.typescript-language-server.config.completions]
-completeFunctionCalls = true
+ completeFunctionCalls = true
 
  [language-server.typescript-language-server.config.javascript.inlayHints]
  includeInlayEnumMemberValueHints = true
