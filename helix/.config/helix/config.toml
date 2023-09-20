@@ -87,6 +87,7 @@ H = ":sh helix-open-in-gh"
 
 # Zelllij
 [keys.normal.'space'.'space']
+"*" = ["move_prev_word_start", "move_next_word_end", "search_selection"]
 # Interactive search in current working directory
 l = ":pipe-to helix-zellij search --current"
 # Interactive search in current working directory (include path name in the search)
