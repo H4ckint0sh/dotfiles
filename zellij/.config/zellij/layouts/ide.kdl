@@ -1,7 +1,31 @@
 layout {
     default_tab_template {
         pane size=1 borderless=true {
-            plugin location="zellij:compact-bar"
+            plugin location="file:/Users/ali/.config/zellij/plugins/zjstatus.wasm" {
+            format_left  "  #[fg=#7aa2f7,bold] {session} {mode} {tabs} "
+				format_right "{datetime}"
+
+                mode_locked        "#[bg=#89B4FA] {name} "
+                mode_resize        "#[fg=#f7768e] {name} "
+                mode_pane          "#[fg=#e0af68] {name} "
+                mode_tab           "#[fg=#7aa2f7] {name} "
+                mode_scroll        "#[fg=#f7768e] {name} "
+                mode_enter_search  "#[fg=#89B4FA] {name} "
+                mode_search        "#[fg=#f7768e] {name} "
+                mode_rename_tab    "#[fg=#73daca] {name} "
+                mode_rename_pane   "#[fg=#73daca] {name} "
+                mode_session       "#[fg=#7dcfff] {name} "
+                mode_move          "#[fg=#f7768e] {name} "
+                mode_prompt        "#[fg=#89B4FA] {name} "
+                mode_tmux          "#[fg=#ff9e64] {name} "
+
+				tab_normal	"#[fg=#565f89] {name} "
+				tab_active	"#[fg=#a9b1d6,bold,italic] {name} "
+
+				datetime	"#[fg=#a9b1d6,bold] {format} "
+				datetime_format "%A, %d %b %Y %H:%M"
+                datetime_timezone "Europe/Berlin"
+            }
         }
         children
     }
