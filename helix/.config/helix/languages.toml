@@ -84,7 +84,7 @@
 
  [language-server.emmet-ls]
  args = ["--stdio"]
- command = "emmet-ls"
+ command = "emmet-language-server"
 
  [language-server.eslint]
  args = ["--stdio"]
