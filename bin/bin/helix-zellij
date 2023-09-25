@@ -100,7 +100,7 @@ function search_buf() {
 function git_status() {
     file=$(git status --short | \
          awk '{ printf("[%s] %s\n", $1, $2) }' | \
-         fzf --preview 'git diff --color {2}' --preview-window 'right,~4,+{2}+4/2' | \
+         fzf --preview 'git diff --color {2}'   --border none \  --preview-window 'right,~4,+{2}+4/2' | \
          awk '{ print $2 }')
     if [[ $file == "" ]]; then
         return 1
@@ -125,7 +125,6 @@ function git_blame() {
           --border none \
           --delimiter ':' \
           --height '100%' \
-          --multi \
           --print-query --exit-0 \
           --scrollbar '▍'
 }
