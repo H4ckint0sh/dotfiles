@@ -99,18 +99,6 @@ function search_buf() {
     fi
 }
 
-function git_status() {
-    file=$(git status --short | \
-         awk '{ printf("[%s] %s\n", $1, $2) }' | \
-         fzf --preview 'git diff --color {2}'   --border none \  --preview-window 'right,~4,+{2}+4/2' | \
-         awk '{ print $2 }')
-    if [[ $file == "" ]]; then
-        return 1
-    fi
-
-    open_files "${file}:1"
-}
-
 function git_blame() {
     fl=$(current_file_and_line)
     file=$(echo $fl | cut -d':' -f1)
@@ -129,37 +117,6 @@ function git_blame() {
           --height '100%' \
           --print-query --exit-0 \
           --scrollbar '▍'
-}
-
-function diff_with_saved() {
-    fl=$(current_file_and_line)
-    file=$(echo $fl | cut -d':' -f1)
-    line=$(echo $fl | cut -d':' -f2)
-
-    # Save buffer to a temporary file by copying buffer content to a scratch
-    # buffer and saving it to DUMP_FILE (this will left untouched the current
-    # buffer, with its pending changes as well)
-    tmux send-keys "%y"
-    tmux send-keys "${line}G"
-    tmux send-keys ":new"
-    tmux send keys C_m
-    tmux send-keys "p"
-    # Remove first empty line
-    tmux send-keys "ggd"
-    # Write temporary buffer in DUMP_FILE
-    tmux send-keys ":write! $DUMP_FILE"
-    tmux send keys C_m
-    # Close temporary file buffer
-    tmux send-keys ":buffer-close"
-    tmux send keys C_m
-
-    if command -v delta &> /dev/null; then
-        delta --paging always $file $DUMP_FILE
-    else
-        diff -u --color $file $DUMP_FILE | bat --plain --paging always
-    fi
-
-    rm -f $DUMP_FILE
 }
 
 function git_browse() {
@@ -206,7 +163,6 @@ function help() {
     echo "   -W, --workspace-inc-path: search in git workspace (include path)"
     echo "- 'git'"
     echo "   -u, --ui: lazygit"
-    echo "   -s, --status: print working dir status"
     echo "- 'tree': open file tree (nnn)"
     echo "   -b, --blame: print blame info for current file"
     echo "   -B, --browse: browse remote repo at current file and line"
@@ -257,9 +213,6 @@ case "$1" in
             "-u"|"--lazygit")
                 lazygit_pane
                 ;;
-            "-s"|"--status")
-                git_status
-                ;;
             "-b"|"--blame")
                 git_blame
                 ;;
@@ -269,9 +222,6 @@ case "$1" in
             "*")
                 help 3
         esac
-        ;;
-    "diff")
-        diff_with_saved
         ;;
     "tree")
         tree_pane

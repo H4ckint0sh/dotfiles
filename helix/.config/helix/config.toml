@@ -92,8 +92,6 @@ W = ":pipe-to helix-tmux search --workspace-inc-path"
 # Interactive search in current buffer
 B = ":pipe-to helix-tmux search --buffer"
 # Git status
-s = ":pipe-to helix-tmux git --status"
-# Git blame
 b = ":pipe-to helix-tmux git --blame"
 # Git browse github repo using default browser
 H = ":pipe-to helix-tmux git --browse"
@@ -101,8 +99,6 @@ H = ":pipe-to helix-tmux git --browse"
 t = ":pipe-to helix-tmux tree"
 # lazygit
 g = ":pipe-to helix-tmux git --lazygit"
-# Diff current buffer with content on disk
-d = ":pipe-to helix-tmux diff"
 
 # Zelllij
 #[keys.normal.'space'.'space']
