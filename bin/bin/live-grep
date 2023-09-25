@@ -82,11 +82,12 @@ function search_file() {
     fi
 
     preview_cmd="bat --style=full --color=always --highlight-line {1} $file"
-    preview_win="up,~4,+{1}+4/2"
+    preview_win="right,~4,+{1}+4/2"
     while true; do
         result=$(bat --plain --color always $file | \
             nl -ba -w1 -s": " | \
             fzf --ansi +i --delimiter ':' \
+                --border none \
                 --exact --no-sort --tac --nth "2.." \
                 --print-query --query="$query" \
                 --preview "$preview_cmd" \
