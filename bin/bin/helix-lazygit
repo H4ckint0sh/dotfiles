@@ -1,7 +1,0 @@
-#!/bin/bash
-
-# Split horizontally and run lazygit 
-tmux split-window -v -l 70% -c "#{pane_current_path}" lazygit
-
-# run reload on exit
-tmux set-hook pane-exited "run-shell '$HOME/bin/helix-reload.sh'"
