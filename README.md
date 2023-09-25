@@ -18,7 +18,7 @@ Run `./cleanenv` to unlink the configs.
 
 ## Apps
 
-- Terminal emulator: [Alacritty](https://github.com/alacritty/alacritty)
+- Terminal emulator: [Kitty](https://github.com/kovidgoyal/kitty)
 - Shell: [Zsh](https://www.zsh.org)
 - Window manager: [Yabai](https://github.com/koekeishiya/yabai)
 - Shortcuts: [Skhd](https://github.com/koekeishiya/skhd)
@@ -26,7 +26,6 @@ Run `./cleanenv` to unlink the configs.
 - Terminal multiplexer: [Tmux](https://github.com/tmux/tmux)
 - Better cat: [Bat](https://github.com/sharkdp/bat)
 - Better ls: [Lsd](https://github.com/Peltoche/lsd)
-- Cli system info: [Neofetch](https://github.com/dylanaraps/neofetch)
 - Git TUI: [Lazygit](https://github.com/jesseduffield/lazygit)
 - Symlink manager: [Stow](https://www.gnu.org/software/stow/)
 
