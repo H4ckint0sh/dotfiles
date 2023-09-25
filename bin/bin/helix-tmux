@@ -189,8 +189,9 @@ function lazygit_pane() {
 
 }
 
-# function tree_pane() {
-# }
+function tree_pane() {
+    nnn -c
+}
 
 # Print help and sleep $1 seconds
 function help() {
@@ -215,10 +216,14 @@ function help() {
 if [ ! -e "$CANARY_FILE" ]; then
 
     touch "$CANARY_FILE"
-    # Re-execute the script in a working pane
-    exec tmux split-window -v helix-tmux "$@"
-    echo $@
-    sleep 10
+
+    if [[ "$@" =~ "tree" ]]; then
+        # Re-execute in a left vertical pane for nnn
+        exec tmux split-window -b -h -l 20% helix-tmux "$@"
+    else
+        # Re-execute the script in a horizontal pane for everything else
+        exec tmux split-window -v -l 70% helix-tmux "$@"
+    fi
     
 fi
 

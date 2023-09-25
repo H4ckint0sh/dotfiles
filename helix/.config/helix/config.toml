@@ -80,10 +80,7 @@ x = ":bc"
 o = ":reload-all"
 
 # Tmux 
-[keys.normal.'space'.'t']
- # l = ":pipe-to tmux split-window -v helix-live-grep"
- # B = ":pipe-to tmux split-window -v helix-git-blame"
- # H = ":sh helix-open-in-gh"
+[keys.normal.'space'.'space']
 # Interactive search in current working directory
 l = ":pipe-to helix-tmux search --current"
 # Interactive search in current working directory (include path name in the search)
@@ -101,7 +98,7 @@ b = ":pipe-to helix-tmux git --blame"
 # Git browse github repo using default browser
 H = ":pipe-to helix-tmux git --browse"
 # Files tree
-t = ":pipe-to helix-ext tree"
+t = ":pipe-to helix-tmux tree"
 # lazygit
 g = ":pipe-to helix-tmux git --lazygit"
 # Diff current buffer with content on disk
