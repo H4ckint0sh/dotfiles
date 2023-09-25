@@ -81,29 +81,51 @@ o = ":reload-all"
 
 # Tmux 
 [keys.normal.'space'.'t']
-l = ":pipe-to tmux split-window -v helix-live-grep"
-B = ":pipe-to tmux split-window -v helix-git-blame"
-H = ":sh helix-open-in-gh"
+ # l = ":pipe-to tmux split-window -v helix-live-grep"
+ # B = ":pipe-to tmux split-window -v helix-git-blame"
+ # H = ":sh helix-open-in-gh"
+# Interactive search in current working directory
+l = ":pipe-to helix-tmux search --current"
+# Interactive search in current working directory (include path name in the search)
+L = ":pipe-to helix-tmux search --current-inc-path"
+# Interactive search in current git directory
+w = ":pipe-to helix-tmux search --workspace"
+# Interactive search in current git directory (include path name in the search)
+W = ":pipe-to helix-tmux search --workspace-inc-path"
+# Interactive search in current buffer
+B = ":pipe-to helix-tmux search --buffer"
+# Git status
+s = ":pipe-to helix-tmux git --status"
+# Git blame
+b = ":pipe-to helix-tmux git --blame"
+# Git browse github repo using default browser
+H = ":pipe-to helix-tmux git --browse"
+# Files tree
+t = ":pipe-to helix-ext tree"
+# lazygit
+g = ":pipe-to helix-tmux git --lazygit"
+# Diff current buffer with content on disk
+d = ":pipe-to helix-tmux diff"
 
 # Zelllij
-[keys.normal.'space'.'space']
-# Interactive search in current working directory
-l = ":pipe-to helix-zellij search --current"
-# Interactive search in current working directory (include path name in the search)
-L = ":pipe-to helix-zellij search --current-inc-path"
-# Interactive search in current git directory
-w = ":pipe-to helix-zellij search --workspace"
-# Interactive search in current git directory (include path name in the search)
-W = ":pipe-to helix-zellij search --workspace-inc-path"
-# Interactive search in current buffer
-B = ":pipe-to helix-zellij search --buffer"
-# Git status
-s = ":pipe-to helix-zellij git --status"
-# Git blame
-b = ":pipe-to helix-zellij git --blame"
-# Git browse github repo using default browser
-H = ":pipe-to helix-zellij git --browse"
-# lazygit
-g = ":pipe-to helix-zellij git --lazygit"
-# Diff current buffer with content on disk
-d = ":pipe-to helix-zellij diff"
+#[keys.normal.'space'.'space']
+## Interactive search in current working directory
+#l = ":pipe-to helix-zellij search --current"
+## Interactive search in current working directory (include path name in the search)
+#L = ":pipe-to helix-zellij search --current-inc-path"
+## Interactive search in current git directory
+#w = ":pipe-to helix-zellij search --workspace"
+## Interactive search in current git directory (include path name in the search)
+#W = ":pipe-to helix-zellij search --workspace-inc-path"
+## Interactive search in current buffer
+#B = ":pipe-to helix-zellij search --buffer"
+## Git status
+#s = ":pipe-to helix-zellij git --status"
+## Git blame
+#b = ":pipe-to helix-zellij git --blame"
+## Git browse github repo using default browser
+#H = ":pipe-to helix-zellij git --browse"
+## lazygit
+#g = ":pipe-to helix-zellij git --lazygit"
+## Diff current buffer with content on disk
+#d = ":pipe-to helix-zellij diff"
