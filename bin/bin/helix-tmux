@@ -179,35 +179,14 @@ function git_browse() {
     sleep 1
 }
 
-#function reload_helix() {
-#
-#    # Data to be listed
-#    list_data="#{pane_index} #{pane_current_command}"
-#
-#    # Find pane id where helix is running
-#    helix_pane_index=$(tmux list-panes -a -F "$list_data" | grep "hx" | awk '{print $1}')
-#
-#    if [ -n "$helix_pane_index" ]; then
-#
-#      # change to helix pane
-#      tmux select-pane -t $helix_pane_index
-#
-#      # Send ":" to start command input in Helix
-#      tmux send-keys ":"
-#
-#      # Send the "reload-all" command to helix pane and simulate Enter
-#      tmux send-keys "reload-all" C-m
-#
-#    fi
-#
-#}
-
 function lazygit_pane() {
 
     # Run lazygit
     lazygit
 
-    #tmux set-hook pane-exited "run-shell 'reload_helix'"
+    # run reload on exit
+    tmux set-hook pane-exited "run-shell '$HOME/bin/helix-reload.sh'"
+
 }
 
 # function tree_pane() {
@@ -238,6 +217,8 @@ if [ ! -e "$CANARY_FILE" ]; then
     touch "$CANARY_FILE"
     # Re-execute the script in a working pane
     exec tmux split-window -v helix-tmux "$@"
+    echo $@
+    sleep 10
     
 fi
 
