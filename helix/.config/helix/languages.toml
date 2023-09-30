@@ -23,14 +23,14 @@
 
  [[language]]
  name = "typescript"
- language-servers = [  "typescript-language-server", "tailwindcss-react", "eslint", "emmet-ls"]
+ language-servers = [  "typescript-language-server", "tailwindcss-react", "eslint", "emmet-ls", "snippets-ls"]
  formatter = { command = 'npx', args = ["prettier", "--parser", "typescript"] }
  indent = { tab-width = 4, unit = "\t" }
  auto-format = true
 
  [[language]]
  name = "tsx"
- language-servers = [ "typescript-language-server", "tailwindcss-react", "eslint", "emmet-ls"]
+ language-servers = [ "typescript-language-server", "tailwindcss-react", "eslint", "emmet-ls", "snippets-ls"]
  formatter = { command = 'npx', args = ["prettier", "--parser", "typescript"] }
  indent = { tab-width = 4, unit = "\t" }
  auto-format = true
