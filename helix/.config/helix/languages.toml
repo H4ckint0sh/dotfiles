@@ -23,21 +23,21 @@
 
  [[language]]
  name = "typescript"
- language-servers = [  "typescript-language-server", "tailwindcss-react", "eslint", "emmet-ls", "snippets-ls"]
+ language-servers = [  "typescript-language-server", "tailwindcss-react", "eslint", "emmet-ls", "snippets-ls", "graphql"]
  formatter = { command = 'npx', args = ["prettier", "--parser", "typescript"] }
  indent = { tab-width = 4, unit = "\t" }
  auto-format = true
 
  [[language]]
  name = "tsx"
- language-servers = [ "typescript-language-server", "tailwindcss-react", "eslint", "emmet-ls", "snippets-ls"]
+ language-servers = [ "typescript-language-server", "tailwindcss-react", "eslint", "emmet-ls", "snippets-ls", "graphql"]
  formatter = { command = 'npx', args = ["prettier", "--parser", "typescript"] }
  indent = { tab-width = 4, unit = "\t" }
  auto-format = true
 
  [[language]]
  name = "jsx"
- language-servers = [ "typescript-language-server", "tailwindcss-react", "eslint", "emmet-ls"]
+ language-servers = [ "typescript-language-server", "tailwindcss-react", "eslint", "emmet-ls","snippets-ls", "graphql"]
  grammar = "javascript"
  formatter = { command = 'npx', args = ["prettier", "--parser", "typescript"] }
  indent = { tab-width = 4, unit = "\t" }
@@ -45,8 +45,15 @@
 
  [[language]]
  name = "javascript"
- language-servers = [ "typescript-language-server", "tailwindcss-react", "eslint", "emmet-ls"]
+ language-servers = [ "typescript-language-server", "tailwindcss-react", "eslint", "emmet-ls", "snippets-ls", "graphql"]
  formatter = { command = 'npx', args = ["prettier", "--parser", "typescript"] }
+ indent = { tab-width = 4, unit = "\t" }
+ auto-format = true
+
+ [language-server.graphql]
+ command = "graphql-lsp" 
+ args = ["server", "-m", "stream"]
+ formatter = { command = 'npx', args = ["prettier", "--parser", "json"] }
  indent = { tab-width = 4, unit = "\t" }
  auto-format = true
 
