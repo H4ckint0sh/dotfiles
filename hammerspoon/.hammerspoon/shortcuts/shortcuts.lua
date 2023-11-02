@@ -19,6 +19,6 @@ hs.hotkey.bind({ "alt", "shift" }, "T", open_app({ "kitty" })) -- Terminal
 -- hs.hotkey.bind({ "cmd", "shift" }, "W", open_app({ "IntelliJ IDEA", "Webstorm" }))
 -- hs.hotkey.bind({ "cmd", "shift" }, "P", open_app({ "Postman" }))
 
-hs.hotkey.bind({ "alt", "shift" }, "C", open_app({ "Microsoft Teams" }))   -- Contact
-hs.hotkey.bind({ "alt", "shift" }, "M", open_app({ "Microsoft Outlook" })) -- Mail
-hs.hotkey.bind({ "alt", "shift" }, "B", open_app({ "Chromium" }))          -- Browser
+hs.hotkey.bind({ "alt", "shift" }, "C", open_app({ "Microsoft Teams (work or school)" })) -- Contact
+hs.hotkey.bind({ "alt", "shift" }, "M", open_app({ "Microsoft Outlook" }))                -- Mail
+hs.hotkey.bind({ "alt", "shift" }, "B", open_app({ "Chromium" }))                         -- Browser
