@@ -11,6 +11,10 @@ if [ $(ps ax | grep "[s]sh-agent" | wc -l) -eq 0 ] ; then
     fi
 fi
 
+# Node- sass
+export SKIP_SASS_BINARY_DOWNLOAD_FOR_CI=true
+export SKIP_NODE_SASS_TESTS=true
+
 # Yabai
 export YABAI_CERT=yabai-cert
 
@@ -220,6 +224,7 @@ export PATH="/opt/homebrew/bin:$PATH"
 export PATH="/opt/homebrew/sbin:$PATH"
 export PATH="/usr/local/opt/llvm/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="$HOME/.dotnet/tools:$PATH"
 export PATH="$HOME/.tmux/plugins/t-smart-tmux-session-manager/bin:$PATH"
 export PATH="/usr/local/opt/findutils/libexec/gnubin:$PATH"
 export PATH="/$HOME/.nvm/versions/node/v16.20.1/bin:$PATH"
