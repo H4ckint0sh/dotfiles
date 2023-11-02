@@ -12,7 +12,8 @@ layout {
                 args "-c"
             }
             pane name="helix" size="80%" {
-                command "hx"
+                command "hx" 
+                args "."
                 focus true
             }
         }
