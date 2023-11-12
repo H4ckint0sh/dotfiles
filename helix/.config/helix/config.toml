@@ -69,6 +69,9 @@ C-q = ":quit"
 tab = ":buffer-next"
 S-tab = ":buffer-previous"
 X = ["extend_line_up", "extend_to_line_bounds"]
+#like c-d in vscode
+"C-n" = ["move_prev_word_start", "move_next_word_end", "search_selection", "extend_search_next"]
+
 
 [keys.normal.space]
 i = ":toggle lsp.display-inlay-hints"
