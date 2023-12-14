@@ -14,7 +14,7 @@ end
 -- If Microsoft Teams is opened then Spotify app will not open
 -- and if Microsoft Teams is not found then Spotify will be opened so on and so forth
 hs.hotkey.bind({ "alt", "shift" }, "T", open_app({ "kitty" })) -- Terminal
--- hs.hotkey.bind({ "alt", "shift" }, "S", open_app({ "Spotify" }))
+hs.hotkey.bind({ "alt", "shift" }, "S", open_app({ "Spotify" }))
 -- hs.hotkey.bind({ "cmd", "shift" }, "D", open_app({ "Discord" }))
 -- hs.hotkey.bind({ "cmd", "shift" }, "W", open_app({ "IntelliJ IDEA", "Webstorm" }))
 -- hs.hotkey.bind({ "cmd", "shift" }, "P", open_app({ "Postman" }))

@@ -1,0 +1,15 @@
+[[sources]] # list of sources to load
+name = "friendly-snippets"  # optional name shown on snippet description
+git = "https://github.com/rafamadriz/friendly-snippets.git" # git repo with snippets collections
+
+[[sources.paths]] # list of paths to load on current source
+scope = ["tsx"]  # optional scopes for current snippets
+path = "snippets/javascript/next-ts.json"  # where snippet file or dir located in repo
+
+[[sources.paths]] # list of paths to load on current source
+scope = ["tsx"]  # optional scopes for current snippets
+path = "snippets/javascript/react-ts.json"  # where snippet file or dir located in repo
+
+[[sources.paths]] # list of paths to load on current source
+scope = ["typescript"]  # optional scopes for current snippets
+path = "snippets/javascript/typescript.json"  # where snippet file or dir located in repo

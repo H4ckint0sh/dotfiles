@@ -1,4 +1,11 @@
 
+ # introudce new language server
+ # - set max completion results len to 20
+ # - completions will return before snippets by default
+ [language-server.scls]
+ command = "simple-completion-language-server"
+ config = { max_completion_items = 10, snippets_first = false }
+
  [[language]]
  name = "rust"
 
@@ -23,21 +30,21 @@
 
  [[language]]
  name = "typescript"
- language-servers = [  "typescript-language-server", "tailwindcss-react", "eslint", "emmet-ls", "snippets-ls", "graphql"]
+ language-servers = [  "typescript-language-server", "tailwindcss-react", "eslint", "emmet-ls", "scls", "graphql"]
  formatter = { command = 'npx', args = ["prettier", "--parser", "typescript"] }
  indent = { tab-width = 4, unit = "\t" }
  auto-format = true
 
  [[language]]
  name = "tsx"
- language-servers = [ "typescript-language-server", "tailwindcss-react", "eslint", "emmet-ls", "snippets-ls", "graphql"]
+ language-servers = [ "typescript-language-server", "tailwindcss-react", "eslint", "emmet-ls", "scls", "graphql"]
  formatter = { command = 'npx', args = ["prettier", "--parser", "typescript"] }
  indent = { tab-width = 4, unit = "\t" }
  auto-format = true
 
  [[language]]
  name = "jsx"
- language-servers = [ "typescript-language-server", "tailwindcss-react", "eslint", "emmet-ls","snippets-ls", "graphql"]
+ language-servers = [ "typescript-language-server", "tailwindcss-react", "eslint", "emmet-ls","scls", "graphql"]
  grammar = "javascript"
  formatter = { command = 'npx', args = ["prettier", "--parser", "typescript"] }
  indent = { tab-width = 4, unit = "\t" }
@@ -45,7 +52,7 @@
 
  [[language]]
  name = "javascript"
- language-servers = [ "typescript-language-server", "tailwindcss-react", "eslint", "emmet-ls", "snippets-ls", "graphql"]
+ language-servers = [ "typescript-language-server", "tailwindcss-react", "eslint", "emmet-ls", "scls", "graphql"]
  formatter = { command = 'npx', args = ["prettier", "--parser", "typescript"] }
  indent = { tab-width = 4, unit = "\t" }
  auto-format = true
@@ -130,11 +137,6 @@
  command = "tailwindcss-language-server"
  args = ["--stdio"]
  config = {}
-
- [language-server.snippets-ls]
- language-id = "typescriptreact"
- command = "snippets-ls"
- args = ["-config", "/Users/ali/.config/helix/snippets.json"]
 
  [language-server.typescript-language-server.config]
  documentFormatting = false
