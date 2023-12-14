@@ -13,7 +13,7 @@ builtin_box_drawing = true
 size = 15
 
 [font.normal]
-family = "Dank Mono"
+family = "SFMono Nerd Font"
 style = "Regular"
 
 [font.offset]
