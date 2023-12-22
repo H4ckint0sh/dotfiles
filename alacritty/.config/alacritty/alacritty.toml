@@ -10,15 +10,15 @@ TERM = "xterm-256color"
 
 [font]
 builtin_box_drawing = true
-size = 13
+size = 15.5
 
 [font.normal]
-family = "SFMono Nerd Font"
+family = "DankMono Nerd Font"
 style = "Regular"
 
 [font.offset]
 x = 0
-y = 5
+y = 8
 
 
 # Tmux
