@@ -14,7 +14,7 @@ local config = {
 	front_end = "WebGpu",
 	font_size = 15.0,
 	line_height = 1.15,
-	native_macos_fullscreen_mode = true,
+	native_macos_fullscreen_mode = false,
 	keys = {
 		{ key = "0", mods = "CMD", action = wezterm.action.ResetFontSize },
 		{ key = "-", mods = "CMD", action = wezterm.action.DecreaseFontSize },
@@ -218,19 +218,5 @@ local config = {
 		},
 	},
 }
-
-wezterm.on('reload-helix', function(window, pane)
-	local top_process = basename(pane:get_foreground_process_name())
-	if top_process == 'hx' then
-		local bottom_pane = pane:tab():get_pane_direction('Down')
-		if bottom_pane ~= nil then
-			local bottom_process = basename(bottom_pane:get_foreground_process_name())
-			if bottom_process == 'lazygit' then
-				local action = wezterm.action.SendString(':reload-all\r\n')
-				window:perform_action(action, pane);
-			end
-		end
-	end
-end)
 
 return config
