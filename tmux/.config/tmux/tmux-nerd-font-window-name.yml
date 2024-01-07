@@ -1,0 +1,16 @@
+config:
+  fallback-icon: "❓"
+  multi-pane-icon: ""
+  show-name: false
+
+icons:
+  btop: "📈"
+  bun: "🥟"
+  docker: "🐳"
+  fish: "🐠"
+  nvim: "📝"
+  overmind: "👀"
+  stripe-mock: "💳"
+  stripe: "💳"
+  hx : "🧬"
+  zsh: "🐚"
