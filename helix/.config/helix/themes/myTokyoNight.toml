@@ -2,13 +2,12 @@
 
 "comment" = { fg = "comment", modifiers = ["italic"] }
 "constant" = { fg = "orange" }
-"constructor" = { fg = "yellow" }
 "constant.character.escape" = { fg = "magenta" }
 "function" = { fg = "blue", modifiers = ["italic"] }
 "function.macro" = { fg = "cyan" }
 "keyword" = { fg = "cyan", modifiers = ["italic"] }
 "keyword.control" = { fg = "magenta", modifiers = ["italic"] }
-"keyword.control.import" = { fg = "cyan", modifiers = ["italic"]}
+"keyword.control.import" = { fg = "cyan", modifiers= ["italic"] }
 "keyword.operator" = { fg = "turquoise" }
 "keyword.function" = { fg = "magenta", modifiers = ["italic"] }
 "operator" = { fg = "turquoise" }
@@ -20,18 +19,18 @@
 "namespace" = { fg = "blue" }
 "variable" = { fg = "white" }
 "variable.builtin" = { fg = "red" }
-"variable.other.member" = { fg = "green", modifiers = ["italic"] }
+"variable.other.member" = { fg = "green", modifiers= ["italic"] }
 "variable.parameter" = { fg = "yellow", modifiers = ["italic"] }
 
 "diff.plus" = { fg = "green" }
 "diff.delta" = { fg = "orange" }
 "diff.minus" = { fg = "red" }
 
-"ui.background" = {}
-"ui.cursor" = { modifiers = ["slow_blink"] }
+"ui.background" = { fg = "foreground" }
+"ui.cursor" = { modifiers = ["reversed"] }
 "ui.cursor.match" = { fg = "orange", modifiers = ["bold"] }
 "ui.cursor.primary" = { modifiers = ["reversed"] }
-"ui.cursorline.primary" = { bg = "turquoise" }
+"ui.cursorline.primary" = { bg = "background_menu" }
 "ui.help" = { fg = "foreground" }
 "ui.linenr" = { fg = "comment" }
 "ui.linenr.selected" = { fg = "turquoise" }
@@ -42,9 +41,9 @@
 "ui.selection.primary" = { bg = "background_highlight" }
 "ui.statusline" = { fg = "foreground" }
 "ui.statusline.inactive" = { fg = "comment" }
-"ui.statusline.normal" = { fg = "black", bg = "blue" , modifiers =["italic"] }
-"ui.statusline.insert" = { fg = "black", bg = "turquoise" , modifiers =["italic"] }
-"ui.statusline.select" = { fg = "black", bg = "magenta" , modifiers =["italic"] }
+"ui.statusline.normal" = { fg = "black", bg = "blue", modifiers= ["italic"] }
+"ui.statusline.insert" = { fg = "black", bg = "green", modifiers= ["italic"] }
+"ui.statusline.select" = { fg = "black", bg = "magenta", modifiers= ["italic"] }
 "ui.text" = { fg = "foreground" }
 "ui.text.focus" = { fg = "cyan" }
 "ui.virtual.ruler" = { bg = "foreground_gutter" }
@@ -92,7 +91,6 @@ black = "#414868"
 foreground = "#a9b1d6"
 foreground_highlight = "#c0caf5"
 foreground_gutter = "#363b54"
-background = "#24283b"
-background_highlight = "#373d5a"
-background_menu = "#1f2335"
-
+background = "#1a1b26"
+background_highlight = "#30374b"
+background_menu = "#16161e"
