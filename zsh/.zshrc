@@ -19,7 +19,7 @@ export YABAI_CERT=yabai-cert
 
 #job
 export PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
-export PUPPETEER_EXECUTABLE_PATH=`which chromium`k
+export PUPPETEER_EXECUTABLE_PATH=`which chromium`
 
 # Path to your dotfiles.
 export DOTFILES=$HOME/.dotfiles
