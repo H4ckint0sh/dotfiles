@@ -12,10 +12,12 @@ icons:
   overmind: "👀"
   stripe-mock: "💳"
   stripe: "💳"
-  hx : "📝"
-  zsh: "🐚"
-  bash: "🔭"
-  fzf: "🔭"
-  rg: "🔭"
-  lazygit: "📥"
+  node: '󰎙'
+  yarn: '󰎙'
+  hx : "󰚄"
+  zsh: ""
+  bash: "󰱽"
+  fzf: "󰱽"
+  rg: "󰱽"
+  lazygit: ""
 
