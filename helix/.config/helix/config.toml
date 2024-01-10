@@ -81,6 +81,8 @@ x = ":bc"
 "," = ":w"
 "!" = ":q!"
 o = ":reload-all"
+# until zenmode is availible
+z = ":toggle gutters.line-numbers.min-width 48 3"
 
 # Tmux 
 [keys.normal.'space'.'space']
