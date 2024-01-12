@@ -8,11 +8,13 @@ tap "H4ckint0sh/formulae"
 tap "homebrew/bundle"
 tap "homebrew/core"
 tap "jesseduffield/lazygit"
+tap "FelixKratz/formulae"
 
 # Binaries
 brew "bash" # Latest Bash version
 brew "coreutils" # Those that come with macOS are outdated
 brew "fzf"
+brew "borders"
 brew "thefuck"
 brew "chafa"
 brew "tldr"
