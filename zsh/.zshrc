@@ -1,5 +1,8 @@
 #@@ -1,203 +1 @@
 
+# Source zsh plugins
+source $HOME/.config/.zsh-vi-mode/zsh-vi-mode.plugin.zsh
+
 if [ $(ps ax | grep "[s]sh-agent" | wc -l) -eq 0 ] ; then
     eval $(ssh-agent -s) > /dev/null
     if [ "$(ssh-add -l)" = "The agent has no identities." ] ; then
@@ -227,6 +230,7 @@ export PATH="$HOME/.dotnet/tools:$PATH"
 export PATH="$HOME/.tmux/plugins/t-smart-tmux-session-manager/bin:$PATH"
 export PATH="/usr/local/opt/findutils/libexec/gnubin:$PATH"
 export PATH="/$HOME/.nvm/versions/node/v16.20.1/bin:$PATH"
+export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
 
 # zoxide
 eval "$(zoxide init zsh)"
