@@ -31,6 +31,8 @@ export DOTFILES=$HOME/.dotfiles
 export EDITOR=hx
 # export OPENAI_API_KEY=$(security find-generic-password -s 'openapi token' -w)
 
+MOZ_DISABLE_SAFE_MODE_KEY=1
+
 # nnn
 #export NNN_OPENER="zellij-nnn"
 export NNN_OPENER="tmux-nnn"

@@ -21,4 +21,4 @@ hs.hotkey.bind({ "alt", "shift" }, "S", open_app({ "Spotify" }))
 
 hs.hotkey.bind({ "alt", "shift" }, "C", open_app({ "Microsoft Teams (work or school)" })) -- Contact
 hs.hotkey.bind({ "alt", "shift" }, "M", open_app({ "Microsoft Outlook" }))                -- Mail
-hs.hotkey.bind({ "alt", "shift" }, "B", open_app({ "Chromium" }))                         -- Browser
+hs.hotkey.bind({ "alt", "shift" }, "B", open_app({ "Floorp" }))                           -- Browser
