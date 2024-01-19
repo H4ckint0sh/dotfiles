@@ -12,7 +12,7 @@ local config = {
 	window_decorations = "RESIZE",
 	font = wezterm.font("DankMono Nerd Font", { weight = "Regular" }),
 	front_end = "WebGpu",
-	font_size = 14.0,
+	font_size = 12.0,
 	line_height = 1.15,
 	native_macos_fullscreen_mode = false,
 	keys = {
