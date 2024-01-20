@@ -15,128 +15,50 @@ hs.pathwatcher.new(os.getenv("HOME") .. "/.hammerspoon/", ReloadConfig):start()
 hs.alert("Hammerspoon config reloaded")
 
 -- Modifier shortcuts
-local hyper = { "⌘", "⌥", "⌃", "⇧" }
+-- local hyper = { "⌘", "⌥", "⌃", "⇧" }
 local shifopt = { "⌥", "⇧" }
 
--- F19 and Hyperkey Hack
--- Keys you want to use with hyper key go here:
-local hyperBindings = { "a",
-	"b",
-	"c",
-	"d",
-	"e",
-	"f",
-	"g",
-	"h",
-	"i",
-	"j",
-	"k",
-	"l",
-	"m",
-	"n",
-	"o",
-	"p",
-	"q",
-	"r",
-	"s",
-	"t",
-	"u",
-	"v",
-	"w",
-	"x",
-	"y",
-	"z",
-	"0",
-	"1",
-	"2",
-	"3",
-	"4",
-	"5",
-	"6",
-	"7",
-	"8",
-	"9",
-	"`",
-	"=",
-	"-",
-	"]",
-	"[",
-	"\'",
-	";",
-	"\\",
-	",",
-	"/",
-	".",
-	"§",
-	"f1",
-	"f2",
-	"f3",
-	"f4",
-	"f5",
-	"f6",
-	"f7",
-	"f8",
-	"f9",
-	"f10",
-	"f11",
-	"f12",
-	"pad.",
-	"pad*",
-	"pad+",
-	"pad/",
-	"pad-",
-	"pad=",
-	"pad0",
-	"pad1",
-	"pad2",
-	"pad3",
-	"pad4",
-	"pad5",
-	"pad6",
-	"pad7",
-	"pad8",
-	"pad9",
-	"padclear",
-	"padenter",
-	"return",
-	"tab",
-	"space",
-	"delete",
-	"help",
-	"home",
-	"pageup",
-	"forwarddelete",
-	"end",
-	"pagedown",
-	"left",
-	"right",
-	"down",
-	"up" }
-
-local k = hs.hotkey.modal.new({}, "F17")
-
----@diagnostic disable-next-line: unused-local
-for i, key in ipairs(hyperBindings) do
-	k:bind({}, key, nil, function()
-		hs.eventtap.keyStroke(hyper, key)
-		k.triggered = true
-	end)
+-- Convenience method to create and start an eventTap then store it in a global variable so it doesn't get garbage collected
+MyEventTaps = {} -- global
+function createEventTap(types, handler)
+	table.insert(MyEventTaps, hs.eventtap.new(types, handler):start())
 end
 
-local pressedF18 = function()
-	k.triggered = false
-	k:enter()
+-- The Hammer key
+-- Install com.stevekehlet.RemapCapsLockToF18.plist (see the README) to map Caps Lock to F18.
+Hammer = hs.hotkey.modal.new()
+
+function Hammer:entered()
+	-- logger.i("Hammer down")
+	self.isDown = true
 end
 
-local releasedF18 = function()
-	k:exit()
-	if not k.triggered then
-		hs.eventtap.keyStroke({}, 'ESCAPE')
+function Hammer:exited()
+	-- logger.i("Hammer up")
+	self.isDown = false
+end
+
+-- Capture presses and releases of F18 to activate the hammer
+createEventTap({
+	hs.eventtap.event.types.keyDown,
+	hs.eventtap.event.types.keyUp
+}, function(event)
+	-- logger.i('caught key: ' .. event:getKeyCode() .. ' of type: ' .. event:getType())
+	if event:getKeyCode() == hs.keycodes.map['F18'] then
+		local isRepeat = event:getProperty(hs.eventtap.event.properties.keyboardEventAutorepeat)
+		if isRepeat > 0 then
+			return true -- ignore and discard
+		end
+		if event:getType() == hs.eventtap.event.types.keyDown then
+			Hammer:enter()
+			return true
+		else
+			Hammer:exit()
+			hs.eventtap.keyStroke({}, 'ESCAPE')
+			return true
+		end
 	end
-end
-
----@diagnostic disable-next-line: unused-local
-local f18 = hs.hotkey.bind({}, 'F18', pressedF18, releasedF18)
+end)
 
 -- Applications
 -- Toggle named app's visibility, launching if needed
@@ -214,6 +136,6 @@ if caffeine then
 end
 
 -- Spotify shortcuts
-hs.hotkey.bind(shifopt, 'p', hs.spotify.playpause)
-hs.hotkey.bind(f18, 'right', hs.spotify.next)
-hs.hotkey.bind(f18, 'left', hs.spotify.previous)
+Hammer:bind({}, 'p', hs.spotify.playpause)
+Hammer:bind({}, 'right', hs.spotify.next)
+Hammer:bind({}, 'left', hs.spotify.previous)
