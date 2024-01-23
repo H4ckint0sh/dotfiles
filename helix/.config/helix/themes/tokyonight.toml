@@ -83,6 +83,9 @@ warning = { fg = "yellow" }
 "ui.statusline.normal" = { bg = "blue", fg = "bg", modifiers = ["bold"] }
 "ui.statusline.insert" = { bg = "light-green", fg = "bg", modifiers = ["bold"] }
 "ui.statusline.select" = { bg = "magenta", fg = "bg", modifiers = ["bold"] }
+"ui.bufferline" = { fg = "comment" }
+"ui.bufferline.active" = { fg = "fg" }
+"ui.bufferline.background" = {}
 "ui.text" = { fg = "fg" }
 "ui.text.focus" = { bg = "bg-visual" }
 "ui.text.inactive" = { fg = "comment", modifiers = ["italic"] }
