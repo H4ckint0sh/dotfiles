@@ -38,6 +38,10 @@ source ./linkfolders
 echo "installing files and folders ..."
 source ./install
 
+echo "Importing defaults ..."
+chmod +x import-defaults.sh
+sh defaults-import.sh ~/defaults/defaults.zip
+
 echo "checking if ~/.nvm directory exists ..."
 DIR=~/.nvm
 if [ -d "$DIR" ];
