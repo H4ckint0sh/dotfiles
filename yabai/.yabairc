@@ -35,11 +35,11 @@ yabai -m config right_padding 5
 yabai -m config window_gap 5
 
 # apps to not manage (ignore)
-yabai -m rule --add app="^(Raycast|Raycast Settings|Calculator|Software Update|Dictionary|VLC|System Preferences|System Settings|IINA|Photo Booth|Archive Utility|Preview|App Store|Fig|Alfred|Activity Monitor|Transmission|Archive Utility|AppCleaner)$" manage=off
+yabai -m rule --add app="^(Raycast|Raycast Settings|Calculator|Software Update|Dictionary|VLC|System Preferences|System Settings|IINA|Photo Booth|Archive Utility|Preview|App Store|Fig|Alfred|Activity Monitor|Transmission|Archive Utility|AppCleaner|LICEcap)$" manage=off
 yabai -m rule --add label="Safari" app="^Safari$" title="^(General|(Tab|Password|Website|Extension)s|AutoFill|Se(arch|curity)|Privacy|Advance)$" manage=off
 yabai -m rule --add label="About This Mac" app="System Information" title="About This Mac" manage=off
 yabai -m rule --add label="Select file to save to" app="^Inkscape$" title="Select file to save to" manage=off
 
 echo "yabai configuration loaded.."
 
-borders active_color=0xffe1e3e4 inactive_color=0xff494d64 width=5.0 &
+borders active_color=0xffe1e3e4 inactive_color=0xff494d64 width=3.0 &
