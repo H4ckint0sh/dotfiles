@@ -1,4 +1,6 @@
 local wezterm = require("wezterm")
+local wt_action = require("wezterm").action
+local k = require("utils/keys")
 
 local config = {
 	color_scheme = 'Tokyo Night Storm',
@@ -16,206 +18,43 @@ local config = {
 	line_height = 1.15,
 	native_macos_fullscreen_mode = false,
 	keys = {
-		{ key = "0", mods = "CMD", action = wezterm.action.ResetFontSize },
-		{ key = "-", mods = "CMD", action = wezterm.action.DecreaseFontSize },
-		{ key = "+", mods = "CMD", action = wezterm.action.IncreaseFontSize },
-		{ key = "q", mods = "CMD", action = wezterm.action.QuitApplication },
-		{ key = "v", mods = "CMD", action = wezterm.action.PasteFrom 'Clipboard' },
-		{
-			key = "P",
-			mods = "CTRL|SHIFT",
-			action = wezterm.action.DisableDefaultAssignment,
-		},
-		{
-			key = "k",
-			mods = "CMD",
-			action = wezterm.action.SendString "\x02s",
-		},
-		{
-			key = "Numpad1",
-			mods = "CMD",
-			action = wezterm.action.SendString "\x021",
-		},
-		{
-			key = "Numpad2",
-			mods = "CMD",
-			action = wezterm.action.SendString "\x022",
-		},
-		{
-			key = "Numpad3",
-			mods = "CMD",
-			action = wezterm.action.SendString "\x023",
-		},
-		{
-			key = "Numpad4",
-			mods = "CMD",
-			action = wezterm.action.SendString "\x024",
-		},
-		{
-			key = "Numpad5",
-			mods = "CMD",
-			action = wezterm.action.SendString "\x025",
-		},
-		{
-			key = "Numpad6",
-			mods = "CMD",
-			action = wezterm.action.SendString "\x026",
-		},
-		{
-			key = "Numpad7",
-			mods = "CMD",
-			action = wezterm.action.SendString "\x027",
-		},
-		{
-			key = "Numpad8",
-			mods = "CMD",
-			action = wezterm.action.SendString "\x028",
-		},
-		{
-			key = "Numpad9",
-			mods = "CMD",
-			action = wezterm.action.SendString "\x029",
-		},
-		{
-			key = "g",
-			mods = "CMD",
-			action = wezterm.action.SendString "\x02g",
-		},
-		{
-			key = ":",
-			mods = "CMD",
-			action = wezterm.action.SendString "\x02:",
-		},
-		{
-			key = "c",
-			mods = "CMD|SHIFT",
-			action = wezterm.action.SendString "\x02\x5b",
-		},
-		{
-			key = "r",
-			mods = "CMD",
-			action = wezterm.action.SendString "\x02,",
-		},
-		{
-			key = "l",
-			mods = "CMD",
-			action = wezterm.action.SendString "\x02L",
-		},
-		{
-			key = "LeftArrow",
-			mods = "CMD|SHIFT",
-			action = wezterm.action.SendString "\x02p",
-		},
-		{
-			key = "RightArrow",
-			mods = "CMD|SHIFT",
-			action = wezterm.action.SendString "\x02n",
-		},
-		{
-			key = "LeftArrow",
-			mods = "CMD",
-			action = wezterm.action.SendString "\x02\x08",
-		},
-		{
-			key = "RightArrow",
-			mods = "CMD",
-			action = wezterm.action.SendString "\x02\x0c",
-		},
-		{
-			key = "DownArrow",
-			mods = "CMD",
-			action = wezterm.action.SendString "\x02\x0a",
-		},
-		{
-			key = "UpArrow",
-			mods = "CMD",
-			action = wezterm.action.SendString "\x02\x0b",
-		},
-		{
-			key = "d",
-			mods = "CMD",
-			action = wezterm.action.SendString "\x02%",
-		},
-		{
-			key = "d",
-			mods = "CMD|SHIFT",
-			action = wezterm.action.SendString "\x02\"",
-		},
-		{
-			key = "t",
-			mods = "CMD",
-			action = wezterm.action.SendString "\x02c",
-		},
-		{
-			key = "w",
-			mods = "CMD",
-			action = wezterm.action.SendString "\x02x",
-		},
-		{
-			key = "e",
-			mods = "CMD",
-			action = wezterm.action.SendString "\x02\x65",
-		},
-		{
-			key = "i",
-			mods = "CMD",
-			action = wezterm.action.SendString "\x02\x69",
-		},
-		{
-			key = "j",
-			mods = "CMD",
-			action = wezterm.action.SendString "\x02\x54",
-		},
-		{
-			key = "z",
-			mods = "CMD",
-			action = wezterm.action.SendString "\x02z",
-		},
-		-- Cycle trough panes
-		{
-			key = "Tab",
-			mods = "CTRL",
-			action = wezterm.action.SendString "\x02\x6f",
-		},
-		-- Cycle trugh layouts
-		{
-			key = "Tab",
-			mods = "CTRL|SHIFT",
-			action = wezterm.action.SendString "\x02\x20",
-		},
-		{
-			key = "a",
-			mods = "CMD",
-			action = wezterm.action.SendString "\x02\x61",
-		},
-		{
-			key = "o",
-			mods = "CMD",
-			action = wezterm.action.SendString "\x02u",
-		},
-		-- Break pane out of window
-		{
-			key = "b",
-			mods = "CMD",
-			action = wezterm.action.SendString "\x02\x21",
-		},
-		-- Swap with previuos pane
-		{
-			key = "p",
-			mods = "CMD",
-			action = wezterm.action.SendString "\x02\x7b",
-		},
-		-- Swap with next pane
-		{
-			key = "n",
-			mods = "CMD",
-			action = wezterm.action.SendString "\x02\x7d",
-		},
-		{
-			key = "f",
-			mods = "CMD",
-			action = wezterm.action.SendString '\x02\x06'
-		},
+		k.key_table("CMD", "0", wt_action.ResetFontSize),
+		k.key_table("CMD", "-", wt_action.DecreaseFontSize),
+		k.key_table("CMD", "+", wt_action.IncreaseFontSize),
+		k.key_table("CMD", "q", wt_action.QuitApplication),
+		k.key_table("CMD", "v", wt_action.PasteFrom 'Clipboard'),
+		k.key_table("CMD", "LeftArrow", wt_action.SendString "\x02\x08"),
+		k.key_table("CMD", "RightArrow", wt_action.SendString "\x02\x0c"),
+		k.key_table("CMD", "UpArrow", wt_action.SendString "x02\x0b"),
+		k.key_table("CMD", "DownArrow", wt_action.SendString "x02\x0a"),
+
+		k.cmd_to_tmux_prefix("1", "1"),
+		k.cmd_to_tmux_prefix("2", "2"),
+		k.cmd_to_tmux_prefix("3", "3"),
+		k.cmd_to_tmux_prefix("4", "4"),
+		k.cmd_to_tmux_prefix("5", "5"),
+		k.cmd_to_tmux_prefix("6", "6"),
+		k.cmd_to_tmux_prefix("7", "7"),
+		k.cmd_to_tmux_prefix("8", "8"),
+		k.cmd_to_tmux_prefix("9", "9"),
+		k.cmd_to_tmux_prefix("'", "n"),
+		k.cmd_to_tmux_prefix(",", "p"),
+		k.cmd_to_tmux_prefix("b", "B"),
+		k.cmd_to_tmux_prefix("C", "C"),
+		k.cmd_to_tmux_prefix("d", "D"),
+		k.cmd_to_tmux_prefix("G", "G"),
+		k.cmd_to_tmux_prefix("g", "g"),
+		k.cmd_to_tmux_prefix("K", "T"),
+		k.cmd_to_tmux_prefix("k", "K"),
+		k.cmd_to_tmux_prefix("l", "L"),
+		k.cmd_to_tmux_prefix("n", '"'),
+		k.cmd_to_tmux_prefix("N", "%"),
+		k.cmd_to_tmux_prefix("o", "u"),
+		k.cmd_to_tmux_prefix("T", "!"),
+		k.cmd_to_tmux_prefix("t", "c"),
+		k.cmd_to_tmux_prefix("w", "x"),
+		k.cmd_to_tmux_prefix("z", "z"),
+		-- k.cmd_to_tmux_prefix("Z", "Z"),
 	},
 }
 
