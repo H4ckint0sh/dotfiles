@@ -26,39 +26,39 @@ end
 
 -- The Hammer key
 -- Install com.stevekehlet.RemapCapsLockToF18.plist (see the README) to map Caps Lock to F18.
-Hammer = hs.hotkey.modal.new()
+-- Hammer = hs.hotkey.modal.new()
 
-function Hammer:entered()
-	-- logger.i("Hammer down")
-	self.isDown = true
-end
+-- function Hammer:entered()
+-- logger.i("Hammer down")
+-- self.isDown = true
+-- end
 
-function Hammer:exited()
-	-- logger.i("Hammer up")
-	self.isDown = false
-end
+-- function Hammer:exited()
+-- logger.i("Hammer up")
+-- self.isDown = false
+-- end
 
 -- Capture presses and releases of F18 to activate the hammer
-createEventTap({
-	hs.eventtap.event.types.keyDown,
-	hs.eventtap.event.types.keyUp
-}, function(event)
-	-- logger.i('caught key: ' .. event:getKeyCode() .. ' of type: ' .. event:getType())
-	if event:getKeyCode() == hs.keycodes.map['F18'] then
-		local isRepeat = event:getProperty(hs.eventtap.event.properties.keyboardEventAutorepeat)
-		if isRepeat > 0 then
-			return true -- ignore and discard
-		end
-		if event:getType() == hs.eventtap.event.types.keyDown then
-			Hammer:enter()
-			return true
-		else
-			Hammer:exit()
-			hs.eventtap.keyStroke({}, 'ESCAPE')
-			return true
-		end
-	end
-end)
+-- createEventTap({
+-- hs.eventtap.event.types.keyDown,
+-- hs.eventtap.event.types.keyUp
+-- }, function(event)
+-- logger.i('caught key: ' .. event:getKeyCode() .. ' of type: ' .. event:getType())
+-- 	if event:getKeyCode() == hs.keycodes.map['F18'] then
+-- 		local isRepeat = event:getProperty(hs.eventtap.event.properties.keyboardEventAutorepeat)
+-- 		if isRepeat > 0 then
+-- 			return true -- ignore and discard
+-- 		end
+-- 		if event:getType() == hs.eventtap.event.types.keyDown then
+-- 			Hammer:enter()
+-- 			return true
+-- 		else
+-- 			Hammer:exit()
+-- 			hs.eventtap.keyStroke({}, 'ESCAPE')
+-- 			return true
+-- 		end
+-- 	end
+-- end)
 
 -- Applications
 -- Toggle named app's visibility, launching if needed
@@ -136,6 +136,6 @@ if caffeine then
 end
 
 -- Spotify shortcuts
-Hammer:bind({}, 'p', hs.spotify.playpause)
-Hammer:bind({}, 'right', hs.spotify.next)
-Hammer:bind({}, 'left', hs.spotify.previous)
+-- Hammer:bind({}, 'p', hs.spotify.playpause)
+-- Hammer:bind({}, 'right', hs.spotify.next)
+-- Hammer:bind({}, 'left', hs.spotify.previous)
