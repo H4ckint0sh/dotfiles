@@ -138,6 +138,22 @@
  args = ["--stdio"]
  config = {}
 
+ [language-server.astro-ls]
+ name = "astro"
+ scope = "source.astro"
+ injection-regex = "astro"
+ file-types = ["astro"]
+ roots = ["package.json", "astro.config.mjs"]
+ command = "astro-ls"
+ args = ["--stdio"]
+ config = {typescript = {tsdk = "/Users/ali/Desktop/projects/taby-frontend-2023/node_modules/typescript/lib"}, environment = "node"}
+
+ [[language]]
+ name = "astro"
+ formatter = { command = 'prettier', args = ["--parser", "astro"] }
+ auto-format = true
+ language-servers = [ "astro-ls" ]
+
  [language-server.typescript-language-server.config]
  documentFormatting = false
  hostInfo = "helix"
