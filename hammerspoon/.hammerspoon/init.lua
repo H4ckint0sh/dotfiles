@@ -67,7 +67,6 @@ local function toggle_app(name)
 	if focused then
 		local app = focused:application()
 		if app:title() == name then
-			app:hide()
 			return
 		end
 	end
@@ -78,8 +77,8 @@ end
 -- Applications, toggle visibility
 hs.hotkey.bind(shifopt, 'b', function() toggle_app('Floorp') end)
 hs.hotkey.bind(shifopt, 'c', function() toggle_app('Microsoft Teams (work or school)') end)
-hs.hotkey.bind(shifopt, 'o', function() toggle_app('Microsoft Outlook') end)
-hs.hotkey.bind(shifopt, 't', function() toggle_app('Wezterm') end)
+hs.hotkey.bind(shifopt, 'm', function() toggle_app('Microsoft Outlook') end)
+hs.hotkey.bind(shifopt, 't', function() toggle_app('kitty') end)
 hs.hotkey.bind(shifopt, 'f', function() toggle_app('Finder') end)
 
 -- caffeinate Icons
