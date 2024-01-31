@@ -11,6 +11,11 @@ color-modes = true
 auto-signature-help = false
 display-messages = true
 display-inlay-hints = true
+display-signature-help-docs = true
+
+[editor.lsp.inline-diagnostics]
+other-lines = ["error", "warning"]
+cursor-line = ["error", "warning"]
 
 [editor.cursor-shape]
 insert = "bar"
