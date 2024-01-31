@@ -150,7 +150,9 @@
 
  [[language]]
  name = "astro"
- formatter = { command = 'prettier', args = ["--parser", "astro"] }
+ formatter = { command = 'npx', args = ["prettier", "--parser", "astro"] }
+ indent = { tab-width = 4, unit = "\t" }
+
  auto-format = true
  language-servers = [ "astro-ls" ]
 
