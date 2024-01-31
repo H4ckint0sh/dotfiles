@@ -22,7 +22,9 @@ keyword = { fg = "magenta", modifiers = ["italic"] }
 label = { fg = "blue" }
 namespace = { fg = "cyan" }
 operator = { fg = "turquoise" }
-punctuation = { fg = "turquoise" }
+"punctuation.delimiter" = { fg = "fg" }
+"punctuation.bracket" = { fg = "fg" }
+"punctuation.special" = { fg = "magenta" }
 special = { fg = "aqua" }
 string = { fg = "light-green" }
 "string.regexp" = { fg = "light-cyan" }
