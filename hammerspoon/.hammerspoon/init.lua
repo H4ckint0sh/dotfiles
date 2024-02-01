@@ -61,25 +61,23 @@ end
 -- end)
 
 -- Applications
--- Toggle named app's visibility, launching if needed
-local function toggle_app(name)
-	local focused = hs.window.focusedWindow()
-	if focused then
-		local app = focused:application()
-		if app:title() == name then
-			return
+-- Open or focus app
+local function open_app(names)
+	return function()
+		for _, name in pairs(names) do
+			if hs.application.launchOrFocus(name) then
+				return
+			end
 		end
 	end
-
-	hs.application.launchOrFocus(name)
 end
 
 -- Applications, toggle visibility
-hs.hotkey.bind(shifopt, 'b', function() toggle_app('Floorp') end)
-hs.hotkey.bind(shifopt, 'c', function() toggle_app('Microsoft Teams (work or school)') end)
-hs.hotkey.bind(shifopt, 'm', function() toggle_app('Microsoft Outlook') end)
-hs.hotkey.bind(shifopt, 't', function() toggle_app('kitty') end)
-hs.hotkey.bind(shifopt, 'f', function() toggle_app('Finder') end)
+hs.hotkey.bind(shifopt, "T", open_app({ "kitty" }))                            -- Terminal
+hs.hotkey.bind(shifopt, "S", open_app({ "Spotify" }))
+hs.hotkey.bind(shifopt, "C", open_app({ "Microsoft Teams (work or school)" })) -- Contact
+hs.hotkey.bind(shifopt, "M", open_app({ "Microsoft Outlook" }))                -- Mail
+hs.hotkey.bind(shifopt, "B", open_app({ "Chromium" }))
 
 -- caffeinate Icons
 local ampOnIcon = [[ASCII:
