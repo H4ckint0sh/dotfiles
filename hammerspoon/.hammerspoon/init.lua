@@ -74,10 +74,11 @@ end
 
 -- Applications, toggle visibility
 hs.hotkey.bind(shifopt, "T", open_app({ "kitty" }))                            -- Terminal
-hs.hotkey.bind(shifopt, "S", open_app({ "Spotify" }))
+hs.hotkey.bind(shifopt, "S", open_app({ "Spotify" }))                          -- Music
 hs.hotkey.bind(shifopt, "C", open_app({ "Microsoft Teams (work or school)" })) -- Contact
 hs.hotkey.bind(shifopt, "M", open_app({ "Microsoft Outlook" }))                -- Mail
-hs.hotkey.bind(shifopt, "B", open_app({ "Chromium" }))
+hs.hotkey.bind(shifopt, "B", open_app({ "Chromium" }))                         -- Browser
+hs.hotkey.bind(shifopt, "F", open_app({ "Finder" }))                           -- File Browser
 
 -- caffeinate Icons
 local ampOnIcon = [[ASCII:
