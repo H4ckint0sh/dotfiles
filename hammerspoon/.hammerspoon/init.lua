@@ -73,7 +73,7 @@ local function open_app(names)
 end
 
 -- Applications, toggle visibility
-hs.hotkey.bind(shifopt, "T", open_app({ "kitty" }))                            -- Terminal
+hs.hotkey.bind(shifopt, "T", open_app({ "Wezterm" }))                          -- Terminal
 hs.hotkey.bind(shifopt, "S", open_app({ "Spotify" }))                          -- Music
 hs.hotkey.bind(shifopt, "C", open_app({ "Microsoft Teams (work or school)" })) -- Contact
 hs.hotkey.bind(shifopt, "M", open_app({ "Microsoft Outlook" }))                -- Mail
