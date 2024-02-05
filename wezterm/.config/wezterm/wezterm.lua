@@ -27,6 +27,9 @@ local config = {
 		k.key_table("CMD", "RightArrow", wt_action.SendString "\x02\x0c"),
 		k.key_table("CMD", "UpArrow", wt_action.SendString "x02\x0b"),
 		k.key_table("CMD", "DownArrow", wt_action.SendString "x02\x0a"),
+		k.key_table("CMD|SHIFT", "LeftArrow", wt_action.SendString "\x02p"),
+		k.key_table("CMD|SHIFT", "RightArrow", wt_action.SendString "\x02n"),
+
 
 		k.cmd_to_tmux_prefix("1", "1"),
 		k.cmd_to_tmux_prefix("2", "2"),
@@ -37,8 +40,6 @@ local config = {
 		k.cmd_to_tmux_prefix("7", "7"),
 		k.cmd_to_tmux_prefix("8", "8"),
 		k.cmd_to_tmux_prefix("9", "9"),
-		k.cmd_to_tmux_prefix("'", "n"),
-		k.cmd_to_tmux_prefix(",", "p"),
 		k.cmd_to_tmux_prefix("b", "B"),
 		k.cmd_to_tmux_prefix("C", "C"),
 		k.cmd_to_tmux_prefix("d", "D"),
