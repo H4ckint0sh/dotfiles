@@ -90,11 +90,23 @@
  name = "html"
  formatter = { command = 'npx', args = ["prettier", "--parser", "html"] }
  language-servers = [ "vscode-html-language-server", "tailwindcss-react", "emmet-ls"]
+ indent = { tab-width = 4, unit = "\t" }
+ auto-format = true
+
  
  [[language]]
  name = "css"
  formatter = { command = 'npx', args = ["prettier", "--parser", "css"] }
  language-servers = [ "vscode-css-language-server", "tailwindcss-react", "emmet-ls"]
+ auto-format = true
+
+ [[language]]
+ name = "scss"
+ formatter = { command = "prettier", args = ["--stdin-filepath", "dummy.scss"] }
+ indent = { tab-width = 4, unit = "\t" }
+ language-servers = ["vscode-css-language-server"]
+ auto-format = true
+
 
  [language-server.emmet-ls]
  args = ["--stdio"]
