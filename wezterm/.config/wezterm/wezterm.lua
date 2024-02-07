@@ -3,8 +3,45 @@ local wt_action = require("wezterm").action
 local k = require("utils/keys")
 
 local config = {
-	color_scheme = 'Tokyo Night Storm',
-	window_background_opacity = 0.95,
+	color_scheme = "OneDark",
+	color_schemes = {
+		["OneDark"] = {
+			foreground = "#c8ccd4",
+			background = "#282c33",
+			-- background = "#21262d",
+			-- background = "#1e1e2e",
+			-- background = "#1a1b26",
+			cursor_bg = "#b1cad8",
+			cursor_fg = "#21262d",
+			cursor_border = "#CF7277",
+			selection_fg = "#21262d",
+			selection_bg = "#2A4668",
+			scrollbar_thumb = "#30363d",
+			split = "#c8ccd4",
+
+			ansi = {
+				"#2f343e",
+				"#d07277",
+				"#a1ca81",
+				"#bf956a",
+				"#73ade9",
+				"#b477cf",
+				"#6eb4bf",
+				"#5d636f",
+			},
+			brights = {
+
+				"#2f343e",
+				"#d07277",
+				"#a1ca81",
+				"#bf956a",
+				"#73ade9",
+				"#b477cf",
+				"#6eb4bf",
+				"#5d636f",
+			},
+		},
+	},
 	send_composed_key_when_left_alt_is_pressed = true,
 	send_composed_key_when_right_alt_is_pressed = true,
 	-- Disable deafault keybindings

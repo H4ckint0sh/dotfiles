@@ -37,7 +37,7 @@ MOZ_DISABLE_SAFE_MODE_KEY=1
 #export NNN_OPENER="zellij-nnn"
 export NNN_OPENER="tmux-nnn"
 
-BLK="d7" CHR="71" DIR="75" EXE="0c" REG="00" HARDLINK="00" SYMLINK="06" MISSING="00" ORPHAN="01" FIFO="0F" SOCK="0F" OTHER="02"
+BLK="04" CHR="04" DIR="04" EXE="00" REG="00" HARDLINK="00" SYMLINK="06" MISSING="00" ORPHAN="01" FIFO="0F" SOCK="0F" OTHER="02"
 export NNN_FCOLORS="$BLK$CHR$DIR$EXE$REG$HARDLINK$SYMLINK$MISSING$ORPHAN$FIFO$SOCK$OTHER"
 export NNN_PLUG='f:fzopen;o:fzopen;a:openall;j:autojump;'
 
@@ -53,7 +53,7 @@ export FZF_DEFAULT_OPTS='
     --ansi
     --header-first
     --scrollbar='▍' 
-    --color=dark,fg:#565f89,bg+:-1,hl:#a9b1d6,fg+:#a9b1d6,hl+:#ff9e64,info:#7aa2f7,prompt:#7aa2f7,pointer:#89ddff,marker:#ff9e64,spinner:#a9b1d6,header:#9ece6a,border:#a9b1d6,separator:#a9b1d6,scrollbar:#a9b1d6,label:#a9b1d6
+    --color=dark,fg:#5d636f,bg+:#282c33,hl:#c8ccd4,fg+:#c8ccd4,hl+:#bf956a,info:#7aa2f7,prompt:#7aa2f7,pointer:#89ddff,marker:#ff9e64,spinner:#5d636f,header:#9ece6a,border:#c8ccd4,separator:#5d636f,scrollbar:#5d636f,label:#5d636f
 '
 
 # Git Stuff

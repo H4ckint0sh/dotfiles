@@ -80,12 +80,6 @@
  json = { validate = { enable = true }, format = { enable = true } }
  provideFormatter = true
 
- [language-server.vscode-css-language-server.config]
- css = { validate = { enable = true } }
- scss = { validate = { enable = true } }
- less = { validate = { enable = true } }
- provideFormatter = true
-
  [[language]]
  name = "html"
  formatter = { command = 'npx', args = ["prettier", "--parser", "html"] }
@@ -97,13 +91,14 @@
  [[language]]
  name = "css"
  formatter = { command = 'npx', args = ["prettier", "--parser", "css"] }
+ indent = { tab-width = 4, unit = "\t" }
  language-servers = [ "vscode-css-language-server", "tailwindcss-react", "emmet-ls"]
  auto-format = true
 
  [[language]]
  name = "scss"
- formatter = { command = "prettier", args = ["--stdin-filepath", "dummy.scss"] }
- indent = { tab-width = 4, unit = "\t" }
+ formatter = { command = "npx", args = ["prettier", "--parser", "scss"] }
+ indent = { tab-width = 8, unit = "\t" }
  language-servers = ["vscode-css-language-server"]
  auto-format = true
 
