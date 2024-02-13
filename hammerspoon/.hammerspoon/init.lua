@@ -60,25 +60,32 @@ end
 -- 	end
 -- end)
 
--- Applications
--- Open or focus app
-local function open_app(names)
-	return function()
-		for _, name in pairs(names) do
-			if hs.application.launchOrFocus(name) then
-				return
-			end
+-- -- Applications
+-- -- Open or focus app
+local toggleApp = function(appName, launch)
+	launch = launch or false
+	local app = hs.application.get(appName)
+	if app then
+		if app:isFrontmost() then
+			return
+		else
+			app:activate()
+		end
+	else
+		if launch then
+			hs.application.launchOrFocus(appName)
+		else
+			hs.alert.show("App '" .. appName .. "' is not loaded!")
 		end
 	end
 end
 
--- Applications, toggle visibility
-hs.hotkey.bind(shifopt, "T", open_app({ "Wezterm" }))                          -- Terminal
-hs.hotkey.bind(shifopt, "S", open_app({ "Spotify" }))                          -- Music
-hs.hotkey.bind(shifopt, "C", open_app({ "Microsoft Teams (work or school)" })) -- Contact
-hs.hotkey.bind(shifopt, "M", open_app({ "Microsoft Outlook" }))                -- Mail
-hs.hotkey.bind(shifopt, "B", open_app({ "Chromium" }))                         -- Browser
-hs.hotkey.bind(shifopt, "F", open_app({ "Finder" }))                           -- File Browser
+hs.hotkey.bind(shifopt, "T", function() toggleApp("Wezterm", true) end)
+hs.hotkey.bind(shifopt, "B", function() toggleApp("Chromium", true) end)
+hs.hotkey.bind(shifopt, "S", function() toggleApp("spotify", true) end)
+hs.hotkey.bind(shifopt, "C", function() toggleApp("Microsoft Teams (work or school)", true) end)
+hs.hotkey.bind(shifopt, "M", function() toggleApp("Microsoft Outlook", true) end)
+hs.hotkey.bind(shifopt, "E", function() toggleApp("zed", true) end)
 
 -- caffeinate Icons
 local ampOnIcon = [[ASCII:
