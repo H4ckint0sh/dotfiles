@@ -6,7 +6,8 @@ local config = {
 	color_scheme = 'Tokyo Night Storm',
 	window_background_opacity = 0.95,
 	send_composed_key_when_left_alt_is_pressed = true,
-	send_composed_key_when_right_alt_is_pressed = true,
+	send_composed_key_when_right_alt_is_pressed = false,
+	allow_win32_input_mode = false,
 	-- Disable deafault keybindings
 	disable_default_key_bindings = true,
 	window_close_confirmation = 'NeverPrompt',
@@ -14,7 +15,7 @@ local config = {
 	window_decorations = "RESIZE",
 	font = wezterm.font("DankMono Nerd Font", { weight = "Regular" }),
 	front_end = "WebGpu",
-	font_size = 12.0,
+	font_size = 14.0,
 	line_height = 1.15,
 	native_macos_fullscreen_mode = false,
 	keys = {
