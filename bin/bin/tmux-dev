@@ -1,7 +1,7 @@
 # #!/usr/bin/env bash
 
 tmux send-keys -t $1:1 'nnn -c' Enter
-tmux split-window -h -l 290 -c "#{session_path}"
+tmux split-window -h -l 85% -c "#{session_path}"
 tmux send-keys 'hx' Enter
 tmux send-keys ' ' 'f'
 tmux new-window -c "#{session_path}" -d
