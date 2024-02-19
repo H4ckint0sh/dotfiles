@@ -31,7 +31,7 @@ for file in $files; do
     case "$choice" in
         y|Y) 
             # Replace the text in the file
-            sed -i'' -e "s/$search_text/$replacement_text/g" "$file"
+            sed -i '' "s/$search_text/$replacement_text/g" "$file"
             echo "Replacement made in $file"
             ;;
         n|N) 
