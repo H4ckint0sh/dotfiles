@@ -2,7 +2,7 @@ theme = "tokyonight"
 
 [editor]
 line-number = "relative"
-mouse = false
+mouse = true
 auto-format = true
 bufferline = "multiple"
 color-modes = true
@@ -81,9 +81,9 @@ X = ["extend_line_up", "extend_to_line_bounds"]
 
 [keys.normal.space]
 i = ":toggle lsp.display-inlay-hints"
-F = "file_picker_in_current_directory"
+"F" = "file_picker_in_current_buffer_directory"
 q = ":q"
-x = ":bc"
+# x = ":bc"
 "," = ":w"
 "!" = ":q!"
 o = ":reload-all"
