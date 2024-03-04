@@ -13,9 +13,9 @@ local config = {
 	window_close_confirmation = 'NeverPrompt',
 	enable_tab_bar = false,
 	window_decorations = "RESIZE",
-	font = wezterm.font("DankMono Nerd Font", { weight = "Regular" }),
+	font = wezterm.font("DankMono Nerd Font", { weight = "Medium" }),
 	front_end = "WebGpu",
-	font_size = 14.0,
+	font_size = 15.0,
 	line_height = 1.15,
 	native_macos_fullscreen_mode = false,
 	keys = {
