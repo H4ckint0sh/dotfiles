@@ -9,10 +9,10 @@
  [[language]]
  name = "rust"
 
- [language-server.gpt]
- command = "bun"
- environment = { HANDLER= "codeium"}
- args = ["run", "/Users/ali/bin/helix-gpt"]
+ # [language-server.gpt]
+ # command = "bun"
+ # environment = { HANDLER= "codeium"}
+ # args = ["run", "/Users/ali/bin/helix-gpt"]
 
  [language-server.rust-analyzer.config]
  check = { command = "clippy", features = "all" }
@@ -35,21 +35,21 @@
 
  [[language]]
  name = "typescript"
- language-servers = [  "typescript-language-server", "tailwindcss-react", "eslint", "emmet-ls", "scls", "graphql", "gpt"]
+ language-servers = [  "typescript-language-server", "tailwindcss-react", "eslint", "emmet-ls", "scls", "graphql"]
  formatter = { command = 'npx', args = ["prettier", "--parser", "typescript"] }
  indent = { tab-width = 4, unit = "\t" }
  auto-format = true
 
  [[language]]
  name = "tsx"
- language-servers = [ "typescript-language-server", "tailwindcss-react", "eslint", "emmet-ls", "scls", "graphql", "gpt"]
+ language-servers = [ "typescript-language-server", "tailwindcss-react", "eslint", "emmet-ls", "scls", "graphql"]
  formatter = { command = 'npx', args = ["prettier", "--parser", "typescript"] }
  indent = { tab-width = 4, unit = "\t" }
  auto-format = true
 
  [[language]]
  name = "jsx"
- language-servers = [ "typescript-language-server", "tailwindcss-react", "eslint", "emmet-ls","scls", "graphql", "gpt"]
+ language-servers = [ "typescript-language-server", "tailwindcss-react", "eslint", "emmet-ls","scls", "graphql"]
  grammar = "javascript"
  formatter = { command = 'npx', args = ["prettier", "--parser", "typescript"] }
  indent = { tab-width = 4, unit = "\t" }
@@ -57,7 +57,7 @@
 
  [[language]]
  name = "javascript"
- language-servers = [ "typescript-language-server", "tailwindcss-react", "eslint", "emmet-ls", "scls", "graphql", "gpt"]
+ language-servers = [ "typescript-language-server", "tailwindcss-react", "eslint", "emmet-ls", "scls", "graphql"]
  formatter = { command = 'npx', args = ["prettier", "--parser", "typescript"] }
  indent = { tab-width = 4, unit = "\t" }
  auto-format = true
@@ -169,7 +169,6 @@
  name = "astro"
  formatter = { command = 'npx', args = ["prettier", "--parser", "astro"] }
  indent = { tab-width = 4, unit = "\t" }
-
  auto-format = true
  language-servers = [ "astro-ls" ]
 
