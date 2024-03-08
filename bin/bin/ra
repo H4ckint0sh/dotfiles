@@ -1,5 +1,6 @@
 #!/bin/bash
 # Replace strings in all files, with a confirmation dialog for each replacement.
+# This is tested and working on MacOS - not tested in other Operating systems
 
 if [[ "$#" -ne 2 ]]; then
     echo "Usage: $0 <search_text> <replacement_text>"
@@ -15,11 +16,7 @@ if ! command -v rg &> /dev/null; then
     return 1
 fi
 
-# Find all files containing the target text using ripgrep
-files=$(rg -l "$search_text")
-
-# Iterate over the files
-for file in $files; do
+for file in $(rg -F --files-with-matches "$search_text"); do
     # Show the differences between the original and the proposed replacement
     echo
     echo "=== $file ==="
@@ -27,7 +24,7 @@ for file in $files; do
     sed -n "s:$search_text:$replacement_text:gp" "$file"
 
     # Ask for confirmation
-    read -p "Confirm replacement in file $file (y/n)? " choice
+    read -p "Confirm replacement of $search_text with $replacement_text in file $file (y/n)? " choice
     case "$choice" in
         y|Y) 
             # Replace the text in the file
