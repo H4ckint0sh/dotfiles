@@ -18,14 +18,13 @@ Run `./cleanenv` to unlink the configs.
 
 ## Apps
 
-- Terminal emulator: [Kitty](https://github.com/kovidgoyal/kitty)
-- Shell: [Zsh](https://www.zsh.org)
-- Window manager: [Yabai](https://github.com/koekeishiya/yabai)
-- Shortcuts: [Skhd](https://github.com/koekeishiya/skhd)
-- Text editor: [Helix](https://helix-editor.com)
-- Terminal multiplexer: [Tmux](https://github.com/tmux/tmux)
-- Better cat: [Bat](https://github.com/sharkdp/bat)
-- Better ls: [Lsd](https://github.com/Peltoche/lsd)
-- Git TUI: [Lazygit](https://github.com/jesseduffield/lazygit)
-- Symlink manager: [Stow](https://www.gnu.org/software/stow/)
+- Text editor: [helix](https://helix-editor.com)
+- Terminal emulator: [wezterm](https://github.com/wez/wezterm)
+- Terminal multiplexer: [tmux](https://github.com/tmux/tmux)
+- Window manager: [aerospace](https://github.com/nikitabobko/AeroSpace)
+- Git TUI: [lazygit](https://github.com/jesseduffield/lazygit)
+- File Manager: [nnn](https://github.com/jarun/nnn)
+- Shell: [zsh](https://www.zsh.org)
+- Symlink manager: [stow](https://www.gnu.org/software/stow/)
+- Better cat: [bat](https://github.com/sharkdp/bat)
 
