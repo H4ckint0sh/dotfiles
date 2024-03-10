@@ -74,7 +74,7 @@ ctrl-left = 'workspace prev'
 8 = ['U32J59x', 'DELL U2715H \(2\)'] 
 9 = ['U32J59x', 'DELL U2715H \(2\)'] 
 
-
+# Send apps to certain workspace
 [[on-window-detected]]
 if.app-id = 'com.microsoft.teams2'
 run = 'move-node-to-workspace 1' 
@@ -90,6 +90,24 @@ run = 'move-node-to-workspace 5'
 [[on-window-detected]]
 if.app-id = 'org.chromium.Chromium'
 run = 'move-node-to-workspace 4' 
+
+
+# Exclude apps
+[[on-window-detected]]
+if.app-id = 'com.apple.finder'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.apple.systempreferences'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'org.m0k.transmission'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.colliderli.iina'
+run = 'layout floating'
 
 
 
