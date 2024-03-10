@@ -3,7 +3,7 @@ local wt_action = require("wezterm").action
 local k = require("utils/keys")
 
 local config = {
-	color_scheme = 'Tokyo Night Storm',
+	color_scheme = 'Catppuccin Mocha',
 	window_background_opacity = 0.95,
 	send_composed_key_when_left_alt_is_pressed = true,
 	send_composed_key_when_right_alt_is_pressed = false,
