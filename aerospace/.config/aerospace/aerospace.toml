@@ -67,12 +67,12 @@ ctrl-left = 'workspace prev'
 1 = ['built-in'] 
 2 = ['built-in'] 
 3 = ['built-in'] 
-4 = ['U32J59x', 'DELL U2715H \(1\)'] 
-5 = ['U32J59x', 'DELL U2715H \(1\)'] 
-6 = ['U32J59x', 'DELL U2715H \(1\)'] 
-7 = ['U32J59x', 'DELL U2715H \(2\)'] 
-8 = ['U32J59x', 'DELL U2715H \(2\)'] 
-9 = ['U32J59x', 'DELL U2715H \(2\)'] 
+4 = ['U32J59x', 'DELL U2723QE \(1\)'] 
+5 = ['U32J59x', 'DELL U2723QE \(1\)'] 
+6 = ['U32J59x', 'DELL U2723QE \(1\)'] 
+7 = ['U32J59x', 'DELL U2723QE \(2\)'] 
+8 = ['U32J59x', 'DELL U2723QE \(2\)'] 
+9 = ['U32J59x', 'DELL U2723QE \(2\)'] 
 
 # Send apps to certain workspace
 [[on-window-detected]]
@@ -85,11 +85,11 @@ run = 'move-node-to-workspace 6'
 
 [[on-window-detected]]
 if.app-id = 'com.github.wez.wezterm'
-run = 'move-node-to-workspace 5' 
+run = 'move-node-to-workspace 4' 
 
 [[on-window-detected]]
 if.app-id = 'org.chromium.Chromium'
-run = 'move-node-to-workspace 4' 
+run = 'move-node-to-workspace 5' 
 
 
 # Exclude apps
