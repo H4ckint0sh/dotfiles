@@ -61,7 +61,7 @@ export FZF_DEFAULT_OPTS='
     --ansi
     --header-first
     --scrollbar='▍'
-    --color=bg+:-1,spinner:#f5e0dc,hl:#a6e3a1,fg:#7f849c,header:#a6e3a1,info:#cba6f7,pointer:#f5e0dc,marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#89b4fa
+    --color=bg+:-1,spinner:#f5e0dc,hl:#89b4fa,fg:#7f849c,header:#a6e3a1,info:#cba6f7,pointer:#f5e0dc,marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#89b4fa
 '
 
 # Git Stuff
