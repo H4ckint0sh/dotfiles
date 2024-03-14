@@ -4,15 +4,21 @@
  # - completions will return before snippets by default
  [language-server.scls]
  command = "simple-completion-language-server"
- config = { max_completion_items = 10, snippets_first = false }
+
+ [language-server.scls.config]
+ max_completion_items = 20     # set max completion results len for each group: words, snippets, unicode-input
+ snippets_first = true         # completions will return before snippets by default
+ feature_words = true          # enable completion by word
+ feature_snippets = true       # enable snippets
+ feature_unicode_input = true  # enable "unicode input"
 
  [[language]]
  name = "rust"
 
- # [language-server.gpt]
- # command = "bun"
- # environment = { HANDLER= "codeium"}
- # args = ["run", "/Users/ali/bin/helix-gpt"]
+ [language-server.gpt]
+ command = "bun"
+ environment = { HANDLER= "codeium"}
+ args = ["run", "/Users/ali/bin/helix-gpt"]
 
  [language-server.rust-analyzer.config]
  check = { command = "clippy", features = "all" }
@@ -35,21 +41,21 @@
 
  [[language]]
  name = "typescript"
- language-servers = [  "typescript-language-server", "tailwindcss-react", "eslint", "emmet-ls", "scls", "graphql"]
+ language-servers = [  "typescript-language-server", "tailwindcss-react", "eslint", "emmet-ls", "scls", "graphql", 'gpt']
  formatter = { command = 'npx', args = ["prettier", "--parser", "typescript"] }
  indent = { tab-width = 4, unit = "\t" }
  auto-format = true
 
  [[language]]
  name = "tsx"
- language-servers = [ "typescript-language-server", "tailwindcss-react", "eslint", "emmet-ls", "scls", "graphql"]
+ language-servers = [ "typescript-language-server", "tailwindcss-react", "eslint", "emmet-ls", "scls", "graphql", 'gpt']
  formatter = { command = 'npx', args = ["prettier", "--parser", "typescript"] }
  indent = { tab-width = 4, unit = "\t" }
  auto-format = true
 
  [[language]]
  name = "jsx"
- language-servers = [ "typescript-language-server", "tailwindcss-react", "eslint", "emmet-ls","scls", "graphql"]
+ language-servers = [ "typescript-language-server", "tailwindcss-react", "eslint", "emmet-ls","scls", "graphql", 'gpt']
  grammar = "javascript"
  formatter = { command = 'npx', args = ["prettier", "--parser", "typescript"] }
  indent = { tab-width = 4, unit = "\t" }
@@ -57,7 +63,7 @@
 
  [[language]]
  name = "javascript"
- language-servers = [ "typescript-language-server", "tailwindcss-react", "eslint", "emmet-ls", "scls", "graphql"]
+ language-servers = [ "typescript-language-server", "tailwindcss-react", "eslint", "emmet-ls", "scls", "graphql", 'gpt']
  formatter = { command = 'npx', args = ["prettier", "--parser", "typescript"] }
  indent = { tab-width = 4, unit = "\t" }
  auto-format = true
