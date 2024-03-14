@@ -12,6 +12,10 @@
  feature_snippets = true       # enable snippets
  feature_unicode_input = true  # enable "unicode input"
 
+ [[sources]] # list of sources to load
+ name = "friendly-snippets"  # optional name shown on snippet description
+ git = "https://github.com/rafamadriz/friendly-snippets.git" # git repo with snippets collections
+
  [[language]]
  name = "rust"
 
