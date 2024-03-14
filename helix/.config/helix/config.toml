@@ -109,7 +109,7 @@ H = ":pipe-to helix-tmux git --browse"
 # Files tree
 t = ":pipe-to helix-tmux tree"
 # lazygit
-g = ":pipe-to helix-tmux git --lazygit"
+g = ":pipe-to helix-tmux git --gitu"
 
 # # Zelllij
 # [keys.normal.'space'.'space']

@@ -136,10 +136,10 @@ function git_browse() {
     sleep 1
 }
 
-function lazygit_pane() {
+function gitu_pane() {
 
-    # Run lazygit
-    lazygit
+    # Run gitu
+    gitu
 
     # run reload on exit
     tmux set-hook pane-exited "run-shell '$HOME/bin/helix-reload.sh'"
@@ -176,6 +176,9 @@ if [ ! -e "$CANARY_FILE" ]; then
     if [[ "$@" =~ "tree" ]]; then
         # Re-execute in a left vertical pane for nnn
         exec tmux split-window -b -h -l 20% helix-tmux "$@"
+    elif [[ "$@" =~ "git" ]]; then
+        # Re-execute in a left vertical pane for nnn
+        exec tmux split-window -h -l 50% helix-tmux "$@"
     else
         # Re-execute the script in a horizontal pane for everything else
         exec tmux split-window -v -l 70% helix-tmux "$@"
@@ -210,8 +213,8 @@ case "$1" in
         ;;
     "git")
         case $2 in
-            "-u"|"--lazygit")
-                lazygit_pane
+            "-u"|"--gitu")
+                gitu_pane
                 ;;
             "-b"|"--blame")
                 git_blame
