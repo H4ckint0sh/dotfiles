@@ -1,0 +1,45 @@
+#!/usr/bin/env sh
+
+# A tiling window manager for macOS
+# https://github.com/koekeishiya/yabai
+
+yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
+sudo yabai --load-sa
+
+# global settings
+yabai -m config mouse_follows_focus on
+yabai -m config focus_follows_mouse off
+yabai -m config window_origin_display default
+yabai -m config window_placement second_child
+yabai -m config window_shadow on
+yabai -m config window_opacity off
+yabai -m config window_opacity_duration 0.0
+yabai -m config active_window_opacity 1.0
+yabai -m config normal_window_opacity 1.0
+yabai -m config insert_feedback_color 0xff9dd274
+yabai -m config split_ratio 0.50
+yabai -m config auto_balance off
+yabai -m config mouse_modifier fn
+yabai -m config mouse_action1 move
+yabai -m config mouse_action2 resize
+yabai -m config mouse_drop_action swap
+
+# general space settings
+yabai -m config layout bsp
+yabai -m config top_padding 5
+yabai -m config bottom_padding 5
+yabai -m config left_padding 5
+# NOTE: for OBS floating head
+# yabai -m config left_padding                 
+yabai -m config right_padding 5
+yabai -m config window_gap 5
+
+# apps to not manage (ignore)
+yabai -m rule --add app="^(Raycast|Raycast Settings|Calculator|Software Update|Dictionary|VLC|System Preferences|System Settings|IINA|Photo Booth|Archive Utility|Preview|App Store|Fig|Alfred|Activity Monitor|Transmission|Archive Utility|AppCleaner|LICEcap)$" manage=off
+yabai -m rule --add label="Safari" app="^Safari$" title="^(General|(Tab|Password|Website|Extension)s|AutoFill|Se(arch|curity)|Privacy|Advance)$" manage=off
+yabai -m rule --add label="About This Mac" app="System Information" title="About This Mac" manage=off
+yabai -m rule --add label="Select file to save to" app="^Inkscape$" title="Select file to save to" manage=off
+
+echo "yabai configuration loaded.."
+
+borders active_color=0xffe1e3e4 inactive_color=0xff494d64 width=3.0 &

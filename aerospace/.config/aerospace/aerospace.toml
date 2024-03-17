@@ -1,0 +1,120 @@
+after-login-command = []
+
+after-startup-command = []
+
+start-at-login = true
+
+enable-normalization-flatten-containers = true
+enable-normalization-opposite-orientation-for-nested-containers = true 
+
+accordion-padding = 30
+
+default-root-container-layout = 'tiles'
+
+default-root-container-orientation = 'auto'
+
+gaps.inner.horizontal = 5
+gaps.inner.vertical =   5
+gaps.outer.left =       5
+gaps.outer.bottom =     5
+gaps.outer.top =        5
+gaps.outer.right =      5
+
+indent-for-nested-containers-with-the-same-orientation = 30
+
+non-empty-workspaces-root-containers-layout-on-startup = 'smart'
+
+[mode.main.binding]
+alt-r = 'reload-config'
+alt-h = 'focus left'
+alt-j = 'focus down'
+alt-k = 'focus up'
+alt-l = 'focus right'
+alt-f = 'fullscreen'
+
+alt-shift-h = 'move-through left'
+alt-shift-j = 'move-through down'
+alt-shift-k = 'move-through up'
+alt-shift-l = 'move-through right'
+
+alt-shift-minus = 'resize smart -50'
+alt-shift-equal = 'resize smart +50'
+
+ctrl-1 = 'workspace 1'
+ctrl-2 = 'workspace 2'
+ctrl-3 = 'workspace 3'
+ctrl-4 = 'workspace 4'
+ctrl-5 = 'workspace 5'
+ctrl-6 = 'workspace 6'
+ctrl-7 = 'workspace 7'
+ctrl-8 = 'workspace 8'
+ctrl-9 = 'workspace 9'
+
+alt-ctrl-1 = ['move-node-to-workspace 1', 'workspace 1']
+alt-ctrl-2 = ['move-node-to-workspace 2', 'workspace 2']
+alt-ctrl-3 = ['move-node-to-workspace 3', 'workspace 3']
+alt-ctrl-4 = ['move-node-to-workspace 4', 'workspace 4']
+alt-ctrl-5 = ['move-node-to-workspace 5', 'workspace 5']
+alt-ctrl-6 = ['move-node-to-workspace 6', 'workspace 6']
+alt-ctrl-7 = ['move-node-to-workspace 7', 'workspace 7']
+alt-ctrl-8 = ['move-node-to-workspace 8', 'workspace 8']
+alt-ctrl-9 = ['move-node-to-workspace 9', 'workspace 9']
+
+ctrl-right = 'workspace next'
+ctrl-left = 'workspace prev'
+
+[workspace-to-monitor-force-assignment]
+1 = ['built-in'] 
+2 = ['built-in'] 
+3 = ['built-in'] 
+4 = ['U32J59x', 'DELL U2723QE \(1\)'] 
+5 = ['U32J59x', 'DELL U2723QE \(1\)'] 
+6 = ['U32J59x', 'DELL U2723QE \(1\)'] 
+7 = ['U32J59x', 'DELL U2723QE \(2\)'] 
+8 = ['U32J59x', 'DELL U2723QE \(2\)'] 
+9 = ['U32J59x', 'DELL U2723QE \(2\)'] 
+
+# Send apps to certain workspace
+[[on-window-detected]]
+if.app-id = 'com.microsoft.teams2'
+run = 'move-node-to-workspace 1' 
+
+[[on-window-detected]]
+if.app-id = 'com.microsoft.outlook'
+run = 'move-node-to-workspace 6' 
+
+[[on-window-detected]]
+if.app-id = 'com.github.wez.wezterm'
+run = 'move-node-to-workspace 4' 
+
+[[on-window-detected]]
+if.app-id = 'org.chromium.Chromium'
+run = 'move-node-to-workspace 5' 
+
+
+# Exclude apps
+[[on-window-detected]]
+if.app-id = 'com.apple.finder'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.apple.systempreferences'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'org.m0k.transmission'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.colliderli.iina'
+run = 'layout floating'
+
+
+
+
+
+
+
+
+
+
