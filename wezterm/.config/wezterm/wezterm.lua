@@ -1,10 +1,18 @@
+local b = require("utils/background")
 local wezterm = require("wezterm")
 local wt_action = require("wezterm").action
 local k = require("utils/keys")
+local w = require("utils/wallpaper")
+local wallpapers_glob = os.getenv("HOME")
+	.. '/.dotfiles/wallpapers/**'
 
 local config = {
+	background = {
+		w.get_wallpaper(wallpapers_glob),
+		b.get_background(0.98, 0.98),
+	},
 	color_scheme = 'Catppuccin Mocha',
-	window_background_opacity = 0.95,
+	-- window_background_opacity = 0.98,
 	send_composed_key_when_left_alt_is_pressed = true,
 	send_composed_key_when_right_alt_is_pressed = false,
 	allow_win32_input_mode = false,
