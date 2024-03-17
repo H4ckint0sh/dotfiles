@@ -21,7 +21,10 @@ local config = {
 	window_close_confirmation = 'NeverPrompt',
 	enable_tab_bar = false,
 	window_decorations = "RESIZE",
-	font = wezterm.font("DankMono Nerd Font", { weight = "Medium" }),
+	font = wezterm.font_with_fallback({
+		{ family = 'Dank Mono',             weight = "Regular" },
+		{ family = "Symbols Nerd Font Mono" },
+	}),
 	front_end = "WebGpu",
 	font_size = 15.0,
 	line_height = 1.15,
