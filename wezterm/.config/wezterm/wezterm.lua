@@ -22,7 +22,7 @@ local config = {
 	enable_tab_bar = false,
 	window_decorations = "RESIZE",
 	font = wezterm.font_with_fallback({
-		{ family = 'Dank Mono',             weight = "Regular" },
+		{ family = 'DankMono Nerd Font',    weight = "Regular" },
 		{ family = "Symbols Nerd Font Mono" },
 	}),
 	front_end = "WebGpu",
