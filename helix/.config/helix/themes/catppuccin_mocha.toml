@@ -40,7 +40,7 @@
 
 "special" = "blue" # fuzzy highlight
 
-"markup.heading.marker" = { fg = "peach", modifiers = ["bold"] }
+"markup.heading.marker" = { fg = "peach" }
 "markup.heading.1" = "lavender"
 "markup.heading.2" = "mauve"
 "markup.heading.3" = "green"
@@ -81,7 +81,7 @@
 "ui.bufferline.background" = {}
 
 "ui.text" = "text"
-"ui.text.focus" = { fg = "text", bg = "surface0", modifiers = ["bold"] }
+"ui.text.focus" = { fg = "text", bg = "surface0" }
 "ui.text.inactive" = { fg = "overlay1" }
 
 "ui.virtual" = "overlay0"
@@ -93,7 +93,7 @@
 
 "ui.cursor" = { fg = "base", bg = "secondary_cursor" }
 "ui.cursor.primary" = { fg = "base", bg = "rosewater" }
-"ui.cursor.match" = { fg = "peach", modifiers = ["bold"] }
+"ui.cursor.match" = { fg = "peach" }
 
 "ui.cursor.primary.normal" = { fg = "base", bg = "lavender" }
 "ui.cursor.primary.insert" = { fg = "base", bg = "green" }
@@ -105,10 +105,10 @@
 
 "ui.cursorline.primary" = {}
 
-"ui.highlight" = { bg = "surface1", modifiers = ["bold"] }
+"ui.highlight" = { bg = "surface1" }
 
 "ui.menu" = { fg = "overlay2" }
-"ui.menu.selected" = { fg = "text", bg = "surface1", modifiers = ["bold"] }
+"ui.menu.selected" = { fg = "text", bg = "surface1" }
 
 "diagnostic.error" = { underline = { color = "red", style = "curl" } }
 "diagnostic.warning" = { underline = { color = "yellow", style = "curl" } }
