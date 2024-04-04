@@ -103,6 +103,8 @@
 "ui.cursor.insert" = { fg = "base", bg = "secondary_cursor_insert" }
 "ui.cursor.select" = { fg = "base", bg = "secondary_cursor" }
 
+"ui.virtual.jump-label" = { fg = "pink", bg = "surface1"}
+
 "ui.cursorline.primary" = {}
 
 "ui.highlight" = { bg = "surface1" }
