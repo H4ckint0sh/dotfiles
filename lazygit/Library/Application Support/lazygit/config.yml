@@ -8,24 +8,29 @@ gui:
   expandFocusedSidePanel: false
   mainPanelSplitMode: "flexible" # one of 'horizontal' | 'flexible' | 'vertical'
   language: "auto" # one of 'auto' | 'en' | 'zh' | 'pl' | 'nl'
+  # Use the mocha catppuccin theme
   theme:
-    activeBorderColor:
-      - magenta
-      - bold
-    inactiveBorderColor:
-      - gray
-    optionsTextColor:
-      - black
-    selectedLineBgColor:
-      - black
-    selectedRangeBgColor:
-      - yellow
-    cherryPickedCommitBgColor:
-      - blue
-    cherryPickedCommitFgColor:
-      - cyan
-    unstagedChangesColor:
-      - white
+     activeBorderColor:
+       - '#89b4fa'
+       - bold
+     inactiveBorderColor:
+       - '#a6adc8'
+     optionsTextColor:
+       - '#89b4fa'
+     selectedLineBgColor:
+       - '#313244'
+     selectedRangeBgColor:
+       - '#313244'
+     cherryPickedCommitBgColor:
+       - '#45475a'
+     cherryPickedCommitFgColor:
+       - '#89b4fa'
+     unstagedChangesColor:
+       - '#f38ba8'
+     defaultFgColor:
+       - '#cdd6f4'
+     searchingActiveBorderColor:
+       - '#f9e2af'
   commitLength:
     show: true
   mouseEvents: true
@@ -40,6 +45,9 @@ gui:
   authorColors: # in case you're not happy with the randomly assigned colour
     "joshmedeski": "#9db5bf"
 git:
+  commit:
+    autoWrapCommitMessage: true
+    autoWrapWidth: 72
   paging:
     colorArg: always
     pager: diff-so-fancy
@@ -68,7 +76,7 @@ git:
     # this determines whether the git graph is rendered in the commits panel
     showGraph: "always"
     # displays the whole git graph by default in the commits panel (equivalent to passing the `--all` argument to `git log`)
-    showWholeGraph: true
+    showWholeGraph: false
 os:
   editCommand: "hx"
   editCommandTemplate: "{{editor}} {{filename}}"
@@ -104,7 +112,7 @@ customCommands:
 keybinding:
   universal:
     quit: "q"
-    quit-alt1: "<c-c>" # alternative/alias of quit
+    # quit-alt1: "<c-c>" # alternative/alias of quit
     return: "<esc>" # return to previous menu, will quit if there's nowhere to return
     quitWithoutChangingDirectory: "Q"
     togglePanel: "<tab>" # goto the next panel
@@ -201,9 +209,9 @@ keybinding:
     amendToCommit: "A"
     pickCommit: "p" # pick commit (when mid-rebase)
     revertCommit: "t"
-    cherryPickCopy: "c"
+    cherryPickCopy: "<c-c>"
     cherryPickCopyRange: "C"
-    pasteCommits: "v"
+    pasteCommits: "<c-v>"
     tagCommit: "T"
     checkoutCommit: "<space>"
     resetCherryPick: "<c-R>"
