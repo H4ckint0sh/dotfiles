@@ -91,7 +91,6 @@ run = 'move-node-to-workspace 4'
 if.app-id = 'org.chromium.Chromium'
 run = 'move-node-to-workspace 5' 
 
-
 # Exclude apps
 [[on-window-detected]]
 if.app-id = 'com.apple.finder'
