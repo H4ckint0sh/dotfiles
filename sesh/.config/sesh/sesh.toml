@@ -1,0 +1,24 @@
+# import = ["~/c/sesh/sesh.toml"]
+
+[default_session]
+startup_command = "tmux-dev"
+
+[[session]]
+name = "Home 🏡"
+path = "~/"
+
+[[session]]
+name = "wezterm config"
+path = "~/.dotfiles/wezterm/.config/wezterm"
+
+[[session]]
+name = "sesh config"
+path = "~/.dotfiles/sesh/.config/sesh"
+
+[[session]]
+name = "dotfiles"
+path = "~/.dotfiles"
+
+[[session]]
+name = "Downloads 📥"
+path = "~/Downloads"
