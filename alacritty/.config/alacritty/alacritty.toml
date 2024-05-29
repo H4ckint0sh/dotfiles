@@ -366,7 +366,7 @@ semantic_escape_chars = ",│`|:\"' ()[]{}<>\t"
 [window]
 decorations = "buttonless"
 dynamic_padding = true
-opacity = 0.95
+opacity = 0.97
 option_as_alt = "OnlyRight"
 startup_mode = "Maximized"
 
