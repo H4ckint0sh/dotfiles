@@ -15,3 +15,7 @@
 	helper = osxkeychain
 [init]
 	defautBranch = main
+
+[push]
+	default = upstream
+	autoSetupRemote = true
