@@ -139,7 +139,7 @@ function git_browse() {
 function lazygit_pane() {
 
     # Run gitu
-    lazygit
+    lazygit 
 
     # run reload on exit
     tmux set-hook pane-exited "run-shell '$HOME/bin/helix-reload.sh'"
