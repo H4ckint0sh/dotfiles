@@ -7,12 +7,12 @@ local wallpapers_glob = os.getenv("HOME")
 	.. '/.dotfiles/wallpapers/**'
 
 local config = {
-	background = {
-		w.get_wallpaper(wallpapers_glob),
-		b.get_background(0.98, 0.98),
-	},
+	-- background = {
+	-- 	w.get_wallpaper(wallpapers_glob),
+	-- 	b.get_background(0.97, 0.98),
+	-- },
 	color_scheme = 'Catppuccin Mocha',
-	-- window_background_opacity = 0.98,
+	window_background_opacity = 0.98,
 	send_composed_key_when_left_alt_is_pressed = true,
 	send_composed_key_when_right_alt_is_pressed = false,
 	allow_win32_input_mode = false,
@@ -58,7 +58,7 @@ local config = {
 		k.cmd_to_tmux_prefix("G", "G"),
 		k.cmd_to_tmux_prefix("g", "g"),
 		k.cmd_to_tmux_prefix("K", "T"),
-		k.cmd_to_tmux_prefix("s", "S"),
+		k.cmd_to_tmux_prefix("k", "K"),
 		k.cmd_to_tmux_prefix("l", "L"),
 		k.cmd_to_tmux_prefix("n", '"'),
 		k.cmd_to_tmux_prefix("N", "%"),
