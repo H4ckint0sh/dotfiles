@@ -169,9 +169,13 @@ y = 8
  key = "B"
  mods = "Command"
  [[keyboard.bindings]]
- chars = "\u0002{"
- key = "N"
+ chars = "\u0002\""
+ key = "n"
  mods = "Command"
+ [[keyboard.bindings]]
+ chars = "\u0002%"
+ key = "N"
+ mods = "Command|Shift"
  [[keyboard.bindings]]
  chars = "\u0002}"
  key = "P"
