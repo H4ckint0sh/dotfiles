@@ -156,28 +156,3 @@
  formatter = { command = 'npx', args = ["prettier", "--parser", "astro"] }
  auto-format = true
  language-servers = [ "astro-ls" ]
-
- [language-server.typescript-language-server.config]
- documentFormatting = false
- hostInfo = "helix"
-
- [language-server.typescript-language-server.config.typescript.inlayHints]
- includeInlayEnumMemberValueHints = true
- includeInlayFunctionLikeReturnTypeHints = true
- includeInlayFunctionParameterTypeHints = true
- includeInlayParameterNameHints = "all"
- includeInlayParameterNameHintsWhenArgumentMatchesName = true
- includeInlayPropertyDeclarationTypeHints = true
- includeInlayVariableTypeHints = true
-
- [language-server.typescript-language-server.config.completions]
- completeFunctionCalls = true
-
- [language-server.typescript-language-server.config.javascript.inlayHints]
- includeInlayEnumMemberValueHints = true
- includeInlayFunctionLikeReturnTypeHints = true
- includeInlayFunctionParameterTypeHints = true
- includeInlayParameterNameHints = "all"
- includeInlayParameterNameHintsWhenArgumentMatchesName = true
- includeInlayPropertyDeclarationTypeHints = true
- includeInlayVariableTypeHints = true
