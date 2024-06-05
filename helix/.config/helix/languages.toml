@@ -36,21 +36,18 @@
  roots = ["package.json", "tailwind.config.js", "tailwind.config.cjs"]
  language-servers = ["volar", "tailwindcss-vue"]
  formatter = { command = "prettier", args = ["--parser", "vue"] }
- # indent = { tab-width = 4, unit = "\t" }
  auto-format = true
 
  [[language]]
  name = "typescript"
  language-servers = [  "typescript-language-server", "tailwindcss-react", "eslint", "emmet-ls", "scls"]
  formatter = { command = 'npx', args = ["prettier", "--parser", "typescript"] }
- # indent = { tab-width = 4, unit = "\t" }
  auto-format = true
 
  [[language]]
  name = "tsx"
  language-servers = [ "typescript-language-server", "tailwindcss-react", "eslint", "emmet-ls", "scls"]
  formatter = { command = 'npx', args = ["prettier", "--parser", "typescript"] }
- # indent = { tab-width = 4, unit = "\t" }
  auto-format = true
 
  [[language]]
@@ -58,33 +55,22 @@
  language-servers = [ "typescript-language-server", "tailwindcss-react", "eslint", "emmet-ls","scls"]
  grammar = "javascript"
  formatter = { command = 'npx', args = ["prettier", "--parser", "typescript"] }
- # indent = { tab-width = 4, unit = "\t" }
  auto-format = true
 
  [[language]]
  name = "javascript"
  language-servers = [ "typescript-language-server", "tailwindcss-react", "eslint", "emmet-ls", "scls"]
  formatter = { command = 'npx', args = ["prettier", "--parser", "typescript"] }
- # indent = { tab-width = 4, unit = "\t" }
  auto-format = true
-
- # [language-server.graphql]
- # command = "graphql-lsp" 
- # args = ["server", "-m", "stream"]
- # formatter = { command = 'npx', args = ["prettier", "--parser", "json"] }
- # # indent = { tab-width = 4, unit = "\t" }
- # auto-format = true
 
  [[language]]
  name = "json"
  language-servers = [ "vscode-json-language-server" ]
  formatter = { command = 'npx', args = ["prettier", "--parser", "json"] }
- # indent = { tab-width = 4, unit = "\t" }
  auto-format = true
 
  [[language]]
  name = "lua"
- # indent = { tab-width = 4, unit = "\t" }
  auto-format = true
 
  [language-server.vscode-json-language-server.config]
@@ -101,7 +87,6 @@
  name = "html"
  formatter = { command = 'npx', args = ["prettier", "--parser", "html"] }
  language-servers = [ "vscode-html-language-server", "tailwindcss-react", "emmet-ls"]
- # indent = { tab-width = 4, unit = "\t" }
  auto-format = true
 
  
@@ -114,7 +99,6 @@
  [[language]]
  name = "scss"
  formatter = { command = "prettier", args = ["--stdin-filepath", "dummy.scss"] }
- # indent = { tab-width = 4, unit = "\t" }
  language-servers = ["vscode-css-language-server"]
  auto-format = true
 
@@ -128,20 +112,16 @@
  command = "vscode-eslint-language-server"
 
  [language-server.eslint.config]
- format = false
+ format = { enable = true }
  nodePath = ""
- onIgnoredFiles = "off"
- packageManager = "yarn"
  quiet = false
  rulesCustomizations = []
  run = "onType"
- useESLintClass = false
  validate = "on"
- codeAction = { disableRuleComment = { enable = true, location = "separateLine" }, showDocumentation = { enable = true } }
- codeActionOnSave = { mode = "all" }
+ codeAction = { disableRuleComment = { enable = true, location = "separateLine" }, showDocumentation = { enable = false } }
+ codeActionsOnSave = { mode = "all", "source.fixAll.eslint" = true }
  experimental = { }
  problems = { shortenToSingleLine = false }
- workingDirectory = { mode = "auto" }
 
  [language-server.volar]
  command = "vue-language-server"
@@ -174,7 +154,6 @@
  [[language]]
  name = "astro"
  formatter = { command = 'npx', args = ["prettier", "--parser", "astro"] }
- # indent = { tab-width = 4, unit = "\t" }
  auto-format = true
  language-servers = [ "astro-ls" ]
 
