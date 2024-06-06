@@ -1,6 +1,6 @@
 
 import = [
-  '~/.config/alacritty/tokyonight.toml',
+  '~/.config/alacritty/catppuccin-mocha.toml',
 ]
 
 live_config_reload = true
