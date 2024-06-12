@@ -7,6 +7,11 @@ auto-format = true
 bufferline = "multiple"
 color-modes = true
 
+[editor.auto-save]
+focus-lost = true
+after-delay.enable = true
+after-delay.timeout = 30000
+
 [editor.lsp]
 auto-signature-help = false
 display-messages = true
@@ -66,27 +71,15 @@ C-space = "signature_help"
 
 [keys.select]
 X = ["extend_line_up", "extend_to_line_bounds"]
-C-j = [
-  'ensure_selections_forward',
-  'extend_to_line_bounds',
-  'extend_char_right',
-  'extend_char_left',
-  'delete_selection',
-  'add_newline_below',
-  'move_line_down',
-  'replace_with_yanked',
-]
-C-k = [
-  'ensure_selections_forward',
-  'extend_to_line_bounds',
-  'extend_char_right',
-  'extend_char_left',
-  'delete_selection',
-  'move_line_up',
-  'add_newline_above',
-  'move_line_up',
-  'replace_with_yanked',
-]
+# Ctrl/Alt-based line modifications
+# Move line down
+C-j = ["extend_to_line_bounds", "delete_selection", "paste_after"]
+# Move line up
+C-k = ["extend_to_line_bounds", "delete_selection", "move_line_up", "paste_before"]
+# Copy line down
+C-A-j = ["normal_mode", "extend_to_line_bounds", "yank", "open_below", "replace_with_yanked", "collapse_selection", "normal_mode"]
+# Copy line up
+C-A-k = ["normal_mode", "extend_to_line_bounds", "yank", "open_above", "replace_with_yanked", "collapse_selection", "normal_mode"]
 
 [keys.normal]
 C-q = ":quit"
