@@ -154,11 +154,11 @@ if.app-id = 'com.microsoft.outlook'
 run = 'move-node-to-workspace 6' 
 
 [[on-window-detected]]
-if.app-id = 'org.alacritty'
+if.app-id = 'com.github.wez.wezterm'
 run = 'move-node-to-workspace 5' 
 
 [[on-window-detected]]
-if.app-id = 'org.chromium.Chromium'
+if.app-id = 'org.mozilla.firefox'
 run = 'move-node-to-workspace 4' 
 
 # Exclude apps
