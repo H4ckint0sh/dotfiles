@@ -39,11 +39,11 @@ gui:
   showFileTree: true # for rendering changes files in a tree format
   showListFooter: false # for seeing the '5 of 20' message in list panels
   showRandomTip: true
-  showCommandLog: false
-  showBottomLine: false
+  showCommandLog: true
+  showBottomLine: true
   commandLogSize: 8
   authorColors: # in case you're not happy with the randomly assigned colour
-    "joshmedeski": "#9db5bf"
+    "Alijan Adeli": "#b4befe"
 git:
   commit:
     autoWrapCommitMessage: true
@@ -51,9 +51,6 @@ git:
   paging:
     colorArg: always
     pager: diff-so-fancy
-  # colorArg: always
-  # useConfig: false
-  # pager: delta --dark --color-only --side-by-side
   merging:
     # only applicable to unix users
     manualCommit: false
