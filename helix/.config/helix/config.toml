@@ -13,9 +13,9 @@ display-messages = true
 display-inlay-hints = true
 display-signature-help-docs = true
 
-[editor.lsp.inline-diagnostics]
-other-lines = "error"
-cursor-line = "error"
+[editor.inline-diagnostics]
+other-lines = "hint"
+cursor-line = "hint"
 
 [editor.cursor-shape]
 insert = "bar"
@@ -25,7 +25,14 @@ select = "underline"
 [editor.statusline]
 left = ["mode", "spinner"]
 center = ["file-name"]
-right = ["diagnostics", "selections", "position", "file-encoding", "file-line-ending", "file-type"]
+right = [
+  "diagnostics",
+  "selections",
+  "position",
+  "file-encoding",
+  "file-line-ending",
+  "file-type",
+]
 separator = "│"
 mode.normal = "NORMAL"
 mode.insert = "INSERT"
@@ -64,7 +71,8 @@ C-j = [
   'extend_to_line_bounds',
   'extend_char_right',
   'extend_char_left',
-  'delete_selection','add_newline_below',
+  'delete_selection',
+  'add_newline_below',
   'move_line_down',
   'replace_with_yanked',
 ]
@@ -86,8 +94,14 @@ tab = ":buffer-next"
 S-tab = ":buffer-previous"
 X = ["extend_line_up", "extend_to_line_bounds"]
 #like c-d in vscode
-"C-n" = ["move_prev_word_start", "move_next_word_end", "search_selection", "extend_search_next"]
-"*" = ["move_prev_word_start", "move_next_word_end", "search_selection"]
+"C-n" = [
+  "move_prev_word_start",
+  "move_next_word_end",
+  "search_selection",
+  "extend_search_next",
+]
+# "*" = ["move_prev_word_start", "move_next_word_end", "search_selection"]
+C-g = [":new", ":insert-output lazygit", ":buffer-close!", ":redraw"]
 
 
 [keys.normal.space]
@@ -101,7 +115,7 @@ o = ":reload-all"
 # until zenmode is availible
 z = ":toggle gutters.line-numbers.min-width 48 3"
 
-# Tmux 
+# Tmux
 [keys.normal.'space'.'space']
 # Interactive search in current working directory
 l = ":pipe-to helix-tmux search --current"

@@ -10,15 +10,19 @@
  snippets_first = true         # completions will return before snippets by default
  feature_words = true          # enable completion by word
  feature_snippets = true       # enable snippets
- feature_unicode_input = false  # enable "unicode input"
+ feature_unicode_input = true  # enable "unicode input"
+ feature_paths = true          # enable path completion
+
+ [[sources]] # list of sources to load
+ name = "friendly-snippets"  # optional name shown on snippet description
+ git = "https://github.com/rafamadriz/friendly-snippets.git" # git repo with snippets collections
 
  [[language]]
  name = "rust"
 
  [language-server.gpt]
- command = "bun"
+ command = "helix-gpt"
  environment = { HANDLER= "codeium"}
- args = ["run", "/Users/ali/bin/helix-gpt"]
 
  [language-server.rust-analyzer.config]
  check = { command = "clippy", features = "all" }
@@ -141,18 +145,16 @@
  args = ["--stdio"]
  config = {}
 
- [language-server.astro-ls]
- name = "astro"
- scope = "source.astro"
- injection-regex = "astro"
- file-types = ["astro"]
- roots = ["package.json", "astro.config.mjs"]
+[language-server.astro-ls]
  command = "astro-ls"
  args = ["--stdio"]
  config = {typescript = {tsdk = "/Users/ali/Desktop/projects/taby-frontend-2023/node_modules/typescript/lib"}, environment = "node"}
 
- [[language]]
+[[language]]
  name = "astro"
- formatter = { command = 'npx', args = ["prettier", "--parser", "astro"] }
+ scope = "source.astro"
+ injection-regex = "astro"
+ file-types = ["astro"]
+ language-servers = ["astro-ls"]
+ formatter = { command = "prettier", args = ["--plugin", "prettier-plugin-astro", "--parser", "astro"] }
  auto-format = true
- language-servers = [ "astro-ls" ]
