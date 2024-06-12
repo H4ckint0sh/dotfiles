@@ -1,0 +1,30 @@
+#!/bin/bash
+
+# Improved error handling and flexibility
+if [ $# -eq 0 ]; then
+  echo "Error: Please provide at least one file to open."
+    exit 1
+fi
+
+# Store all arguments in an array (more concise)
+files=("$@")
+
+# Check for existing 'hx' pane on the right
+if ! tmux list-panes -F '#{pane_active} #{pane_current_command}' | grep -q '0 hx'; then
+  # Split and open 'hx' in a new pane (right-aligned, 80% width)
+  tmux split-window -h -l 80% 
+  tmux send-keys "hx"
+  tmux send-keys C-m
+  sleep 1
+  else
+  # Select existing 'hx' pane
+  tmux select-pane -R
+  fi
+
+# Loop through each file in the array
+for file in "${files[@]}"; do
+  # Open the specified file in current pane
+  tmux send-keys ":open $file"
+  tmux send-keys C-m
+done
+    

@@ -139,7 +139,7 @@ function git_browse() {
 function lazygit_pane() {
 
     # Run gitu
-    lazygit 
+    gitui 
 
     # run reload on exit
     tmux set-hook pane-exited "run-shell '$HOME/bin/helix-reload.sh'"
@@ -147,7 +147,7 @@ function lazygit_pane() {
 }
 
 function tree_pane() {
-    nnn -c
+    yazi
 }
 
 # Print help and sleep $1 seconds
@@ -174,13 +174,15 @@ if [ ! -e "$CANARY_FILE" ]; then
     touch "$CANARY_FILE"
 
     if [[ "$@" =~ "tree" ]]; then
-        # Re-execute in a left vertical pane for nnn
-        exec tmux split-window -b -h -l 20% helix-tmux "$@"
+        if [ "$(tmux display-message -p "#{pane_at_left}")" = "0" ]; then
+            exec tmux select-pane -L
+        else 
+            exec tmux split-window -b -h -l 20% helix-tmux "$@"
+        fi
     else
         # Re-execute the script in a horizontal pane for everything else
         exec tmux split-window -v -l 70% helix-tmux "$@"
     fi
-    
 fi
 
 # Remove the canary file
