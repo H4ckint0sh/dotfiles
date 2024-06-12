@@ -1,11 +1,13 @@
-# import = ["~/c/sesh/sesh.toml"]
-
-[default_session]
-startup_command = "tmux-dev"
 
 [[session]]
-name = "Home 🏡"
+name = "Downloads 󰥨 "
+path = "~/Downloads"
+startup_command = "download"
+
+[[session]]
+name = "Home 󱎰 "
 path = "~/"
+startup_command = "download"
 
 [[session]]
 name = "wezterm config"
@@ -16,9 +18,22 @@ name = "sesh config"
 path = "~/.dotfiles/sesh/.config/sesh"
 
 [[session]]
-name = "dotfiles"
+name = "dotfiles  "
 path = "~/.dotfiles"
+startup_command= "dotfiles"
 
 [[session]]
-name = "Downloads 📥"
-path = "~/Downloads"
+name = "Vyta 󰉼 "
+path = "/Users/ali/Desktop/projects/farghuset-frontend"
+startup_command= "litium"
+
+[[session]]
+name = "Bergkvist 󱗈 "
+path = "/Users/ali/Desktop/projects/litium-frontend"
+startup_command= "litium"
+
+[[session]]
+name = "Lindab 󰀛 "
+path = "/Users/ali/Desktop/projects/lindab-2019-frontend"
+startup_command= "next"
+
