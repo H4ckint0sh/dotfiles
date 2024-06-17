@@ -28,10 +28,11 @@ require("lazy").setup("plugins", {
 
 
 -- These modules are not loaded by lazy
+require("core.autocmds")
 require("core.options")
 require("core.keymaps")
 
 -- LSP
-require('lsp.functions')
 require('lsp.config')
 require('lsp.setup')
+require('lsp.functions')
