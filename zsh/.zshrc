@@ -33,22 +33,6 @@ export EDITOR=hx
 
 MOZ_DISABLE_SAFE_MODE_KEY=1
 
-# nnn
-#export NNN_OPENER="zellij-nnn"
-export NNN_OPENER="tmux-nnn"
-
-# nnn catpuccin colors
-# This second option relies on you're terminal using the catppuccin theme and well use true catppuccin colors:
-BLK="03" CHR="03" DIR="04" EXE="02" REG="07" HARDLINK="05" SYMLINK="05" MISSING="08" ORPHAN="01" FIFO="06" SOCK="03" UNKNOWN="01"
-
-# Export Context Colors
-export NNN_COLORS="#04020301;4231"
-
-# Finally Export the set file colors ( Both options require this)
-export NNN_FCOLORS="$BLK$CHR$DIR$EXE$REG$HARDLINK$SYMLINK$MISSING$ORPHAN$FIFO$SOCK$UNKNOWN"
-
-export NNN_PLUG='f:fzopen;o:fzopen;a:openall;j:autojump;'
-
 export ZSH_CUSTOM=$DOTFILES
 # export LANG=en_US.UTF-8
 # export LC_ALL=$LANG
@@ -61,7 +45,7 @@ export FZF_DEFAULT_OPTS='
     --ansi
     --header-first
     --scrollbar='▍'
-    --color=bg+:-1,spinner:#f5e0dc,hl:#89b4fa,fg:#7f849c,header:#a6e3a1,info:#cba6f7,pointer:#f5e0dc,marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#89b4fa
+    --color=bg+:-1,spinner:#f5e0dc,hl:#89b4fa,border:#cdd6f4,fg:#7f849c,header:#a6e3a1,info:#cba6f7,pointer:#f5e0dc,marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#89b4fa
 '
 
 # Git Stuff
@@ -195,8 +179,8 @@ alias gbb='git-switchbranch'
 alias gbf='git branch | head -1 | xargs' # top branch
 alias gl=pretty_git_log
 alias gla=pretty_git_log_all
-#alias gl="git log --graph --format=format:'%C(bold blue)%h%C(reset) - %C(white)%s%C(reset) %C(green)%an %ar %C(reset) %C(bold magenta)%d%C(reset)'"
-#alias gla="git log --all --graph --format=format:'%C(bold blue)%h%C(reset) - %C(white)%s%C(reset) %C(bold magenta)%d%C(reset)'"
+alias gl="git log --graph --format=format:'%C(bold blue)%h%C(reset) - %C(white)%s%C(reset) %C(green)%an %ar %C(reset) %C(bold magenta)%d%C(reset)'"
+alias gla="git log --all --graph --format=format:'%C(bold blue)%h%C(reset) - %C(white)%s%C(reset) %C(bold magenta)%d%C(reset)'"
 alias git-current-branch="git branch | grep \* | cut -d ' ' -f2"
 alias grc='git rebase --continue'
 alias gra='git rebase --abort'
