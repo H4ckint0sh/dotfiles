@@ -1,43 +1,44 @@
-local opt = vim.opt
+local opt          = vim.opt
 
 -- Session Management
 opt.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
 
 -- Line Numbers
 opt.relativenumber = true
-opt.number = true
+opt.number         = true
 
 -- Enable the tabline
-vim.o.showtabline = 2 -- Always show the tab line
+vim.o.showtabline  = 2 -- Always show the tab line
 
 -- Use the custom buffer line function
-vim.o.tabline = '%!v:lua.MyTabLine()'
+vim.o.tabline      = '%!v:lua.MyTabLine()'
 
 -- Tabs & Indentation
-opt.tabstop = 4
-opt.shiftwidth = 4
-opt.expandtab = true
-opt.autoindent = true
+opt.tabstop        = 4
+opt.shiftwidth     = 4
+opt.expandtab      = true
+opt.autoindent     = true
 vim.bo.softtabstop = 4
 
 -- Line Wrapping
-opt.wrap = false
+opt.wrap           = false
 
 -- Search Settings
-opt.ignorecase = true
-opt.smartcase = true
+opt.ignorecase     = true
+opt.smartcase      = true
 
 -- Cursor Line
-opt.cursorline = true
+opt.cursorline     = true
 
-opt.autoindent = true
+opt.autoindent     = true
+opt.wildignore     = "*node_modules/**"
 
 -- Appearance
-opt.termguicolors = true
-opt.background = "dark"
-opt.signcolumn = "yes"
+opt.termguicolors  = true
+opt.background     = "dark"
+opt.signcolumn     = "yes"
 vim.diagnostic.config {
-  float = { border = "rounded" }, -- add border to diagnostic popups
+    float = { border = "rounded" }, -- add border to diagnostic popups
 }
 
 -- Backspace
@@ -54,26 +55,27 @@ opt.splitbelow = true
 opt.iskeyword:append("-")
 
 -- Disable the mouse while in nvim
-opt.mouse = ""
+opt.mouse          = ""
 
 -- Folding
-opt.foldlevel = 20
-opt.foldmethod = "expr"
-opt.foldexpr = "nvim_treesitter#foldexpr()" -- Utilize Treesitter folds
+opt.foldcolumn     = "0"
+opt.foldnestmax    = 0
+opt.foldlevel      = 99
+opt.foldlevelstart = 99
 
 -- Undo
 -- Enable persistent undo globally
-vim.opt.undofile = true
+vim.opt.undofile   = true
 
--- Ensure the directory for undo files exists
-local undo_dir = vim.fn.expand('~/.vim/undo')
-if vim.fn.isdirectory(undo_dir) == 0 then
-    vim.fn.mkdir(undo_dir, 'p')
-end
-
--- Set the directory where undo files will be stored
-vim.opt.undodir = undo_dir
-
+vim.opt.formatoptions:remove('c');
+vim.opt.formatoptions:remove('r');
+vim.opt.formatoptions:remove('o');
+vim.opt.fillchars:append('stl: ');
+vim.opt.fillchars:append('eob: ');
+vim.opt.fillchars:append('fold: ');
+vim.opt.fillchars:append('foldopen: ');
+vim.opt.fillchars:append('foldsep: ');
+vim.opt.fillchars:append('foldclose:');
 
 
 -- Make the buffer line and other elements transparent

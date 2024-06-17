@@ -6,6 +6,7 @@ local keymap = vim.keymap
 -- General keymaps
 keymap.set("i", "jk", "<ESC>")                 -- exit insert mode with jk
 keymap.set("i", "ii", "<ESC>")                 -- exit insert mode with ii
+keymap.set("n", "%", "ggVG")                   -- exit insert mode with ii
 keymap.set("n", "<leader>wq", ":wq<CR>")       -- save and quit
 keymap.set("n", "<leader>qq", ":q!<CR>")       -- quit without saving
 keymap.set("n", "<leader>ww", ":w<CR>")        -- save
@@ -51,7 +52,10 @@ keymap.set("n", "<leader>er", ":NvimTreeFocus<CR>")    -- toggle focus to file e
 keymap.set("n", "<leader>ef", ":NvimTreeFindFile<CR>") -- find file in file explorer
 
 -- Telescope
-keymap.set('n', '<leader>ff', require('telescope.builtin').find_files, {})
+keymap.set('n', '<leader>ff',
+    "<cmd>lua require('telescope.builtin').git_files(require('telescope.themes').get_dropdown({ previewer = false }))<CR>",
+    {})
+keymap.set('n', '<leader>fF', require('telescope.builtin').find_files, {})
 keymap.set('n', '<leader>fg', require('telescope.builtin').live_grep, {})
 keymap.set('n', '<leader>fb', require('telescope.builtin').buffers, {})
 keymap.set('n', '<leader>fh', require('telescope.builtin').help_tags, {})

@@ -133,5 +133,6 @@ require("mason-lspconfig").setup_handlers {
             on_attach = require("lsp.servers.vuels").on_attach,
             settings = require("lsp.servers.vuels").settings,
         })
-    end
+    end,
+
 }

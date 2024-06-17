@@ -58,10 +58,6 @@ return {
                     vim.keymap.set(mode, l, r, opts)
                 end
 
-                -- ╭──────────────────────────────────────────────────────────╮
-                -- │ Keymappings                                              │
-                -- ╰──────────────────────────────────────────────────────────╯
-
                 -- Navigation
                 map('n', ']c', function()
                     if vim.wo.diff then return ']c' end
