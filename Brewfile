@@ -56,11 +56,10 @@ brew "yarn"
 
 # Apps
 cask "hammerspoon"
-cask "eloston-chromium"
+cask "Firefox"
 cask "docker"
 cask "appcleaner"
 cask "the-unarchiver"
 cask "transmission"
-cask "alfred"
+cask "raycast"
 cask "mouse-fix"
-cask "topnotch"
