@@ -27,7 +27,7 @@ local config = {
 	}),
 	front_end = "WebGpu",
 	font_size = 15.0,
-	line_height = 1.15,
+	line_height = 1.2,
 	native_macos_fullscreen_mode = false,
 	keys = {
 		k.key_table("CMD", "0", wt_action.ResetFontSize),
