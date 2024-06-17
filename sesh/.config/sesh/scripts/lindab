@@ -1,0 +1,13 @@
+# #!/usr/bin/env bash
+
+tmux send-keys 'hx' Enter
+tmux send-keys ' ' 'f'
+tmux new-window -c "#{session_path}"
+tmux split-window -h -l 50% 
+tmux send-keys 'npm run dev' Enter
+tmux select-pane -L
+tmux send-keys 'npm run mockapi' Enter
+tmux select-window -p
+
+
+

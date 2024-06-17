@@ -1,39 +1,36 @@
 
 [[session]]
-name = "Downloads 󰥨 "
+name = " Downloads 󰥨 "
 path = "~/Downloads"
 startup_command = "download"
 
 [[session]]
-name = "Home 󱎰 "
+name = " Home 󱎰 "
 path = "~/"
 startup_command = "download"
 
 [[session]]
-name = "wezterm config"
-path = "~/.dotfiles/wezterm/.config/wezterm"
-
-[[session]]
-name = "sesh config"
-path = "~/.dotfiles/sesh/.config/sesh"
-
-[[session]]
-name = "dotfiles  "
+name = " dotfiles  "
 path = "~/.dotfiles"
 startup_command= "dotfiles"
 
 [[session]]
-name = "Vyta 󰉼 "
+name = " Vyta 󰉼 "
 path = "/Users/ali/Desktop/projects/farghuset-frontend"
 startup_command= "litium"
 
 [[session]]
-name = "Bergkvist 󱗈 "
+name = " Bergkvist 󰭇 "
 path = "/Users/ali/Desktop/projects/litium-frontend"
 startup_command= "litium"
 
 [[session]]
-name = "Lindab 󰀛 "
+name = " Lindab 󰀛 "
 path = "/Users/ali/Desktop/projects/lindab-2019-frontend"
+startup_command= "lindab"
+
+[[session]]
+name = " Taby 󰬁 "
+path = "/Users/ali/Desktop/projects/taby-frontend-2023"
 startup_command= "next"
 
