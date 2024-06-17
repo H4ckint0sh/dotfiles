@@ -19,7 +19,7 @@ display-inlay-hints = true
 display-signature-help-docs = true
 
 [editor.inline-diagnostics]
-other-lines = "hint"
+other-lines = "error"
 cursor-line = "hint"
 
 [editor.cursor-shape]
