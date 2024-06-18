@@ -20,12 +20,12 @@ local config = {
     disable_default_key_bindings = true,
     window_close_confirmation = 'NeverPrompt',
     enable_tab_bar = false,
+    term = "tmux-256color",
     window_decorations = "RESIZE",
     font = wezterm.font_with_fallback({
         { family = 'DankMono Nerd Font', weight = "Regular" },
         { family = "Symbols Nerd Font" },
     }),
-    front_end = "WebGpu",
     font_size = 15.0,
     line_height = 1.2,
     underline_position = -6, -- Adjust this value as needed
