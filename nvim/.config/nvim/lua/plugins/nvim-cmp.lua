@@ -25,13 +25,6 @@ return {
                 require("plugins.cmp-npm")
             end,
         },
-        {
-            "zbirenbaum/copilot-cmp",
-            cond = false,
-            config = function()
-                require("copilot_cmp").setup()
-            end,
-        },
         "petertriho/cmp-git",
     },
     config = function()
@@ -55,11 +48,6 @@ return {
         end
 
         cmp_git.setup()
-
-        local copilot_comparators_status_ok, copilot_cmp_comparators = pcall(require, "copilot_cmp.comparators")
-        if not copilot_comparators_status_ok then
-            vim.cmd('echohl ErrorMsg | echo "Failed to load copilot_cmp.comparators" | echohl NONE')
-        end
 
         require("luasnip/loaders/from_vscode").lazy_load()
 
@@ -236,11 +224,6 @@ return {
             }),
             formatting = {
                 format = function(entry, vim_item)
-                    -- Set the highlight group for the Codeium source
-                    if entry.source.name == "codeium" then
-                        vim_item.kind_hl_group = "CmpItemKindCopilot"
-                    end
-
                     -- Get the item with kind from the lspkind plugin
                     local item_with_kind = require("lspkind").cmp_format({
                         mode = "symbol_text",
@@ -282,9 +265,8 @@ return {
                     -- Limits LSP results to specific types based on line context (Fields, Methods, Variables)
                     entry_filter = limit_lsp_types,
                 },
-                { name = "npm",     priority = 9 },
-                { name = "copilot", priority = 9 },
-                { name = "git",     priority = 7 },
+                { name = "npm", priority = 9 },
+                { name = "git", priority = 7 },
                 {
                     name = "luasnip",
                     priority = 7,
@@ -305,7 +287,6 @@ return {
                 priority_weight = 2,
                 comparators = {
                     deprioritize_snippet,
-                    copilot_cmp_comparators.prioritize or function() end,
                     cmp.config.compare.exact,
                     cmp.config.compare.locality,
                     cmp.config.compare.score,

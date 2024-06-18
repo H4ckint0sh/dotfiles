@@ -2,7 +2,6 @@ return {
     -- buffer line
     {
         "akinsho/bufferline.nvim",
-        event = "VeryLazy",
         keys = {
             { "bp",        ":BufferLinePick <CR>" },
             { "bd",        ":BufferLinePickClose <CR>" },
@@ -19,31 +18,23 @@ return {
             { "<leader>9", "<Cmd>BufferLineGoToBuffer 9<CR>" },
         },
         config = function()
-            local mocha = require("catppuccin.palettes").get_palette("mocha")
-            require("bufferline").setup({
-                highlights = {
-                    tab = {
-                        bold = false,
-                        italic = false
-                    },
-                    tab_selected = {
-                        bold = false,
-                        italic = false
-                    },
-                    buffer_visible = {
-                        bold = false,
-                        italic = false
-                    },
-                    buffer_selected = {
-                        bold = false,
-                        italic = false,
-                    },
-                },
+            local bufferline = require("bufferline")
+            bufferline.setup({
                 options = {
                     mode = 'buffers',
+                    numbers = "buffer_id",
+                    max_name_length = 15,
+                    max_prefix_length = 12, -- prefix used when a buffer is de-duplicated
+                    truncate_names = true,  -- whether or not tab names should be truncated
+                    tab_size = 15,
+                    separator_style = 'thin',
                     always_show_bufferline = false,
-                    offsets = { { filetype = "NvimTree", text = "File Manager", padding = 1, separator = true, } },
-                    separator_style = "slant",
+                    offsets = { { filetype = "NvimTree", text = "File Manager", separator = true, } },
+                    style_preset = {
+                        bufferline.style_preset.no_italic,
+                        bufferline.style_preset.no_bold,
+                        bufferline.style_preset.minimal,
+                    },
                     diagnostics = false,
                     show_buffer_icons = false,
                     show_buffer_close_icons = false,
