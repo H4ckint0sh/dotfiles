@@ -6,13 +6,8 @@ return {
         keys = {
             { "bp",        ":BufferLinePick <CR>" },
             { "bd",        ":BufferLinePickClose <CR>" },
-
-            { "bm<Right>", ":BufferLineMoveNext<CR>" },
-            { "bm<Left>",  ":BufferLineMovePrev<CR>" },
-
             { "<tab>",     ":BufferLineCycleNext<CR>" },
             { "<s-tab>",   ":BufferLineCyclePrev<CR>" },
-
             { "<leader>1", "<Cmd>BufferLineGoToBuffer 1<CR>" },
             { "<leader>2", "<Cmd>BufferLineGoToBuffer 2<CR>" },
             { "<leader>3", "<Cmd>BufferLineGoToBuffer 3<CR>" },
@@ -24,6 +19,7 @@ return {
             { "<leader>9", "<Cmd>BufferLineGoToBuffer 9<CR>" },
         },
         config = function()
+            local mocha = require("catppuccin.palettes").get_palette("mocha")
             require("bufferline").setup({
                 highlights = {
                     tab = {
@@ -44,8 +40,9 @@ return {
                     },
                 },
                 options = {
+                    mode = 'buffers',
                     always_show_bufferline = false,
-                    offsets = { { filetype = "NvimTree", text = "File Manager", padding = 1 } },
+                    offsets = { { filetype = "NvimTree", text = "File Manager", padding = 1, separator = true, } },
                     separator_style = "slant",
                     diagnostics = false,
                     show_buffer_icons = false,
