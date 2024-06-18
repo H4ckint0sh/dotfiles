@@ -153,7 +153,6 @@ git_page_maybe() {
 # OTHER ALIASES----------------------------------------------------------------
 alias nc="nnn -c"
 alias g="gitu"
-alias ls="nnn -de"
 alias c="clear"
 alias gpath="find -type f | fzf | sed 's/^..//' | tr -d '\n' | pbcopy"
 alias kp="ps aux | fzf | awk '{print \$2}' | xargs kill"
