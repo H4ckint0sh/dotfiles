@@ -15,7 +15,6 @@ vim.opt.rtp:prepend(lazypath)
 -- This has to be set before initializing lazy
 vim.g.mapleader = " "
 
-require("custom.bufferline")
 require("custom.statueline")
 
 -- Initialize lazy with dynamic loading of anything in the plugins directory

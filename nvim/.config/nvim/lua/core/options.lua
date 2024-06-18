@@ -8,10 +8,9 @@ opt.relativenumber = true
 opt.number         = true
 
 -- Enable the tabline
-vim.o.showtabline  = 2 -- Always show the tab line
+vim.o.showtabline  = 0
 
 -- Use the custom buffer line function
-vim.o.tabline      = '%!v:lua.MyTabLine()'
 
 -- Tabs & Indentation
 opt.tabstop        = 4
@@ -21,29 +20,26 @@ opt.autoindent     = true
 vim.o.softtabstop  = 4
 -- Use tabs instead of spaces
 vim.o.expandtab    = true
--- Make backspace key work as expected
-vim.o.backspace    = 'indent,eol,start'
-
 
 -- Line Wrapping
-opt.wrap          = false
+opt.wrap           = false
 
 -- Search Settings
-opt.ignorecase    = true
-opt.smartcase     = true
+opt.ignorecase     = true
+opt.smartcase      = true
 
 -- Cursor Line
-opt.cursorline    = true
+opt.cursorline     = true
 
-opt.autoindent    = true
-opt.wildignore    = "*node_modules/**"
+opt.autoindent     = true
+opt.wildignore     = "*node_modules/**"
 
 -- Appearance
-opt.termguicolors = true
-opt.background    = "dark"
-opt.signcolumn    = "yes"
+opt.termguicolors  = true
+opt.background     = "dark"
+opt.signcolumn     = "yes"
 vim.diagnostic.config {
-	float = { border = "rounded" }, -- add border to diagnostic popups
+    float = { border = "rounded" }, -- add border to diagnostic popups
 }
 
 -- Backspace
@@ -60,7 +56,7 @@ opt.splitbelow = true
 opt.iskeyword:append("-")
 
 -- Disable the mouse while in nvim
-opt.mouse          = ""
+opt.mouse          = "a"
 
 -- Folding
 opt.foldcolumn     = "0"
@@ -83,12 +79,3 @@ vim.opt.fillchars:append('foldsep: ');
 vim.opt.fillchars:append('foldclose:');
 
 
--- Make the buffer line and other elements transparent
-vim.cmd [[
-  hi TabLine guibg=NONE ctermbg=NONE
-  hi TabLineSel guibg=NONE ctermbg=NONE gui=bold
-  hi TabLineFill guibg=NONE ctermbg=NONE
-  hi StatusLineMode guibg=NONE cterm=bold
-  hi StatusLine guifg=white guibg=NONE cterm=none
-  hi StatusLineInfo guifg=white guibg=NONE cterm=none
-]]
