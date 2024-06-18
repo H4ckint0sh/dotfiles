@@ -22,13 +22,13 @@ return {
             bufferline.setup({
                 options = {
                     mode = 'buffers',
-                    numbers = "buffer_id",
-                    max_name_length = 15,
-                    max_prefix_length = 12, -- prefix used when a buffer is de-duplicated
-                    truncate_names = true,  -- whether or not tab names should be truncated
-                    tab_size = 15,
+                    numbers = "ordinal",
+                    max_name_length = 10,
+                    max_prefix_length = 2, -- prefix used when a buffer is de-duplicated
+                    truncate_names = true, -- whether or not tab names should be truncated
+                    tab_size = 12,
                     separator_style = 'thin',
-                    always_show_bufferline = false,
+                    always_show_bufferline = true,
                     offsets = { { filetype = "NvimTree", text = "File Manager", separator = true, } },
                     style_preset = {
                         bufferline.style_preset.no_italic,
