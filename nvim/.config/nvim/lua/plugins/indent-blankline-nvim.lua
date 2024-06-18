@@ -7,7 +7,7 @@ return {
     opts = {
         enabled = true,
         exclude = {
-            filetypes = { "help", "dashboard", "packer", "NvimTree", "Trouble", "TelescopePrompt", "Float" },
+            filetypes = { "help", "dashboard", "packer", "Trouble", "TelescopePrompt", "Float" },
             buftypes = { "terminal", "nofile", "telescope" },
         },
         indent = {
@@ -15,7 +15,7 @@ return {
         },
         scope = {
             enabled = true,
-            show_start = true,
+            show_start = false,
         }
     },
 }

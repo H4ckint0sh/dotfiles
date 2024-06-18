@@ -18,27 +18,32 @@ opt.tabstop        = 4
 opt.shiftwidth     = 4
 opt.expandtab      = true
 opt.autoindent     = true
-vim.bo.softtabstop = 4
+vim.o.softtabstop  = 4
+-- Use tabs instead of spaces
+vim.o.expandtab    = true
+-- Make backspace key work as expected
+vim.o.backspace    = 'indent,eol,start'
+
 
 -- Line Wrapping
-opt.wrap           = false
+opt.wrap          = false
 
 -- Search Settings
-opt.ignorecase     = true
-opt.smartcase      = true
+opt.ignorecase    = true
+opt.smartcase     = true
 
 -- Cursor Line
-opt.cursorline     = true
+opt.cursorline    = true
 
-opt.autoindent     = true
-opt.wildignore     = "*node_modules/**"
+opt.autoindent    = true
+opt.wildignore    = "*node_modules/**"
 
 -- Appearance
-opt.termguicolors  = true
-opt.background     = "dark"
-opt.signcolumn     = "yes"
+opt.termguicolors = true
+opt.background    = "dark"
+opt.signcolumn    = "yes"
 vim.diagnostic.config {
-    float = { border = "rounded" }, -- add border to diagnostic popups
+	float = { border = "rounded" }, -- add border to diagnostic popups
 }
 
 -- Backspace

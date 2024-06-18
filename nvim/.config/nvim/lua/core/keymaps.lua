@@ -23,6 +23,9 @@ keymap.set('v', '<A-S-u>', 'yP`[V`]')
 keymap.set('n', '<A-S-d>', 'yyp')
 keymap.set('v', '<A-S-d>', 'y`>pgv')
 
+-- Buffers
+keymap.set('n', '<leader>bc', ':bd<CR>')
+
 
 -- General keymaps
 keymap.set("i", "jk", "<ESC>")                 -- exit insert mode with jk

@@ -49,6 +49,21 @@ return {
             yadm                         = {
                 enable = false
             },
+            diff_opts                    = {
+                -- Use neovim's builtin diff (see diffopt in vimrc)
+                internal = true,
+                -- smarter diff algorithm that is semantically better
+                algorithm = 'patience',
+                -- Equivalent as git diff --indent-heuristic
+                indent_heuristic = true,
+                -- Use line matching algorithm (neovim#14537)
+                -- Include whitespace-only changes in git hunks
+                -- regardless of &diffopt (gitsigns.nvim#696)
+                ignore_whitespace_change = true,
+                ignore_blank_lines = true,
+                ignore_whitespace = true,
+                ignore_whitespace_change_at_eol = true,
+            },
             on_attach                    = function(bufnr)
                 local gs = package.loaded.gitsigns
 
@@ -96,5 +111,5 @@ return {
         { "<Leader>ghS", desc = "stage buffer" },
         { "<Leader>ght", desc = "toggle deleted" },
         { "<Leader>ghu", desc = "undo stage" },
-    }
+    },
 }

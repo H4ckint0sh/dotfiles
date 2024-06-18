@@ -28,6 +28,7 @@ return {
         custom_highlights = function(colors)
             return {
                 TelescopeResultsComment = { fg = colors.overlay0 },
+                GitSignsCurrentLineBlame = { fg = colors.overlay0 },
             }
         end,
         highlight_overrides = {
