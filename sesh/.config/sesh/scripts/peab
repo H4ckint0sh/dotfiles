@@ -3,11 +3,6 @@
 tmux send-keys 'nvim' Enter
 tmux send-keys ' ' 'ff'
 tmux new-window -c "#{session_path}"
-tmux split-window -h -l 50% 
-tmux send-keys 'npm run dev' Enter
-tmux select-pane -L
-tmux send-keys 'npm run mockapi' Enter
+tmux send-keys 'TARGET_SITE=https://bostadapi.qa.peab.se/ npm start' Enter
 tmux select-window -p
-
-
-
+open http://localhost:4000

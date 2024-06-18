@@ -1,4 +1,7 @@
 
+[default_session]
+startup_command = "default"
+
 [[session]]
 name = " Downloads 󰥨 "
 path = "~/Downloads"
@@ -12,7 +15,6 @@ startup_command = "download"
 [[session]]
 name = " dotfiles  "
 path = "~/.dotfiles"
-startup_command= "dotfiles"
 
 [[session]]
 name = " Vyta 󰉼 "
@@ -28,6 +30,11 @@ startup_command= "litium"
 name = " Lindab 󰀛 "
 path = "/Users/ali/Desktop/projects/lindab-2019-frontend"
 startup_command= "lindab"
+
+[[session]]
+name = " PEAB 󰹖 "
+path = "/Users/ali/Desktop/projects/peab-backend/Peab.Bostad.ClientSide/"
+startup_command= "peab"
 
 [[session]]
 name = " Taby 󰬁 "
