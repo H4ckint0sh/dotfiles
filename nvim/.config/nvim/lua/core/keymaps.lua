@@ -3,6 +3,27 @@ vim.g.mapleader = " "
 
 local keymap = vim.keymap
 
+-- init.lua
+-- Move line up
+keymap.set('n', '<A-u>', ':m .-2<cr>==')
+keymap.set('i', '<A-u>', '<esc>:m .-2<cr>==gi')
+keymap.set('v', '<A-u>', ":m '<-2<CR>gv=gv")
+
+-- Move line down
+keymap.set('n', '<A-d>', ':m .+1<CR>==')
+keymap.set('i', '<A-d>', '<Esc>:m .+1<CR>==gi')
+keymap.set('v', '<A-d>', ":m '>+1<CR>gv=gv")
+
+-- init.lua
+-- Duplicate line up
+keymap.set('n', '<A-S-u>', 'yypk')
+keymap.set('v', '<A-S-u>', 'yP`[V`]')
+
+-- Duplicate line down
+keymap.set('n', '<A-S-d>', 'yyp')
+keymap.set('v', '<A-S-d>', 'y`>pgv')
+
+
 -- General keymaps
 keymap.set("i", "jk", "<ESC>")                 -- exit insert mode with jk
 keymap.set("i", "ii", "<ESC>")                 -- exit insert mode with ii
