@@ -6,7 +6,7 @@ import = [
 live_config_reload = true
 
 [env]
-TERM = "xterm-256color"
+TERM = "tmux-256color"
 
 [font]
 builtin_box_drawing = true
@@ -370,7 +370,7 @@ semantic_escape_chars = ",│`|:\"' ()[]{}<>\t"
 [window]
 decorations = "buttonless"
 dynamic_padding = true
-opacity = 0.97
+opacity = 1
 option_as_alt = "OnlyRight"
 startup_mode = "Maximized"
 

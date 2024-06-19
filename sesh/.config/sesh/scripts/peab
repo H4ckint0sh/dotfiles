@@ -1,7 +1,7 @@
 # #!/usr/bin/env bash
 
-tmux send-keys 'nvim' Enter
-tmux send-keys ' ' 'ff'
+tmux send-keys 'hx' Enter
+tmux send-keys ' ' 'f'
 tmux new-window -c "#{session_path}"
 tmux send-keys 'TARGET_SITE=https://bostadapi.qa.peab.se/ npm start' Enter
 tmux select-window -p

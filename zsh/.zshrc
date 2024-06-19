@@ -28,7 +28,7 @@ export PUPPETEER_EXECUTABLE_PATH=`which chromium`
 export DOTFILES=$HOME/.dotfiles
 
 # Set helix as EDITOR
-export EDITOR=nvim
+export EDITOR=hx
 # export OPENAI_API_KEY=$(security find-generic-password -s 'openapi token' -w)
 
 MOZ_DISABLE_SAFE_MODE_KEY=1
