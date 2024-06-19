@@ -17,9 +17,6 @@ fi
 export SKIP_SASS_BINARY_DOWNLOAD_FOR_CI=true
 export SKIP_NODE_SASS_TESTS=true
 
-# Yabai
-export YABAI_CERT=yabai-cert
-
 #job
 export PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
 export PUPPETEER_EXECUTABLE_PATH=`which chromium`
