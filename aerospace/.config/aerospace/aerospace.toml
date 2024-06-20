@@ -175,5 +175,9 @@ if.app-id = 'org.m0k.transmission'
 run = 'layout floating'
 
 [[on-window-detected]]
+if.app-id = 'com.cockos.LICEcap'
+run = 'layout floating'
+
+[[on-window-detected]]
 if.app-id = 'com.colliderli.iina'
 run = 'layout floating'
