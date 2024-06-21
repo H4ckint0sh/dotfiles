@@ -49,7 +49,7 @@ return {
 				-- Include whitespace-only changes in git hunks
 				-- regardless of &diffopt (gitsigns.nvim#696)
 				ignore_whitespace_change = true,
-				ignore_blank_lines = true,
+				ignore_blank_lines = false,
 				ignore_whitespace = true,
 				ignore_whitespace_change_at_eol = true,
 			},

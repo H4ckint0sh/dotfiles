@@ -4,10 +4,6 @@ local options = {
 	completeopt = "menu,menuone,noselect", --- Better autocompletion
 	emoji = false, --- Fix emoji display
 	expandtab = true, --- Use spaces instead of tabs
-	foldcolumn = "0",
-	foldnestmax = 0,
-	foldlevel = 99, --- Using ufo provider need a large value
-	foldlevelstart = 99, --- Expand all folds by default
 	ignorecase = true, --- Needed for smartcase
 	laststatus = 3, --- Have a global statusline at the bottom instead of one for each window
 	mouse = "a", --- Enable mouse
@@ -25,8 +21,6 @@ local options = {
 	splitright = true, --- Vertical splits will automatically be to the right
 	tabstop = 4, --- Insert 4 spaces for a tab
 	termguicolors = true, --- Correct terminal colors
-	timeoutlen = 300, --- Faster completion (cannot be lower than 200 because then commenting doesn't work)
-	updatetime = 300, --- Faster completion
 	viminfo = "'1000", --- Increase the size of file history
 	wildignore = "*node_modules/**", --- Don't search inside Node.js modules (works for gutentag)
 	wrap = false, --- Display long lines as just one line
@@ -34,6 +28,7 @@ local options = {
 	autoindent = true, --- Good auto indent
 	backspace = "indent,eol,start", --- Making sure backspace works
 	swapfile = false,
+	undofile = true,
 	conceallevel = 2,
 	concealcursor = "", --- Set to an empty string to expand tailwind class when on cursorline
 	cursorline = true,
@@ -49,21 +44,17 @@ local globals = {
 	speeddating_no_mappings = 1, --- Disable default mappings for speeddating
 }
 
+-- vim.o.statuscolumn = "%!v:lua.require('custom.statuscolumn').hackStatuscolumn()";
+
 vim.opt.shortmess:append("c")
 vim.opt.formatoptions:remove("c")
 vim.opt.formatoptions:remove("r")
 vim.opt.formatoptions:remove("o")
 vim.opt.fillchars:append("stl: ")
-vim.opt.fillchars:append("eob: ")
-vim.opt.fillchars:append("fold: ")
-vim.opt.fillchars:append("foldopen: ")
-vim.opt.fillchars:append("foldsep: ")
-vim.opt.fillchars:append("foldclose:")
 
-vim.cmd [[
-set statusline=%!v:lua.require('custom.statusline').global()
-
-]]
+vim.cmd([[
+    set statusline=%!v:lua.require('custom.statusline').global()
+]])
 
 for k, v in pairs(options) do
 	vim.opt[k] = v

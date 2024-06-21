@@ -134,5 +134,5 @@ require("mason-lspconfig").setup_handlers {
             settings = require("lsp.servers.vuels").settings,
         })
     end,
-
 }
+

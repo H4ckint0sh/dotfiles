@@ -15,6 +15,11 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+-- LSP
+require("lsp.config")
+require("lsp.setup")
+require("lsp.functions")
+
 -- Initialize lazy with dynamic loading of anything in the plugins directory
 require("lazy").setup("plugins", {
 	change_detection = {
@@ -28,13 +33,9 @@ require("util")
 
 -- Statusline
 require("custom.statusline")
+-- require("custom.column")
 
 -- These modules are not loaded by lazy
 -- require("core.autocmds")
 require("core.options")
 require("core.keymaps")
-
--- LSP
-require("lsp.config")
-require("lsp.setup")
-require("lsp.functions")
