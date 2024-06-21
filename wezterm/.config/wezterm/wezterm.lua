@@ -23,7 +23,7 @@ local config = {
     term = "tmux-256color",
     window_decorations = "RESIZE",
     font = wezterm.font_with_fallback({
-        { family = 'DankMono Nerd Font', weight = "Regular" },
+        { family = 'Dank Mono', weight = "Regular" },
         { family = "Symbols Nerd Font" },
     }),
     font_size = 15.0,
