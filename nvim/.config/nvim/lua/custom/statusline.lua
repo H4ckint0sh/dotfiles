@@ -16,6 +16,7 @@ vim.api.nvim_set_hl(0, "StatusLine", { bg = base, fg = text })
 local modes_map = {
 	["n"] = "NORMAL",
 	["i"] = "INSERT",
+	["v"] = "VISUAL ",
 	["V"] = "VISUAL LINE",
 	[""] = "VISUAL BLOCK",
 	["c"] = "COMMAND",
@@ -26,7 +27,7 @@ local function get_mode_color()
 	local mode_color = "%#StatusLineNormal#"
 	if current_mode == "i" then
 		mode_color = "%#StatusLineInsert#"
-	elseif current_mode == "V" or current_mode == "" then
+	elseif current_mode == "V" or current_mode == "" or current_mode == "v" then
 		mode_color = "%#StatusLineVisual#"
 	end
 	return mode_color
