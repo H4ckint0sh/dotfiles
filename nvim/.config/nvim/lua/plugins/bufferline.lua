@@ -24,10 +24,10 @@ return {
                 options = {
                     mode = 'buffers',
                     numbers = "ordinal",
-                    max_name_length = 18,
-                    max_prefix_length = 15, -- prefix used when a buffer is de-duplicated
+                    max_name_length = 10,
+                    max_prefix_length = 8, -- prefix used when a buffer is de-duplicated
                     truncate_names = true,  -- whether or not tab names should be truncated
-                    tab_size = 18,
+                    tab_size = 10,
                     separator_style = 'thin',
                     always_show_bufferline = true,
                     offsets = { { filetype = "NvimTree", text = "File Manager", separator = true, } },
