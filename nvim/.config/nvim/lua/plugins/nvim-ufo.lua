@@ -9,9 +9,9 @@ return {
 				require("statuscol").setup({
 					relculright = true,
 					segments = {
-						{ text = {"  " ,"%s" }, click = "v:lua.ScSa" },
+						{ text = { "%s" }, click = "v:lua.ScSa" },
 						{ text = { builtin.lnumfunc, " " }, click = "v:lua.ScLa" },
-						{ text = { builtin.foldfunc , " "}, click = "v:lua.ScFa" },
+						{ text = { builtin.foldfunc, " " }, click = "v:lua.ScFa" },
 					},
 				})
 			end,
@@ -19,6 +19,30 @@ return {
 	},
 	opts = {
 		-- INFO: Uncomment to use treesitter as fold provider, otherwise nvim lsp is used
+		provider_selector = function(bufnr, filetype, _)
+			local fmap = { lua = { "lsp", "treesitter" } }
+
+			return fmap[filetype]
+				or function()
+					local function handle_fallback_exception(err, providerName)
+						if type(err) == "string" and err:match("UfoFallbackException") then
+							return require("ufo").getFolds(bufnr, providerName)
+						else
+							return require("promise").reject(err)
+						end
+					end
+
+					return require("ufo")
+						.getFolds(bufnr, "lsp")
+						:catch(function(err)
+							return handle_fallback_exception(err, "treesitter")
+						end)
+						:catch(function(err)
+							return handle_fallback_exception(err, "indent")
+						end)
+				end
+		end,
+
 		open_fold_hl_timeout = 400,
 		close_fold_kinds_for_ft = { default = { "imports", "comment" } },
 		preview = {
@@ -42,7 +66,6 @@ return {
 		vim.o.foldlevelstart = 99
 		vim.o.foldenable = true
 
-		-- Option 2: nvim lsp as LSP client
 		-- Tell the server the capability of foldingRange,
 		-- Neovim hasn't added foldingRange to default capabilities, users must add it manually
 		local capabilities = vim.lsp.protocol.make_client_capabilities()
