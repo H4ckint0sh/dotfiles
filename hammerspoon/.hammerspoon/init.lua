@@ -80,8 +80,8 @@ local toggleApp = function(appName, launch)
 	end
 end
 
-hs.hotkey.bind(shifopt, "T", function() toggleApp("Alacritty", true) end)
-hs.hotkey.bind(shifopt, "B", function() toggleApp("Firefox", true) end)
+hs.hotkey.bind(shifopt, "T", function() toggleApp("kitty", true) end)
+hs.hotkey.bind(shifopt, "B", function() toggleApp("Google Chrome", true) end)
 hs.hotkey.bind(shifopt, "G", function() toggleApp("Google Chrome", true) end)
 hs.hotkey.bind(shifopt, "S", function() toggleApp("spotify", true) end)
 hs.hotkey.bind(shifopt, "C", function() toggleApp("Microsoft Teams", true) end)
