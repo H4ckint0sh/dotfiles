@@ -1,7 +1,7 @@
 # #!/usr/bin/env bash
 
-tmux send-keys 'hx' Enter
-tmux send-keys ' ' 'f'
+tmux send-keys 'nvim' Enter
+tmux send-keys C-p
 tmux new-window -c "#{session_path}"
 tmux split-window -h -l 50% 
 tmux send-keys 'yarn proxy' Enter
