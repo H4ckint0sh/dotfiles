@@ -154,7 +154,7 @@ if.app-id = 'com.microsoft.outlook'
 run = 'move-node-to-workspace 6' 
 
 [[on-window-detected]]
-if.app-id = 'net.kovidgoyal.kitty'
+if.app-id = 'com.github.wez.wezterm'
 run = 'move-node-to-workspace 5' 
 
 [[on-window-detected]]

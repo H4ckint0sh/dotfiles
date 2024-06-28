@@ -1,5 +1,5 @@
 # #!/usr/bin/env bash
 
 tmux send-keys 'nvim' Enter
-tmux send-keys ' ' 'ff'
+tmux send-keys ' ' 'f'
 
