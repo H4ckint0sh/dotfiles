@@ -26,11 +26,15 @@ keymap.set('v', '<A-S-d>', 'y`>pgv')
 -- Buffers
 keymap.set('n', '<leader>bc', ':bd<CR>')
 
+keymap.set('n', '<leader>h', function () vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is.enable)
+    
+end)
+
 
 -- General keymaps
 keymap.set("i", "jk", "<ESC>")                 -- exit insert mode with jk
 keymap.set("i", "ii", "<ESC>")                 -- exit insert mode with ii
-keymap.set("n", "%", "ggVG")                   -- exit insert mode with ii
+keymap.set("n", "<leader>%", "ggVG")                   -- exit insert mode with ii
 keymap.set("n", "<leader>wq", ":wq<CR>")       -- save and quit
 keymap.set("n", "<leader>qq", ":q!<CR>")       -- quit without saving
 keymap.set("n", "<leader>ww", ":w<CR>")        -- save

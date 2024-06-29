@@ -27,6 +27,38 @@ M._if_win = function(a, b)
 	end
 end
 
+-- Create a function that returns a tagged keymap description
+---@param plugin_name string
+M.plugin_keymap_desc = function(plugin_name)
+  ---@param desc string
+  return function(desc)
+    -- Capitalize plugin name and concat with desc
+    return plugin_name:gsub('^%l', string.upper) .. ': ' .. desc
+  end
+end
+
+--icons
+M.icons = {
+  diagnostics = {
+    Error = ' ',
+    Warn = ' ',
+    Hint = ' ',
+    Info = ' '
+  },
+  git = {
+    added = '',
+    changed = '',
+    deleted = '',
+  },
+  dap = {
+    Stopped = {'󰁕 ', 'DiagnosticSignWarn', 'DapStoppedLine'},
+    Breakpoint = {' ', 'DiagnosticSignInfo'},
+    BreakpointCondition = {' ', 'DiagnosticSignHint'},
+    BreakpointRejected = {' ', 'DiagnosticSignError'},
+    LogPoint = '.>',
+  },
+}
+
 M._if_win_fs_norm = function(a, b)
 	return M._if_win(vim.fs.normalize(a), b or a)
 end
