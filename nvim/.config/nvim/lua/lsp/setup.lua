@@ -46,10 +46,10 @@ local handlers = {
 		border = "rounded",
 	}),
 	["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" }),
-	["textDocument/publishDiagnostics"] = vim.lsp.with(
-		vim.lsp.diagnostic.on_publish_diagnostics,
-		{ virtual_text = true }
-	),
+	-- ["textDocument/publishDiagnostics"] = vim.lsp.with(
+	-- 	vim.lsp.diagnostic.on_publish_diagnostics,
+	-- 	{ virtual_text = true }
+	-- ),
 }
 
 local function on_attach(client, bufnr)

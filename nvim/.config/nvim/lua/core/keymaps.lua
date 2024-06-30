@@ -30,6 +30,24 @@ keymap.set('n', '<leader>h', function () vim.lsp.inlay_hint.enable(not vim.lsp.i
     
 end)
 
+-- Telescope
+keymap.set(
+	"n",
+	"<C-p>",
+	':lua require("telescope.builtin").find_files({ hidden = true, find_command = { "fd", "--type", "f", "--hidden", "--exclude", ".git" }})<CR>'
+)
+keymap.set("n", "<S-p>", "<CMD>lua require('tele-scope.pickers.multi-rg')()<CR>")
+
+
+-- Find word/file across project
+keymap.set(
+	"n",
+	"<Leader>pf",
+	"<CMD>lua require('plugins.telescope').project_files({ default_text = vim.fn.expand('<cword>'), initial_mode = 'normal' })<CR>"
+)
+keymap.set("n", "<Leader>pw", "<CMD>lua require('telescope.builtin').grep_string({ initial_mode = 'normal' })<CR>")
+
+
 
 -- General keymaps
 keymap.set("i", "jk", "<ESC>")                 -- exit insert mode with jk
