@@ -1,4 +1,4 @@
-#@@ -1,203 +1 @@
+
 
 # Source zsh plugins
 source $HOME/.config/.zsh-vi-mode/zsh-vi-mode.plugin.zsh
@@ -35,15 +35,31 @@ export ZSH_CUSTOM=$DOTFILES
 # export LC_ALL=$LANG
 
 # fzf
-export FZF_DEFAULT_OPTS='
-    --reverse
-    --border=sharp
-    --preview-window=border-sharp
-    --ansi
-    --header-first
-    --scrollbar='▍'
-    --color=bg+:-1,spinner:#f5e0dc,hl:#89b4fa,border:#cdd6f4,fg:#7f849c,header:#a6e3a1,info:#cba6f7,pointer:#f5e0dc,marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#89b4fa
-'
+export FZF_DEFAULT_OPTS="   
+    --reverse \
+    --border=sharp\
+    --preview-window=border-sharp\
+    --ansi\
+    --header-first\
+    --scrollbar='▍'\
+    --color=bg+:#2f334d \
+    --color=bg:#1a1b26 \
+    --color=border:#636da6 \
+    --color=gutter:#1a1b26 \
+    --color=fg:#636da6 \
+    --color=fg+:#c8d3f5 \
+    --color=header:#82aaff \
+    --color=hl+:#0db9d7 \
+    --color=hl:#0db9d7 \
+    --color=info:#545c7e \
+    --color=marker:#ff007c \
+    --color=pointer:#ff966c \
+    --color=prompt:#2ac3de \
+    --color=query:#c0caf5:regular \
+    --color=scrollbar:#27a1b9 \
+    --color=separator:#ff9e64 \
+    --color=spinner:#ff007c \
+"
 
 # Git Stuff
 LOG_HASH="%C(always,yellow)%h%C(always,reset)"
