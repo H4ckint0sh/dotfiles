@@ -1,68 +1,48 @@
--- Catppuccin Theme
+-- tokyonight Theme
 return {
-	-- https://github.com/catppuccin/nvim
-	"catppuccin/nvim",
-	name = "catppuccin", -- name is needed otherwise plugin shows up as "nvim" due to github URI
-	lazy = false, -- We want the colorscheme to load immediately when starting Neovim
-	priority = 1000, -- Load the colorscheme before other non-lazy-loaded plugins
+	-- https://github.com/tokyonight/nvim
+	"folke/tokyonight.nvim",
+	lazy = false,
+	priority = 1000,
 	opts = {
-		--   -- Replace this with your scheme-specific settings or remove to use the defaults
-		-- transparent = true,
-		flavour = "mocha", -- "latte, frappe, macchiato, mocha"
-		no_bold = true, --No Bold
-		styles = { -- Haes the styles of general hi groups (see `:h highlight-args`):
-			comments = { "italic" }, -- Change the style of comments
-			conditionals = { "italic" },
-			loops = {},
+		style = "night", -- The theme comes in three styles, `storm`, a darker variant `night` and
+		styles = {
+			-- Style to be applied to different syntax groups
+			-- Value is any valid attr-list value for `:help nvim_set_hl`
+			comments = { italic = true },
+			keywords = { italic = true },
+			conditionals = { italic = true },
 			functions = {},
-			keywords = { "italic" },
-			strings = {},
 			variables = {},
-			numbers = {},
-			booleans = {},
-			properties = {},
-			types = {},
-			operators = {},
-			-- miscs = {}, -- Uncomment to turn off hard-coded styles
+			-- Background styles. Can be "dark", "transparent" or "normal"
+			sidebars = "dark", -- style for sidebars, see below
+			floats = "transparent", -- style for floating windows
 		},
-		custom_highlights = function(colors)
-			return {
-				TelescopeResultsComment = { fg = colors.overlay0 },
-				GitSignsCurrentLineBlame = { fg = colors.overlay0 },
-				DiagnosticVirtualTextError = { bg = colors.none },
-				DiagnosticVirtualTextHint = { bg = colors.none },
-				DiagnosticVirtualTextInfo = { bg = colors.none },
-				DiagnosticVirtualTextWarn = { bg = colors.none },
-				TelescopePromptBorder = { fg = colors.text, bg = colors.none },
-				TelescopeResultsBorder = { fg = colors.text, bg = colors.none },
-				TelescopePreviewBorder = { fg = colors.text, bg = colors.none },
-				NormalFloat = { bg = colors.none },
-				FloatBorder = { fg = colors.text, bg = colors.none },
-				Pmenu = { bg = colors.none },
-				WinSeparator = { fg = colors.text, bg = colors.none },
-				TroubleNormal = { bg = colors.none, fg = colors.text },
-				NoiceCmdlinePopupBorder = { bg = colors.none, fg = colors.text },
-				NoiceCmdlinePopupBorderCmdline = { bg = colors.none, fg = colors.text },
-				NoiceCmdlinePopupBorderCalculator = { bg = colors.none, fg = colors.text },
-				NoiceCmdlinePopupBorderFilter = { bg = colors.none, fg = colors.text },
-				NoiceCmdlinePopupBorderHelp = { bg = colors.none, fg = colors.text },
-				NoiceCmdlinePopupBorderIncRename = { bg = colors.none, fg = colors.text },
-				NoiceCmdlinePopupBorderInput = { bg = colors.none, fg = colors.text },
-				NoiceCmdlinePopupBorderLua = { bg = colors.none, fg = colors.text },
-				NoiceCmdlinePopupBorderSearch = { bg = colors.none, fg = colors.text },
-				NoiceCmdlineIconSearch = { bg = colors.none, fg = colors.mauve },
-			}
+		on_highlights = function(H, C)
+			-- Native
+			H["@keyword.import"] = { fg = C.purple, italic = true }
+			H["@tag.tsx"] = { fg = C.blue2 }
+			H["@tag.builtin.tsx"] = { fg = C.red }
+
+			-- Tokyonight
+			H.CursorLine = { bg = "NONE" }
+			H.LspInlayHint = { bg = "NONE", fg = C.comment }
+			H.TelescopeResultsComment = { fg = C.comment }
+			H.GitSignsCurrentLineBlame = { fg = C.comment }
+			H.DiagnosticVirtualTextError = { bg = "NONE", fg = C.red }
+			H.DiagnosticVirtualTextHint = { bg = "NONE", fg = C.teal }
+			H.DiagnosticVirtualTextInfo = { bg = "NONE", fg = C.green }
+			H.DiagnosticVirtualTextWarn = { bg = "NONE", fg = C.yellow } H.WinSeparator = { fg = C.fg, bg = "NONE" }
+			H.TroubleNormal = { bg = "NONE", fg = C.fg }
+
+			-- Galnce-nvim
+			H.GlancePreviewCursorLine = { bg = C.bg_highlight }
+			H.GlancePreviewCursorLine = { fg = C.fg }
+			H.GlanceBorderTop = { fg = C.fg }
 		end,
-		highlight_overrides = {
-			all = function(colors)
-				return {
-					Tag = { fg = colors.red },
-				}
-			end,
-		},
 	},
 	config = function(_, opts)
-		require("catppuccin").setup(opts) -- Replace this with your favorite colorscheme
-		vim.cmd("colorscheme catppuccin") -- Replace this with your favorite colorscheme
+		require("tokyonight").setup(opts) -- Replace this with your favorite colorscheme
+		vim.cmd("colorscheme tokyonight") -- Replace this with your favorite colorscheme
 	end,
 }
