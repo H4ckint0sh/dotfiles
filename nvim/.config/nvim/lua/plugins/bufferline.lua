@@ -30,7 +30,7 @@ return {
                     tab_size = 10,
                     separator_style = 'thin',
                     always_show_bufferline = true,
-                    offsets = { { filetype = "NvimTree", text = "File Manager", separator = true, } },
+                    offsets = { { filetype = "NvimTree", text = "File Manager", separator = false, } },
                     style_preset = {
                         bufferline.style_preset.no_italic,
                         bufferline.style_preset.no_bold,
