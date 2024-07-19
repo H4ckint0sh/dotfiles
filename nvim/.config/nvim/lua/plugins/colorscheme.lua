@@ -25,20 +25,16 @@ return {
 			H["@tag.builtin.tsx"] = { fg = C.red }
 
 			-- Tokyonight
-			H.CursorLine = { bg = "NONE" }
+			H.CursorLine = { bg = C.bg_highlight }
 			H.LspInlayHint = { bg = "NONE", fg = C.comment }
 			H.TelescopeResultsComment = { fg = C.comment }
 			H.GitSignsCurrentLineBlame = { fg = C.comment }
 			H.DiagnosticVirtualTextError = { bg = "NONE", fg = C.red }
 			H.DiagnosticVirtualTextHint = { bg = "NONE", fg = C.teal }
 			H.DiagnosticVirtualTextInfo = { bg = "NONE", fg = C.green }
-			H.DiagnosticVirtualTextWarn = { bg = "NONE", fg = C.yellow } H.WinSeparator = { fg = C.fg, bg = "NONE" }
+			H.DiagnosticVirtualTextWarn = { bg = "NONE", fg = C.yellow }
+			H.WinSeparator = { fg = C.fg, bg = "NONE" }
 			H.TroubleNormal = { bg = "NONE", fg = C.fg }
-
-			-- Galnce-nvim
-			H.GlancePreviewCursorLine = { bg = C.bg_highlight }
-			H.GlancePreviewCursorLine = { fg = C.fg }
-			H.GlanceBorderTop = { fg = C.fg }
 		end,
 	},
 	config = function(_, opts)
