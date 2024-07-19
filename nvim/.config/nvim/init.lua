@@ -36,6 +36,6 @@ require("lsp.setup")
 require("lsp.functions")
 
 -- These modules are not loaded by lazy
--- require("core.autocmds")
+require("core.autocmds")
 require("core.options")
 require("core.keymaps")

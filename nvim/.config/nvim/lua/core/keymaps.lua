@@ -14,6 +14,28 @@ keymap.set("n", "<A-d>", ":m .+1<CR>==")
 keymap.set("i", "<A-d>", "<Esc>:m .+1<CR>==gi")
 keymap.set("v", "<A-d>", ":m '>+1<CR>gv=gv")
 
+-- Select whole file
+keymap.set("n", "<leader>%", "ggVG")
+
+-- Keep stuff centred while moving around
+keymap.set("n", "*", "*zzzv")
+keymap.set("n", "#", "#zzzv")
+keymap.set("n", ",", ",zzzv")
+keymap.set("n", ";", ";zzzv")
+keymap.set("n", "n", "nzzzv")
+keymap.set("n", "N", "Nzzzv")
+
+-- Some fun register stuff
+keymap.set("v", "<leader>y", '"+y')
+keymap.set("n", "<leader>Y", '"+y$')
+keymap.set("v", "<leader>d", '"_d')
+keymap.set("n", "<leader>x", '"_x')
+keymap.set("n", "<leader>p", '"_dP')
+
+-- Keep things highlighted after moving with < and >
+keymap.set("v", "<", "<gv")
+keymap.set("v", ">", ">gv")
+
 -- init.lua
 -- Duplicate line up
 keymap.set("n", "<A-S-u>", "yypk")
@@ -22,6 +44,9 @@ keymap.set("v", "<A-S-u>", "yP`[V`]")
 -- Duplicate line down
 keymap.set("n", "<A-S-d>", "yyp")
 keymap.set("v", "<A-S-d>", "y`>pgv")
+
+-- Remove highlights
+keymap.set("n", "<CR>", ":noh<CR><CR>")
 
 -- Buffers
 keymap.set("n", "<leader>bc", ":bd<CR>")
