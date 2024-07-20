@@ -25,6 +25,7 @@ require("lazy").setup("plugins", {
 
 -- Utils
 require("util")
+require("util.globals")
 
 -- Statusline
 require("custom.statusline")
