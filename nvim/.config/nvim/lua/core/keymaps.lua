@@ -61,7 +61,7 @@ keymap.set(
 	"<C-p>",
 	':lua require("telescope.builtin").find_files({ hidden = true, find_command = { "fd", "--type", "f", "--hidden", "--exclude", ".git" }})<CR>'
 )
-keymap.set("n", "<S-p>", "<CMD>lua require('tele-scope.pickers.multi-rg')()<CR>")
+keymap.set("n", "<C-g>", "<CMD>lua require('tele-scope.pickers.multi-rg')()<CR>")
 
 -- Find word/file across project
 keymap.set(
