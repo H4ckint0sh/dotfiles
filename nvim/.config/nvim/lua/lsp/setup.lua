@@ -27,6 +27,7 @@ mason_lsp.setup({
 		"tailwindcss",
 		"tsserver",
 		"astro",
+		"emmet-ls",
 	},
 	-- Whether servers that are set up (via lspconfig) should be automatically installed if they're not already installed.
 	-- This setting has no relation with the `ensure_installed` setting.
@@ -137,5 +138,33 @@ require("mason-lspconfig").setup_handlers({
 	end,
 	["astro"] = function()
 		lspconfig.astro.setup({})
+	end,
+	["emmet_ls"] = function()
+		lspconfig.emmet_ls.setup({
+			-- on_attach = on_attach,
+			capabilities = capabilities,
+			filetypes = {
+				"css",
+				"eruby",
+				"html",
+				"javascript",
+				"javascriptreact",
+				"less",
+				"sass",
+				"scss",
+				"svelte",
+				"pug",
+				"typescriptreact",
+				"vue",
+			},
+			init_options = {
+				html = {
+					options = {
+						-- For possible options, see: https://github.com/emmetio/emmet/blob/master/src/config.ts#L79-L267
+						["bem.enabled"] = true,
+					},
+				},
+			},
+		})
 	end,
 })
