@@ -5,11 +5,8 @@
 "constant.character.escape" = { fg = "magenta" }
 "function" = { fg = "blue", modifiers = ["italic"] }
 "function.macro" = { fg = "cyan" }
-"keyword" = { fg = "cyan", modifiers = ["italic"] }
-"keyword.control" = { fg = "magenta", modifiers = ["italic"] }
-"keyword.control.import" = { fg = "cyan", modifiers= ["italic"] }
-"keyword.operator" = { fg = "turquoise" }
-"keyword.function" = { fg = "magenta", modifiers = ["italic"] }
+"keyword" = { fg = "magenta", modifiers = ["italic"] }
+"keyword.storage.modifier.ref" = "cyan"
 "operator" = { fg = "turquoise" }
 "punctuation" = { fg = "turquoise" }
 "string" = { fg = "light-green" }
@@ -33,7 +30,7 @@
 "ui.cursorline.primary" = { bg = "background_menu" }
 "ui.help" = { fg = "foreground" }
 "ui.linenr" = { fg = "comment" }
-"ui.linenr.selected" = { fg = "turquoise" }
+"ui.linenr.selected" = { fg = "orange" }
 "ui.menu" = { fg = "foreground" }
 "ui.menu.selected" = { bg = "background_highlight" }
 "ui.popup" = { fg = "foreground" }
