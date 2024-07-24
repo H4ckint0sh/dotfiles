@@ -12,6 +12,7 @@
 "string" = { fg = "light-green" }
 "string.regexp" = { fg = "light-blue" }
 "tag" = { fg = "red" }
+"attribute" = "blue"
 "type" = { fg = "teal" }
 "namespace" = { fg = "blue" }
 "variable" = { fg = "white" }
@@ -47,6 +48,10 @@
 "ui.virtual.whitespace" = { fg = "foreground_gutter" }
 "ui.virtual.inlay-hint" = { fg = "comment" }
 "ui.window" = { fg = "black" }
+
+"ui.bufferline" = { fg = "comment" }
+"ui.bufferline.active" = { fg = "orange" }
+"ui.bufferline.background" = {}
 
 "error" = { fg = "red" }
 "warning" = { fg = "yellow" }
