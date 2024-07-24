@@ -22,6 +22,7 @@
 
  [language-server.gpt]
  command = "helix-gpt"
+ # args = ["--handler","codeium","--logFile","~/tmp/helix-gpt.log"]
  environment = { HANDLER= "codeium"}
 
  [language-server.rust-analyzer.config]
@@ -44,26 +45,26 @@
 
  [[language]]
  name = "typescript"
- language-servers = [  "typescript-language-server", "tailwindcss-react", "eslint", "emmet-ls", "scls"]
+ language-servers = [  "typescript-language-server", "tailwindcss-react", "eslint", "emmet-ls", "scls", "gpt"]
  formatter = { command = 'npx', args = ["prettier", "--parser", "typescript"] }
  auto-format = true
 
  [[language]]
  name = "tsx"
- language-servers = [ "typescript-language-server", "tailwindcss-react", "eslint", "emmet-ls", "scls"]
+ language-servers = [ "typescript-language-server", "tailwindcss-react", "eslint", "emmet-ls", "scls", "gpt"]
  formatter = { command = 'npx', args = ["prettier", "--parser", "typescript"] }
  auto-format = true
 
  [[language]]
  name = "jsx"
- language-servers = [ "typescript-language-server", "tailwindcss-react", "eslint", "emmet-ls","scls"]
+ language-servers = [ "typescript-language-server", "tailwindcss-react", "eslint", "emmet-ls","scls", "gpt"]
  grammar = "javascript"
  formatter = { command = 'npx', args = ["prettier", "--parser", "typescript"] }
  auto-format = true
 
  [[language]]
  name = "javascript"
- language-servers = [ "typescript-language-server", "tailwindcss-react", "eslint", "emmet-ls", "scls"]
+ language-servers = [ "typescript-language-server", "tailwindcss-react", "eslint", "emmet-ls", "scls", "gpt"]
  formatter = { command = 'npx', args = ["prettier", "--parser", "typescript"] }
  auto-format = true
 
