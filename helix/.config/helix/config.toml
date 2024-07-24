@@ -95,18 +95,18 @@ X = ["extend_line_up", "extend_to_line_bounds"]
 ]
 # "*" = ["move_prev_word_start", "move_next_word_end", "search_selection"]
 C-g = [":new", ":insert-output lazygit", ":buffer-close!", ":redraw"]
+C-r = [":new", ":insert-output serpl", ":buffer-close!", ":redraw"]
 
 
 [keys.normal.space]
-i = ":toggle lsp.display-inlay-hints"
 "F" = "file_picker_in_current_buffer_directory"
 q = ":q"
 x = ":bc"
 "," = ":w"
 "!" = ":q!"
 o = ":reload-all"
-# until zenmode is availible
-z = ":toggle gutters.line-numbers.min-width 48 3"
+# Toggle
+t = { h = ":toggle file-picker.hidden", f = ":toggle auto-format", i = ":toggle lsp.display-inlay-hints" ,z = ":toggle gutters.line-numbers.min-width 48 3"}
 
 # Tmux
 [keys.normal.'space'.'space']
