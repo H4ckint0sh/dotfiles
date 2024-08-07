@@ -1,40 +1,45 @@
 
 [[session]]
-name = " Downloads 󰥨 "
+name = "Downloads 󰥨 "
 path = "~/Downloads"
 startup_command = "download"
 
 [[session]]
-name = " Home 󱎰 "
+name = "Home 󱎰 "
 path = "~/"
 startup_command = "download"
 
 [[session]]
-name = " dotfiles  "
+name = "dotfiles  "
 path = "~/.dotfiles"
 startup_command = "default"
 
 [[session]]
-name = " Vyta 󰉼 "
+name = "Vyta 󰉼 "
 path = "/Users/ali/Desktop/projects/farghuset-frontend"
 startup_command= "litium"
 
 [[session]]
-name = " Bergkvist 󰭇 "
+name = "Bergkvist 󰭇 "
 path = "/Users/ali/Desktop/projects/litium-frontend"
 startup_command= "litium"
 
 [[session]]
-name = " Lindab 󰀛 "
+name = "Lindab 󰀛 "
 path = "/Users/ali/Desktop/projects/lindab-2019-frontend"
 startup_command= "lindab"
 
 [[session]]
-name = " PEAB 󰹖 "
+name = "PEAB 󰹖 "
 path = "/Users/ali/Desktop/projects/peab-backend/Peab.Bostad.ClientSide"
 startup_command= "peab"
 
 [[session]]
-name = " Taby 󰬁 "
+name = "Taby 󰬁 "
 path = "/Users/ali/Desktop/projects/taby-frontend-2023"
 startup_command= "next"
+
+[[session]]
+name = "Kontek  "
+path = "/Users/ali/Desktop/projects/kontek-2020-frontend"
+startup_command= "kontek"
