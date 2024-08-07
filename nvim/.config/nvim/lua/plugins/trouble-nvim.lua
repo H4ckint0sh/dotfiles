@@ -25,22 +25,22 @@ return {
 	end,
 	keys = {
 		{
-			"<leader>cD",
+			"<leader>D",
 			"<cmd>Trouble diagnostics toggle<cr>",
 			desc = "Workspace Diagnostics",
 		},
 		{
-			"<leader>cd",
+			"<leader>d",
 			"<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
 			desc = "Buffer Diagnostics",
 		},
 		{
-			"<leader>cs",
+			"<leader>s",
 			"<cmd>Trouble symbols toggle focus=true<cr>",
 			desc = "Symbols (Trouble)",
 		},
 		{
-			"<leader>cx",
+			"<leader>gD",
 			"<cmd>Trouble lsp toggle win.position=right<cr>",
 			desc = "LSP Definitions / references / ... (Trouble)",
 		},

@@ -27,7 +27,7 @@ mason_lsp.setup({
 		"tailwindcss",
 		"tsserver",
 		"astro",
-		"emmet-ls",
+		"emmet_ls",
 	},
 	-- Whether servers that are set up (via lspconfig) should be automatically installed if they're not already installed.
 	-- This setting has no relation with the `ensure_installed` setting.
@@ -129,6 +129,7 @@ require("mason-lspconfig").setup_handlers({
 
 	["vuels"] = function()
 		lspconfig.vuels.setup({
+
 			filetypes = require("lsp.servers.vuels").filetypes,
 			handlers = handlers,
 			init_options = require("lsp.servers.vuels").init_options,
@@ -142,7 +143,7 @@ require("mason-lspconfig").setup_handlers({
 	["emmet_ls"] = function()
 		lspconfig.emmet_ls.setup({
 			-- on_attach = on_attach,
-			capabilities = capabilities,
+			capailities = capabilities,
 			filetypes = {
 				"css",
 				"eruby",

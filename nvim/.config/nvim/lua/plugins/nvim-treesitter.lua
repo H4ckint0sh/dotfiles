@@ -29,6 +29,7 @@ return {
 				"lua",
 				"markdown",
 				"prisma",
+				"glimmer",
 				"vim",
 				"astro",
 				"vimdoc",

@@ -18,6 +18,7 @@ return {
 			typescriptreact = { { "prettied", "prettier" } },
 			yaml = { "prettier" },
 			astro = { "prettier" },
+			handlebars = { { "prettied", "prettier" } },
 		},
 		format_on_save = function(bufnr)
 			-- Disable with a global or buffer-local variable
@@ -31,7 +32,7 @@ return {
 		local conform = require("conform")
 		conform.setup(opts)
 
-		vim.keymap.set({ "n" }, "<leader>f", function()
+		vim.keymap.set({ "n" }, "<leader>F", function()
 			conform.format({
 				lsp_fallback = true,
 				async = false,
@@ -39,7 +40,7 @@ return {
 			})
 		end, { desc = "format file" })
 
-		vim.keymap.set({ "v" }, "<leader>f", function()
+		vim.keymap.set({ "v" }, "<leader>F", function()
 			conform.format({
 				lsp_fallback = true,
 				async = false,

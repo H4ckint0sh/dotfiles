@@ -3,6 +3,11 @@ vim.g.mapleader = " "
 
 local keymap = vim.keymap
 
+keymap.set("v", "<S-PageDown>", ":m '>+1<CR>gv=gv") -- Move Line Down in Visual Mode
+keymap.set("v", "<S-PageUp>", ":m '<-2<CR>gv=gv") -- Move Line Up in Visual Mode
+keymap.set("n", "<S-PageDown>", ":m .+1<CR>==") -- Move Line Down in Normal Mode
+keymap.set("n", "<S-PageUp>", ":m .-2<CR>==") -- Move Line Up in Normal Mode
+
 -- init.lua
 -- Move line up
 keymap.set("n", "<A-u>", ":m .-2<cr>==")
@@ -49,27 +54,14 @@ keymap.set("v", "<A-S-d>", "y`>pgv")
 keymap.set("n", "<CR>", ":noh<CR><CR>")
 
 -- Buffers
-keymap.set("n", "<leader>bc", ":bd<CR>")
+keymap.set("n", "<leader>x", ":bd<CR>")
+
+-- Save
+keymap.set("n", "<C-s>", ":w<CR>", { silent = true })
 
 keymap.set("n", "<leader>h", function()
 	vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is.enable)
 end)
-
--- Telescope
-keymap.set(
-	"n",
-	"<C-p>",
-	':lua require("telescope.builtin").find_files({ hidden = true, find_command = { "fd", "--type", "f", "--hidden", "--exclude", ".git" }})<CR>'
-)
-keymap.set("n", "<C-g>", "<CMD>lua require('tele-scope.pickers.multi-rg')()<CR>")
-
--- Find word/file across project
-keymap.set(
-	"n",
-	"<Leader>pf",
-	"<CMD>lua require('plugins.telescope').project_files({ default_text = vim.fn.expand('<cword>'), initial_mode = 'normal' })<CR>"
-)
-keymap.set("n", "<Leader>pw", "<CMD>lua require('telescope.builtin').grep_string({ initial_mode = 'normal' })<CR>")
 
 -- General keymaps
 keymap.set("i", "jk", "<ESC>") -- exit insert mode with jk
@@ -118,19 +110,6 @@ keymap.set("n", "<leader>sm", ":MaximizerToggle<CR>") -- toggle maximize tab
 keymap.set("n", "<leader>ee", ":NvimTreeToggle<CR>") -- toggle file explorer
 keymap.set("n", "<leader>er", ":NvimTreeFocus<CR>") -- toggle focus to file explorer
 keymap.set("n", "<leader>ef", ":NvimTreeFindFile<CR>") -- find file in file explorer
-
--- Telescope
---keymap.set('n', '<leader>ff',
---    "<cmd>lua require('telescope.builtin').git_files(require('telescope.themes').get_dropdown({ previewer = false }))<CR>",
---    {})
---keymap.set('n', '<leader>fF', require('telescope.builtin').find_files, {})
---keymap.set('n', '<leader>fg', require('telescope.builtin').live_grep, {})
---keymap.set('n', '<leader>fb', require('telescope.builtin').buffers, {})
---keymap.set('n', '<leader>fh', require('telescope.builtin').help_tags, {})
---keymap.set('n', '<leader>fs', require('telescope.builtin').current_buffer_fuzzy_find, {})
---keymap.set('n', '<leader>fo', require('telescope.builtin').lsp_document_symbols, {})
---keymap.set('n', '<leader>fi', require('telescope.builtin').lsp_incoming_calls, {})
---keymap.set('n', '<leader>fm', function() require('telescope.builtin').treesitter({ default_text = ":method:" }) end)
 
 -- Git-blame
 keymap.set("n", "<leader>gb", ":GitBlameToggle<CR>") -- toggle git blame
@@ -187,3 +166,46 @@ keymap.set("n", "<leader>gp", "<cmd>lua vim.diagnostic.goto_prev()<CR>")
 keymap.set("n", "<leader>gn", "<cmd>lua vim.diagnostic.goto_next()<CR>")
 keymap.set("n", "<leader>tr", "<cmd>lua vim.lsp.buf.document_symbol()<CR>")
 keymap.set("i", "<C-Space>", "<cmd>lua vim.lsp.buf.completion()<CR>")
+
+keymap.set("n", "<leader>p", require("fzf-lua").files, { desc = "Fzf Files" })
+
+keymap.set("n", "<leader>r", require("fzf-lua").registers, { desc = "Registers" })
+
+keymap.set("n", "<leader>m", require("fzf-lua").marks, { desc = "Marks" })
+
+keymap.set("n", "<leader>f", require("fzf-lua").live_grep, { desc = "Fzf Grep" })
+
+keymap.set("n", "<leader>b", require("fzf-lua").buffers, { desc = "Fzf Buffers" })
+
+keymap.set("n", "<leader>j", require("fzf-lua").helptags, { desc = "Help Tags" })
+
+keymap.set("n", "<leader>gc", require("fzf-lua").git_bcommits, { desc = "Browse File Commits" })
+
+keymap.set("n", "<leader>gs", require("fzf-lua").git_status, { desc = "Git Status" })
+
+keymap.set("n", "<leader>'", "<cmd>FzfLua resume<cr>", { desc = "Resume" })
+
+keymap.set(
+	"n",
+	"<leader>s",
+	":lua require'fzf-lua'.spell_suggest({ winopts = {relative='cursor',row=1.01, col=0, height=0.2, width=0.2} })<cr>",
+	{ desc = "Spelling Suggestions" }
+)
+
+keymap.set("n", "<leader>cj", require("fzf-lua").lsp_definitions, { desc = "Jump to Definition" })
+
+keymap.set(
+	"n",
+	"<leader>cs",
+	":lua require'fzf-lua'.lsp_document_symbols({winopts = {preview={wrap='wrap'}}})<cr>",
+	{ desc = "Document Symbols" }
+)
+
+keymap.set("n", "<leader>cr", require("fzf-lua").lsp_references, { desc = "LSP References" })
+
+keymap.set(
+	"n",
+	"<leader>cd",
+	":lua require'fzf-lua'.diagnostics_document({fzf_opts = { ['--wrap'] = true }})<cr>",
+	{ desc = "Document Diagnostics" }
+)
