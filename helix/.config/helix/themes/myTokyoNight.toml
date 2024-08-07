@@ -15,7 +15,7 @@
 "attribute" = "blue"
 "type" = { fg = "teal" }
 "namespace" = { fg = "blue" }
-"variable" = { fg = "white" }
+"variable" = { fg = "blue" }
 "variable.builtin" = { fg = "red" }
 "variable.other.member" = { fg = "green", modifiers= ["italic"] }
 "variable.parameter" = { fg = "yellow", modifiers = ["italic"] }

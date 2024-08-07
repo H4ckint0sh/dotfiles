@@ -6,6 +6,25 @@ mouse = true
 auto-format = true
 bufferline = "multiple"
 color-modes = true
+popup-border = "all"
+jump-label-alphabet = "fjdkslaeiwovncmgh"
+
+# or control each character
+[editor.whitespace.render]
+space = "all"
+tab = "all"
+nbsp = "none"
+nnbsp = "none"
+newline = "none"
+
+[editor.whitespace.characters]
+space = "·"
+nbsp = "⍽"
+nnbsp = "␣"
+tab = "→"
+newline = "⏎"
+tabpad = "·" # Tabs will look like "→···" (depending on tab width)
+
 
 [editor.auto-save]
 focus-lost = true
