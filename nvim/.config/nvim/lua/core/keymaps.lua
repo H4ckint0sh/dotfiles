@@ -63,6 +63,13 @@ keymap.set("n", "<leader>h", function()
 	vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is.enable)
 end)
 
+-- Search
+keymap.set("n", "r", ":%s/\\v/g<left><left>", { silent = false }) -- replace
+keymap.set("n", "ss", ":s/", { silent = false }) -- search and replace
+keymap.set("n", "SS", ":%s/\\v", { silent = false }) -- search and replace
+keymap.set("v", "<leader><C-s>", ":s/\\%V") -- Search only in visual selection usingb%V atom
+keymap.set("v", "<C-r>", '"hy:%s/\\v<C-r>h//g<left><left>', { silent = false }) -- change selection
+
 -- General keymaps
 keymap.set("i", "jk", "<ESC>") -- exit insert mode with jk
 keymap.set("i", "ii", "<ESC>") -- exit insert mode with ii
@@ -156,7 +163,8 @@ keymap.set("n", "<leader>gi", "<cmd>lua vim.lsp.buf.implementation()<CR>")
 keymap.set("n", "<leader>gt", "<cmd>lua vim.lsp.buf.type_definition()<CR>")
 --keymap.set('n', '<leader>gr', '<cmd>lua vim.lsp.buf.references()<CR>')
 keymap.set("n", "<leader>gs", "<cmd>lua vim.lsp.buf.signature_help()<CR>")
-keymap.set("n", "<leader>rr", "<cmd>lua vim.lsp.buf.rename()<CR>")
+keymap.set("n", "<leader>a", " <cmd>lua vim.lsp.buf.code_action()<CR>")
+keymap.set("n", "<leader>r", "<cmd>lua vim.lsp.buf.rename()<CR>")
 keymap.set("n", "<leader>gf", "<cmd>lua vim.lsp.buf.format({async = true})<CR>")
 keymap.set("n", "<leader>cf", "<cmd>lua require('lsp.functions').format()<CR>")
 keymap.set("v", "<leader>gf", "<cmd>lua vim.lsp.buf.format({async = true})<CR>")
@@ -169,7 +177,7 @@ keymap.set("i", "<C-Space>", "<cmd>lua vim.lsp.buf.completion()<CR>")
 
 keymap.set("n", "<leader>p", require("fzf-lua").files, { desc = "Fzf Files" })
 
-keymap.set("n", "<leader>r", require("fzf-lua").registers, { desc = "Registers" })
+keymap.set("n", "<leader>R", require("fzf-lua").registers, { desc = "Registers" })
 
 keymap.set("n", "<leader>m", require("fzf-lua").marks, { desc = "Marks" })
 
@@ -209,3 +217,23 @@ keymap.set(
 	":lua require'fzf-lua'.diagnostics_document({fzf_opts = { ['--wrap'] = true }})<cr>",
 	{ desc = "Document Diagnostics" }
 )
+
+-- load the session for the current directory
+keymap.set("n", "<leader>qs", function()
+	require("persistence").load()
+end)
+
+-- select a session to load
+keymap.set("n", "<leader>S", function()
+	require("persistence").select()
+end)
+
+-- load the last session
+keymap.set("n", "<leader>ql", function()
+	require("persistence").load({ last = true })
+end)
+
+-- stop Persistence => session won't be saved on exit
+keymap.set("n", "<leader>qd", function()
+	require("persistence").stop()
+end)
