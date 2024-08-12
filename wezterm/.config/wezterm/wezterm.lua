@@ -39,7 +39,7 @@ local config = {
 	front_end = "WebGpu",
 	window_decorations = "RESIZE",
 	font = wezterm.font_with_fallback({
-		{ family = "Dank Mono",        weight = "Regular" },
+		{ family = "Dank Mono", weight = "Regular" },
 		{ family = "Symbols Nerd Font" },
 	}),
 	font_size = 16.0,
@@ -80,6 +80,8 @@ local config = {
 		k.cmd_to_tmux_prefix("N", "%"),
 		k.cmd_to_tmux_prefix("o", "u"),
 		k.cmd_to_tmux_prefix("T", "!"),
+		k.cmd_to_tmux_prefix("s", "S"),
+		k.cmd_to_tmux_prefix("r", "R"),
 		k.cmd_to_tmux_prefix("t", "c"),
 		k.cmd_to_tmux_prefix("w", "x"),
 		k.cmd_to_tmux_prefix("z", "z"),

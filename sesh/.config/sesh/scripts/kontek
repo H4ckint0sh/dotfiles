@@ -1,7 +1,7 @@
 # #!/usr/bin/env bash
 
 tmux send-keys 'nvim' Enter
-tmux send-keys C-p
+tmux send-keys ' p' Enter
 tmux new-window -c "#{session_path}"
 tmux send-keys 'npm start' Enter
 tmux select-window -p

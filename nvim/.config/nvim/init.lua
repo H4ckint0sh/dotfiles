@@ -32,7 +32,7 @@ require("util.globals")
 
 -- Statusline
 require("custom.statusline")
--- require("custom.column")
+require("custom.substitute") -- Substitutes in the statusline
 
 -- LSP
 require("lsp.config")
