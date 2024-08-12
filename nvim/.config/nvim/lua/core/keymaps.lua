@@ -56,6 +56,9 @@ keymap.set("n", "<CR>", ":noh<CR><CR>")
 -- Buffers
 keymap.set("n", "<leader>x", ":bd<CR>")
 
+-- Redo
+keymap.set("n", "<S-u>", ":redo<CR>", { silent = true })
+
 -- Save
 keymap.set("n", "<C-s>", ":w<CR>", { silent = true })
 
@@ -64,10 +67,10 @@ keymap.set("n", "<leader>h", function()
 end)
 
 -- Search
-keymap.set("n", "r", ":%s/\\v/g<left><left>", { silent = false }) -- replace
+keymap.set("n", "R", ":%s/\\v/g<left><left>", { silent = false }) -- replace
 keymap.set("n", "ss", ":s/", { silent = false }) -- search and replace
 keymap.set("n", "SS", ":%s/\\v", { silent = false }) -- search and replace
-keymap.set("v", "<leader><C-s>", ":s/\\%V") -- Search only in visual selection usingb%V atom
+keymap.set("v", "<leader><C-r>", ":s/\\%V") -- Search only in visual selection usingb%V atom
 keymap.set("v", "<C-r>", '"hy:%s/\\v<C-r>h//g<left><left>', { silent = false }) -- change selection
 
 -- General keymaps
