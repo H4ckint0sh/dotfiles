@@ -1,9 +1,6 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
--- Use node 20 for all LSPs and so on
-vim.env.PATH = "~/.nvm/versions/node/v20.14.0/bin:" .. vim.env.PATH
-
 -- Bootstrap lazy
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then

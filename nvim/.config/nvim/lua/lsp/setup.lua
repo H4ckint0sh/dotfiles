@@ -1,8 +1,9 @@
 -- Setup installer & lsp configs
 local mason_ok, mason = pcall(require, "mason")
 local mason_lsp_ok, mason_lsp = pcall(require, "mason-lspconfig")
+local mason_tool_installer_ok, mason_tool_installer = pcall(require, "mason-tool-installer")
 
-if not mason_ok or not mason_lsp_ok then
+if not mason_ok or not mason_lsp_ok or not mason_tool_installer_ok then
 	return
 end
 
@@ -23,6 +24,8 @@ mason_lsp.setup({
 		"html",
 		"jsonls",
 		"lua_ls",
+		"ember",
+		-- "glint",
 		"prismals",
 		"tailwindcss",
 		"tsserver",
@@ -39,6 +42,14 @@ mason_lsp.setup({
 	automatic_installation = true,
 })
 
+mason_tool_installer.setup({
+	ensure_installed = {
+		"prettier", -- prettier formatter
+		"djlint", -- handlebars formatter
+		"eslint", -- javascript formatter
+	},
+})
+
 local lspconfig = require("lspconfig")
 
 local handlers = {
@@ -47,10 +58,10 @@ local handlers = {
 		border = "rounded",
 	}),
 	["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" }),
-	-- ["textDocument/publishDiagnostics"] = vim.lsp.with(
-	-- 	vim.lsp.diagnostic.on_publish_diagnostics,
-	-- 	{ virtual_text = true }
-	-- ),
+	["textDocument/publishDiagnostics"] = vim.lsp.with(
+		vim.lsp.diagnostic.on_publish_diagnostics,
+		{ virtual_text = true }
+	),
 }
 
 local function on_attach(client, bufnr)
@@ -140,6 +151,20 @@ require("mason-lspconfig").setup_handlers({
 	["astro"] = function()
 		lspconfig.astro.setup({})
 	end,
+	-- ["glint"] = function()
+	-- 	lspconfig.glint.setup({
+	-- 		cmd = { "glint-language-server" },
+	-- 		filetypes = { "html.handlebars", "handlebars" },
+	-- 		root_dir = vim.uv.cwd,
+	-- 	})
+	-- end,
+	["ember"] = function()
+		lspconfig.ember.setup({
+			cmd = { "ember-language-server", "--stdio" },
+			filetypes = { "handlebars", "typescript", "javascript" },
+			root_dir = vim.uv.cwd,
+		})
+	end,
 	["emmet_ls"] = function()
 		lspconfig.emmet_ls.setup({
 			-- on_attach = on_attach,
@@ -152,6 +177,7 @@ require("mason-lspconfig").setup_handlers({
 				"javascriptreact",
 				"less",
 				"sass",
+				"handlebars",
 				"scss",
 				"svelte",
 				"pug",
