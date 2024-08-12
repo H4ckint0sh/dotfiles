@@ -120,7 +120,7 @@ return {
 		require("ufo").setup(opts)
 		vim.keymap.set("n", "zR", require("ufo").openAllFolds)
 		vim.keymap.set("n", "zM", require("ufo").closeAllFolds)
-		vim.keymap.set("n", "zr", require("ufo").openFoldsExceptKinds)
+		vim.keymap.set("n", "zs", require("ufo").openFoldsExceptKinds)
 		vim.keymap.set("n", "K", function()
 			local winid = require("ufo").peekFoldedLinesUnderCursor()
 			if not winid then
