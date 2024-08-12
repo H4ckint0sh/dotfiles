@@ -4,6 +4,7 @@ return {
 	opts = {
 		formatters_by_ft = {
 			css = { "prettied", "prettier" },
+			scss = { "prettied", "prettier" },
 			graphql = { "prettied", "prettier" },
 			html = { "prettied", "prettier" },
 			javascript = { "prettied", "prettier" },
