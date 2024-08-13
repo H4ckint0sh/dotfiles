@@ -12,7 +12,7 @@ after-login-command = []
 # You can use it to add commands that run after AeroSpace startup.
 # 'after-startup-command' is run after 'after-login-command'
 # Available commands : https://nikitabobko.github.io/AeroSpace/commands
-after-startup-command = []
+after-startup-command = ['exec-and-forget open -a Wezterm & open -a Microsoft\ Teams & open -a Chromium',]
 
 # Start AeroSpace at login
 start-at-login = true
@@ -27,12 +27,12 @@ enable-normalization-opposite-orientation-for-nested-containers = true
 accordion-padding = 30
 
 # Possible values: tiles|accordion
-default-root-container-layout = 'tiles'
+default-root-container-layout = 'accordion'
 
 # Possible values: horizontal|vertical|auto
 # 'auto' means: wide monitor (anything wider than high) gets horizontal orientation,
 #               tall monitor (anything higher than wide) gets vertical orientation
-default-root-container-orientation = 'auto'
+default-root-container-orientation = 'vertical'
 
 # Possible values: (qwerty|dvorak)
 # See https://nikitabobko.github.io/AeroSpace/guide#key-mapping
@@ -102,26 +102,20 @@ alt-shift-l = 'move right'
 
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#workspace
-ctrl-1 = 'workspace 1'
-ctrl-2 = 'workspace 2'
-ctrl-3 = 'workspace 3'
-ctrl-4 = 'workspace 4'
-ctrl-5 = 'workspace 5'
-ctrl-6 = 'workspace 6'
-ctrl-7 = 'workspace 7'
-ctrl-8 = 'workspace 8'
-ctrl-9 = 'workspace 9'
+alt-c = 'workspace c'
+alt-x = 'workspace x'
+alt-b = 'workspace b'
+alt-t = 'workspace t'
+alt-m = 'workspace m'
+alt-y = 'workspace y'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
-alt-ctrl-1 = ['move-node-to-workspace 1', 'workspace 1']
-alt-ctrl-2 = ['move-node-to-workspace 2', 'workspace 2']
-alt-ctrl-3 = ['move-node-to-workspace 3', 'workspace 3']
-alt-ctrl-4 = ['move-node-to-workspace 4', 'workspace 4']
-alt-ctrl-5 = ['move-node-to-workspace 5', 'workspace 5']
-alt-ctrl-6 = ['move-node-to-workspace 6', 'workspace 6']
-alt-ctrl-7 = ['move-node-to-workspace 7', 'workspace 7']
-alt-ctrl-8 = ['move-node-to-workspace 8', 'workspace 8']
-alt-ctrl-9 = ['move-node-to-workspace 9', 'workspace 9']
+alt-shift-c = ['move-node-to-workspace c', 'workspace c']
+alt-shift-x = ['move-node-to-workspace x', 'workspace x']
+alt-shift-b = ['move-node-to-workspace b', 'workspace b']
+alt-shift-t = ['move-node-to-workspace t', 'workspace t']
+alt-shift-m = ['move-node-to-workspace m', 'workspace m']
+alt-shift-y = ['move-node-to-workspace y', 'workspace y']
 
 alt-shift-f = 'fullscreen'
 
@@ -164,31 +158,33 @@ alt-shift-k = ['join-with up', 'mode main']
 alt-shift-l = ['join-with right', 'mode main']
 
 [workspace-to-monitor-force-assignment]
-1 = ['built-in'] 
-2 = ['built-in'] 
-3 = ['built-in'] 
-4 = ['U32J59x', 'DELL U2723QE \(1\)'] 
-5 = ['U32J59x', 'DELL U2723QE \(1\)'] 
-6 = ['U32J59x', 'DELL U2723QE \(1\)'] 
-7 = ['U32J59x', 'DELL U2723QE \(2\)'] 
-8 = ['U32J59x', 'DELL U2723QE \(2\)'] 
-9 = ['U32J59x', 'DELL U2723QE \(2\)'] 
+c = ['Built-in Retina Display'] 
+x = ['Built-in Retina Display'] 
+b = ['U32J59x', 'DELL U2723QE \(2\)', 'Built-in Retina Display'] 
+t = ['U32J59x', 'DELL U2723QE \(1\)', 'Built-in Retina Display'] 
+m = ['U32J59x', 'DELL U2723QE \(2\)', 'Built-in Retina Display'] 
+y = ['U32J59x', 'DELL U2723QE \(1\)', 'Built-in Retina Display'] 
+
 # Send apps to certain workspace
 [[on-window-detected]]
 if.app-id = 'com.microsoft.teams2'
-run = 'move-node-to-workspace 1' 
+run = 'move-node-to-workspace c' 
+
+[[on-window-detected]]
+if.app-id = 'com.apple.mail'
+run = 'move-node-to-workspace m' 
 
 [[on-window-detected]]
 if.app-id = 'com.microsoft.outlook'
-run = 'move-node-to-workspace 6' 
+run = 'move-node-to-workspace m' 
 
 [[on-window-detected]]
 if.app-id = 'com.github.wez.wezterm'
-run = 'move-node-to-workspace 5' 
+run = 'move-node-to-workspace t' 
 
 [[on-window-detected]]
-if.app-id = 'org.mozilla.firefox'
-run = 'move-node-to-workspace 4' 
+if.app-id = 'org.chromium.Chromium'
+run = 'move-node-to-workspace b' 
 
 # Exclude apps
 [[on-window-detected]]
