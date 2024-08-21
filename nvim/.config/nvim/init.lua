@@ -27,8 +27,6 @@ require("lazy").setup("plugins", {
 require("util")
 require("util.globals")
 
--- Statusline
--- require("custom.statusline")
 require("custom.substitute") -- Substitutes in the statusline
 
 -- LSP

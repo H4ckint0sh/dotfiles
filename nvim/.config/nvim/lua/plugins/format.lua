@@ -19,7 +19,16 @@ return {
 			typescriptreact = { "prettied", "prettier" },
 			yaml = { "prettier" },
 			astro = { "prettier" },
-			handlebars = { "djlint" },
+			handlebars = { "prettier" },
+		},
+		formatters = {
+			prettier = {
+				options = {
+					ft_parsers = {
+						handlebars = "glimmer",
+					},
+				},
+			},
 		},
 		format_on_save = function(bufnr)
 			-- Disable with a global or buffer-local variable

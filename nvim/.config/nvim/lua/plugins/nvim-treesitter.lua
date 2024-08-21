@@ -200,6 +200,7 @@ return {
 					javascript = "rainbow-parens",
 					typescript = "rainbow-parens",
 					tsx = "rainbow-parens",
+					handlebars = "rainbow_blocks",
 				},
 				priority = {
 					[""] = 110,

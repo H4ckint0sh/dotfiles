@@ -14,6 +14,8 @@ return {
 			-- javascriptreact = { "eslint" },
 			-- typescriptreact = { "eslint" },
 			svelte = { "eslint" },
+			css = { "eslint" },
+			scss = { "eslint" },
 			handlebars = { "djlint" },
 		}
 

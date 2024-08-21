@@ -161,7 +161,7 @@ require("mason-lspconfig").setup_handlers({
 	["ember"] = function()
 		lspconfig.ember.setup({
 			cmd = { "ember-language-server", "--stdio" },
-			filetypes = { "handlebars", "typescript", "javascript" },
+			filetypes = { "handlebars" },
 			root_dir = vim.uv.cwd,
 		})
 	end,

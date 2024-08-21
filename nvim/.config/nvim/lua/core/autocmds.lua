@@ -38,3 +38,9 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 	pattern = { "*.handlebars", "*.hbs" },
 	command = "set filetype=handlebars",
 })
+
+-- Auto reload aerospace config
+vim.api.nvim_create_autocmd("BufWritePost", {
+	pattern = { "aerospace.toml" },
+	command = "!aerospace reload-config",
+})

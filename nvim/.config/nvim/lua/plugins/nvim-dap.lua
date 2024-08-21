@@ -65,8 +65,14 @@ return {
 			handlers = {},
 		})
 
+		require("dap-vscode-js").setup({
+			debugger_path = vim.fn.stdpath("data") .. "/lazy/vscode-js-debug",
+			adapters = { "pwa-node", "pwa-chrome", "pwa-msedge", "node-terminal", "pwa-extensionHost" },
+		})
+
 		require("dapui").setup({})
 		local dap, dapui = require("dap"), require("dapui")
+		dap.set_log_level("DEBUG")
 		dap.listeners.after.event_initialized["dapui_config"] = function()
 			dapui.open({ reset = true })
 		end
