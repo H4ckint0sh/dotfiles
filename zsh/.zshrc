@@ -240,6 +240,7 @@ export PATH="/usr/local/opt/findutils/libexec/gnubin:$PATH"
 export PATH="/$HOME/.nvm/versions/node/v16.20.2/bin:$PATH"
 export PATH="/$HOME/.nvm/versions/node/v18.18.2/bin:$PATH"
 export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
+export PATH="/$HOME/.pyenv/shims/djlint:$PATH"
 
 # zoxide
 eval "$(zoxide init zsh)"
@@ -291,3 +292,10 @@ source /opt/homebrew/share/zsh-history-substring-search/zsh-history-substring-se
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 eval "$(atuin init zsh)"
+
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init --path)"
+  eval "$(pyenv init -)"
+fi
