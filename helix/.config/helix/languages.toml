@@ -113,14 +113,20 @@ auto-format = true
 [[language]]
 name = "handlebars"
 injection-regex = "hbs"
+roots = ["package.json"]
 file-types = ["hbs", "handlebars"]
 grammar = "glimmer"
-language-servers = ["emmet-ls", "scls"]
+language-servers = ["ember", "emmet-ls"]
 scope = "source.glimmer"
+# formatter = { command = "djilnt", args = [ "--reformat", "--format-"] }
+formatter = { command = "prettier", args = ['--parser', 'glimmer'] }
+auto-format = true
+
+
 
 [[grammar]]
 name = "glimmer"
-source = { git = "https://github.com/alexlafroscia/tree-sitter-glimmer", rev = "d3031a8294bf331600d5046b1d14e690a0d8ba0c" }
+source = { git = "https://github.com/alexlafroscia/tree-sitter-glimmer", rev = "d3031a8294bf331600d5046b1d14e690a0d8ba0c"}
 
 
 [language-server.vscode-json-language-server.config]
