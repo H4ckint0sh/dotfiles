@@ -102,20 +102,22 @@ alt-shift-l = 'move right'
 
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#workspace
-alt-c = 'workspace c'
-alt-x = 'workspace x'
-alt-b = 'workspace b'
-alt-t = 'workspace t'
-alt-m = 'workspace m'
-alt-y = 'workspace y'
+alt-c = 'workspace C'
+alt-x = 'workspace X'
+alt-b = 'workspace B'
+alt-t = 'workspace T'
+alt-d = 'workspace D'
+alt-m = 'workspace M'
+alt-y = 'workspace Y'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
-alt-shift-c = ['move-node-to-workspace c', 'workspace c']
-alt-shift-x = ['move-node-to-workspace x', 'workspace x']
-alt-shift-b = ['move-node-to-workspace b', 'workspace b']
-alt-shift-t = ['move-node-to-workspace t', 'workspace t']
-alt-shift-m = ['move-node-to-workspace m', 'workspace m']
-alt-shift-y = ['move-node-to-workspace y', 'workspace y']
+alt-shift-c = ['move-node-to-workspace C', 'workspace C']
+alt-shift-x = ['move-node-to-workspace X', 'workspace X']
+alt-shift-b = ['move-node-to-workspace B', 'workspace B']
+alt-shift-t = ['move-node-to-workspace T', 'workspace T']
+alt-shift-d = ['move-node-to-workspace D', 'workspace D']
+alt-shift-m = ['move-node-to-workspace M', 'workspace M']
+alt-shift-y = ['move-node-to-workspace Y', 'workspace Y']
 
 alt-shift-f = 'fullscreen'
 
@@ -158,33 +160,38 @@ alt-shift-k = ['join-with up', 'mode main']
 alt-shift-l = ['join-with right', 'mode main']
 
 [workspace-to-monitor-force-assignment]
-c = ['Built-in Retina Display'] 
-x = ['Built-in Retina Display'] 
-b = ['U32J59x', 'DELL U2723QE \(2\)', 'Built-in Retina Display'] 
-t = ['U32J59x', 'DELL U2723QE \(1\)', 'Built-in Retina Display'] 
-m = ['U32J59x', 'DELL U2723QE \(2\)', 'Built-in Retina Display'] 
-y = ['U32J59x', 'DELL U2723QE \(1\)', 'Built-in Retina Display'] 
+C = ['Built-in Retina Display'] 
+X = ['Built-in Retina Display'] 
+B = ['U32J59x', 'DELL U2723QE \(2\)', 'Built-in Retina Display'] 
+T = ['U32J59x', 'DELL U2723QE \(1\)', 'Built-in Retina Display'] 
+D = ['U32J59x', 'DELL U2723QE \(1\)', 'Built-in Retina Display'] 
+M = ['U32J59x', 'DELL U2723QE \(2\)', 'Built-in Retina Display'] 
+Y = ['U32J59x', 'DELL U2723QE \(1\)', 'Built-in Retina Display'] 
 
 # Send apps to certain workspace
 [[on-window-detected]]
 if.app-id = 'com.microsoft.teams2'
-run = 'move-node-to-workspace c' 
+run = 'move-node-to-workspace C' 
 
 [[on-window-detected]]
 if.app-id = 'com.apple.mail'
-run = 'move-node-to-workspace m' 
+run = 'move-node-to-workspace M' 
 
 [[on-window-detected]]
 if.app-id = 'com.microsoft.outlook'
-run = 'move-node-to-workspace m' 
+run = 'move-node-to-workspace M' 
 
 [[on-window-detected]]
 if.app-id = 'com.github.wez.wezterm'
-run = 'move-node-to-workspace t' 
+run = 'move-node-to-workspace T' 
 
 [[on-window-detected]]
 if.app-id = 'org.chromium.Chromium'
-run = 'move-node-to-workspace b' 
+run = 'move-node-to-workspace B' 
+
+[[on-window-detected]]
+if.app-id = 'com.hnc.Discord'
+run = "move-node-to-workspace D"
 
 # Exclude apps
 [[on-window-detected]]
