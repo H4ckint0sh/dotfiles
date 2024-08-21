@@ -56,8 +56,8 @@ local config = {
 		k.key_table("CMD", "RightArrow", wt_action.SendString("\x02\x0c")),
 		k.key_table("CMD", "UpArrow", wt_action.SendString("x02\x0b")),
 		k.key_table("CMD", "DownArrow", wt_action.SendString("x02\x0a")),
-		k.key_table("CMD|SHIFT", "LeftArrow", wt_action.SendString("\x02p")),
-		k.key_table("CMD|SHIFT", "RightArrow", wt_action.SendString("\x02n")),
+		k.key_table("CMD|ALT", "LeftArrow", wt_action.SendString("\x02p")),
+		k.key_table("CMD|ALT", "RightArrow", wt_action.SendString("\x02n")),
 
 		k.cmd_to_tmux_prefix("1", "1"),
 		k.cmd_to_tmux_prefix("2", "2"),
