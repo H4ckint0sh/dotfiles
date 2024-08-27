@@ -1,10 +1,5 @@
 
 [[session]]
-name = "Downloads 󰥨 "
-path = "~/Downloads"
-startup_command = "download"
-
-[[session]]
 name = "Home 󱎰 "
 path = "~/"
 startup_command = "download"
