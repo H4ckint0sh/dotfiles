@@ -32,16 +32,16 @@ return {
 			---@type table
 			toggler = {
 				---line-comment keymap
-				line = "<C-c>",
+				line = "<leader>/",
 				---block-comment keymap
-				block = "<C-b>",
+				block = "<leader>c",
 			},
 
 			---LHS of operator-pending mapping in NORMAL + VISUAL mode
 			---@type table
 			opleader = {
 				---line-comment keymap
-				line = "<C-c>",
+				line = "<C-/>",
 				---block-comment keymap
 				block = "<C-b>",
 			},

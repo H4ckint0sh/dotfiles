@@ -30,6 +30,8 @@ return {
 				"markdown",
 				"prisma",
 				"glimmer",
+				"regex",
+				"bash",
 				"vim",
 				"astro",
 				"vimdoc",

@@ -15,8 +15,8 @@ return {
 			functions = {},
 			variables = {},
 			-- Background styles. Can be "dark", "transparent" or "normal"
-			sidebars = "dark", -- style for sidebars, see below
-			floats = "transparent", -- style for floating windows
+			sidebars = "normal", -- style for sidebars, see below
+			floats = "normal", -- style for floating windows
 		},
 		on_highlights = function(H, C)
 			-- Native
@@ -27,7 +27,6 @@ return {
 			-- Tokyonight
 			H.CursorLine = { bg = C.bg_highlight }
 			H.LspInlayHint = { bg = "NONE", fg = C.comment }
-			H.TelescopeResultsComment = { fg = C.comment }
 			H.GitSignsCurrentLineBlame = { fg = C.comment }
 			H.DiagnosticVirtualTextError = { bg = "NONE", fg = C.red }
 			H.DiagnosticVirtualTextHint = { bg = "NONE", fg = C.teal }
