@@ -34,31 +34,27 @@ export ZSH_CUSTOM=$DOTFILES
 # export LANG=en_US.UTF-8
 # export LC_ALL=$LANG
 
-# fzf
-export FZF_DEFAULT_OPTS="   
-    --reverse \
-    --border=sharp\
-    --preview-window=border-sharp\
-    --ansi\
-    --header-first\
-    --scrollbar='▍'\
-    --color=bg+:#2f334d \
-    --color=bg:#1a1b26 \
-    --color=border:#636da6 \
-    --color=gutter:#1a1b26 \
-    --color=fg:#636da6 \
-    --color=fg+:#c8d3f5 \
-    --color=header:#82aaff \
-    --color=hl+:#0db9d7 \
-    --color=hl:#0db9d7 \
-    --color=info:#545c7e \
-    --color=marker:#ff007c \
-    --color=pointer:#ff966c \
-    --color=prompt:#2ac3de \
-    --color=query:#c0caf5:regular \
-    --color=scrollbar:#27a1b9 \
-    --color=separator:#ff9e64 \
-    --color=spinner:#ff007c \
+export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
+  --highlight-line \
+  --info=inline-right \
+  --ansi \
+  --layout=reverse \
+  --color=bg+:#283457 \
+  --color=bg:#16161e \
+  --color=border:#27a1b9 \
+  --color=fg:#c0caf5 \
+  --color=gutter:#16161e \
+  --color=header:#ff9e64 \
+  --color=hl+:#2ac3de \
+  --color=hl:#2ac3de \
+  --color=info:#545c7e \
+  --color=marker:#ff007c \
+  --color=pointer:#ff007c \
+  --color=prompt:#2ac3de \
+  --color=query:#c0caf5:regular \
+  --color=scrollbar:#27a1b9 \
+  --color=separator:#ff9e64 \
+  --color=spinner:#ff007c \
 "
 
 # Git Stuff
