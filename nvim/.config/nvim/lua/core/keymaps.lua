@@ -20,7 +20,7 @@ keymap.set("i", "<A-d>", "<Esc>:m .+1<CR>==gi")
 keymap.set("v", "<A-d>", ":m '>+1<CR>gv=gv")
 
 -- Select whole file
-keymap.set("n", "<leader>%", "ggVG")
+keymap.set("n", "<leader>sa", "ggVG")
 
 -- Keep stuff centred while moving around
 keymap.set("n", "*", "*zzzv")
@@ -50,6 +50,15 @@ keymap.set("v", "<A-S-u>", "yP`[V`]")
 keymap.set("n", "<A-S-d>", "yyp")
 keymap.set("v", "<A-S-d>", "y`>pgv")
 
+-- move to first non-blank character
+keymap.set("n", "<BS>", "^")
+
+-- Highlight to end of line
+keymap.set("n", "L", "vg_")
+
+-- paste over whole file
+keymap.set("n", "<leader>v", "ggVGp")
+
 -- Remove highlights
 keymap.set("n", "<CR>", ":noh<CR><CR>")
 
@@ -60,7 +69,7 @@ keymap.set("n", "<leader>x", ":bd<CR>")
 keymap.set("n", "<S-u>", ":redo<CR>", { silent = true })
 
 -- Save
-keymap.set("n", "<C-s>", ":w<CR>", { silent = true })
+keymap.set("n", "<leader>w", ":w<CR>", { silent = true })
 
 keymap.set("n", "<leader>h", function()
 	vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is.enable)
