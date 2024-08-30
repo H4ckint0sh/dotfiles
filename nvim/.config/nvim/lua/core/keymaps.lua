@@ -125,6 +125,9 @@ keymap.set("n", "<leader>qc", ":cclose<CR>") -- close quickfix list
 -- Vim-maximizer
 keymap.set("n", "<leader>sm", ":MaximizerToggle<CR>") -- toggle maximize tab
 
+-- got to previuos active tab
+keymap.set("n", "<leader>#", ":b#<CR>")
+
 -- Nvim-tree
 keymap.set("n", "<leader>ee", ":NvimTreeToggle<CR>") -- toggle file explorer
 keymap.set("n", "<leader>er", ":NvimTreeFocus<CR>") -- toggle focus to file explorer
@@ -164,71 +167,28 @@ keymap.set("n", "<leader>h9", function()
 	require("harpoon.ui").nav_file(9)
 end)
 
--- Vim REST Console
-keymap.set("n", "<leader>xr", ":call VrcQuery()<CR>") -- Run REST query
-
--- LSP
-keymap.set("n", "<leader>gg", "<cmd>lua vim.lsp.buf.hover()<CR>")
-keymap.set("n", "<leader>gd", "<cmd>lua vim.lsp.buf.definition()<CR>")
-keymap.set("n", "<leader>gD", "<cmd>lua vim.lsp.buf.declaration()<CR>")
-keymap.set("n", "<leader>gi", "<cmd>lua vim.lsp.buf.implementation()<CR>")
-keymap.set("n", "<leader>gt", "<cmd>lua vim.lsp.buf.type_definition()<CR>")
---keymap.set('n', '<leader>gr', '<cmd>lua vim.lsp.buf.references()<CR>')
-keymap.set("n", "<leader>gs", "<cmd>lua vim.lsp.buf.signature_help()<CR>")
-keymap.set("n", "<leader>a", " <cmd>lua vim.lsp.buf.code_action()<CR>")
-keymap.set("n", "<leader>r", "<cmd>lua vim.lsp.buf.rename()<CR>")
-keymap.set("n", "<leader>gf", "<cmd>lua vim.lsp.buf.format({async = true})<CR>")
-keymap.set("n", "<leader>cf", "<cmd>lua require('lsp.functions').format()<CR>")
-keymap.set("v", "<leader>gf", "<cmd>lua vim.lsp.buf.format({async = true})<CR>")
-keymap.set("n", "<leader>ga", "<cmd>lua vim.lsp.buf.code_action()<CR>")
-keymap.set("n", "<leader>gl", "<cmd>lua vim.diagnostic.open_float()<CR>")
-keymap.set("n", "<leader>gp", "<cmd>lua vim.diagnostic.goto_prev()<CR>")
-keymap.set("n", "<leader>gn", "<cmd>lua vim.diagnostic.goto_next()<CR>")
-keymap.set("n", "<leader>tr", "<cmd>lua vim.lsp.buf.document_symbol()<CR>")
-keymap.set("i", "<C-Space>", "<cmd>lua vim.lsp.buf.completion()<CR>")
-
-keymap.set("n", "<leader>p", require("fzf-lua").files, { desc = "Fzf Files" })
-
+-- Keybindings for LSP functionalities
+keymap.set("n", "<leader>gd", "<cmd>lua vim.lsp.buf.definition()<CR>") -- Go to Definition
+keymap.set("n", "<leader>gi", "<cmd>lua vim.lsp.buf.implementation()<CR>") -- Go to Implementation
+keymap.set("n", "<leader>r", "<cmd>lua vim.lsp.buf.rename()<CR>") -- Rename Symbol
+keymap.set("n", "<leader>a", "<cmd>lua vim.lsp.buf.code_action()<CR>") -- Code Actions
+keymap.set("n", "<leader>gy", "<cmd>lua vim.lsp.buf.type_definition()<CR>") -- Type Definition
+keymap.set("n", "<leader>sh", "<cmd>lua vim.lsp.buf.signature_help()<CR>") -- Signature Help
+keymap.set("n", "<leader>f", require("fzf-lua").files, { desc = "Fzf Files" })
 keymap.set("n", "<leader>R", require("fzf-lua").registers, { desc = "Registers" })
-
 keymap.set("n", "<leader>m", require("fzf-lua").marks, { desc = "Marks" })
-
-keymap.set("n", "<leader>f", require("fzf-lua").live_grep, { desc = "Fzf Grep" })
-
+keymap.set("n", "<leader>h", require("fzf-lua").oldfiles, { desc = "Recent files" })
+keymap.set("n", "<leader>g", require("fzf-lua").live_grep, { desc = "Fzf Grep" }, { silent = true })
 keymap.set("n", "<leader>b", require("fzf-lua").buffers, { desc = "Fzf Buffers" })
-
 keymap.set("n", "<leader>j", require("fzf-lua").helptags, { desc = "Help Tags" })
-
 keymap.set("n", "<leader>gc", require("fzf-lua").git_bcommits, { desc = "Browse File Commits" })
-
-keymap.set("n", "<leader>gs", require("fzf-lua").git_status, { desc = "Git Status" })
-
+-- keymap.set("n", "<leader>gs", require("fzf-lua").git_status, { desc = "Git Status" })
+keymap.set("n", "<leader>d", "<cmd>FzfLua lsp_document_diagnostics<CR>")
+keymap.set("n", "<leader>D", "<cmd>FzfLua lsp_workspace_diagnostics<CR>")
+keymap.set("n", "<leader>ca", "<cmd>FzfLua lsp_code_actions<CR>", {})
+keymap.set("n", "<leader>gs", "<cmd>FzfLua lsp_document_symbols<CR>", {})
+keymap.set("n", "<leader>gr", "<cmd>FzfLua lsp_references<CR>", {})
 keymap.set("n", "<leader>'", "<cmd>FzfLua resume<cr>", { desc = "Resume" })
-
-keymap.set(
-	"n",
-	"<leader>s",
-	":lua require'fzf-lua'.spell_suggest({ winopts = {relative='cursor',row=1.01, col=0, height=0.2, width=0.2} })<cr>",
-	{ desc = "Spelling Suggestions" }
-)
-
-keymap.set("n", "<leader>cj", require("fzf-lua").lsp_definitions, { desc = "Jump to Definition" })
-
-keymap.set(
-	"n",
-	"<leader>cs",
-	":lua require'fzf-lua'.lsp_document_symbols({winopts = {preview={wrap='wrap'}}})<cr>",
-	{ desc = "Document Symbols" }
-)
-
-keymap.set("n", "<leader>cr", require("fzf-lua").lsp_references, { desc = "LSP References" })
-
-keymap.set(
-	"n",
-	"<leader>cd",
-	":lua require'fzf-lua'.diagnostics_document({fzf_opts = { ['--wrap'] = true }})<cr>",
-	{ desc = "Document Diagnostics" }
-)
 
 -- load the session for the current directory
 keymap.set("n", "<leader>qs", function()
