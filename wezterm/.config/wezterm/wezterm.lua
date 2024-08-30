@@ -42,7 +42,7 @@ local config = {
 		{ family = "Maple Mono", weight = "Regular" },
 		{ family = "Symbols Nerd Font" },
 	}),
-	font_size = 13.0,
+	font_size = 14.0,
 	line_height = 1.2,
 	underline_position = -6, -- Adjust this value as needed
 	native_macos_fullscreen_mode = false,
