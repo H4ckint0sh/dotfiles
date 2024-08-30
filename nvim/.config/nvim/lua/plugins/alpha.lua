@@ -89,10 +89,10 @@ return {
 		}))
 		dashboard.section.buttons.val = {
 			dashboard.button("SPC e", "  New file", "<Cmd>ene <CR>"),
-			dashboard.button("SPC P", "  Find file", "<cmd> FzfLua files <cr>"),
-			dashboard.button("SPC P", "󰺯  Find text", "<cmd> FzfLua grep <cr><cr>"),
-			dashboard.button("SPC P", "  Recent files", "<cmd> FzfLua oldfiles <cr><cr>"),
-			dashboard.button("SPC S", "󰦛  Restore Session", [[<cmd> lua require("persistence").select() <cr>]]),
+			dashboard.button("SPC f", "  Find file", "<Cmd> FzfLua files <CR>"),
+			dashboard.button("SPC g", "󰺯  Find text", "<Cmd> FzfLua grep <CR>"),
+			dashboard.button("SPC h", "  Recent files", "<Cmd> FzfLua oldfiles <CR>"),
+			dashboard.button("SPC S", "󰦛  Restore Session", [[<Cmd> lua require("persistence").select() <CR>]]),
 			dashboard.button("SPC q q", "  Quit", "<Cmd>qa<CR>"),
 		}
 	end,
