@@ -44,26 +44,12 @@ local options = {
 	showmode = false, --- Don't show things like -- INSERT -- anymore
 }
 
-local globals = {
-	speeddating_no_mappings = 1, --- Disable default mappings for speeddating
-}
-
--- vim.o.statuscolumn = "%!v:lua.require('custom.statuscolumn').hackStatuscolumn()";
-
 vim.opt.shortmess:append("c")
 vim.opt.formatoptions:remove("c")
 vim.opt.formatoptions:remove("r")
 vim.opt.formatoptions:remove("o")
 vim.opt.fillchars:append("stl: ")
 
-vim.cmd([[
-    set statusline=%!v:lua.require('custom.statusline').global()
-]])
-
 for k, v in pairs(options) do
 	vim.opt[k] = v
-end
-
-for k, v in pairs(globals) do
-	vim.g[k] = v
 end

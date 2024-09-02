@@ -1,3 +1,4 @@
+---@diagnostic disable: different-requires
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 

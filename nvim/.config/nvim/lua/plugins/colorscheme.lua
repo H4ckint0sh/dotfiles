@@ -24,7 +24,6 @@ return {
 			H["@tag.tsx"] = { fg = C.blue2 }
 			H["@tag.builtin.tsx"] = { fg = C.red }
 
-			-- Tokyonight
 			H.CursorLine = { bg = C.bg_highlight }
 			H.LspInlayHint = { bg = "NONE", fg = C.comment }
 			H.GitSignsCurrentLineBlame = { fg = C.comment }
@@ -34,6 +33,9 @@ return {
 			H.DiagnosticVirtualTextWarn = { bg = "NONE", fg = C.yellow }
 			H.WinSeparator = { fg = C.fg, bg = "NONE" }
 			H.TroubleNormal = { bg = "NONE", fg = C.fg }
+
+			-- Neogit
+			H.NeogitSectionHeader = { fg = C.magenta }
 		end,
 	},
 	config = function(_, opts)

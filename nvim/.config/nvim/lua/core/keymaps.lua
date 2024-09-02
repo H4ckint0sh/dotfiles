@@ -1,6 +1,3 @@
--- Set leader key to space
-vim.g.mapleader = " "
-
 local keymap = vim.keymap
 
 keymap.set("v", "<S-PageDown>", ":m '>+1<CR>gv=gv") -- Move Line Down in Visual Mode
@@ -178,7 +175,7 @@ keymap.set("n", "<leader>f", require("fzf-lua").files, { desc = "Fzf Files" })
 keymap.set("n", "<leader>R", require("fzf-lua").registers, { desc = "Registers" })
 keymap.set("n", "<leader>m", require("fzf-lua").marks, { desc = "Marks" })
 keymap.set("n", "<leader>h", require("fzf-lua").oldfiles, { desc = "Recent files" })
-keymap.set("n", "<leader>g", require("fzf-lua").live_grep, { desc = "Fzf Grep" }, { silent = true })
+keymap.set("n", "<leader>t", require("fzf-lua").live_grep, { desc = "Fzf Grep" }, { silent = true })
 keymap.set("n", "<leader>b", require("fzf-lua").buffers, { desc = "Fzf Buffers" })
 keymap.set("n", "<leader>j", require("fzf-lua").helptags, { desc = "Help Tags" })
 keymap.set("n", "<leader>gc", require("fzf-lua").git_bcommits, { desc = "Browse File Commits" })

@@ -2,6 +2,7 @@
     "diagnostics.globals": [
         "hs",
         "vim",
-        "createEventTap"
+        "createEventTap",
+        "center_cursor_on_search_result"
     ]
 }
