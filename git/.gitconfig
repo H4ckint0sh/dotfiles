@@ -6,16 +6,30 @@
 #	name = Alijan Adeli
 #	email = ali@MacBook-Pro-som-tillhor-Alijan.local
 [core]
-	pager = diff-so-fancy | less --tabs=4 -RFX
-
+	pager = delta
 [interactive]
-	diffFilter = diff-so-fancy --patch
-
+	diffFilter = delta --color-only
 [credential]
 	helper = osxkeychain
 [init]
 	defautBranch = main
-
 [push]
 	default = upstream
 	autoSetupRemote = true
+[delta]
+    navigate = true    # use n and N to move between diff sections
+    light = false      # set to true if you're in a terminal w/ a light background color (e.g. the default macOS terminal)
+    side-by-side = true
+    line-numbers = true
+    syntax-theme = tokyonight_storm 
+    true-color = always
+    hunk-header-style = omit
+
+[delta "line-numbers"]
+    line-numbers = true
+    line-numbers-minus-style = red
+    line-numbers-zero-style = "#565f89"
+    line-numbers-plus-style = green
+    line-numbers-left-format = "{nm:^4}"
+    line-numbers-right-format = "{np:^4}"
+
