@@ -108,8 +108,6 @@ keymap.set("n", "<leader>tp", ":tabp<CR>") -- previous tab
 keymap.set("n", "<leader>cc", ":diffput<CR>") -- put diff from current to other during diff
 keymap.set("n", "<leader>cj", ":diffget 1<CR>") -- get diff from left (local) during merge
 keymap.set("n", "<leader>ck", ":diffget 3<CR>") -- get diff from right (remote) during merge
-keymap.set("n", "<leader>cn", "]c") -- next diff hunk
-keymap.set("n", "<leader>cp", "[c") -- previous diff hunk
 
 -- Quickfix keymaps
 keymap.set("n", "<leader>qo", ":copen<CR>") -- open quickfix list
@@ -165,24 +163,23 @@ keymap.set("n", "<leader>h9", function()
 end)
 
 -- Keybindings for LSP functionalities
-keymap.set("n", "<leader>gd", "<cmd>lua vim.lsp.buf.definition()<CR>") -- Go to Definition
-keymap.set("n", "<leader>gi", "<cmd>lua vim.lsp.buf.implementation()<CR>") -- Go to Implementation
+keymap.set("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>") -- Go to Definition
+keymap.set("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>") -- Go to Implementation
 keymap.set("n", "<leader>r", "<cmd>lua vim.lsp.buf.rename()<CR>") -- Rename Symbol
 keymap.set("n", "<leader>a", "<cmd>lua vim.lsp.buf.code_action()<CR>") -- Code Actions
-keymap.set("n", "<leader>gy", "<cmd>lua vim.lsp.buf.type_definition()<CR>") -- Type Definition
-keymap.set("n", "<leader>sh", "<cmd>lua vim.lsp.buf.signature_help()<CR>") -- Signature Help
+keymap.set("n", "gy", "<cmd>lua vim.lsp.buf.type_definition()<CR>") -- Type Definition
+keymap.set("n", "sh", "<cmd>lua vim.lsp.buf.signature_help()<CR>") -- Signature Help
 keymap.set("n", "<leader>f", require("fzf-lua").files, { desc = "Fzf Files" })
 keymap.set("n", "<leader>R", require("fzf-lua").registers, { desc = "Registers" })
 keymap.set("n", "<leader>m", require("fzf-lua").marks, { desc = "Marks" })
 keymap.set("n", "<leader>h", require("fzf-lua").oldfiles, { desc = "Recent files" })
-keymap.set("n", "<leader>t", require("fzf-lua").live_grep, { desc = "Fzf Grep" }, { silent = true })
+keymap.set("n", "<leader>t", require("fzf-lua").live_grep, { desc = "Fzf Grep" })
 keymap.set("n", "<leader>b", require("fzf-lua").buffers, { desc = "Fzf Buffers" })
 keymap.set("n", "<leader>j", require("fzf-lua").helptags, { desc = "Help Tags" })
 keymap.set("n", "<leader>gc", require("fzf-lua").git_bcommits, { desc = "Browse File Commits" })
 -- keymap.set("n", "<leader>gs", require("fzf-lua").git_status, { desc = "Git Status" })
 keymap.set("n", "<leader>d", "<cmd>FzfLua lsp_document_diagnostics<CR>")
 keymap.set("n", "<leader>D", "<cmd>FzfLua lsp_workspace_diagnostics<CR>")
-keymap.set("n", "<leader>ca", "<cmd>FzfLua lsp_code_actions<CR>", {})
 keymap.set("n", "<leader>gs", "<cmd>FzfLua lsp_document_symbols<CR>", {})
 keymap.set("n", "<leader>gr", "<cmd>FzfLua lsp_references<CR>", {})
 keymap.set("n", "<leader>'", "<cmd>FzfLua resume<cr>", { desc = "Resume" })
