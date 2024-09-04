@@ -24,6 +24,9 @@ export PUPPETEER_EXECUTABLE_PATH=`which chromium`
 # Path to your dotfiles.
 export DOTFILES=$HOME/.dotfiles
 
+# path to bat config
+export BAT_CONFIG_PATH="$HOME/.config/bat/config"
+
 # Set helix as EDITOR
 export EDITOR=hx
 # export OPENAI_API_KEY=$(security find-generic-password -s 'openapi token' -w)
