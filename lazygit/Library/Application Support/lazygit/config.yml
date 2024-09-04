@@ -53,7 +53,7 @@ git:
     autoWrapWidth: 72
   paging:
     colorArg: always
-    pager: diff-so-fancy
+    pager: delta --dark --paging=never --line-numbers --side-by-side
   merging:
     # only applicable to unix users
     manualCommit: false
