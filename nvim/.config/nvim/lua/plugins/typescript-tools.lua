@@ -36,12 +36,16 @@ return {
 			handlers = handlers,
 			settings = {
 				separate_diagnostic_server = false,
+				-- mirror of VSCode's `typescript.suggest.completeFunctionCalls`
+				complete_function_calls = true,
+				include_completions_with_insert_text = true,
 				code_lens = "off",
 				tsserver_file_preferences = {
 					includeInlayParameterNameHints = "all",
 					includeCompletionsForModuleExports = true,
 					quotePreference = "auto",
 				},
+				expose_as_code_action = "all",
 			},
 		})
 	end,

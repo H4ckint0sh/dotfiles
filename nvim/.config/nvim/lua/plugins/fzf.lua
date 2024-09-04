@@ -13,6 +13,10 @@ return {
 		fzf.setup({
 			winopts = {
 				backdrop = 100,
+				preview = {
+					-- layout = "vertical" or "horizontal"
+					layout = "flex",
+				},
 			},
 			keymap = {
 				fzf = {

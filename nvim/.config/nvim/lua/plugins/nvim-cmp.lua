@@ -13,11 +13,19 @@ return {
 		"saadparwaiz1/cmp_luasnip",
 		{
 			"L3MON4D3/LuaSnip",
-			dependencies = "rafamadriz/friendly-snippets",
-			build = "make install_jsregexp",
-			config = function()
-				require("luasnip.loaders.from_vscode").lazy_load({ paths = { vim.fn.stdpath("config") .. "/snippets" } })
-			end,
+			event = "VeryLazy",
+			dependencies = {
+				{
+					"rafamadriz/friendly-snippets",
+					config = function()
+						require("luasnip").filetype_extend(
+							"typescript",
+							{ "javascript", "javascriptreact", "typescriptreact" }
+						)
+						require("luasnip.loaders.from_vscode").lazy_load()
+					end,
+				},
+			},
 		},
 		{
 			"David-Kunz/cmp-npm",
@@ -48,8 +56,6 @@ return {
 		end
 
 		cmp_git.setup()
-
-		require("luasnip/loaders/from_vscode").lazy_load()
 
 		local check_backspace = function()
 			local col = vim.fn.col(".") - 1
@@ -169,7 +175,7 @@ return {
 				},
 			}),
 		})
-
+		require("luasnip.loaders.from_vscode").lazy_load()
 		cmp.setup({
 			snippet = {
 				expand = function(args)
@@ -292,7 +298,7 @@ return {
 				{ name = "git", priority = 7 },
 				{
 					name = "luasnip",
-					priority = 7,
+					priority = 10,
 					max_item_count = 5,
 				},
 				{
