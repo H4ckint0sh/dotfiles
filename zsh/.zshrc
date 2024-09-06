@@ -27,8 +27,11 @@ export DOTFILES=$HOME/.dotfiles
 # path to bat config
 export BAT_CONFIG_PATH="$HOME/.config/bat/config"
 
+# terminal
+export TERM=tmux-256color
+
 # Set helix as EDITOR
-export EDITOR=hx
+export EDITOR=nvim
 # export OPENAI_API_KEY=$(security find-generic-password -s 'openapi token' -w)
 
 MOZ_DISABLE_SAFE_MODE_KEY=1
