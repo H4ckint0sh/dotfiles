@@ -1,5 +1,7 @@
 local icons = require("util.icons").icons
 local fmt = require("util.icons").fmt
+---@diagnostic disable-next-line: missing-fields
+local colors = require("tokyonight.colors").setup({ style = "night" })
 local M = {}
 
 M.mode = {
@@ -21,8 +23,6 @@ M.mode = {
 		return icon .. " " .. name
 	end,
 	color = function()
-		local colors = require("tokyonight.colors").setup({ style = "night" })
-
 		local mode = vim.fn.mode()
 		local map = {
 			n = colors.blue,
@@ -36,57 +36,40 @@ M.mode = {
 			S = colors.magenta,
 		}
 		return {
-			fg = map[mode] or colors.magenta,
-			bg = colors.bg,
+			bg = map[mode] or colors.magenta,
+			fg = colors.bg_dark,
 		}
 	end,
+	separator = { right = "", left = "░▒▓" },
 }
 
-M.branch = {
-	"branch",
-	icon = icons.GitBranch,
+M.filetype = {
+	"filetype",
 	color = function()
-		local colors = require("tokyonight.colors").setup({ style = "night" })
-		return { bg = colors.bg }
+		return { fg = colors.blue, bg = colors.bg_highlight }
 	end,
+	separator = { right = "", left = "" },
 }
-
-M.diff = {
-	"diff",
-	symbols = {
-		added = fmt("Add", ""),
-		modified = fmt("Modified", ""),
-		removed = fmt("Removed", ""),
-	},
-	color = function()
-		local colors = require("tokyonight.colors").setup({ style = "night" })
-		return { bg = colors.bg }
-	end,
-}
-
-M.filetype = { "filetype" }
 
 M.diagnostics = {
 	"diagnostics",
 	color = function()
-		local colors = require("tokyonight.colors").setup({ style = "night" })
-		return { bg = colors.bg }
+		return { bg = colors.bg_highlight }
 	end,
+	separator = { right = "", left = "" },
 }
 
 M.encoding = {
 	"encoding",
 	color = function()
-		local colors = require("tokyonight.colors").setup({ style = "night" })
-		return { fg = colors.blue, bg = colors.bg }
+		return { fg = colors.blue, bg = colors.bg_highlight }
 	end,
 }
 
 M.fileformat = {
 	"fileformat",
 	color = function()
-		local colors = require("tokyonight.colors").setup({ style = "night" })
-		return { fg = colors.blue, bg = colors.bg }
+		return { fg = colors.blue, bg = colors.bg_highlight }
 	end,
 }
 
@@ -98,8 +81,7 @@ M.indentation = {
 		return type .. ": " .. value
 	end,
 	color = function()
-		local colors = require("tokyonight.colors").setup({ style = "night" })
-		return { fg = colors.blue, bg = colors.bg }
+		return { fg = colors.blue, bg = colors.bg_highlight }
 	end,
 }
 
@@ -109,8 +91,7 @@ M.progress = {
 		return vim.trim(location)
 	end,
 	color = function()
-		local colors = require("tokyonight.colors").setup({ style = "night" })
-		return { fg = colors.purple, bg = colors.bg }
+		return { fg = colors.black, bg = colors.fg }
 	end,
 }
 
@@ -120,8 +101,7 @@ M.location = {
 		return vim.trim(location)
 	end,
 	color = function()
-		local colors = require("tokyonight.colors").setup({ style = "night" })
-		return { fg = colors.purple, bg = colors.bg }
+		return { fg = colors.black, bg = colors.fg }
 	end,
 }
 
@@ -130,9 +110,9 @@ M.macro = {
 		return vim.fn.reg_recording()
 	end,
 	icon = icons.Recording,
+	separator = { left = "", right = "" },
 	color = function()
-		local colors = require("tokyonight.colors").setup({ style = "night" })
-		return { fg = colors.red }
+		return { fg = colors.magenta, bg = colors.bg_dark }
 	end,
 }
 
@@ -149,9 +129,9 @@ M.lsp = {
 		return table.concat(attached_clients, ", ")
 	end,
 	icon = icons.Braces,
+	separator = { right = "", left = "" },
 	color = function()
-		local colors = require("tokyonight.colors").setup({ style = "night" })
-		return { fg = colors.comment, bg = colors.bg }
+		return { fg = colors.fg_dark, bg = colors.bg_dark }
 	end,
 }
 
@@ -160,8 +140,7 @@ M.gap = {
 		return " "
 	end,
 	color = function()
-		local colors = require("tokyonight.colors").setup({ style = "night" })
-		return { bg = colors.bg }
+		return { bg = colors.bg_highlight }
 	end,
 	padding = 0,
 }

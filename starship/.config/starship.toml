@@ -1,103 +1,92 @@
-# The minimal, blazing-fast, and infinitely customizable prompt
-# https://starship.rs
-
-[package]
-disabled = true
-
-[username]
-disabled = true
-
-[hostname]
-disabled = true
-
-[aws]
-disabled = true
-
-[docker_context]
-disabled = true
-
-[git_branch]
-disabled = true
-
-[git_commit]
-disabled = true
-
-[git_state]
-disabled = true
-
-[git_metrics]
-disabled = true
-
-[git_status]
-disabled = true
-
-# Sets user-defined palette
-palette = "catppuccin_mocha"
-
-[character]
-# Note the use of Catppuccin color 'maroon'
-success_symbol = "[[♥](green)  ❯](maroon)"
-error_symbol = "[❯](red)"
-vimcmd_symbol = "[❮](green)"
+palette = "tokyonight_night"
+format = """
+[░▒▓](#c0caf5)\
+[  ](bg:#c0caf5 fg:#16161e)\
+[](bg:#9d7cd8 fg:#c0caf5)\
+$directory\
+[](fg:#9d7cd8 bg:#394b70)\
+$nodejs\
+[](fg:#394b70 bg:#212736)\
+$rust\
+$golang\
+$php\
+[ ](fg:#1d2230)\
+$character\ 
+"""
 
 [directory]
-truncation_length = 4
-# Catppuccin 'lavender'
-style = "bold lavender"
+style = "fg:#1f2335 bg:#9d7cd8"
+format = "[ $path ]($style)"
+truncation_length = 3
+truncation_symbol = "…/"
 
-# palette tables should be last in the config ⚓️
-[palettes.catppuccin_latte]
-rosewater = "#dc8a78"
-flamingo = "#dd7878"
-pink = "#ea76cb"
-mauve = "#8839ef"
-red = "#d20f39"
-maroon = "#e64553"
-peach = "#fe640b"
-yellow = "#df8e1d"
-green = "#40a02b"
-teal = "#179299"
-sky = "#04a5e5"
-sapphire = "#209fb5"
-blue = "#1e66f5"
-lavender = "#7287fd"
-text = "#4c4f69"
-subtext1 = "#5c5f77"
-subtext0 = "#6c6f85"
-overlay2 = "#7c7f93"
-overlay1 = "#8c8fa1"
-overlay0 = "#9ca0b0"
-surface2 = "#acb0be"
-surface1 = "#bcc0cc"
-surface0 = "#ccd0da"
-base = "#eff1f5"
-mantle = "#e6e9ef"
-crust = "#dce0e8"
+[directory.substitutions]
+"Documents" = "󰈙 "
+"Downloads" = " "
+"Music" = " "
+"Pictures" = " "
 
-[palettes.catppuccin_mocha]
-rosewater = "#f5e0dc"
-flamingo = "#f2cdcd"
-pink = "#f5c2e7"
-mauve = "#cba6f7"
-red = "#f38ba8"
-maroon = "#eba0ac"
-peach = "#fab387"
-yellow = "#f9e2af"
-green = "#a6e3a1"
-teal = "#94e2d5"
-sky = "#89dceb"
-sapphire = "#74c7ec"
-blue = "#89b4fa"
-lavender = "#b4befe"
-text = "#cdd6f4"
-subtext1 = "#bac2de"
-subtext0 = "#a6adc8"
-overlay2 = "#9399b2"
-overlay1 = "#7f849c"
-overlay0 = "#6c7086"
-surface2 = "#585b70"
-surface1 = "#45475a"
-surface0 = "#313244"
-base = "#1e1e2e"
-mantle = "#181825"
-crust = "#11111b"
+[git_branch]
+symbol = ""
+style = "bg:#394b70"
+format = '[[ $symbol $branch ](fg:#7dcfff bg:#394b70)]($style)'
+
+[git_status]
+style = "bg:#394b70"
+format = '[[($all_status$ahead_behind )](fg:#7dcfff bg:#394b70)]($style)'
+
+[nodejs]
+symbol = ""
+style = "bg:#212736"
+format = '[[ $symbol ($version) ](fg:#7dcfff bg:#394b70)]($style)'
+
+[rust]
+symbol = ""
+style = "bg:#212736"
+format = '[[ $symbol ($version) ](fg:#7dcfff bg:#212736)]($style)'
+
+[golang]
+symbol = ""
+style = "bg:#212736"
+format = '[[ $symbol ($version) ](fg:#7dcfff bg:#212736)]($style)'
+
+[php]
+symbol = ""
+style = "bg:#212736"
+format = '[[ $symbol ($version) ](fg:#7dcfff bg:#212736)]($style)'
+
+[time]
+disabled = false
+time_format = "%R" # Hour:Minute Format
+style = "bg:#1d2230"
+format = '[[  $time ](fg:#a0a9cb bg:#1d2230)]($style)'
+
+[character]
+success_symbol = '[ ](bold green) '
+error_symbol = '[ ](#E84D44) '
+vimcmd_symbol = '[󰕷 ](bold green) '
+
+[palettes.tokyonight_night]
+red = "#f7768e"
+orange = "#ff9e64"
+yellow = "#e0af68"
+light-green = "#9ece6a"
+green = "#73daca"
+turquoise = "#89ddff"
+light-cyan = "#b4f9f8"
+teal = "#2ac3de"
+cyan = "#7dcfff"
+blue = "#7aa2f7"
+magenta = "#bb9af7"
+white = "#c0caf5"
+light-gray = "#9aa5ce"
+parameters = "#cfc9c2"
+comment = "#565f89"
+black = "#414868"
+foreground = "#a9b1d6"
+foreground_highlight = "#c0caf5"
+foreground_gutter = "#363b54"
+background = "#1a1b26"
+background_highlight = "#30374b"
+background_menu = "#16161e"
+
