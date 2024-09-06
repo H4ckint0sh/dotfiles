@@ -18,12 +18,11 @@ Run `./cleanenv` to unlink the configs.
 
 ## Apps
 
-- Text editor: [helix](https://helix-editor.com)
+- Text editor: [Neovim](https://neovim.io/)
 - Terminal emulator: [wezterm](https://github.com/wez/wezterm)
 - Terminal multiplexer: [tmux](https://github.com/tmux/tmux)
 - Window manager: [aerospace](https://github.com/nikitabobko/AeroSpace)
 - Git TUI: [lazygit](https://github.com/jesseduffield/lazygit)
-- File Manager: [nnn](https://github.com/jarun/nnn)
 - Shell: [zsh](https://www.zsh.org)
 - Symlink manager: [stow](https://www.gnu.org/software/stow/)
 - Better cat: [bat](https://github.com/sharkdp/bat)
