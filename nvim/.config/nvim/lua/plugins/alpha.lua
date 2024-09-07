@@ -88,7 +88,6 @@ return {
 			[[  a  a  a  b  b  b  ]],
 		}))
 		dashboard.section.buttons.val = {
-			dashboard.button("SPC e", "  New file", "<Cmd>ene <CR>"),
 			dashboard.button("SPC f", "  Find file", "<Cmd> FzfLua files <CR>"),
 			dashboard.button("SPC t", "󰺯  Find text", "<Cmd> FzfLua live_grep <CR>"),
 			dashboard.button("SPC h", "  Recent files", "<Cmd> FzfLua oldfiles <CR>"),
