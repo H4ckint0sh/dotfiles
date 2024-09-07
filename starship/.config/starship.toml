@@ -2,9 +2,9 @@ palette = "tokyonight_night"
 format = """
 [░▒▓](#c0caf5)\
 [  ](bg:#c0caf5 fg:#16161e)\
-[](bg:#9d7cd8 fg:#c0caf5)\
+[](bg:#292e42 fg:#c0caf5)\
 $directory\
-[](fg:#9d7cd8 bg:#394b70)\
+[](fg:#292e42 bg:#394b70)\
 $nodejs\
 [](fg:#394b70 bg:#212736)\
 $rust\
@@ -15,7 +15,7 @@ $character\
 """
 
 [directory]
-style = "fg:#1f2335 bg:#9d7cd8"
+style = "fg:#bb9af7 bg:#292e42"
 format = "[ $path ]($style)"
 truncation_length = 3
 truncation_symbol = "…/"
