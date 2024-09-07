@@ -17,6 +17,24 @@ return {
 			return (byte < 0x80 and 1) or (byte < 0xE0 and 2) or (byte < 0xF0 and 3) or (byte < 0xF8 and 4) or 1
 		end
 
+		-- Hide statusline in the Alpha dashboard buffer
+		vim.api.nvim_create_autocmd("FileType", {
+			pattern = "alpha",
+			callback = function()
+				vim.o.laststatus = 0 -- Hide the statusline in Alpha dashboard
+				vim.o.showtabline = 0 -- Hide tabline in Alpha dashboard
+			end,
+		})
+
+		-- Show the statusline again when leaving the Alpha dashboard
+		vim.api.nvim_create_autocmd("BufUnload", {
+			buffer = 0,
+			callback = function()
+				vim.o.laststatus = 3 -- Show the statusline after leaving Alpha
+				vim.o.showtabline = 2 -- Hide tabline in Alpha dashboard
+			end,
+		})
+
 		local function applyColors(logo, colors, logoColors)
 			dashboard.section.header.val = logo
 
