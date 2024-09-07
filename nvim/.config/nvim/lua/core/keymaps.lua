@@ -57,7 +57,7 @@ keymap.set("n", "L", "vg_")
 keymap.set("n", "<leader>v", "ggVGp")
 
 -- Remove highlights
-keymap.set("n", "<CR>", ":noh<CR><CR>")
+keymap.set("n", "<CR>", ":noh<CR><CR>", { silent = true })
 
 -- Buffers
 keymap.set("n", "<leader>x", ":bd<CR>")
