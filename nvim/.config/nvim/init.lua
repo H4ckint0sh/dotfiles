@@ -29,6 +29,7 @@ require("util")
 require("util.globals")
 
 require("custom.substitute") -- Substitutes in the statusline
+require("custom.session") -- Substitutes in the statusline
 
 -- LSP
 require("lsp.config")
