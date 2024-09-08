@@ -38,6 +38,8 @@ return {
 	config = function()
 		local lspkind = require("lspkind")
 		local types = require("cmp.types")
+		local neocodeium = require("neocodeium")
+		local commands = require("neocodeium.commands")
 
 		local cmp_status_ok, cmp = pcall(require, "cmp")
 		if not cmp_status_ok then
@@ -54,6 +56,15 @@ return {
 		if not cmp_git_ok then
 			vim.cmd('echohl ErrorMsg | echo "Failed to load cmp_git" | echohl NONE')
 		end
+
+		cmp.event:on("menu_opened", function()
+			commands.disable()
+			neocodeium.clear()
+		end)
+
+		cmp.event:on("menu_closed", function()
+			commands.enable()
+		end)
 
 		cmp_git.setup()
 
@@ -131,7 +142,7 @@ return {
 
 		local source_mapping = {
 			npm = "  ",
-			supermaven = "",
+			neocodeium = "",
 			nvim_lsp = "LSP",
 			buffer = "BUF",
 			nvim_lua = "  ",
@@ -284,7 +295,7 @@ return {
 			-- You should specify your *installed* sources.
 			sources = {
 				{
-					name = "supermaven",
+					name = "neocodeium",
 					priority = 11,
 					max_item_count = 3,
 				},
