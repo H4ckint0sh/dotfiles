@@ -6,8 +6,17 @@ local keep = {
 	"buffers", -- hidden and unloaded buffers, not just those in windows
 	"curdir", -- the current directory
 	"globals", -- global variables that start with an uppercase letter and contain at least one lowercase letter.
-	"resize", -- size of the Vim window: 'lines' and 'columns'
 	"tabpages", -- all tab pages
+	-- "blank", -- empty windows
+	-- "folds", -- manually created folds, opened/closed folds and local fold options
+	-- "help", -- 	the help window
+	-- "localoptions", -- options and mappings local to a window or buffer (not global values for local options)
+	-- "options", -- all options and mappings (also global values for local options)
+	-- "sesdir", -- the directory in which the session file is located will become the current directory
+	-- "skiprtp", -- exclude 'runtimepath' and 'packpath' from the options
+	-- "terminal", -- include terminal windows where the command can be restored
+	-- "winpos", -- position of the whole Vim window
+	-- "winsize", -- window sizes
 }
 
 vim.opt.sessionoptions = table.concat(keep, ",")
@@ -25,15 +34,6 @@ end
 -- List all session files in the sessions directory
 local function list_sessions()
 	return vim.fn.glob(("%s*.vim"):format(sessions_dir), true, true)
-end
-
--- Get the last modified session file
-local function get_last_session()
-	local sessions = list_sessions()
-	table.sort(sessions, function(a, b)
-		return vim.uv.fs_stat(a).mtime.sec > vim.uv.fs_stat(b).mtime.sec
-	end)
-	return sessions[1]
 end
 
 -- Escape file name to be safely used in command
