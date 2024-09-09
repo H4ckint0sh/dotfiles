@@ -4,7 +4,13 @@ return {
 	event = "VeryLazy",
 	config = function()
 		local neocodeium = require("neocodeium")
-		neocodeium.setup()
-		vim.keymap.set("i", "<A-f>", neocodeium.accept)
+		local cmp = require("cmp")
+		neocodeium.setup({
+			enabled = function()
+				return not cmp.visible()
+			end,
+		})
+
+		vim.keymap.set("i", "<C-f>", neocodeium.accept)
 	end,
 }
