@@ -6,7 +6,7 @@ return {
 		local neocodeium = require("neocodeium")
 		local cmp = require("cmp")
 		neocodeium.setup({
-			enabled = function()
+			filter = function()
 				return not cmp.visible()
 			end,
 		})

@@ -42,7 +42,8 @@ local options = {
 	fileencoding = "utf-8", --- The encoding written to file
 	incsearch = true, --- Start searching before pressing enter
 	showmode = false, --- Don't show things like -- INSERT -- anymore
-	inccommand = "split",
+	inccommand = "split", -- Show what is changing shen substituting
+	autoread = true, -- disable neovim generating a swapfile and showing the error
 }
 
 vim.opt.shortmess:append("c")

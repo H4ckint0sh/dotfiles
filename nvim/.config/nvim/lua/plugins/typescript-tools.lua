@@ -45,6 +45,12 @@ return {
 					includeCompletionsForModuleExports = true,
 					quotePreference = "auto",
 				},
+				tsserver_plugins = {
+					-- for TypeScript v4.9+
+					-- "@styled/typescript-styled-plugin",
+					-- or for older TypeScript versions
+					"typescript-styled-plugin",
+				},
 				expose_as_code_action = "all",
 			},
 		})

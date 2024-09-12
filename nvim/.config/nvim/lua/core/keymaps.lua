@@ -5,6 +5,10 @@ keymap.set("v", "<S-PageUp>", ":m '<-2<CR>gv=gv") -- Move Line Up in Visual Mode
 keymap.set("n", "<S-PageDown>", ":m .+1<CR>==") -- Move Line Down in Normal Mode
 keymap.set("n", "<S-PageUp>", ":m .-2<CR>==") -- Move Line Up in Normal Mode
 
+-- Terminal
+-- Define terminal mode mapping in Lua
+vim.keymap.set("t", "<S-esc>", "<C-\\><C-n>")
+
 -- init.lua
 -- Move line up
 keymap.set("n", "<A-u>", ":m .-2<cr>==")

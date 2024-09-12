@@ -28,7 +28,7 @@ mason_lsp.setup({
 		-- "glint",
 		"prismals",
 		"tailwindcss",
-		"tsserver",
+		"ts_ls",
 		"astro",
 		"emmet_ls",
 	},
@@ -87,7 +87,7 @@ require("mason-lspconfig").setup_handlers({
 		})
 	end,
 
-	["tsserver"] = function()
+	["ts_ls"] = function()
 		-- Skip since we use typescript-tools.nvim
 	end,
 

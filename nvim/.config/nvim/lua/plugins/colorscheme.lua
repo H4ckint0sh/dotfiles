@@ -37,6 +37,15 @@ return {
 
 			-- Neogit
 			H.NeogitSectionHeader = { fg = C.magenta }
+
+			-- Fzf
+			H.FzfLuaBorder = { fg = C.fg }
+			H.FzfLuaFzfCursorLine = { bg = C.bg_highlight }
+			H.FzfLuaScrollFloatEmpty = { bg = C.fg }
+			H.FzfLuaScrollFloatEmpty = { bg = C.fg }
+			H.FzfLuaScrollFloatFull = { bg = C.fg }
+			H.FzfLuaFzfScrollbar = { fg = C.fg }
+			H.FzfLuaFzfBorder = { fg = C.fg }
 		end,
 	},
 	config = function(_, opts)

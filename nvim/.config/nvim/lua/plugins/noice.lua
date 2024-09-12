@@ -43,13 +43,6 @@ return {
 			},
 		},
 	},
-	keys = {
-		{
-			"<leader>nd",
-			vim.cmd.NoiceDismiss,
-			desc = "Dismiss notification",
-		},
-	},
 	config = function(_, opts)
 		require("noice").setup(opts)
 	end,
