@@ -58,10 +58,10 @@ local handlers = {
 		border = "rounded",
 	}),
 	["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" }),
-	["textDocument/publishDiagnostics"] = vim.lsp.with(
-		vim.lsp.diagnostic.on_publish_diagnostics,
-		{ virtual_text = true }
-	),
+	-- ["textDocument/publishDiagnostics"] = vim.lsp.with(
+	-- 	vim.lsp.diagnostic.on_publish_diagnostics,
+	-- 	{ virtual_text = true }
+	-- ),
 }
 
 local function on_attach(client, bufnr)
@@ -87,8 +87,19 @@ require("mason-lspconfig").setup_handlers({
 		})
 	end,
 
-	["ts_ls"] = function()
-		-- Skip since we use typescript-tools.nvim
+	["vtsls"] = function()
+		require("lspconfig.configs").vtsls = require("vtsls").lspconfig
+
+		lspconfig.vtsls.setup({
+			capabilities = capabilities,
+			handlers = require("lsp.servers.tsserver").handlers,
+			on_attach = require("lsp.servers.tsserver").on_attach,
+			settings = require("lsp.servers.tsserver").settings,
+		})
+	end,
+
+	["tsserver"] = function()
+		-- Skip since we use vstls
 	end,
 
 	["tailwindcss"] = function()
