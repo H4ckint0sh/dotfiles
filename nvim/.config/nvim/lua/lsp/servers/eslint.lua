@@ -12,6 +12,10 @@ end
 M.on_attach = on_attach
 
 M.settings = {
+	bin = "eslint", -- or `eslint_d`P-- allows to use flat config format
+	experimental = {
+		useFlatConfig = false,
+	},
 	codeAction = {
 		disableRuleComment = {
 			enable = true,
@@ -25,7 +29,7 @@ M.settings = {
 		enable = false,
 		mode = "all",
 	},
-	format = false,
+	format = true,
 	nodePath = "",
 	onIgnoredFiles = "off",
 	packageManager = "npm",
@@ -33,7 +37,7 @@ M.settings = {
 	rulesCustomizations = {},
 	run = "onType",
 	useESLintClass = false,
-	validate = "off",
+	validate = "on",
 	workingDirectory = {
 		mode = "location",
 	},

@@ -46,6 +46,10 @@ return {
 			H.FzfLuaScrollFloatFull = { bg = C.fg }
 			H.FzfLuaFzfScrollbar = { fg = C.fg }
 			H.FzfLuaFzfBorder = { fg = C.fg }
+
+			-- Neocodeium
+			H.NeoCodeiumSuggestion = { bg = "NONE", fg = C.comment }
+			H.NeoCodeiumLabel = { bg = "NONE", fg = C.comment }
 		end,
 	},
 	config = function(_, opts)
