@@ -1,5 +1,8 @@
 
 
+# Source zsh plugins
+source $HOME/.config/.zsh-vi-mode/zsh-vi-mode.plugin.zsh
+
 if [ $(ps ax | grep "[s]sh-agent" | wc -l) -eq 0 ] ; then
     eval $(ssh-agent -s) > /dev/null
     if [ "$(ssh-add -l)" = "The agent has no identities." ] ; then
@@ -24,12 +27,18 @@ export DOTFILES=$HOME/.dotfiles
 # path to bat config
 export BAT_CONFIG_PATH="$HOME/.config/bat/config"
 
+# terminal
+export TERM=tmux-256color
+
 # Set helix as EDITOR
 export EDITOR=nvim
+# export OPENAI_API_KEY=$(security find-generic-password -s 'openapi token' -w)
+
+MOZ_DISABLE_SAFE_MODE_KEY=1
 
 export ZSH_CUSTOM=$DOTFILES
-export LANG=en_US.UTF-8
-export LC_ALL=$LANG
+# export LANG=en_US.UTF-8
+# export LC_ALL=$LANG
 
 export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
   --highlight-line \
@@ -37,7 +46,7 @@ export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
   --ansi \
   --layout=reverse \
   --color=bg+:#283457 \
-  --color=bg:#1a1b26 \
+  --color=bg:#16161e \
   --color=border:#27a1b9 \
   --color=fg:#c0caf5 \
   --color=gutter:#16161e \
@@ -241,6 +250,9 @@ eval $(thefuck --alias)
 
 # Starship
 eval "$(starship init zsh)"
+
+# Felix (return to LWD)
+source <(command fx --init)
 
 # NVM
 export NVM_DIR="$HOME/.nvm"
