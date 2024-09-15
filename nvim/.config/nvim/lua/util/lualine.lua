@@ -1,5 +1,4 @@
 local icons = require("util.icons").icons
-local fmt = require("util.icons").fmt
 ---@diagnostic disable-next-line: missing-fields
 local colors = require("tokyonight.colors").setup({ style = "night" })
 local M = {}
