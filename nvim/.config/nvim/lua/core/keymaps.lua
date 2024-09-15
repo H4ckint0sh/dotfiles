@@ -186,23 +186,3 @@ keymap.set("n", "<leader>D", "<cmd>FzfLua lsp_workspace_diagnostics<CR>")
 keymap.set("n", "<leader>gs", "<cmd>FzfLua lsp_document_symbols<CR>", {})
 keymap.set("n", "<leader>gr", "<cmd>FzfLua lsp_references<CR>", {})
 keymap.set("n", "<leader>'", "<cmd>FzfLua resume<cr>", { desc = "Resume" })
-
--- load the session for the current directory
-keymap.set("n", "<leader>qs", function()
-	require("persistence").load()
-end)
-
--- select a session to load
-keymap.set("n", "<leader>S", function()
-	require("persistence").select()
-end)
-
--- load the last session
-keymap.set("n", "<leader>ql", function()
-	require("persistence").load({ last = true })
-end)
-
--- stop Persistence => session won't be saved on exit
-keymap.set("n", "<leader>qd", function()
-	require("persistence").stop()
-end)
