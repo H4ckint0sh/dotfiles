@@ -15,7 +15,7 @@ return {
 			prompt_align = "left",
 
 			-- When true, <Esc> will close the modal
-			insert_only = true,
+			insert_only = false,
 
 			-- When true, input will start in insert mode.
 			start_in_insert = true,
@@ -34,16 +34,12 @@ return {
 			min_width = { 10, 0.1 },
 
 			win_options = {
-				-- Window transparency (0-100)
-				winblend = 0,
-				-- Change default highlight groups (see :help winhl)
 				winhighlight = "",
 			},
 
 			-- Set to `false` to disable
 			mappings = {
 				n = {
-					["<Esc>"] = "Close",
 					["<CR>"] = "Confirm",
 				},
 				i = {

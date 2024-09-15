@@ -9,6 +9,7 @@ return {
 			filter = function()
 				return not cmp.visible()
 			end,
+			filetypes = { DressingInput = false },
 		})
 
 		vim.keymap.set("i", "<C-f>", neocodeium.accept)

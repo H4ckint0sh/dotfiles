@@ -117,7 +117,6 @@ return {
 	{
 		"styled-components/vim-styled-components",
 		ft = { "typescript", "javascript", "typescriptreact", "javascriptreact" },
-		config = true,
 	},
 
 	{

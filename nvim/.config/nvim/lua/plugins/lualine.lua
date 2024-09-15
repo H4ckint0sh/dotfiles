@@ -1,4 +1,4 @@
-local sources = require("plugins.utils.lualine_sources")
+local sources = require("util.lualine")
 
 return {
 	"nvim-lualine/lualine.nvim",

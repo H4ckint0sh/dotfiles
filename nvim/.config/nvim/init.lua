@@ -1,24 +1,20 @@
----@diagnostic disable: different-requires
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
+require("util.globals")
+require("core.options")
 
 -- lazy
 require("core.lazy")
 
--- Utils
-require("util")
-require("util.globals")
+-- Custom
 require("custom.substitute") -- Substitutes in the statusline
-require("custom.session") -- Substitutes in the statusline
+require("custom.session")    -- Substitutes in the statusline
 
 -- LSP
 require("lsp.config")
 require("lsp.setup")
 require("lsp.functions")
 
--- These modules are not loaded by lazy
+-- These are not Loaded by lazy.nvim
 require("core.autocmds")
-require("core.options")
 require("core.keymaps")
 
 -- Load custom modules

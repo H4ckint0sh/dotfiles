@@ -84,31 +84,10 @@ return {
 				end, { expr = true })
 
 				-- Actions
-				map({ "n", "v" }, "<leader>ghs", gs.stage_hunk)
-				map({ "n", "v" }, "<leader>ghr", gs.reset_hunk)
-				map("n", "<leader>ghS", gs.stage_buffer)
-				map("n", "<leader>ghu", gs.undo_stage_hunk)
-				map("n", "<leader>ghR", gs.reset_buffer)
-				map("n", "<leader>ghp", gs.preview_hunk)
-				map("n", "<leader>gm", function()
+				map("n", "<leader>gb", function()
 					gs.blame_line({ full = true })
 				end)
-				map("n", "<leader>ghd", gs.diffthis)
-				map("n", "<leader>ght", gs.toggle_deleted)
-
-				-- Text object
-				map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>")
 			end,
 		})
 	end,
-	keys = {
-		{ "<Leader>ghd", desc = "diff hunk" },
-		{ "<Leader>ghp", desc = "preview" },
-		{ "<Leader>ghR", desc = "reset buffer" },
-		{ "<Leader>ghr", desc = "reset hunk" },
-		{ "<Leader>ghs", desc = "stage hunk" },
-		{ "<Leader>ghS", desc = "stage buffer" },
-		{ "<Leader>ght", desc = "toggle deleted" },
-		{ "<Leader>ghu", desc = "undo stage" },
-	},
 }

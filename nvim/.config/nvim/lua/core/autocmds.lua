@@ -44,3 +44,21 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 	pattern = { "aerospace.toml" },
 	command = "!aerospace reload-config",
 })
+
+-- No comment on new line
+vim.api.nvim_create_autocmd("BufEnter", {
+	pattern = "*",
+	callback = function()
+		vim.opt.formatoptions:remove("c")
+		vim.opt.formatoptions:remove("r")
+		vim.opt.formatoptions:remove("o")
+	end,
+})
+
+-- Keybindings applied after all lazy and non-lazy plugins are loaded
+-- vim.api.nvim_create_autocmd("VimEnter", {
+-- 	callback = function()
+-- 		vim.keymap.set("n", "n", "nzzzv")
+-- 		vim.keymap.set("n", "N", "Nzzzv")
+-- 	end,
+-- })

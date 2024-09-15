@@ -45,13 +45,18 @@ local options = {
 	inccommand = "split", -- Show what is changing shen substituting
 	autoread = true, -- disable neovim generating a swapfile and showing the error
 }
+local globals = {
+	mapleader = " ", --- Map leader key to SPC
+	maplocalleader = " ", --- Map local leader key to comma
+}
 
 vim.opt.shortmess:append("c")
-vim.opt.formatoptions:remove("c")
-vim.opt.formatoptions:remove("r")
-vim.opt.formatoptions:remove("o")
 vim.opt.fillchars:append("stl: ")
 
 for k, v in pairs(options) do
 	vim.opt[k] = v
+end
+
+for k, v in pairs(globals) do
+	vim.g[k] = v
 end
