@@ -18,12 +18,13 @@ return {
 		options = {
 			component_separators = { left = " ", right = "" },
 			section_separators = { left = " ", right = "" },
+			ignore_focus = { "NvimTree" },
 		},
 		sections = {
-			lualine_a = { sources.mode },
+			lualine_a = { sources.filetree, sources.mode },
 			lualine_b = { sources.branch, sources.diff },
 			lualine_c = { sources.filetype, sources.macro },
-			lualine_x = { sources.neocodeium_status, sources.lsp, sources.diagnostics },
+			lualine_x = { sources.neocodeium_status, sources.lsp_formater_linter, sources.diagnostics },
 			lualine_y = { sources.indentation, sources.encoding, sources.fileformat },
 			lualine_z = { sources.progress, sources.location },
 		},

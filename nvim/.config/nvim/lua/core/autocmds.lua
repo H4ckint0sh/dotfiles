@@ -56,9 +56,9 @@ vim.api.nvim_create_autocmd("BufEnter", {
 })
 
 -- Keybindings applied after all lazy and non-lazy plugins are loaded
--- vim.api.nvim_create_autocmd("VimEnter", {
--- 	callback = function()
--- 		vim.keymap.set("n", "n", "nzzzv")
--- 		vim.keymap.set("n", "N", "Nzzzv")
--- 	end,
--- })
+vim.api.nvim_create_autocmd("VimEnter", {
+	callback = function()
+		vim.keymap.set("n", "n", "nzzzv")
+		vim.keymap.set("n", "N", "Nzzzv")
+	end,
+})

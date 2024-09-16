@@ -38,6 +38,10 @@ return {
 			-- Neogit
 			H.NeogitSectionHeader = { fg = C.magenta }
 
+			-- NvimTree
+			H.NvimTreeWinSeparator = { fg = C.fg, bg = C.bg_dark }
+			H.NvimTreeFolderIcon = { fg = C.yellow }
+
 			-- Fzf
 			H.FzfLuaBorder = { fg = C.fg }
 			H.FzfLuaFzfCursorLine = { bg = C.bg_highlight }

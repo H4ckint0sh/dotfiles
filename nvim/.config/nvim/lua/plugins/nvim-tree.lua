@@ -1,3 +1,4 @@
+vim.api.nvim_set_keymap("n", "<leader>wp", "<cmd>lua create_window_picker()<CR>", { noremap = true, silent = true })
 -- File Explorer / Tree
 return {
 	-- https://github.com/nvim-tree/nvim-tree.lua
@@ -96,7 +97,7 @@ return {
 				highlight_opened_files = "none",
 				root_folder_label = ":~",
 				indent_markers = {
-					enable = false,
+					enable = true,
 					icons = {
 						corner = "└ ",
 						edge = "│ ",
@@ -144,7 +145,7 @@ return {
 					-- if true the tree will resize itself after opening a file
 					resize_window = false,
 					window_picker = {
-						enable = true,
+						enable = false,
 						chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890",
 						exclude = {
 							filetype = { "notify", "packer", "qf", "diff", "fugitive", "fugitiveblame" },

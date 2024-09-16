@@ -23,9 +23,18 @@ return {
 			options = {
 				mode = "buffers",
 				numbers = "ordinal",
-				separator_style = "thin",
+				tab_size = 8,
+				separator_style = "",
 				always_show_bufferline = true,
-				offsets = { { filetype = "NvimTree", text = "File Manager", separator = false } },
+				offsets = {
+					{
+						filetype = "NvimTree",
+						text = "File Explorer",
+						highlight = "Directory",
+						text_align = "left",
+						separator = true,
+					},
+				},
 				style_preset = {
 					bufferline.style_preset.no_italic,
 					bufferline.style_preset.no_bold,
@@ -37,7 +46,7 @@ return {
 				show_close_icon = false,
 				show_tab_indicators = false,
 				indicator_icon = nil,
-				indicator = { style = "", icon = "" },
+				indicator = { style = "none", icon = "none" },
 				buffer_close_icon = "",
 				modified_icon = "●",
 				close_icon = "",
