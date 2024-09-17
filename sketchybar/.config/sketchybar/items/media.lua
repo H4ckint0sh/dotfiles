@@ -1,15 +1,15 @@
-local colors = require("config.colors")
+local icons = require("icons")
+local colors = require("colors")
 
-local whitelist = {
-  ["Psst"] = true,
-};
+local whitelist = { ["Spotify"] = true,
+                    ["Music"] = true    };
 
 local media_cover = sbar.add("item", {
-  position = "left",
+  position = "right",
   background = {
     image = {
       string = "media.artwork",
-      scale = 0.80,
+      scale = 0.85,
     },
     color = colors.transparent,
   },
@@ -24,7 +24,7 @@ local media_cover = sbar.add("item", {
 })
 
 local media_artist = sbar.add("item", {
-  position = "left",
+  position = "right",
   drawing = false,
   padding_left = 3,
   padding_right = 0,
@@ -34,13 +34,13 @@ local media_artist = sbar.add("item", {
     width = 0,
     font = { size = 9 },
     color = colors.with_alpha(colors.white, 0.6),
-    max_chars = 24,
+    max_chars = 18,
     y_offset = 6,
   },
 })
 
 local media_title = sbar.add("item", {
-  position = "left",
+  position = "right",
   drawing = false,
   padding_left = 3,
   padding_right = 0,
@@ -48,7 +48,7 @@ local media_title = sbar.add("item", {
   label = {
     font = { size = 11 },
     width = 0,
-    max_chars = 35,
+    max_chars = 16,
     y_offset = -5,
   },
 })
@@ -110,9 +110,9 @@ media_cover:subscribe("mouse.exited", function(env)
 end)
 
 media_cover:subscribe("mouse.clicked", function(env)
-  media_cover:set({ popup = { drawing = "toggle" } })
+  media_cover:set({ popup = { drawing = "toggle" }})
 end)
 
 media_title:subscribe("mouse.exited.global", function(env)
-  media_cover:set({ popup = { drawing = false } })
+  media_cover:set({ popup = { drawing = false }})
 end)

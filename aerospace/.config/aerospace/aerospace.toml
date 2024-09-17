@@ -6,13 +6,15 @@ after-login-command = []
 after-startup-command = [
      'exec-and-forget /opt/homebrew/opt/borders/bin/borders active_color=0xCFCBC2B1 inactive_color=0x33434c5e width=4.0',
      'exec-and-forget /opt/homebrew/opt/sketchybar/bin/sketchybar',
-     'exec-and-forget open -a Wezterm & open -a Microsoft\ Teams & open -a Chromium'
+     'exec-and-forget open -a Wezterm & open -a Microsoft\ Teams & open -a Chromium',
+     'exec-and-forget /opt/homebrew/bin/sketchybar',
 ]
 
+# Notify Sketchybar about workspace change
 exec-on-workspace-change = [
   '/bin/bash',
   '-c',
-  'sketchybar --trigger aerospace_workspace_changed FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE'
+  '/opt/homebrew/bin/sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE',
 ]
 
 on-focused-monitor-changed = [

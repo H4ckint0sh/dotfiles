@@ -1,74 +1,76 @@
-local constants = require("constants")
-local settings = require("config.settings")
+local colors = require("colors")
+local icons = require("icons")
+local settings = require("settings")
 
-local maxItems <const> = 15
-local menuItems = {}
-local isShowingMenu = false
-
-local frontAppWatcher = sbar.add("item", {
+local menu_watcher = sbar.add("item", {
+  drawing = false,
+  updates = false,
+})
+local space_menu_swap = sbar.add("item", {
   drawing = false,
   updates = true,
 })
+sbar.add("event", "swap_menus_and_spaces")
 
-local swapWatcher = sbar.add("item", {
-  drawing = false,
-  updates = true,
-})
-
-local function createPlaceholders()
-  for index = 1, maxItems, 1 do
-    local menu = sbar.add("item", constants.items.MENU .. "." .. index, {
-      drawing = false,
-      icon = { drawing = false },
-      width = "dynamic",
-      label = {
-        font = {
-          style = index == 1 and settings.fonts.styles.bold or settings.fonts.styles.regular,
-        },
+local max_items = 15
+local menu_items = {}
+for i = 1, max_items, 1 do
+  local menu = sbar.add("item", "menu." .. i, {
+    padding_left = settings.paddings,
+    padding_right = settings.paddings,
+    drawing = false,
+    icon = { drawing = false },
+    label = {
+      font = {
+        style = settings.font.style_map[i == 1 and "Heavy" or "Semibold"]
       },
-      click_script = "$CONFIG_DIR/bridge/menus/bin/menus -s " .. index,
-    })
-    menuItems[index] = menu
-  end
-
-  sbar.add("bracket", { "/" .. constants.items.MENU .. "\\..*/" }, {
-    background = {
-      color = settings.colors.bg1,
-      padding_left = settings.dimens.padding.item,
-      padding_right = settings.dimens.padding.item,
+      padding_left = 6,
+      padding_right = 6,
     },
+    click_script = "$CONFIG_DIR/helpers/menus/bin/menus -s " .. i,
   })
+
+  menu_items[i] = menu
 end
 
-local function updateMenus()
-  sbar.set("/" .. constants.items.MENU .. "\\..*/", { drawing = false })
+sbar.add("bracket", { '/menu\\..*/' }, {
+  background = { color = colors.bg1 }
+})
 
-  sbar.exec("$CONFIG_DIR/bridge/menus/bin/menus -l", function(menus)
-    local index = 1
+local menu_padding = sbar.add("item", "menu.padding", {
+  drawing = false,
+  width = 5
+})
+
+local function update_menus(env)
+  sbar.exec("$CONFIG_DIR/helpers/menus/bin/menus -l", function(menus)
+    sbar.set('/menu\\..*/', { drawing = false })
+    menu_padding:set({ drawing = true })
+    id = 1
     for menu in string.gmatch(menus, '[^\r\n]+') do
-      if index < maxItems then
-        menuItems[index]:set(
-          {
-            width = "dynamic",
-            label = menu,
-            drawing = isShowingMenu
-          }
-        )
-      else
-        break
-      end
-      index = index + 1
+      if id < max_items then
+        menu_items[id]:set( { label = menu, drawing = true } )
+      else break end
+      id = id + 1
     end
   end)
-
-  sbar.set(constants.items.MENU .. ".padding", { drawing = isShowingMenu })
 end
 
-frontAppWatcher:subscribe(constants.events.FRONT_APP_SWITCHED, updateMenus)
+menu_watcher:subscribe("front_app_switched", update_menus)
 
-swapWatcher:subscribe(constants.events.SWAP_MENU_AND_SPACES, function(env)
-  isShowingMenu = env.isShowingMenu == "on"
-  updateMenus()
+space_menu_swap:subscribe("swap_menus_and_spaces", function(env)
+  local drawing = menu_items[1]:query().geometry.drawing == "on"
+  if drawing then
+    menu_watcher:set( { updates = false })
+    sbar.set("/menu\\..*/", { drawing = false })
+    sbar.set("/space\\..*/", { drawing = true })
+    sbar.set("front_app", { drawing = true })
+  else
+    menu_watcher:set( { updates = true })
+    sbar.set("/space\\..*/", { drawing = false })
+    sbar.set("front_app", { drawing = false })
+    update_menus()
+  end
 end)
 
-createPlaceholders()
+return menu_watcher
