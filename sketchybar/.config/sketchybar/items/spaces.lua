@@ -1,5 +1,6 @@
 local constants = require("constants")
 local settings = require("config.settings")
+local app_icons = require("config.icons").apps
 
 local spaces = {}
 
@@ -12,19 +13,6 @@ local currentWorkspaceWatcher = sbar.add("item", {
 	drawing = false,
 	updates = true,
 })
-
--- Modify this file with Visual Studio Code - at least vim does have problems with the icons
--- copy "Icons" from the nerd fonts cheat sheet and replace icon and name accordingly below
--- https://www.nerdfonts.com/cheat-sheet
-local spaceConfigs <const> = {
-	["C"] = { icon = "", name = "Meeting" },
-	["X"] = { icon = "󱞁", name = "Comunication" },
-	["T"] = { icon = "", name = "Terminal" },
-	["B"] = { icon = "󰖟", name = "Browser" },
-	["D"] = { icon = "󰖟", name = "D" },
-	["M"] = { icon = "", name = "Mail" },
-	["Y"] = { icon = "󰌾", name = "Secrets" },
-}
 
 local function selectCurrentWorkspace(focusedWorkspaceName)
 	for sid, item in pairs(spaces) do
@@ -50,33 +38,79 @@ end
 
 local function addWorkspaceItem(workspaceName)
 	local spaceName = constants.items.SPACES .. "." .. workspaceName
-	local spaceConfig = spaceConfigs[workspaceName]
 
 	spaces[spaceName] = sbar.add("item", spaceName, {
-		label = {
-			width = 0,
-			padding_left = 0,
-			string = spaceConfig.name,
-		},
 		icon = {
-			string = spaceConfig.icon or settings.icons.apps["default"],
-			color = settings.colors.white,
+			string = workspaceName,
+			padding_left = 15,
+			padding_right = 0,
 		},
+		label = {
+			padding_right = 15,
+			font = "sketchybar-app-font:Regular:16.0",
+			y_offset = -1,
+		},
+		padding_right = 1,
+		padding_left = 1,
 		background = {
 			color = settings.colors.bg1,
+			border_width = 1,
+			height = 26,
+			border_color = settings.colors.black,
 		},
 		click_script = "aerospace workspace " .. workspaceName,
 	})
 
-	spaces[spaceName]:subscribe("mouse.entered", function(env)
-		sbar.animate("tanh", 30, function()
-			spaces[spaceName]:set({ label = { width = "dynamic" } })
-		end)
-	end)
+	local function update()
+		sbar.exec(constants.aerospace.GET_CURRENT_WINDOW_APPS(workspaceName), function(windowApps)
+			local icon_line = ""
+			local no_app = true
 
-	spaces[spaceName]:subscribe("mouse.exited", function(env)
-		sbar.animate("tanh", 30, function()
-			spaces[spaceName]:set({ label = { width = 0 } })
+			-- Split the windowApps string into individual app names by lines
+			for app in windowApps:gmatch("[^\r\n]+") do
+				no_app = false
+				local lookup = app_icons[app]
+				-- Use the default icon if no match is found
+				local icon = (lookup == nil) and app_icons["default"] or lookup
+				-- Concatenate the app icons with a space
+				icon_line = icon_line .. " " .. icon
+			end
+
+			-- If no apps are found, display a placeholder
+			if no_app then
+				icon_line = " —"
+			end
+
+			-- Update the SketchyBar label with the icons string
+			spaces[spaceName]:set({ label = icon_line })
+		end)
+	end
+
+	spaces[spaceName]:subscribe(constants.events.UPDATE_WINDOWS, update)
+	spaces[spaceName]:subscribe(constants.events.FRONT_APP_SWITCHED, update)
+
+	spaces[spaceName]:subscribe(constants.events.FRONT_APP_SWITCHED, function()
+		sbar.exec(constants.aerospace.GET_CURRENT_WINDOW_APPS(workspaceName), function(windowApps)
+			local icon_line = ""
+			local no_app = true
+
+			-- Split the windowApps string into individual app names by lines
+			for app in windowApps:gmatch("[^\r\n]+") do
+				no_app = false
+				local lookup = app_icons[app]
+				-- Use the default icon if no match is found
+				local icon = (lookup == nil) and app_icons["default"] or lookup
+				-- Concatenate the app icons with a space
+				icon_line = icon_line .. " " .. icon
+			end
+
+			-- If no apps are found, display a placeholder
+			if no_app then
+				icon_line = " —"
+			end
+
+			-- Update the SketchyBar label with the icons string
+			spaces[spaceName]:set({ label = icon_line })
 		end)
 	end)
 
