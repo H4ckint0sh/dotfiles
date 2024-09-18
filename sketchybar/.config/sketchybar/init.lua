@@ -6,6 +6,7 @@ sbar = require("sketchybar")
 
 -- Bundle the entire initial configuration into a single message to sketchybar
 sbar.begin_config()
+sbar.hotload(true)
 require("bar")
 require("default")
 require("items")
