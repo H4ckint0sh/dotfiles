@@ -62,16 +62,16 @@ PATH = '/opt/homebrew/bin:/opt/homebrew/sbin:${PATH}'
 #                 See: https://nikitabobko.github.io/AeroSpace/guide#assign-workspaces-to-monitors
 
 [gaps]
-inner.horizontal = 15
-inner.vertical =   15
-outer.left =       15
-outer.bottom =     15
+inner.horizontal = 12
+inner.vertical =   12
+outer.left =       12
+outer.bottom =     12
 outer.top = [
-    {monitor."U32J59x" = 50},
-    {monitor."DELL U2723QE" = 50},
-    15
+    {monitor."U32J59x" = 45},
+    {monitor."DELL U2723QE" = 45},
+    12
 ]
-outer.right =      10
+outer.right =      12
 
 # 'main' binding mode declaration
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
