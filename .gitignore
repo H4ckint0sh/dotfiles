@@ -2,6 +2,7 @@
 *.pyc
 .DS_Store
 /helix/.config/helix/runtime
+/helix/.config/helix/external-snippets/
 .npmrc
 .yarnrc
 dist
@@ -11,3 +12,4 @@ pids
 run
 /lazygit/Library/Application Support/lazygit/state.yml
 fish/.config/fish/conf.d/nvm.fish
+helix/.config/helix/external-snippets/github.com/rafamadriz
