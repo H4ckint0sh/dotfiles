@@ -9,6 +9,7 @@ tap "homebrew/bundle"
 tap "homebrew/core"
 tap "jesseduffield/lazygit"
 tap "FelixKratz/formulae"
+tap "FelixKratz/formulae"
 
 # Binaries
 brew "bash" # Latest Bash version
@@ -26,6 +27,7 @@ brew "diff-so-fancy"
 brew "findutils"
 brew "luajit", args: ["HEAD"]
 brew "neovim"
+brew "install sketchybar"
 brew "stow"
 brew "tmux"
 brew "gitmux"
