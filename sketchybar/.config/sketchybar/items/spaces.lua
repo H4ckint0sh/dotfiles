@@ -3,201 +3,270 @@ local icons = require("icons")
 local settings = require("settings")
 local app_icons = require("helpers.app_icons")
 
+-- Commands to get information about monitors and workspaces
+local LIST_MONITORS = "aerospace list-monitors | awk '{print $1}'"
+local LIST_WORKSPACES = "aerospace list-workspaces --monitor %s"
+local LIST_APPS = "aerospace list-windows --workspace %s | awk -F'|' '{gsub(/^ *| *$/, \"\", $2); print $2}'"
+local LIST_CURRENT = "aerospace list-workspaces --focused"
+
 local spaces = {}
+local workspaceToMonitorMap = {}
 
--- Create the container bracket
-local container_bracket = sbar.add("bracket", {}, {
-	background = {
-		color = colors.bg2,
-		border_color = colors.bg1,
-		border_width = 2,
-	},
-	padding_left = 10,
-	padding_right = 10,
-})
+-- Cache para íconos de aplicaciones para evitar búsquedas repetitivas
+local icon_cache = {}
 
--- Initialize the items field as an empty table
-container_bracket.items = {}
+-- Function to get the icon for an application
+local function getIconForApp(appName)
+	if icon_cache[appName] then
+		return icon_cache[appName]
+	end
+	local icon = app_icons[appName] or app_icons["default"] or "?"
+	icon_cache[appName] = icon
+	return icon
+	--return app_icons[appName] or app_icons["default"] or "?"
+end
 
-for i = 1, 10, 1 do
-	local space = sbar.add("space", "space." .. i, {
-		position = "left",
-		space = i,
-		icon = {
-			font = { family = settings.font.numbers },
-			padding_left = 8,
-			padding_right = 0,
-			color = colors.grey,
-			string = icons.space_indicator.off,
-		},
-		label = {
-			padding_right = 15,
-			padding_left = 8,
-			color = colors.grey,
-			highlight_color = colors.white,
-			font = "sketchybar-app-font:Regular:16.0",
-			y_offset = -1,
-		},
-		padding_right = 2,
-		padding_left = 2,
-		background = {
-			color = colors.bg2,
-			border_color = colors.bg1,
-			border_width = 2,
-		},
-		popup = { background = { border_width = 5, border_color = colors.black } }
-	})
-
-	table.insert(container_bracket.items, space.name)
-	spaces[i] = space
-
-	-- Single item bracket for space items to achieve double border on highlight
-	local space_bracket = sbar.add("bracket", { space.name }, {
-		background = {
-			color = colors.transparent,
-			border_color = colors.bg2,
-			height = 26,
-			border_width = 2
-		}
-	})
-
-	-- Padding space
-	sbar.add("space", "space.padding." .. i, {
-		space = i,
-		width = settings.group_paddings,
-	})
-
-	local space_popup = sbar.add("item", {
-		position = "popup." .. space.name,
-		padding_left = 5,
-		padding_right = 0,
-		background = {
-			drawing = true,
-			image = {
-				corner_radius = 9,
-				scale = 0.2
-			}
-		}
-	})
-
-	space:subscribe("space_change", function(env)
-		local selected = env.SELECTED == "true"
-		space:set({
-			icon = { string = selected and icons.space_indicator.on or icons.space_indicator.off, color = selected and colors.red or colors.dirty_white },
-			label = { highlight = selected },
-			background = { border_color = selected and colors.blue or colors.bg2 },
-		})
-	end)
-
-
-	space:subscribe("mouse.clicked", function(env)
-		if env.BUTTON == "other" then
-			space_popup:set({ background = { image = "space." .. env.SID } })
-			space:set({ popup = { drawing = "toggle" } })
-		else
-			local op = (env.BUTTON == "right") and "--destroy" or "--focus"
-			sbar.exec("yabai -m space " .. op .. " " .. env.SID)
+-- Function to update workspace icons
+local function updateSpaceIcons(spaceId, workspaceName)
+	sbar.exec(LIST_APPS:format(workspaceName), function(appsOutput)
+		if not appsOutput then
+			return
 		end
-	end)
 
-	space:subscribe("mouse.exited", function(_)
-		space:set({ popup = { drawing = false } })
+		local icon_strip = ""
+		local shouldDraw = false
+
+		for app in appsOutput:gmatch("[^\r\n]+") do
+			local appName = app:match("^%s*(.-)%s*$")
+			if appName and appName ~= "" then
+				icon_strip = icon_strip .. " " .. getIconForApp(appName)
+				shouldDraw = true
+			end
+		end
+
+		if spaces[spaceId] then
+			spaces[spaceId].item:set({
+				label = { string = icon_strip, drawing = shouldDraw },
+			})
+		else
+		end
 	end)
 end
 
--- Add the container bracket to include all spaces
-sbar.add("bracket", container_bracket.items, {
-	background = {
-		color = colors.bg2,
-		border_color = colors.bg1,
-		border_width = 2,
-		height = 28,
-	},
-})
+-- Function to add or update a workspace item
+local function addOrUpdateWorkspaceItem(workspaceName, monitorId, isSelected)
+	local spaceId = "workspace_" .. workspaceName .. "_" .. monitorId
+
+	if not spaces[spaceId] then
+		local space_item = sbar.add("item", spaceId, {
+			icon = {
+				font = { family = settings.font.numbers },
+				string = workspaceName,
+				padding_left = 12,
+				padding_right = 12,
+				color = colors.grey,
+				highlight_color = colors.white,
+			},
+			label = {
+				padding_right = 12,
+				padding_left = 0,
+				color = colors.grey,
+				highlight_color = colors.white,
+				font = "sketchybar-app-font:Regular:12.0",
+				y_offset = -1,
+			},
+			padding_left = 2,
+			padding_right = 2,
+			background = {
+				color = colors.bg2,
+				border_width = 1,
+				height = 24,
+				corner_radius = 7,
+			},
+			click_script = "aerospace workspace " .. workspaceName,
+			display = monitorId,
+		})
+
+		local space_bracket = sbar.add("bracket", { spaceId }, {
+			background = {
+				color = colors.transparent,
+				border_color = colors.transparent,
+				height = 26,
+				border_width = 1,
+				corner_radius = 7,
+			},
+		})
+
+		space_item:subscribe("mouse.clicked", function()
+			sbar.exec("aerospace workspace " .. workspaceName)
+		end)
+
+		spaces[spaceId] = { item = space_item, bracket = space_bracket }
+		workspaceToMonitorMap[workspaceName] = monitorId
+	end
+
+	spaces[spaceId].item:set({
+		icon = { highlight = isSelected },
+		label = { highlight = isSelected },
+	})
+	spaces[spaceId].bracket:set({
+		background = { border_color = isSelected and colors.dirty_white or colors.transparent },
+	})
+
+	updateSpaceIcons(spaceId, workspaceName)
+end
+
+-- Function to remove a workspace item
+local function removeWorkspaceItem(spaceId)
+	if spaces[spaceId] then
+		sbar.remove(spaces[spaceId].item)
+		sbar.remove(spaces[spaceId].bracket)
+		spaces[spaceId] = nil
+
+		local workspaceName = spaceId:match("workspace_(.-)_%d+")
+		if workspaceName then
+			workspaceToMonitorMap[workspaceName] = nil
+		end
+	else
+	end
+end
+
+-- Safe execution function
+local function safeExec(command, callback)
+	sbar.exec(command, function(output)
+		if output then
+			callback(output)
+		end
+	end)
+end
+
+-- Function to get the list of monitors
+local function getMonitors(callback)
+	safeExec(LIST_MONITORS, function(monitorsOutput)
+		local monitors = {}
+		for monitor in monitorsOutput:gmatch("[^\r\n]+") do
+			table.insert(monitors, monitor)
+		end
+		callback(monitors)
+	end)
+end
+
+-- Function to get the focused workspace
+local function getFocusedWorkspace(callback)
+	safeExec(LIST_CURRENT, function(focusedWorkspaceOutput)
+		local focusedWorkspace = focusedWorkspaceOutput:match("[^\r\n]+")
+		callback(focusedWorkspace)
+	end)
+end
+
+-- Function to get and sort workspaces by monitor
+local function getWorkspacesForMonitor(monitorId, callback)
+	safeExec(LIST_WORKSPACES:format(monitorId), function(workspacesOutput)
+		local workspaces = {}
+		for workspaceName in workspacesOutput:gmatch("[^\r\n]+") do
+			table.insert(workspaces, workspaceName)
+		end
+		table.sort(workspaces, function(a, b)
+			return a:lower() < b:lower()
+		end)
+		callback(workspaces)
+	end)
+end
+
+-- Function to update all workspaces
+local function updateAllWorkspaces()
+	getMonitors(function(monitorList)
+		getFocusedWorkspace(function(focusedWorkspace)
+			local updatedSpaces = {} -- Guarda todos los worskpaces independiente de los monitores
+			for _, monitorId in ipairs(monitorList) do
+				getWorkspacesForMonitor(monitorId, function(workspaces)
+					for _, workspaceName in ipairs(workspaces) do
+						local spaceId = "workspace_" .. workspaceName .. "_" .. monitorId
+						local isSelected = workspaceName == focusedWorkspace
+						addOrUpdateWorkspaceItem(workspaceName, monitorId, isSelected)
+						updatedSpaces[spaceId] = true
+					end
+
+					-- Remove obsolete workspaces for this monitor
+					for spaceId in pairs(spaces) do
+						if not updatedSpaces[spaceId] and spaceId:match("_%d+$") == "_" .. monitorId then
+							removeWorkspaceItem(spaceId)
+						end
+					end
+				end)
+			end
+		end)
+	end)
+end
+
+-- Initial setup
+updateAllWorkspaces()
 
 local space_window_observer = sbar.add("item", {
 	drawing = false,
 	updates = true,
 })
 
-space_window_observer:subscribe("space_windows_change", "front_app_switched", function(env)
-	local icon_line = ""
-	local no_app = true
-	for app, count in pairs(env.INFO.apps) do
-		no_app = false
-		local lookup = app_icons[app]
-		local icon = ((lookup == nil) and app_icons["default"] or lookup)
-		icon_line = icon_line .. icon
+space_window_observer:subscribe(
+	{ "aerospace_workspace_change", "front_app_switched", "space_windows_change" },
+	function()
+		updateAllWorkspaces()
 	end
+)
 
-	if (no_app) then
-		icon_line = " 􀍠"
-	end
-	sbar.animate("tanh", 10, function()
-		spaces[env.INFO.space]:set({ label = icon_line })
-	end)
-end)
-
-
-
--- Uncomment and complete the following block if needed for "swap_menus_and_spaces" functionality
---[[
+-- Indicator for swapping menus and spaces
 local spaces_indicator = sbar.add("item", {
-  padding_left = -3,
-  padding_right = 0,
-  icon = {
-    padding_left = 8,
-    padding_right = 9,
-    color = colors.grey,
-    string = icons.switch.on,
-  },
-  label = {
-    width = 0,
-    padding_left = 0,
-    padding_right = 8,
-    string = "Spaces",
-    color = colors.bg1,
-  },
-  background = {
-    color = colors.with_alpha(colors.grey, 0.0),
-    border_color = colors.with_alpha(colors.bg1, 0.0),
-  }
+	padding_left = -3,
+	padding_right = 10,
+	icon = {
+		padding_left = 8,
+		padding_right = 9,
+		color = colors.grey,
+		string = icons.switch.off,
+	},
+	label = {
+		width = 0,
+		padding_left = 0,
+		padding_right = 8,
+		string = "Spaces",
+		color = colors.grey,
+	},
+	background = {
+		color = colors.with_alpha(colors.bg2, 0.0),
+		border_color = colors.with_alpha(colors.bg1, 0.0),
+	},
 })
 
-spaces_indicator:subscribe("swap_menus_and_spaces", function(env)
-  local currently_on = spaces_indicator:query().icon.value == icons.switch.on
-  spaces_indicator:set({
-    icon = currently_on and icons.switch.off or icons.switch.on
-  })
+local function toggleSpacesIndicator(currently_on)
+	spaces_indicator:set({
+		icon = currently_on and icons.switch.off or icons.switch.on,
+	})
+end
+
+spaces_indicator:subscribe("swap_menus_and_spaces", function()
+	local currently_on = spaces_indicator:query().icon.value == icons.switch.on
+	toggleSpacesIndicator(currently_on)
 end)
 
-spaces_indicator:subscribe("mouse.entered", function(env)
-  sbar.animate("tanh", 30, function()
-    spaces_indicator:set({
-      background = {
-        color = { alpha = 1.0 },
-        border_color = { alpha = 1.0 },
-      },
-      icon = { color = colors.bg1 },
-      label = { width = "dynamic" }
-    })
-  end)
-end)
+local function animateSpacesIndicator(entered)
+	sbar.animate("tanh", 30, function()
+		spaces_indicator:set({
+			background = {
+				color = { alpha = entered and 1.0 or 0.0 },
+				border_color = { alpha = entered and 0.5 or 0.0 },
+			},
+			icon = { color = colors.grey },
+			label = { width = entered and "dynamic" or 0 },
+		})
+	end)
+end
 
-spaces_indicator:subscribe("mouse.exited", function(env)
-  sbar.animate("tanh", 30, function()
-    spaces_indicator:set({
-      background = {
-        color = { alpha = 0.0 },
-        border_color = { alpha = 0.0 },
-      },
-      icon = { color = colors.grey },
-      label = { width = 0, }
-    })
-  end)
+spaces_indicator:subscribe("mouse.entered", function()
+	animateSpacesIndicator(true)
 end)
-
-spaces_indicator:subscribe("mouse.clicked", function(env)
-  sbar.trigger("swap_menus_and_spaces")
+spaces_indicator:subscribe("mouse.exited", function()
+	animateSpacesIndicator(false)
 end)
-]]--
+spaces_indicator:subscribe("mouse.clicked", function()
+	sbar.trigger("swap_menus_and_spaces")
+end)
