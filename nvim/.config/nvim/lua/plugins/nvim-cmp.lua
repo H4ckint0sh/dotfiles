@@ -131,7 +131,7 @@ return {
 
 		local source_mapping = {
 			npm = "  ",
-			neocodeium = "",
+			supermaven = "",
 			nvim_lsp = "LSP",
 			buffer = "BUF",
 			nvim_lua = "  ",
@@ -284,7 +284,7 @@ return {
 			-- You should specify your *installed* sources.
 			sources = {
 				{
-					name = "neocodeium",
+					name = "supermaven",
 					priority = 11,
 					max_item_count = 3,
 				},
