@@ -1,6 +1,6 @@
 return {
-	text = "MonoLisa", -- Used for text
-	numbers = "MonoLisa", -- Used for numbers
+	text = "Maple Mono", -- Used for text
+	numbers = "Maple Mono", -- Used for numbers
 	weather = "Hack Nerd Font",
 
 	-- Unified font style map
@@ -10,5 +10,5 @@ return {
 		["Bold"] = "Bold",
 		["Heavy"] = "Heavy",
 		["Black"] = "Black",
-	}
+	},
 }
