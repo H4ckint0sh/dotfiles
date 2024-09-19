@@ -3,7 +3,7 @@ local sources = require("util.lualine")
 return {
 	"nvim-lualine/lualine.nvim",
 	event = { "BufReadPost", "BufNewFile" },
-	dependencies = { "nvim-tree/nvim-web-devicons", "monkoose/neocodeium" },
+	dependencies = { "nvim-tree/nvim-web-devicons" },
 	config = function(_, opts)
 		local colors = require("tokyonight.colors").setup({ style = "night" })
 		local tokyonight = require("lualine.themes.tokyonight")
