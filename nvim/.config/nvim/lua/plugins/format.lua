@@ -20,6 +20,7 @@ return {
 			yaml = { "prettier" },
 			astro = { "prettier" },
 			handlebars = { "djlint" },
+			toml = { "taplo" },
 		},
 		format_on_save = function(bufnr)
 			-- Disable with a global or buffer-local variable
