@@ -40,27 +40,27 @@ export ZSH_CUSTOM=$DOTFILES
 # export LANG=en_US.UTF-8
 # export LC_ALL=$LANG
 
+# Created with https://vitormv.github.io/fzf-themes/
 export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
   --highlight-line \
   --info=inline-right \
   --ansi \
   --layout=reverse \
-  --color=bg+:#283457 \
-  --color=bg:#16161e \
-  --color=border:#27a1b9 \
-  --color=fg:#c0caf5 \
-  --color=gutter:#16161e \
+  --color=fg:#565f89 \
+  --color=fg+:#c0caf5 \
+  --color=bg:#1a1b26 \
+  --color=bg+:#1a1b26
+  --color=hl:#3d59a1 \
+  --color=hl+:#7aa2f7 \
+  --color=info:#7aa2f7 \
+  --color=marker:#87ff00 \
+  --color=prompt:#ff007c \
+  --color=spinner:#bb9af7 \
+  --color=pointer:#bb9af7 \
   --color=header:#ff9e64 \
-  --color=hl+:#2ac3de \
-  --color=hl:#2ac3de \
-  --color=info:#545c7e \
-  --color=marker:#ff007c \
-  --color=pointer:#ff007c \
-  --color=prompt:#2ac3de \
-  --color=query:#c0caf5:regular \
-  --color=scrollbar:#27a1b9 \
-  --color=separator:#ff9e64 \
-  --color=spinner:#ff007c \
+  --color=border:#565f89 \
+  --color=label:#c0caf5 \
+  --color=query:#d9d9d9 \
 "
 
 # Git Stuff

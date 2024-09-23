@@ -43,13 +43,15 @@ return {
 			H.NvimTreeFolderIcon = { fg = C.yellow }
 
 			-- Fzf
-			H.FzfLuaBorder = { fg = C.fg }
-			H.FzfLuaFzfCursorLine = { bg = C.bg_highlight }
+			H.FzfLuaBorder = { fg = C.comment }
+			H.FzfLuaCursorLine = { bg = C.bg_dark }
 			H.FzfLuaScrollFloatEmpty = { bg = C.fg }
 			H.FzfLuaScrollFloatEmpty = { bg = C.fg }
 			H.FzfLuaScrollFloatFull = { bg = C.fg }
-			H.FzfLuaFzfScrollbar = { fg = C.fg }
-			H.FzfLuaFzfBorder = { fg = C.fg }
+			H.FzfLuaFzfScrollbar = { fg = C.comment }
+			H.FzfLuaFzfBorder = { fg = C.comment }
+			H.FzfLuaPreviewTitle = { fg = C.fg }
+			H.FzfLuaCursorLine = { bg = C.bg_highlight }
 
 			-- Neocodeium
 			H.NeoCodeiumSuggestion = { bg = "NONE", fg = C.comment }
