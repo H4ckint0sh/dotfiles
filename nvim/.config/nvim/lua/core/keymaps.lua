@@ -72,10 +72,6 @@ keymap.set("n", "<S-u>", ":redo<CR>", { silent = true })
 -- Save
 keymap.set("n", "<leader>w", ":w<CR>", { silent = true })
 
-keymap.set("n", "<leader>h", function()
-	vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is.enable)
-end)
-
 -- Search
 keymap.set("n", "R", ":%s/\\v/g<left><left>", { silent = false }) -- replace
 keymap.set("n", "ss", ":s/", { silent = false }) -- search and replace
