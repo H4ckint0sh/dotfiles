@@ -12,10 +12,7 @@ end
 M.on_attach = on_attach
 
 M.settings = {
-	bin = "eslint", -- or `eslint_d`P-- allows to use flat config format
-	experimental = {
-		useFlatConfig = false,
-	},
+	useFlatConfig = false,
 	codeAction = {
 		disableRuleComment = {
 			enable = true,
