@@ -1,8 +1,8 @@
 # #!/usr/bin/env bash
 
 CHOICE=$(
-	sesh list -i | fzf-tmux -p 55%,60% \
-		--no-sort --border-label ' sesh ' --prompt '⚡  ' --color=bg:#1e1e2e \
+	sesh list -i | fzf-tmux -p 50%,60% \
+		--no-sort --border-label ' sesh ' --prompt '⚡  ' \
 		--header '  ^a all ^t tmux ^x zoxide ^g config ^d tmux kill ^f find' \
 		--bind 'tab:down,btab:up' \
 		--bind 'ctrl-a:change-prompt(⚡  )+reload(sesh list -i)' \
