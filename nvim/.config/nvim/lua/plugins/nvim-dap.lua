@@ -1,3 +1,4 @@
+---@diagnostic disable: missing-fields
 return {
 	"mfussenegger/nvim-dap",
 	dependencies = {
@@ -82,7 +83,7 @@ return {
 		for _, adapter in ipairs({ "pwa-node", "pwa-chrome" }) do
 			dap.adapters[adapter] = {
 				type = "server",
-				host = "127.0.0.1",
+				host = "::1",
 				port = "${port}",
 				executable = {
 					command = "js-debug-adapter",
@@ -102,11 +103,12 @@ return {
 					runtimeExecutable = "bunx",
 					runtimeArgs = { "tsx" },
 				},
+				-- Working with Litium (WIP)
 				{
 					type = "pwa-chrome",
 					request = "launch",
 					name = "Launch (Chrome)",
-					url = "http://localhost:3000",
+					url = "https://localhost:3001",
 					sourceMaps = true,
 					webRoot = "${workspaceFolder}",
 					protocol = "inspector",
