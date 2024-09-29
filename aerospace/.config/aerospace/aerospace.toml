@@ -4,7 +4,7 @@ start-at-login = true
 after-login-command = []
 
 after-startup-command = [
-  'exec-and-forget open -a Wezterm & open -a Microsoft\ Teams & open -a Chromium',
+  'exec-and-forget open -a Wezterm & open -a Microsoft\ Teams & open -a Google\ Chrome',
   'exec-and-forget /opt/homebrew/bin/sketchybar',
 ]
 
@@ -82,6 +82,7 @@ alt-t = 'workspace T'
 alt-d = 'workspace D'
 alt-m = 'workspace M'
 alt-y = 'workspace Y'
+alt-z = 'workspace Z'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
 alt-shift-c = ['move-node-to-workspace C', 'workspace C']
@@ -91,6 +92,7 @@ alt-shift-t = ['move-node-to-workspace T', 'workspace T']
 alt-shift-d = ['move-node-to-workspace D', 'workspace D']
 alt-shift-m = ['move-node-to-workspace M', 'workspace M']
 alt-shift-y = ['move-node-to-workspace Y', 'workspace Y']
+alt-shift-z = ['move-node-to-workspace Z', 'workspace Z']
 
 alt-shift-f = 'fullscreen'
 
@@ -143,6 +145,7 @@ T = ['U32J59x', 'DELL U2723QE \(1\)', 'Built-in Retina Display']
 D = ['U32J59x', 'DELL U2723QE \(1\)', 'Built-in Retina Display']
 M = ['U32J59x', 'DELL U2723QE \(2\)', 'Built-in Retina Display']
 Y = ['U32J59x', 'DELL U2723QE \(1\)', 'Built-in Retina Display']
+Z = ['U32J59x', 'DELL U2723QE \(2\)', 'Built-in Retina Display']
 
 # Send apps to certain workspace
 [[on-window-detected]]
@@ -165,6 +168,10 @@ run = 'move-node-to-workspace T'
 if.app-id = 'org.chromium.Chromium'
 run = 'move-node-to-workspace B'
 
+[[on-window-detected]] # Goole Chrome
+if.app-id = 'com.google.Chrome'
+run = 'move-node-to-workspace B'
+
 [[on-window-detected]]
 if.app-id = 'com.hnc.Discord'
 run = "move-node-to-workspace D"
@@ -185,3 +192,7 @@ run = 'layout floating'
 [[on-window-detected]]
 if.app-id = 'com.colliderli.iina'
 run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'dev.zed.Zed '
+run = 'move-node-to-workspace Z'
