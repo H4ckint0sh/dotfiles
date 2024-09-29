@@ -30,7 +30,7 @@ mason_lsp.setup({
 		"tailwindcss",
 		"ts_ls",
 		"astro",
-		"emmet_ls",
+		"vtsls",
 	},
 	-- Whether servers that are set up (via lspconfig) should be automatically installed if they're not already installed.
 	-- This setting has no relation with the `ensure_installed` setting.
@@ -84,6 +84,17 @@ require("mason-lspconfig").setup_handlers({
 			on_attach = on_attach,
 			capabilities = capabilities,
 			handlers = handlers,
+		})
+	end,
+
+	["vtsls"] = function()
+		require("lspconfig.configs").vtsls = require("vtsls").lspconfig
+
+		lspconfig.vtsls.setup({
+			capabilities = capabilities,
+			handlers = require("lsp.servers.ts_ls").handlers,
+			on_attach = require("lsp.servers.ts_ls").on_attach,
+			settings = require("lsp.servers.ts_ls").settings,
 		})
 	end,
 
@@ -165,33 +176,7 @@ require("mason-lspconfig").setup_handlers({
 			root_dir = vim.uv.cwd,
 		})
 	end,
-	["emmet_ls"] = function()
-		lspconfig.emmet_ls.setup({
-			-- on_attach = on_attach,
-			capailities = capabilities,
-			filetypes = {
-				"css",
-				"eruby",
-				"html",
-				"javascript",
-				"javascriptreact",
-				"less",
-				"sass",
-				"handlebars",
-				"scss",
-				"svelte",
-				"pug",
-				"typescriptreact",
-				"vue",
-			},
-			init_options = {
-				html = {
-					options = {
-						-- For possible options, see: https://github.com/emmetio/emmet/blob/master/src/config.ts#L79-L267
-						["bem.enabled"] = true,
-					},
-				},
-			},
-		})
+	["emmet-language-server"] = function()
+		lspconfig.emmet_language_server.setup({})
 	end,
 })
