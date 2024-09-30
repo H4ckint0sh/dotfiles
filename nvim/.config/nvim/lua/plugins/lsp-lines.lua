@@ -13,8 +13,16 @@ return {
 			desc = "Toggle lsp_lines",
 		},
 	},
-	config = function(_, opts)
-		require("lsp_lines").setup(opts)
+	config = true,
+	init = function()
 		vim.diagnostic.config({ virtual_text = false })
+		-- disable virtual lines for the lazy.nvim window
+		local LAZY_NAMESPACE = vim.api.nvim_get_namespaces().lazy
+		if LAZY_NAMESPACE ~= nil then
+			vim.diagnostic.config({
+				virtual_text = true,
+				virtual_lines = false,
+			}, LAZY_NAMESPACE)
+		end
 	end,
 }
