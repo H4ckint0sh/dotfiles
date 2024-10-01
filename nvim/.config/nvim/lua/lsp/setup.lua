@@ -25,20 +25,11 @@ mason_lsp.setup({
 		"jsonls",
 		"lua_ls",
 		"ember",
-		-- "glint",
 		"prismals",
 		"tailwindcss",
-		"ts_ls",
 		"astro",
 		"vtsls",
 	},
-	-- Whether servers that are set up (via lspconfig) should be automatically installed if they're not already installed.
-	-- This setting has no relation with the `ensure_installed` setting.
-	-- Can either be:
-	--   - false: Servers are not automatically installed.
-	--   - true: All servers set up via lspconfig are automatically installed.
-	--   - { exclude: string[] }: All servers set up via lspconfig, except the ones provided in the list, are automatically installed.
-	--       Example: automatic_installation = { exclude = { "rust_analyzer", "solargraph" } }
 	automatic_installation = true,
 })
 
@@ -58,14 +49,15 @@ local handlers = {
 		border = "rounded",
 	}),
 	["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" }),
-	-- ["textDocument/publishDiagnostics"] = vim.lsp.with(
-	-- 	vim.lsp.diagnostic.on_publish_diagnostics,
-	-- 	{ virtual_text = true }
-	-- ),
+	["textDocument/publishDiagnostics"] = vim.lsp.with(
+		vim.lsp.diagnostic.on_publish_diagnostics,
+		{ virtual_text = false }
+	),
 }
 
+---@diagnostic disable-next-line: unused-local
 local function on_attach(client, bufnr)
-	-- set up buffer keymaps, etc.
+	-- disable as we use vtsls instead
 end
 
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
@@ -92,13 +84,13 @@ require("mason-lspconfig").setup_handlers({
 
 		lspconfig.vtsls.setup({
 			capabilities = capabilities,
-			handlers = require("lsp.servers.ts_ls").handlers,
-			on_attach = require("lsp.servers.ts_ls").on_attach,
-			settings = require("lsp.servers.ts_ls").settings,
+			handlers = require("lsp.servers.vtsls").handlers,
+			on_attach = require("lsp.servers.vtsls").on_attach,
+			settings = require("lsp.servers.vtsls").settings,
 		})
 	end,
 
-	["ts_ls"] = function()
+	["tsserver"] = function()
 		-- Skip since we use typescript.tools
 	end,
 

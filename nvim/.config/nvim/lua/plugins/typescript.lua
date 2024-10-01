@@ -71,10 +71,5 @@ return {
 		ft = { "typescript", "javascript", "typescriptreact", "javascriptreact" },
 	},
 
-	{
-		"dmmulroy/ts-error-translator.nvim",
-		config = true,
-	},
-
 	{ "artemave/workspace-diagnostics.nvim" },
 }
