@@ -9,12 +9,12 @@ local handlers = {
 		border = "rounded",
 	}),
 	["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" }),
-	-- ["textDocument/publishDiagnostics"] = vim.lsp.with(
-	-- 	vim.lsp.diagnostic.on_publish_diagnostics,
-	-- 	{ virtual_text = true }
-	-- ),
+	["textDocument/publishDiagnostics"] = vim.lsp.with(
+		vim.lsp.diagnostic.on_publish_diagnostics,
+		{ virtual_text = false }
+	),
 	["textDocument/definition"] = function(err, result, method, ...)
-		if vim.tbl_islist(result) and #result > 1 then
+		if vim.tbl_isarray(result) and #result > 1 then
 			local filtered_result = filter(result, filterReactDTS)
 			return vim.lsp.handlers["textDocument/definition"](err, filtered_result, method, ...)
 		end

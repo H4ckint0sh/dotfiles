@@ -1,8 +1,7 @@
 return {
 	"https://git.sr.ht/~whynothugo/lsp_lines.nvim",
-	name = "lsp_lines",
+	name = "lsp_lines.nvim",
 	dependencies = { "neovim/nvim-lspconfig" },
-	event = "LspAttach",
 	keys = {
 		{
 			"<Leader>lt",
@@ -13,7 +12,7 @@ return {
 			desc = "Toggle lsp_lines",
 		},
 	},
-	config = true,
+	lazy = true,
 	init = function()
 		vim.diagnostic.config({ virtual_text = false })
 		-- disable virtual lines for the lazy.nvim window
@@ -24,5 +23,19 @@ return {
 				virtual_lines = false,
 			}, LAZY_NAMESPACE)
 		end
+		vim.api.nvim_create_autocmd("DiagnosticChanged", {
+			callback = function(args)
+				if #args.data.diagnostics ~= 0 then
+					require("lazy.core.loader").load({ "lsp_lines.nvim" }, { event = "DiagnosticChanged" })
+					return true
+				end
+			end,
+		})
+	end,
+	config = function()
+		require("lsp_lines").setup()
+
+		vim.diagnostic.config({ virtual_lines = { highlight_whole_line = false } })
+		vim.diagnostic.config({ virtual_lines = false }, vim.api.nvim_create_namespace("lazy"))
 	end,
 }
