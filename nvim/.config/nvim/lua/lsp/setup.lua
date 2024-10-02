@@ -90,10 +90,6 @@ require("mason-lspconfig").setup_handlers({
 		})
 	end,
 
-	["tsserver"] = function()
-		-- Skip since we use typescript.tools
-	end,
-
 	["tailwindcss"] = function()
 		lspconfig.tailwindcss.setup({
 			capabilities = require("lsp.servers.tailwindcss").capabilities,
@@ -168,7 +164,7 @@ require("mason-lspconfig").setup_handlers({
 			root_dir = vim.uv.cwd,
 		})
 	end,
-	["emmet-language-server"] = function()
+	["emmet_language_server"] = function()
 		lspconfig.emmet_language_server.setup({})
 	end,
 })

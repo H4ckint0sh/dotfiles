@@ -1,4 +1,3 @@
--- Auto-completion / Snippets
 return {
 	-- https://github.com/hrsh7th/nvim-cmp
 	"hrsh7th/nvim-cmp",
@@ -10,23 +9,6 @@ return {
 		"hrsh7th/cmp-path",
 		"hrsh7th/cmp-cmdline",
 		"hrsh7th/cmp-calc",
-		"saadparwaiz1/cmp_luasnip",
-		{
-			"L3MON4D3/LuaSnip",
-			event = "VeryLazy",
-			dependencies = {
-				{
-					"rafamadriz/friendly-snippets",
-					config = function()
-						require("luasnip").filetype_extend(
-							"typescript",
-							{ "javascript", "javascriptreact", "typescriptreact" }
-						)
-						require("luasnip.loaders.from_vscode").lazy_load()
-					end,
-				},
-			},
-		},
 		{
 			"David-Kunz/cmp-npm",
 			config = function()
@@ -45,11 +27,6 @@ return {
 			return
 		end
 
-		local snip_status_ok, luasnip = pcall(require, "luasnip")
-		if not snip_status_ok then
-			vim.cmd('echohl ErrorMsg | echo "Failed to load luasnip" | echohl NONE')
-		end
-
 		local cmp_git_ok, cmp_git = pcall(require, "cmp_git")
 		if not cmp_git_ok then
 			vim.cmd('echohl ErrorMsg | echo "Failed to load cmp_git" | echohl NONE')
@@ -57,18 +34,11 @@ return {
 
 		cmp_git.setup()
 
+		require("custom.snippets").register_cmp_source()
+
 		local check_backspace = function()
 			local col = vim.fn.col(".") - 1
 			return col == 0 or vim.fn.getline("."):sub(col, col):match("%s")
-		end
-
-		local function deprioritize_snippet(entry1, entry2)
-			if entry1:get_kind() == types.lsp.CompletionItemKind.Snippet then
-				return false
-			end
-			if entry2:get_kind() == types.lsp.CompletionItemKind.Snippet then
-				return true
-			end
 		end
 
 		local function limit_lsp_types(entry, ctx)
@@ -134,8 +104,8 @@ return {
 			supermaven = "",
 			nvim_lsp = "LSP",
 			buffer = "BUF",
+			snp = "SNP",
 			nvim_lua = "  ",
-			luasnip = "SNP",
 			calc = "  ",
 			path = " 󰉖 ",
 			treesitter = "  ",
@@ -175,11 +145,10 @@ return {
 				},
 			}),
 		})
-		require("luasnip.loaders.from_vscode").lazy_load()
 		cmp.setup({
 			snippet = {
-				expand = function(args)
-					luasnip.lsp_expand(args.body)
+				expand = function(arg)
+					vim.snippet.expand(arg.body)
 				end,
 			},
 			mapping = cmp.mapping.preset.insert({
@@ -203,10 +172,6 @@ return {
 						cmp.select_next_item()
 					elseif cmp.visible() and has_words_before() then
 						cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
-					elseif luasnip.expandable() then
-						luasnip.expand()
-					elseif luasnip.expand_or_jumpable() then
-						luasnip.expand_or_jump()
 					elseif check_backspace() then
 						fallback()
 					else
@@ -219,8 +184,6 @@ return {
 				["<S-Tab>"] = cmp.mapping(function(fallback)
 					if cmp.visible() then
 						cmp.select_prev_item()
-					elseif luasnip.jumpable(-1) then
-						luasnip.jump(-1)
 					else
 						fallback()
 					end
@@ -229,23 +192,13 @@ return {
 					"s",
 				}),
 				["<C-l>"] = cmp.mapping(function(fallback)
-					if luasnip.expandable() then
-						luasnip.expand()
-					elseif luasnip.expand_or_jumpable() then
-						luasnip.expand_or_jump()
-					else
-						fallback()
-					end
+					fallback()
 				end, {
 					"i",
 					"s",
 				}),
 				["<C-h>"] = cmp.mapping(function(fallback)
-					if luasnip.jumpable(-1) then
-						luasnip.jump(-1)
-					else
-						fallback()
-					end
+					fallback()
 				end, {
 					"i",
 					"s",
@@ -288,6 +241,7 @@ return {
 					priority = 11,
 					max_item_count = 3,
 				},
+				{ name = "snp" },
 				{
 					name = "nvim_lsp",
 					priority = 10,
@@ -296,11 +250,6 @@ return {
 				},
 				{ name = "npm", priority = 9 },
 				{ name = "git", priority = 7 },
-				{
-					name = "luasnip",
-					priority = 10,
-					max_item_count = 5,
-				},
 				{
 					name = "buffer",
 					priority = 7,
@@ -315,7 +264,6 @@ return {
 			sorting = {
 				priority_weight = 2,
 				comparators = {
-					deprioritize_snippet,
 					cmp.config.compare.exact,
 					cmp.config.compare.locality,
 					cmp.config.compare.score,
