@@ -152,6 +152,19 @@ pretty_git_format() {
     column -s '}' -t
 }
 
+# fh - search in your command history and execute selected command
+fh() {
+  eval $( ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | fzf +s --tac | sed 's/ *[0-9]* *//')
+}
+
+# fd - cd to selected directory
+fd() {
+  local dir
+  dir=$(find ${1:-.} -path '*/\.*' -prune \
+                  -o -type d -print 2> /dev/null | fzf +m) &&
+  cd "$dir"
+}
+
 function prs { 
   GH_FORCE_TTY=100% gh pr list --limit 300 |
   fzf --ansi --preview 'GH_FORCE_TTY=100% gh pr view --comments {1}' --preview-window 'down,70%' --header-lines 3 |
