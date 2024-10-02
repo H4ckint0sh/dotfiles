@@ -70,7 +70,7 @@ return {
 		end
 
 		local has_words_before = function()
-			if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then
+			if vim.bo[0].filetype == "prompt" then
 				return false
 			end
 		end
