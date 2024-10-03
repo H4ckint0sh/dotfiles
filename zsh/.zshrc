@@ -304,7 +304,6 @@ source /opt/homebrew/share/zsh-history-substring-search/zsh-history-substring-se
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
-eval "$(atuin init zsh)"
 
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
