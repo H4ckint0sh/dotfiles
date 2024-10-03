@@ -56,6 +56,9 @@ return {
 			-- Neocodeium
 			H.NeoCodeiumSuggestion = { bg = "NONE", fg = C.comment }
 			H.NeoCodeiumLabel = { bg = "NONE", fg = C.comment }
+
+			-- indent blankline
+			H.IblScope = { fg = C.fg }
 		end,
 	},
 	config = function(_, opts)
