@@ -24,6 +24,7 @@ mason_lsp.setup({
 		"html",
 		"jsonls",
 		"lua_ls",
+		"zls",
 		"ember",
 		"prismals",
 		"tailwindcss",
@@ -76,6 +77,15 @@ require("mason-lspconfig").setup_handlers({
 			on_attach = on_attach,
 			capabilities = capabilities,
 			handlers = handlers,
+		})
+	end,
+
+	["zls"] = function()
+		lspconfig.zls.setup({
+			capabilities = capabilities,
+			handlers = handlers,
+			on_attach = on_attach,
+			-- settings = require("lsp.servers.zls").settings,
 		})
 	end,
 
