@@ -29,7 +29,7 @@ mason_lsp.setup({
 		"prismals",
 		"tailwindcss",
 		"astro",
-		"vtsls",
+		"ts_ls",
 	},
 	automatic_installation = true,
 })
@@ -85,19 +85,11 @@ require("mason-lspconfig").setup_handlers({
 			capabilities = capabilities,
 			handlers = handlers,
 			on_attach = on_attach,
-			-- settings = require("lsp.servers.zls").settings,
 		})
 	end,
 
-	["vtsls"] = function()
-		require("lspconfig.configs").vtsls = require("vtsls").lspconfig
-
-		lspconfig.vtsls.setup({
-			capabilities = capabilities,
-			handlers = require("lsp.servers.vtsls").handlers,
-			on_attach = require("lsp.servers.vtsls").on_attach,
-			settings = require("lsp.servers.vtsls").settings,
-		})
+	["ts_ls"] = function()
+		-- disabel to use typescript-tools
 	end,
 
 	["tailwindcss"] = function()

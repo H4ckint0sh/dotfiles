@@ -3,22 +3,22 @@ return {
 	event = { "BufReadPre", "BufNewFile" },
 	opts = {
 		formatters_by_ft = {
-			css = { "prettied", "prettier" },
-			scss = { "prettied", "prettier" },
-			graphql = { "prettied", "prettier" },
-			html = { "prettied", "prettier" },
-			javascript = { "prettied", "prettier" },
-			javascriptreact = { "prettied", "prettier" },
-			json = { "prettied", "prettier" },
+			css = { "prettied" },
+			scss = { "prettied" },
+			graphql = { "prettied" },
+			html = { "prettied" },
+			javascript = { "prettied" },
+			javascriptreact = { "prettied" },
+			json = { "prettied" },
 			lua = { "stylua" },
-			markdown = { "prettied", "prettier" },
+			markdown = { "prettied" },
 			python = { "isort", "black" },
 			sql = { "sql-formatter" },
-			svelte = { "prettied", "prettier" },
-			typescript = { "prettied", "prettier" },
-			typescriptreact = { "prettied", "prettier" },
+			svelte = { "prettied" },
+			typescript = { "prettied" },
+			typescriptreact = { "prettied" },
 			yaml = { "prettier" },
-			astro = { "prettier" },
+			astro = { "prettied" },
 			handlebars = { "djlint" },
 			toml = { "taplo" },
 		},
@@ -27,7 +27,7 @@ return {
 			if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
 				return
 			end
-			return { timeout_ms = 3000, lsp_format = "fallback" }
+			return { timeout_ms = 500, lsp_format = "fallback" }
 		end,
 	},
 	config = function(_, opts)
@@ -38,7 +38,7 @@ return {
 			conform.format({
 				lsp_fallback = true,
 				async = false,
-				timeout_ms = 2500,
+				timeout_ms = 500,
 			})
 		end, { desc = "format file" })
 
@@ -78,7 +78,7 @@ return {
 				}
 			end
 
-			conform.format({ async = true, lsp_fallback = true, range = range })
+			conform.format({ async = true, lsp_fallback = false, range = range })
 		end, { range = true })
 	end,
 }
