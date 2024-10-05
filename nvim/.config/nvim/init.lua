@@ -12,7 +12,6 @@ require("custom.snippets") -- Snippets
 -- LSP
 require("lsp.config")
 require("lsp.setup")
-require("lsp.functions")
 
 -- These are not Loaded by lazy.nvim
 require("core.autocmds")
