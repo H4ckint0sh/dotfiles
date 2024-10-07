@@ -42,25 +42,26 @@ export ZSH_CUSTOM=$DOTFILES
 
 # Created with https://vitormv.github.io/fzf-themes/
 export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
-  --highlight-line \
-  --info=inline-right \
-  --ansi \
-  --layout=reverse \
-  --color=fg:#565f89 \
-  --color=fg+:#c0caf5 \
-  --color=bg:#1a1b26 \
-  --color=bg+:#1a1b26
-  --color=hl:#3d59a1 \
-  --color=hl+:#7aa2f7 \
-  --color=info:#7aa2f7 \
-  --color=marker:#87ff00 \
-  --color=prompt:#ff007c \
-  --color=spinner:#bb9af7 \
-  --color=pointer:#bb9af7 \
-  --color=header:#ff9e64 \
-  --color=border:#565f89 \
-  --color=label:#c0caf5 \
-  --color=query:#d9d9d9 \
+      --height=40% \
+      --highlight-line \
+      --info=inline-right \
+      --ansi \
+      --layout=reverse \
+      --color=fg:#565f89 \
+      --color=fg+:#c0caf5 \
+      --color=bg:#1a1b26 \
+      --color=bg+:#1a1b26
+      --color=hl:#3d59a1 \
+      --color=hl+:#7aa2f7 \
+      --color=info:#7aa2f7 \
+      --color=marker:#87ff00 \
+      --color=prompt:#ff007c \
+      --color=spinner:#bb9af7 \
+      --color=pointer:#bb9af7 \
+      --color=header:#ff9e64 \
+      --color=border:#565f89 \
+      --color=label:#c0caf5 \
+      --color=query:#d9d9d9 \
 "
 
 # Git Stuff
