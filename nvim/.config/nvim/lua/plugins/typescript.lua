@@ -9,10 +9,10 @@ local handlers = {
 		border = "rounded",
 	}),
 	["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" }),
-	-- ["textDocument/publishDiagnostics"] = vim.lsp.with(
-	--     vim.lsp.diagnostic.on_publish_diagnostics,
-	--     { virtual_text = true }
-	-- ),
+	["textDocument/publishDiagnostics"] = vim.lsp.with(
+		vim.lsp.diagnostic.on_publish_diagnostics,
+		{ virtual_text = true }
+	),
 	["textDocument/definition"] = function(err, result, method, ...)
 		if vim.tbl_islist(result) and #result > 1 then
 			local filtered_result = filter(result, filterReactDTS)
@@ -55,15 +55,6 @@ return {
 				},
 			})
 		end,
-	},
-
-	{
-		"razak17/tailwind-fold.nvim",
-		opts = {
-			min_chars = 50,
-		},
-		dependencies = { "nvim-treesitter/nvim-treesitter" },
-		ft = { "html", "svelte", "astro", "vue", "typescriptreact" },
 	},
 
 	{
