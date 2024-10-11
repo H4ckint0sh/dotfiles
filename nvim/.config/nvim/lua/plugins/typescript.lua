@@ -14,7 +14,7 @@ local handlers = {
 		{ virtual_text = true }
 	),
 	["textDocument/definition"] = function(err, result, method, ...)
-		if vim.tbl_islist(result) and #result > 1 then
+		if vim.isarray(result) and #result > 1 then
 			local filtered_result = filter(result, filterReactDTS)
 			return baseDefinitionHandler(err, filtered_result, method, ...)
 		end
