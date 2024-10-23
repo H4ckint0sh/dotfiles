@@ -51,9 +51,9 @@ return {
 			val = {
 				dashboard.button("SPC f", "  Find file", "<Cmd> FzfLua files <CR>"),
 				dashboard.button("SPC t", "󰺯  Find text", "<Cmd> FzfLua live_grep <CR>"),
-				dashboard.button("SPC h", "  Recent files", "<Cmd> FzfLua oldfiles <CR>"),
+				dashboard.button("SPC h", "󰋚  Recent files", "<Cmd> FzfLua oldfiles <CR>"),
 				dashboard.button("SPC s", "󰦛  Restore Session", "<Cmd> SessionLoad <CR>"),
-				dashboard.button("SPC q q", "  Quit", "<Cmd>qa<CR>"),
+				dashboard.button("SPC q q", "󰤆  Quit", "<Cmd>qa<CR>"),
 			},
 			opts = {
 				spacing = 1,
