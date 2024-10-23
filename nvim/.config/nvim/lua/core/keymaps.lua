@@ -174,6 +174,7 @@ keymap.set("n", "<leader>R", require("fzf-lua").registers, { desc = "Registers" 
 keymap.set("n", "<leader>m", require("fzf-lua").marks, { desc = "Marks" })
 keymap.set("n", "<leader>h", require("fzf-lua").oldfiles, { desc = "Recent files" })
 keymap.set("n", "<leader>t", require("fzf-lua").live_grep, { desc = "Fzf Grep" })
+keymap.set("n", "<leader>y", require("fzf-lua").live_grep_glob, { desc = "Fzf Grep" })
 keymap.set("n", "<leader>b", require("fzf-lua").buffers, { desc = "Fzf Buffers" })
 keymap.set("n", "<leader>j", require("fzf-lua").helptags, { desc = "Help Tags" })
 keymap.set("n", "<leader>gf", require("fzf-lua").git_status, { desc = "Git Status" })
