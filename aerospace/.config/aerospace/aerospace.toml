@@ -185,6 +185,10 @@ run = 'layout floating'
 if.app-id = 'org.m0k.transmission'
 run = 'layout floating'
 
+[[on-window-detected]] # Exclude apps
+if.app-id = 'com.apple.iphonesimulator'
+run = 'layout floating'
+
 [[on-window-detected]]
 if.app-id = 'com.cockos.LICEcap'
 run = 'layout floating'
