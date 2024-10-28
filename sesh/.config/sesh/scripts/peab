@@ -2,7 +2,7 @@
 
 tmux send-keys 'nvim' Enter
 tmux new-window -c "#{session_path}"
-tmux send-keys 'TARGET_SITE=https://peabkotifi2023.qa.peab.se/ npm start' Enter
+tmux send-keys 'TARGET_SITE=https://bostadapi.qa.peab.se/ npm start' Enter
 # tmux send-keys 'TARGET_SITE=https://peabkotifi2023.qa.peab.se/ npm start' Enter
 tmux select-window -p
 open http://localhost:4000

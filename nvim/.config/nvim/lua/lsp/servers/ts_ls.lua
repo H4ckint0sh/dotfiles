@@ -28,28 +28,30 @@ local init_options = {
 }
 
 local settings = {
-	complete_function_calls = true,
-	vtsls = {
-		enableMoveToFileCodeAction = true,
-		autoUseWorkspaceTsdk = true,
-		experimental = {
-			completion = {
-				enableServerSideFuzzyMatch = true,
-			},
+	typescript = {
+		inlayHints = {
+			parameterNames = { enabled = "literals" },
+			parameterTypes = { enabled = false },
+			variableTypes = { enabled = false },
+			propertyDeclarationTypes = { enabled = true },
+			functionLikeReturnTypes = { enabled = false },
+			enumMemberValues = { enabled = true },
+		},
+		suggest = {
+			includeCompletionsForModuleExports = false,
 		},
 	},
-	typescript = {
-		updateImportsOnFileMove = { enabled = "always" },
-		suggest = {
-			completeFunctionCalls = true,
-		},
+	javascript = {
 		inlayHints = {
-			enumMemberValues = { enabled = true },
-			functionLikeReturnTypes = { enabled = true },
 			parameterNames = { enabled = "literals" },
-			parameterTypes = { enabled = true },
-			propertyDeclarationTypes = { enabled = true },
+			parameterTypes = { enabled = false },
 			variableTypes = { enabled = false },
+			propertyDeclarationTypes = { enabled = true },
+			functionLikeReturnTypes = { enabled = false },
+			enumMemberValues = { enabled = true },
+		},
+		suggest = {
+			includeCompletionsForModuleExports = false,
 		},
 	},
 }
