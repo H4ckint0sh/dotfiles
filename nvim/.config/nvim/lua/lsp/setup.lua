@@ -1,9 +1,10 @@
 -- Setup installer & lsp configs
 local mason_ok, mason = pcall(require, "mason")
 local mason_lsp_ok, mason_lsp = pcall(require, "mason-lspconfig")
+local blink_cmp_ok, blink_cmp = pcall(require, "blink.cmp")
 local mason_tool_installer_ok, mason_tool_installer = pcall(require, "mason-tool-installer")
 
-if not mason_ok or not mason_lsp_ok or not mason_tool_installer_ok then
+if not mason_ok or not mason_lsp_ok or not mason_tool_installer_ok or not blink_cmp_ok then
 	return
 end
 
@@ -61,7 +62,7 @@ local function on_attach(client, bufnr)
 	-- disable as we use vtsls instead
 end
 
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
+local capabilities = blink_cmp.get_lsp_capabilities()
 
 capabilities.textDocument.foldingRange = {
 	dynamicRegistration = false,
