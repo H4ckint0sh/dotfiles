@@ -1,12 +1,12 @@
 local options = {
-	clipboard = "unnamedplus", --- Copy-paste between vim and everything else
+	clipboard = "unnamed,unnamedplus", --- Copy-paste between vim and everything else
 	cmdheight = 0, --- Give more space for displaying messages
 	completeopt = "menu,menuone,noselect", --- Better autocompletion
 	emoji = false, --- Fix emoji display
 	expandtab = true, --- Use spaces instead of tabs
 	ignorecase = true, --- Needed for smart case
 	laststatus = 3, --- Have a global status line at the bottom instead of one for each window
-	mouse = "a", --- Enable mouse
+	mouse = "", --- Enable mouse
 	number = true, --- Shows current line number
 	pumheight = 15, --- Max num of items in completion menu
 	relativenumber = true, --- Enables relative number

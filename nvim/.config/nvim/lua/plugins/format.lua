@@ -28,7 +28,7 @@ return {
 			if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
 				return
 			end
-			return { timeout_ms = 500, lsp_format = "fallback" }
+			return { timeout_ms = 500, lsp_format = "never" }
 		end,
 	},
 	config = function(_, opts)
@@ -37,7 +37,7 @@ return {
 
 		vim.keymap.set({ "n" }, "<leader>F", function()
 			conform.format({
-				lsp_fallback = true,
+				lsp_fallback = false,
 				async = false,
 				timeout_ms = 500,
 			})
@@ -45,7 +45,7 @@ return {
 
 		vim.keymap.set({ "v" }, "<leader>F", function()
 			conform.format({
-				lsp_fallback = true,
+				lsp_fallback = false,
 				async = false,
 				timeout_ms = 500,
 			})
