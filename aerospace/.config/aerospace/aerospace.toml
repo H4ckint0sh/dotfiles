@@ -4,7 +4,7 @@ start-at-login = true
 after-login-command = []
 
 after-startup-command = [
-  'exec-and-forget open -a Wezterm & open -a Microsoft\ Teams & open -a Google\ Chrome',
+  'exec-and-forget open -a Wezterm & open -a Microsoft\ Teams & open -a Chromium',
   'exec-and-forget /opt/homebrew/bin/sketchybar',
 ]
 

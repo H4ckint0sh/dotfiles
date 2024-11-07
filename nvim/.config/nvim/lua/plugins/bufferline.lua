@@ -24,7 +24,7 @@ return {
 				mode = "buffers",
 				numbers = "ordinal",
 				tab_size = 8,
-				separator_style = "",
+				separator_style = { "", "" },
 				always_show_bufferline = true,
 				offsets = {
 					{
@@ -41,11 +41,11 @@ return {
 					bufferline.style_preset.minimal,
 				},
 				diagnostics = false,
-				show_buffer_icons = false,
+				show_buffer_icons = true,
 				show_buffer_close_icons = false,
 				show_close_icon = false,
 				show_tab_indicators = false,
-				indicator_icon = nil,
+				indicator_icon = "",
 				indicator = { style = "none", icon = "none" },
 				buffer_close_icon = "",
 				modified_icon = "●",

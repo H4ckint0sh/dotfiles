@@ -36,7 +36,7 @@ brew "starship"
 brew "wget"
 brew "choose"
 brew "yarn"
-brew "nvm"
+brew "fnm"
 brew "zoxide"
 brew "jesseduffield/lazygit/lazygit"
 brew "H4ckint0sh/formulae/hyabai", args: ["HEAD"]

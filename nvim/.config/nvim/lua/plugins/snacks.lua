@@ -11,11 +11,18 @@ return {
 		quickfile = { enabled = true },
 		statuscolumn = { enabled = false },
 		words = { enabled = true },
+		styles = {
+			notification = {
+				wo = {
+					winblend = 0,
+				},
+			},
+		},
 	},
 	-- stylua: ignore
     keys = {
       { '<leader>N', function() Snacks.notifier.hide() end },
-      { '<leader>g', function() Snacks.lazygit() end },
+      { '<leader>g', function() Snacks.lazygit.open() end },
 	  { "<c-t>", function() Snacks.terminal.toggle() end },
 	  { "<leader>x", function() Snacks.bufdelete() end },
 	  { "<leader>br", function() Snacks.gitbrowse() end },
