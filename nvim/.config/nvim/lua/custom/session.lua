@@ -71,7 +71,7 @@ local function session_load()
 			mods = { silent = false, emsg_silent = true },
 		})
 
-		require("notify")("Session loaded")
+		Snacks.notifier.notify("Session loaded", "info", { title = "Session" })
 	end
 end
 
@@ -101,9 +101,9 @@ vim.api.nvim_create_autocmd({
 
 		-- Notify if a matching session is found
 		if session_exists() then
-			require("notify")("Matching session found")
+			Snacks.notifier.notify("Matching session found", "info", { title = "Session" })
 		else
-			require("notify")("No matching session found", "warn")
+			Snacks.notifier.notify("No matching session found", "warn", { title = "Session" })
 		end
 	end,
 })

@@ -7,7 +7,6 @@ require("core.lazy")
 -- Custom
 require("custom.substitute") -- Substitutes in the statusline
 require("custom.session") -- Substitutes in the statusline
-require("custom.snippets") -- Snippets
 
 -- LSP
 require("lsp.config")

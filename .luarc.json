@@ -3,6 +3,10 @@
         "hs",
         "vim",
         "createEventTap",
-        "center_cursor_on_search_result"
+        "center_cursor_on_search_result",
+        "Snacks"
+    ],
+    "diagnostics.disable": [
+        "undefined-global"
     ]
 }
