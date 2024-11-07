@@ -21,13 +21,6 @@ keymap.set("n", "<leader>sa", "ggVG")
 keymap.set("n", "n", "nzzzv")
 keymap.set("n", "N", "Nzzzv")
 
--- Some fun register stuff
-keymap.set("v", "<leader>y", '"+y')
-keymap.set("n", "<leader>Y", '"+y$')
-keymap.set("v", "<leader>d", '"_d')
-keymap.set("n", "<leader>x", '"_x')
-keymap.set("n", "<leader>p", '"_dP')
-
 -- Keep things highlighted after moving with < and >
 keymap.set("v", "<", "<gv")
 keymap.set("v", ">", ">gv")
@@ -51,9 +44,6 @@ keymap.set("n", "<leader>v", "ggVGp")
 
 -- Remove highlights
 keymap.set("n", "<CR>", ":noh<CR><CR>", { silent = true })
-
--- Buffers
-keymap.set("n", "<leader>x", ":bd<CR>")
 
 -- Redo
 keymap.set("n", "<S-u>", ":redo<CR>", { silent = true })
