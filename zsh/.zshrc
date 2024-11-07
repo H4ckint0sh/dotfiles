@@ -1,8 +1,3 @@
-
-
-# Source zsh plugins
-source $HOME/.config/.zsh-vi-mode/zsh-vi-mode.plugin.zsh
-
 if [ $(ps ax | grep "[s]sh-agent" | wc -l) -eq 0 ] ; then
     eval $(ssh-agent -s) > /dev/null
     if [ "$(ssh-add -l)" = "The agent has no identities." ] ; then
@@ -33,8 +28,6 @@ export TERM=tmux-256color
 # Set helix as EDITOR
 export EDITOR=nvim
 # export OPENAI_API_KEY=$(security find-generic-password -s 'openapi token' -w)
-
-MOZ_DISABLE_SAFE_MODE_KEY=1
 
 export ZSH_CUSTOM=$DOTFILES
 # export LANG=en_US.UTF-8
