@@ -4,9 +4,6 @@ return {
 	"folke/tokyonight.nvim",
 	lazy = false,
 	priority = 1000,
-	init = function()
-		vim.cmd("colorscheme tokyonight")
-	end,
 	opts = {
 		style = "night", -- The theme comes in three styles, `storm`, a darker variant `night` and
 		transparent = true, -- Enable this to disable setting the background color.

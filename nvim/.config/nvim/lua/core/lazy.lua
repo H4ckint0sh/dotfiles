@@ -24,6 +24,8 @@ require("lazy").setup("plugins", {
 	debug = false,
 	ui = {
 		border = "rounded",
+		-- The backdrop opacity. 0 is fully opaque, 100 is fully transparent.
+		backdrop = 100,
 	},
 })
 
