@@ -31,6 +31,7 @@ mason_lsp.setup({
 		"tailwindcss",
 		"astro",
 		"ts_ls",
+		"jdtls",
 	},
 	automatic_installation = true,
 })
@@ -89,9 +90,9 @@ require("mason-lspconfig").setup_handlers({
 		})
 	end,
 
-	["ts_ls"] = function()
-		-- disabel to use typescript-tools
-	end,
+	["jdtls"] = function() end, -- Prevent Mason from attaching `jdtls`
+
+	["ts_ls"] = function() end, -- disabel to use typescript-tools
 
 	["tailwindcss"] = function()
 		lspconfig.tailwindcss.setup({

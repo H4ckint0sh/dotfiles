@@ -22,6 +22,10 @@ export DOTFILES=$HOME/.dotfiles
 # path to bat config
 export BAT_CONFIG_PATH="$HOME/.config/bat/config"
 
+# JAVA_HOME
+export JAVA_HOME=$(/usr/libexec/java_home)
+
+
 # terminal
 export TERM=tmux-256color
 
