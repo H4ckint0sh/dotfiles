@@ -21,11 +21,12 @@ return {
 	},
 	-- stylua: ignore
     keys = {
-      { '<leader>N', function() Snacks.notifier.hide() end },
-      { '<leader>g', function() Snacks.lazygit.open() end },
-	  { "<c-t>", function() Snacks.terminal.toggle() end },
-	  { "<leader>x", function() Snacks.bufdelete() end },
-	  { "<leader>br", function() Snacks.gitbrowse() end },
+		{ '<leader>N', function() Snacks.notifier.hide() end },
+		{ '<leader>g', function() Snacks.lazygit.open() end },
+		{ "<c-t>", function() Snacks.terminal.toggle() end },
+		{ "<leader>x", function() Snacks.bufdelete() end },
+		{ "<leader>br", function() Snacks.gitbrowse() end },
+		{"<leader>fr", function() Snacks.rename.rename_file() end}
 	},
 	init = function()
 		vim.api.nvim_create_autocmd("User", {
