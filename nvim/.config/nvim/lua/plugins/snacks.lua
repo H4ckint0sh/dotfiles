@@ -18,6 +18,11 @@ return {
 				},
 			},
 		},
+		lazygit = {
+			theme = {
+				activeBorderColor = { fg = "MatchParen", bold = true },
+			},
+		},
 	},
 	-- stylua: ignore
     keys = {

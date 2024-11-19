@@ -15,7 +15,6 @@ return {
 			pattern = "alpha",
 			callback = function()
 				vim.o.laststatus = 0 -- Hide the statusline in Alpha dashboard
-				vim.o.showtabline = 0 -- Hide tabline in Alpha dashboard
 			end,
 		})
 
@@ -24,7 +23,6 @@ return {
 			buffer = 0,
 			callback = function()
 				vim.o.laststatus = 3 -- Show the statusline after leaving Alpha
-				vim.o.showtabline = 2 -- Hide tabline in Alpha dashboard
 			end,
 		})
 
