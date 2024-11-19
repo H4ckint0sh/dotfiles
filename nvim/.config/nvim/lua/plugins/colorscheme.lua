@@ -62,6 +62,9 @@ return {
 
 			-- indent blankline
 			H.IblScope = { fg = C.fg }
+
+			-- Float
+			H.FloatBorder = { fg = C.comment, bg = "NONE" }
 		end,
 	},
 	config = function(_, opts)
