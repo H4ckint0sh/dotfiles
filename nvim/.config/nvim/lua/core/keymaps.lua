@@ -122,8 +122,21 @@ keymap.set("n", "<leader>R", require("fzf-lua").registers, { desc = "Registers" 
 keymap.set("n", "<leader>m", require("fzf-lua").marks, { desc = "Marks" })
 keymap.set("n", "<leader>h", require("fzf-lua").oldfiles, { desc = "Recent files" })
 keymap.set("n", "<leader>t", require("fzf-lua").live_grep, { desc = "Fzf Grep" })
+vim.keymap.set("n", "<leader>b", function()
+	require("fzf-lua").buffers({
+		winopts = {
+			height = 0.5, -- Window height (90% of the screen)
+			width = 0.5, -- Window width (50% of the screen)
+			row = 0.5, -- Center vertically
+			col = 0.5, -- Center horizontally
+			preview = {
+				hidden = "hidden", -- Disable the preview window
+			},
+		},
+	})
+end, { desc = "Open buffers with fzf-lua" })
 keymap.set("n", "<leader>y", require("fzf-lua").live_grep_glob, { desc = "Fzf Grep" })
-keymap.set("n", "<leader>b", require("fzf-lua").buffers, { desc = "Fzf Buffers" })
+-- keymap.set("n", "<leader>b", require("fzf-lua").buffers, { desc = "Fzf Buffers" })
 keymap.set("n", "<leader>j", require("fzf-lua").helptags, { desc = "Help Tags" })
 keymap.set("n", "<leader>gf", require("fzf-lua").git_status, { desc = "Git Status" })
 keymap.set("n", "<leader>d", "<cmd>FzfLua lsp_document_diagnostics<CR>")
