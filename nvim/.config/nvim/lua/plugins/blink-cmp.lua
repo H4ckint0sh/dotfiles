@@ -8,12 +8,8 @@ return {
 		{ "saghen/blink.compat" },
 		-- add source to dependencies
 	},
-
-	-- use a release tag to download pre-built binaries
-	version = "v0.*",
-
-	---@module 'blink.cmp'
-	---@type blink.cmp.Config
+	-- Use nightly build
+	build = "cargo +nightly build --release",
 	opts = {
 		sources = {
 			completion = {
@@ -46,7 +42,9 @@ return {
 			autocomplete = {
 				min_width = 25,
 				border = "rounded",
-				draw = "reversed",
+				draw = {
+					columns = { { "label", "label_description", gap = 1 }, { "kind_icon", "kind" } },
+				},
 			},
 			documentation = {
 				border = "rounded",
