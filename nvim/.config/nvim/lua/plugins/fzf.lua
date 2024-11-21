@@ -6,7 +6,15 @@ return {
 		require("fzf-lua").setup({
 			{ "telescope" },
 			fzf_opts = { ["--layout"] = "reverse", ["--marker"] = "+" },
+			files = {
+				fzf_opts = {
+					["--history"] = vim.fn.stdpath("data") .. "/fzf-lua-files-history",
+				},
+			},
 			grep = {
+				fzf_opts = {
+					["--history"] = vim.fn.stdpath("data") .. "/fzf-lua-grep-history",
+				},
 				rg_opts = table.concat({
 					"--column",
 					"--line-number",
