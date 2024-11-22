@@ -5,6 +5,7 @@ return {
 	config = function()
 		require("fzf-lua").setup({
 			{ "telescope" },
+			fzf_colors = true,
 			fzf_opts = { ["--layout"] = "reverse", ["--marker"] = "+" },
 			files = {
 				fzf_opts = {

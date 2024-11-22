@@ -117,7 +117,12 @@ keymap.set("n", "<leader>r", "<cmd>lua vim.lsp.buf.rename()<CR>") -- Rename Symb
 keymap.set("n", "<leader>a", "<cmd>lua vim.lsp.buf.code_action()<CR>") -- Code Actions
 keymap.set("n", "gy", "<cmd>lua vim.lsp.buf.type_definition()<CR>") -- Type Definition
 keymap.set("n", "sh", "<cmd>lua vim.lsp.buf.signature_help()<CR>") -- Signature Help
-keymap.set("n", "<leader>f", require("fzf-lua").files, { desc = "Fzf Files" })
+keymap.set("n", "<leader>f", function()
+	require("fzf-lua").files({
+		formatter = "path.filename_first",
+		fzf_opts = { ["--delimiter"] = "[\t]", ["--nth"] = 1 },
+	})
+end)
 keymap.set("n", "<leader>R", require("fzf-lua").registers, { desc = "Registers" })
 keymap.set("n", "<leader>m", require("fzf-lua").marks, { desc = "Marks" })
 keymap.set("n", "<leader>h", require("fzf-lua").oldfiles, { desc = "Recent files" })
