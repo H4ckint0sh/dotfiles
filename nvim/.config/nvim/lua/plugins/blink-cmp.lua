@@ -57,8 +57,5 @@ return {
 
 		-- experimental auto-brackets support
 		accept = { auto_brackets = { enabled = true } },
-
-		-- experimental signature help support
-		trigger = { signature_help = { enabled = true } },
 	},
 }
