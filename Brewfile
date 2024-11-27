@@ -3,13 +3,9 @@ tap "homebrew/cask"
 tap "epk/epk"
 tap "arl/arl"
 tap "homebrew/cask-versions"
-tap "koekeishiya/formulae"
-tap "H4ckint0sh/formulae"
 tap "homebrew/bundle"
 tap "homebrew/core"
 tap "jesseduffield/lazygit"
-tap "FelixKratz/formulae"
-tap "FelixKratz/formulae"
 
 # Binaries
 brew "bash" # Latest Bash version
@@ -27,7 +23,6 @@ brew "diff-so-fancy"
 brew "findutils"
 brew "luajit", args: ["HEAD"]
 brew "neovim"
-brew "install sketchybar"
 brew "stow"
 brew "tmux"
 brew "gitmux"
@@ -39,8 +34,6 @@ brew "yarn"
 brew "fnm"
 brew "zoxide"
 brew "jesseduffield/lazygit/lazygit"
-brew "H4ckint0sh/formulae/hyabai", args: ["HEAD"]
-brew "koekeishiya/formulae/skhd"
 brew "grep"
 brew "jq" # Used for spatie/visit
 brew "mas" # Mac App Store manager
@@ -57,8 +50,6 @@ brew "nginx"
 brew "yarn"
 
 # Apps
-cask "hammerspoon"
-cask "Firefox"
 cask "docker"
 cask "appcleaner"
 cask "the-unarchiver"
