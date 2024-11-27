@@ -187,6 +187,7 @@ alias kp="ps aux | fzf | awk '{print \$2}' | xargs kill"
 alias delds="find . -name ".DS_Store" -type f -delete"
 
 # GIT ALIASES -----------------------------------------------------------------
+alias v='nvim'
 alias gc='git commit'
 alias ls='eza -1 -T --icons -a'
 alias gco='git checkout'
