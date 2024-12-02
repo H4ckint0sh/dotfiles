@@ -11,6 +11,18 @@ return {
 	-- Use nightly build
 	build = "cargo +nightly build --release",
 	opts = {
+		completion = {
+			menu = {
+				min_width = 25,
+				border = "rounded",
+				draw = {
+					columns = { { "label", "label_description", gap = 4 }, { "kind_icon", gap = 1, "kind" } },
+				},
+			},
+			signature = {
+				border = "rounded",
+			},
+		},
 		sources = {
 			completion = {
 				enabled_providers = { "lsp", "path", "snippets", "buffer", "dadbod" },
@@ -37,23 +49,6 @@ return {
 			use_nvim_cmp_as_default = true,
 		},
 		nerd_font_variant = "normal",
-
-		windows = {
-			autocomplete = {
-				min_width = 25,
-				border = "rounded",
-				draw = {
-					columns = { { "label", "label_description", gap = 1 }, { "kind_icon", "kind" } },
-				},
-			},
-			documentation = {
-				border = "rounded",
-				auto_show = true,
-			},
-			signature_help = {
-				border = "rounded",
-			},
-		},
 
 		-- experimental auto-brackets support
 		accept = { auto_brackets = { enabled = true } },
