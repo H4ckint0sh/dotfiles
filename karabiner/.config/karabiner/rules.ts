@@ -40,6 +40,28 @@ const rules: KarabinerRules[] = [
       },
     ],
   },
+  {
+    description: "left_ctrl -> cmd+tab if pressed alone",
+    manipulators: [
+      {
+        from: {
+          key_code: "left_control",
+        },
+        to: [
+          {
+            key_code: "left_control",
+          },
+        ],
+        to_if_alone: [
+          {
+            key_code: "tab",
+            modifiers: ["command"],
+          },
+        ],
+        type: "basic",
+      },
+    ],
+  },
   ...createHyperSubLayers({
     spacebar: open(
       "raycast://extensions/stellate/mxstbr-commands/create-notion-todo"
@@ -194,7 +216,24 @@ const rules: KarabinerRules[] = [
 
     // r = "Raycast"
     r: {
-      c: open("raycast://extensions/thomas/color-picker/pick-color"),
+      k: open("raycast://extensions/mblode/google-search/index"),
+      y: open(
+        "raycast://extensions/tonka3000/youtube/search-videos?arguments=%7B%22query%22%3A%22%22%7D"
+      ),
+      o: open("raycast://extensions/raycast/github/search-repositories"),
+      p: open("raycast://extensions/nhojb/brew/search"),
+    },
+
+    u: {
+      // Lock screen
+      i: {
+        to: [
+          {
+            key_code: "q",
+            modifiers: ["right_control", "right_command"],
+          },
+        ],
+      },
     },
   }),
   {
