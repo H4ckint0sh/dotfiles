@@ -4,15 +4,10 @@ local keymap = vim.keymap
 -- Define terminal mode mapping in Lua
 vim.keymap.set("t", "<S-esc>", "<C-\\><C-n>")
 
--- Move line up
-keymap.set("n", "<A-u>", ":m .-2<cr>==")
-keymap.set("i", "<A-u>", "<esc>:m .-2<cr>==gi")
-keymap.set("v", "<A-u>", ":m '<-2<CR>gv=gv")
-
--- Move line down
-keymap.set("n", "<A-d>", ":m .+1<CR>==")
-keymap.set("i", "<A-d>", "<Esc>:m .+1<CR>==gi")
-keymap.set("v", "<A-d>", ":m '>+1<CR>gv=gv")
+-- same behavior like alt + up/down in vscode
+-- the selected line will move one line up/down
+keymap.set("v", "J", ":m '>+1<CR>gv=gv")
+keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
 -- Select whole file
 keymap.set("n", "<leader>sa", "ggVG")
