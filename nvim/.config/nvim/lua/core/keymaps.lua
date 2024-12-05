@@ -38,7 +38,7 @@ keymap.set("n", "L", "vg_")
 keymap.set("n", "<leader>v", "ggVGp")
 
 -- Remove highlights
-keymap.set("n", "<CR>", ":noh<CR><CR>", { silent = true })
+vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
 -- Redo
 keymap.set("n", "<S-u>", ":redo<CR>", { silent = true })
