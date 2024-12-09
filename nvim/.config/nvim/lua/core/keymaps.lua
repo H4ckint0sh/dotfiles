@@ -51,7 +51,7 @@ keymap.set("n", "R", ":%s/\\v/g<left><left>", { silent = false }) -- replace
 keymap.set("n", "ss", ":s/", { silent = false }) -- search and replace
 keymap.set("n", "SS", ":%s/\\v", { silent = false }) -- search and replace
 keymap.set("v", "<leader><C-r>", ":s/\\%V") -- Search only in visual selection usingb%V atom
-keymap.set("v", "<C-r>", '"hy:%s/\\v<C-r>h//g<left><left>', { silent = false }) -- change selection
+keymap.set("v", "<leader>w", '"hy:%s/\\v<C-r>h//g<left><left>', { silent = false }) -- change selection
 
 -- General keymaps
 keymap.set("n", "<leader>%", "ggVG") -- exit insert mode with ii
