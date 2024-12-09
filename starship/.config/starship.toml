@@ -7,7 +7,7 @@ format = """
 $directory\
 [](fg:#ff9e64 bg:#394b70)\
 $nodejs\
-[](fg:#394b70 bg:#212736)\
+(fg:#394b70)\
 $rust\
 $golang\
 $php\
@@ -24,12 +24,11 @@ truncation_symbol = ".../"
 
 [git_branch]
 symbol = ""
-style = "bg:#394b70"
-format = '[[ $symbol $branch ](fg:#7dcfff bg:#394b70)]($style)'
+style = ""
+format = '[[ $symbol $branch ](fg:#7dcfff)]($style)'
 
 [git_status]
-style = "bg:#394b70"
-format = '[[($all_status$ahead_behind )](fg:#7dcfff bg:#394b70)]($style)'
+format = '[[($all_status$ahead_behind )](fg:#7dcfff)]($style)'
 
 [nodejs]
 symbol = ""
@@ -38,18 +37,15 @@ format = '[[ $symbol ($version) ](fg:#9ece6a bg:#394b70)]($style)'
 
 [rust]
 symbol = ""
-style = "bg:#212736"
-format = '[[ $symbol ($version) ](fg:#7dcfff bg:#212736)]($style)'
+format = '[[ $symbol ($version) ](fg:#7dcfff)]($style)'
 
 [golang]
 symbol = ""
-style = "bg:#212736"
-format = '[[ $symbol ($version) ](fg:#7dcfff bg:#212736)]($style)'
+format = '[[ $symbol ($version) ](fg:#7dcfff )]($style)'
 
 [php]
 symbol = ""
-style = "bg:#212736"
-format = '[[ $symbol ($version) ](fg:#7dcfff bg:#212736)]($style)'
+format = '[[ $symbol ($version) ](fg:#7dcfff ($style)'
 
 [time]
 disabled = false

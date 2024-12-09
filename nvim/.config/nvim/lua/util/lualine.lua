@@ -35,40 +35,37 @@ M.mode = {
 			S = colors.magenta,
 		}
 		return {
-			bg = map[mode] or colors.magenta,
-			fg = colors.bg_dark,
+			fg = map[mode] or colors.magenta,
+			bg = colors.bg,
 		}
 	end,
-	separator = { right = "", left = "░▒▓" },
 }
 
 M.filetype = {
 	"filetype",
 	color = function()
-		return { fg = colors.blue, bg = colors.bg_highlight }
+		return { fg = colors.blue, bg = colors.bg }
 	end,
-	separator = { right = "", left = "" },
 }
 
 M.diagnostics = {
 	"diagnostics",
 	color = function()
-		return { bg = colors.bg_highlight }
+		return { bg = colors.bg }
 	end,
-	separator = { right = "", left = "" },
 }
 
 M.encoding = {
 	"encoding",
 	color = function()
-		return { fg = colors.blue, bg = colors.bg_highlight }
+		return { fg = colors.blue, bg = colors.bg }
 	end,
 }
 
 M.fileformat = {
 	"fileformat",
 	color = function()
-		return { fg = colors.blue, bg = colors.bg_highlight }
+		return { fg = colors.blue, bg = colors.bg }
 	end,
 }
 
@@ -80,7 +77,7 @@ M.indentation = {
 		return type .. ": " .. value
 	end,
 	color = function()
-		return { fg = colors.blue, bg = colors.bg_highlight }
+		return { fg = colors.blue, bg = colors.bg }
 	end,
 }
 
@@ -167,9 +164,8 @@ M.lsp_formater_linter = {
 		return language_servers
 	end,
 	icon = icons.Braces,
-	separator = { right = "", left = "" },
 	color = function()
-		return { fg = colors.fg_dark, bg = colors.bg_dark }
+		return { fg = colors.fg_dark, bg = colors.bg }
 	end,
 }
 
@@ -178,7 +174,7 @@ M.gap = {
 		return " "
 	end,
 	color = function()
-		return { bg = colors.bg_highlight }
+		return { bg = colors.bg }
 	end,
 	padding = 0,
 }
