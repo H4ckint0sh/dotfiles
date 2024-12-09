@@ -1,21 +1,20 @@
 palette = "tokyonight_night"
 format = """
-[░▒▓](#c0caf5)\
-[  ](bg:#c0caf5 fg:#16161e)\
-[](bg:#292e42 fg:#c0caf5)\
+(#c0caf5)\
+(fg:#c0caf5)\
 $directory\
-[](fg:#292e42 bg:#394b70)\
+(fg:#292e42)\
 $nodejs\
-[](fg:#394b70 bg:#212736)\
+(fg:#394b70)\
 $rust\
 $golang\
 $php\
-[ ](fg:#1d2230)\
+(fg:#1d2230)\
 $character\ 
 """
 
 [directory]
-style = "fg:#bb9af7 bg:#292e42"
+style = "fg:#bb9af7"
 format = "[ $path ]($style)"
 truncation_length = 3
 truncation_symbol = "…/"
@@ -28,38 +27,32 @@ truncation_symbol = "…/"
 
 [git_branch]
 symbol = ""
-style = "bg:#394b70"
-format = '[[ $symbol $branch ](fg:#7dcfff bg:#394b70)]($style)'
+style = ""
+format = '[[ $symbol $branch ](fg:#7dcfff)]($style)'
 
 [git_status]
-style = "bg:#394b70"
-format = '[[($all_status$ahead_behind )](fg:#7dcfff bg:#394b70)]($style)'
+format = '[[($all_status$ahead_behind )](fg:#7dcfff)]($style)'
 
 [nodejs]
 symbol = ""
-style = "bg:#212736"
-format = '[[ $symbol ($version) ](fg:#7dcfff bg:#394b70)]($style)'
+format = '[[ $symbol ($version) ](fg:#7dcfff )]($style)'
 
 [rust]
 symbol = ""
-style = "bg:#212736"
-format = '[[ $symbol ($version) ](fg:#7dcfff bg:#212736)]($style)'
+format = '[[ $symbol ($version) ](fg:#7dcfff)]($style)'
 
 [golang]
 symbol = ""
-style = "bg:#212736"
-format = '[[ $symbol ($version) ](fg:#7dcfff bg:#212736)]($style)'
+format = '[[ $symbol ($version) ](fg:#7dcfff )]($style)'
 
 [php]
 symbol = ""
-style = "bg:#212736"
-format = '[[ $symbol ($version) ](fg:#7dcfff bg:#212736)]($style)'
+format = '[[ $symbol ($version) ](fg:#7dcfff ($style)'
 
 [time]
 disabled = false
-time_format = "%R" # Hour:Minute Format
-style = "bg:#1d2230"
-format = '[[  $time ](fg:#a0a9cb bg:#1d2230)]($style)'
+time_format = "%R"                           # Hour:Minute Format
+format = '[[  $time ](fg:#a0a9cb)]($style)'
 
 [character]
 success_symbol = '[ ](bold green) '
@@ -89,4 +82,3 @@ foreground_gutter = "#363b54"
 background = "#1a1b26"
 background_highlight = "#30374b"
 background_menu = "#16161e"
-
