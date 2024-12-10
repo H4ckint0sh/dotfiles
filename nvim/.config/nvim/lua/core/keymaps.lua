@@ -34,6 +34,9 @@ keymap.set("n", "<BS>", "^")
 -- Highlight to end of line
 keymap.set("n", "L", "vg_")
 
+-- Dont copy the deleted text
+keymap.set("n", "x", '"_x')
+
 -- paste over whole file
 keymap.set("n", "<leader>v", "ggVGp")
 
