@@ -78,7 +78,6 @@ local function addOrUpdateWorkspaceItem(workspaceName, monitorId, isSelected)
 			padding_left = 2,
 			padding_right = 2,
 			background = {
-				color = colors.bg2,
 				border_width = 1,
 				height = 24,
 				corner_radius = 7,
