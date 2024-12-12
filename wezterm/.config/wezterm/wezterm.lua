@@ -2,30 +2,61 @@
 local wezterm = require("wezterm")
 local wt_action = require("wezterm").action
 local k = require("utils/keys")
--- local w = require("utils/wallpaper")
--- local wallpapers_glob = os.getenv("HOME")
--- .. '/.dotfiles/wallpapers/**'
+-- Load the colors from my existing neobean colors.lua file
+local colors = dofile(os.getenv("HOME") .. "/.config/nvim/lua/util/colors.lua")
+
+-- Restart wezterm when the active colorscheme changes
+wezterm.add_to_config_reload_watch_list(os.getenv("HOME") .. "/colorscheme/active/active-colorscheme.sh")
 
 local config = {
-	-- background = {
-	-- 	w.get_wallpaper(wallpapers_glob),
-	-- 	b.get_background(0.97, 0.98),
-	-- },
-	-- color_scheme = "Tokyo Night",
-	colors = {
-		foreground = "#c0caf5",
-		background = "#1a1b26",
-		cursor_bg = "#c0caf5",
-		cursor_border = "#c0caf5",
-		cursor_fg = "#1a1b26",
-		selection_bg = "#283457",
-		selection_fg = "#c0caf5",
-		split = "#7aa2f7",
-		compose_cursor = "#ff9e64",
-		scrollbar_thumb = "#292e42",
 
-		ansi = { "15161e", "#f7768e", "#9ece6a", "#e0af68", "#7aa2f7", "#bb9af7", "#7dcfff", "#a9b1d6" },
-		brights = { "414868", "#f7768e", "#9ece6a", "#e0af68", "#7aa2f7", "#bb9af7", "#7dcfff", "#c0caf5" },
+	colors = {
+		-- The default text color
+		foreground = colors["h4ckint0sh_color14"],
+		-- The default background color
+		background = colors["h4ckint0sh_color10"],
+
+		-- Overrides the cell background color when the current cell is occupied by the cursor
+		cursor_bg = colors["h4ckint0sh_color24"],
+		-- Overrides the text color when the current cell is occupied by the cursor
+		cursor_fg = colors["h4ckint0sh_color14"],
+		-- Specifies the border color of the cursor when the cursor style is set to Block
+		cursor_border = colors["h4ckint0sh_color02"],
+
+		-- The foreground color of selected text
+		selection_fg = colors["h4ckint0sh_color14"],
+		-- The background color of selected text
+		selection_bg = colors["h4ckint0sh_color16"],
+
+		-- The color of the scrollbar "thumb"; the portion that represents the current viewport
+		scrollbar_thumb = colors["h4ckint0sh_color10"],
+
+		-- The color of the split lines between panes
+		split = colors["h4ckint0sh_color02"],
+
+		-- ANSI color palette
+		ansi = {
+			colors["h4ckint0sh_color10"], -- black
+			colors["h4ckint0sh_color11"], -- red
+			colors["h4ckint0sh_color02"], -- green
+			colors["h4ckint0sh_color05"], -- yellow
+			colors["h4ckint0sh_color04"], -- blue
+			colors["h4ckint0sh_color01"], -- magenta
+			colors["h4ckint0sh_color03"], -- cyan
+			colors["h4ckint0sh_color14"], -- white
+		},
+
+		-- Bright ANSI color palette
+		brights = {
+			colors["h4ckint0sh_color08"], -- bright black
+			colors["h4ckint0sh_color11"], -- bright red
+			colors["h4ckint0sh_color02"], -- bright green
+			colors["h4ckint0sh_color05"], -- bright yellow
+			colors["h4ckint0sh_color04"], -- bright blue
+			colors["h4ckint0sh_color01"], -- bright magenta
+			colors["h4ckint0sh_color03"], -- bright cyan
+			colors["h4ckint0sh_color14"], -- bright white
+		},
 	},
 	window_background_opacity = 1,
 	send_composed_key_when_left_alt_is_pressed = true,

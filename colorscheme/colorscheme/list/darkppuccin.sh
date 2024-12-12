@@ -14,63 +14,63 @@
 # C (#37f499) becomes when darkened 4 steps to the right.
 #
 # Markdown heading 1 - color04
-linkarzu_color18="#796394"
+h4ckint0sh_color18="#796394"
 # Markdown heading 2 - color02
-linkarzu_color19="#526c96"
+h4ckint0sh_color19="#526c96"
 # Markdown heading 3 - color03
-linkarzu_color20="#648861"
+h4ckint0sh_color20="#648861"
 # Markdown heading 4 - color01
-linkarzu_color21="#8d6067"
+h4ckint0sh_color21="#8d6067"
 # Markdown heading 5 - color05
-linkarzu_color22="#6c7298"
+h4ckint0sh_color22="#6c7298"
 # Markdown heading 6 - color08
-linkarzu_color23="#966b51"
+h4ckint0sh_color23="#966b51"
 
 # Mauve
-linkarzu_color04="#cba6f7"
+h4ckint0sh_color04="#cba6f7"
 # Blue
-linkarzu_color02="#89b4fa"
+h4ckint0sh_color02="#89b4fa"
 # Green
-linkarzu_color03="#a6e3a1"
+h4ckint0sh_color03="#a6e3a1"
 # Maroon
-linkarzu_color01="#eba0ac"
+h4ckint0sh_color01="#eba0ac"
 # Lavender
-linkarzu_color05="#b4befe"
+h4ckint0sh_color05="#b4befe"
 # Peach
-linkarzu_color08="#fab387"
+h4ckint0sh_color08="#fab387"
 # Sapphire
-linkarzu_color06="#74c7ec"
+h4ckint0sh_color06="#74c7ec"
 # Surface 0
 # Markdown codeblock
-linkarzu_color07="#26263a"
+h4ckint0sh_color07="#26263a"
 # Subtext0
 # Comments
-linkarzu_color09="#a6adc8"
+h4ckint0sh_color09="#a6adc8"
 # Base
 # Terminal and neovim background
-linkarzu_color10="#161622"
+h4ckint0sh_color10="#161622"
 # Red
 # Underline spellbad
-linkarzu_color11="#f38ba8"
+h4ckint0sh_color11="#f38ba8"
 # Yellow
 # Underline spellcap
-linkarzu_color12="#f9e2af"
+h4ckint0sh_color12="#f9e2af"
 # Surface2
 # line across cursor
-linkarzu_color13="#3d3d5d"
+h4ckint0sh_color13="#3d3d5d"
 # Text
 # Cursor and tmux windows text
-linkarzu_color14="#cdd6f4"
+h4ckint0sh_color14="#cdd6f4"
 # Surface1
 # Tmux inactive windows (7 colors to the right)
-linkarzu_color15="#314430"
+h4ckint0sh_color15="#314430"
 # Flamingo
 # Selected text
-linkarzu_color16="#f2cdcd"
+h4ckint0sh_color16="#f2cdcd"
 # Lualine across
-linkarzu_color17="#1e1e2e"
+h4ckint0sh_color17="#1e1e2e"
 # Cursor color
-linkarzu_color24="#F712FF"
+h4ckint0sh_color24="#F712FF"
 # https://www.colorhexa.com/1e1e2e
 # #0f0f16
 # #161622
@@ -81,4 +81,4 @@ linkarzu_color24="#F712FF"
 # #3d3d5d
 # #454569
 # Background of inactive tmux pane
-linkarzu_color25=#232e3b
+h4ckint0sh_color25=#232e3b

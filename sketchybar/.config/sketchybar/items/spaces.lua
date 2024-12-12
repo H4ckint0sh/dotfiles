@@ -90,7 +90,7 @@ local function addOrUpdateWorkspaceItem(workspaceName, monitorId, isSelected)
 		local space_bracket = sbar.add("bracket", { spaceId }, {
 			background = {
 				color = colors.transparent,
-				border_color = colors.transparent,
+				border_color = colors.grey,
 				height = 26,
 				border_width = 1,
 				corner_radius = 7,
@@ -110,7 +110,7 @@ local function addOrUpdateWorkspaceItem(workspaceName, monitorId, isSelected)
 		label = { highlight = isSelected },
 	})
 	spaces[spaceId].bracket:set({
-		background = { border_color = isSelected and colors.dirty_white or colors.transparent },
+		background = { border_color = isSelected and colors.white or colors.transparent },
 	})
 
 	updateSpaceIcons(spaceId, workspaceName)

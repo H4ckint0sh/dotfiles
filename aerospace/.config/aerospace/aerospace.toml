@@ -4,6 +4,7 @@ start-at-login = true
 after-login-command = []
 
 after-startup-command = [
+  'exec-and-forget borders active_color=0xff565f89 inactive_color=0xff365f69 width=5.0',
   'exec-and-forget open -a Wezterm & open -a Microsoft\ Teams & open -a Chromium',
   'exec-and-forget /opt/homebrew/bin/sketchybar',
 ]
