@@ -1,3 +1,6 @@
+# source active colorscheme
+source $HOME/.dotfiles/colorscheme/colorscheme/active/active-colorscheme.sh
+
 if [ $(ps ax | grep "[s]sh-agent" | wc -l) -eq 0 ] ; then
     eval $(ssh-agent -s) > /dev/null
     if [ "$(ssh-add -l)" = "The agent has no identities." ] ; then
@@ -15,21 +18,21 @@ export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
       --info=inline-right \
       --ansi \
       --layout=reverse \
-      --color=fg:#565f89 \
-      --color=fg+:#c0caf5 \
-      --color=bg:#1a1b26 \
-      --color=bg+:#1a1b26
-      --color=hl:#3d59a1 \
-      --color=hl+:#7aa2f7 \
-      --color=info:#7aa2f7 \
-      --color=marker:#87ff00 \
-      --color=prompt:#ff007c \
-      --color=spinner:#bb9af7 \
-      --color=pointer:#bb9af7 \
-      --color=header:#ff9e64 \
-      --color=border:#565f89 \
-      --color=label:#c0caf5 \
-      --color=query:#d9d9d9 \
+      --color=fg:${h4ckint0sh_color09} \
+      --color=fg+:${h4ckint0sh_color07} \
+      --color=bg:${h4ckint0sh_color10} \
+      --color=bg+:${h4ckint0sh_color10}\
+      --color=hl:${h4ckint0sh_color02} \
+      --color=hl+:${h4ckint0sh_color02} \
+      --color=info:${h4ckint0sh_color03} \
+      --color=marker:${h4ckint0sh_color01} \
+      --color=prompt:${h4ckint0sh_color07} \
+      --color=spinner:${h4ckint0sh_color07} \
+      --color=pointer:${h4ckint0sh_color08} \
+      --color=header:${h4ckint0sh_color07} \
+      --color=border:${h4ckint0sh_color09} \
+      --color=label:${h4ckint0sh_color07} \
+      --color=query:${h4ckint0sh_color07} \
 "
 
 # Node- sass

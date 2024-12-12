@@ -93,17 +93,17 @@ format = """
 \$username\\
 \$directory\\
 \$nodejs\\
-\$time\\
 \$character\\
 """
 
 [character]
-success_symbol = '[  ](${h4ckint0sh_color02} bold)'
-error_symbol = '[  ](${h4ckint0sh_color11} bold)'
-vicmd_symbol = '[󰕷  ](${h4ckint0sh_color04} bold)'
+success_symbol = '[  ](${h4ckint0sh_color03} bold) '
+error_symbol = '[  ](${h4ckint0sh_color11} bold) '
+vicmd_symbol = '[󰕷  ](${h4ckint0sh_color01} bold) '
 
 [directory]
-style = "${h4ckintosh_color01}"
+style = "${h4ckintosh_color02} bold"
+disabled = false
 truncation_length = 3
 truncation_symbol = "…/"
 
@@ -113,24 +113,15 @@ disabled = true
 [gcloud]
 disabled = true
 
-[time]
-style = '${h4ckint0sh_color04} bold'
-disabled = false
-format = '[\[\$time\]](\$style) '
-# https://docs.rs/chrono/0.4.7/chrono/format/strftime/index.html
-# %T	00:34:60	Hour-minute-second format. Same to %H:%M:%S.
-# time_format = '%y/%m/%d %T'
-time_format = '%y/%m/%d'
-
 [username]
-style_user = '${h4ckint0sh_color04} bold'
+style_user = '${h4ckint0sh_color12} bold'
 style_root = 'white bold'
 format = '[\$user](\$style).@.'
 show_always = true
 
 [nodejs]
-symbol = ""
-format = '[[\$symbol(\$version)](${h4ckint0sh_color05})](\$style)'
+symbol = " "
+format = '[[\$symbol(\$version)](${h4ckint0sh_color03})](\$style) '
 
 EOF
 
