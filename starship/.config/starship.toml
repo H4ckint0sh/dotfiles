@@ -1,83 +1,45 @@
-palette = "tokyonight_night"
-
+# This will show the time on a 2nd line
+# Add a "\" at the end of an item, if you want the next item to show on the same line
 format = """
-[░▒▓](bg:##9ece6a, fg:#9ece6a)\
-[  ](bg:#9ece6a fg:#16161e)\
-[](bg:#ff9e64 fg:#9ece6a)\
+$username\
 $directory\
-[](fg:#ff9e64 bg:#394b70)\
 $nodejs\
-(fg:#394b70)\
-$rust\
-$golang\
-$php\
-[](fg:#1d2230)\
-$line_break\
-$character\ 
+$time\
+$character\
 """
 
+[character]
+success_symbol = '[  ](#7aa2f7 bold)'
+error_symbol = '[  ](#f7768e bold)'
+vicmd_symbol = '[󰕷  ](#bb9af7 bold)'
+
 [directory]
-style = "fg:#1a1b26 bg:#ff9e64"
-format = "[ $path ]($style)"
-truncation_length = 3
-truncation_symbol = ".../"
-
-[git_branch]
-symbol = ""
 style = ""
-format = '[[ $symbol $branch ](fg:#7dcfff)]($style)'
+truncation_length = 3
+truncation_symbol = "…/"
 
-[git_status]
-format = '[[($all_status$ahead_behind )](fg:#7dcfff)]($style)'
+[battery]
+disabled = true
+
+[gcloud]
+disabled = true
+
+[time]
+style = '#bb9af7 bold'
+disabled = false
+format = '[\[$time\]]($style) '
+# https://docs.rs/chrono/0.4.7/chrono/format/strftime/index.html
+# %T	00:34:60	Hour-minute-second format. Same to %H:%M:%S.
+# time_format = '%y/%m/%d %T'
+time_format = '%y/%m/%d'
+
+[username]
+style_user = '#bb9af7 bold'
+style_root = 'white bold'
+format = '[$user]($style).@.'
+show_always = true
 
 [nodejs]
 symbol = ""
-style = "bg:#212736"
-format = '[[ $symbol ($version) ](fg:#9ece6a bg:#394b70)]($style)'
+format = '[[$symbol($version)](#3d59a1)]($style)'
 
-[rust]
-symbol = ""
-format = '[[ $symbol ($version) ](fg:#7dcfff)]($style)'
-
-[golang]
-symbol = ""
-format = '[[ $symbol ($version) ](fg:#7dcfff )]($style)'
-
-[php]
-symbol = ""
-format = '[[ $symbol ($version) ](fg:#7dcfff ($style)'
-
-[time]
-disabled = false
-time_format = "%R"                                      # Hour:Minute Format
-style = "bg:#1d2230"
-format = '[[  $time ](fg:#a0a9cb bg:#1d2230)]($style)'
-
-[character]
-success_symbol = '[](bold #7aa2f7)'
-error_symbol = '[](bold #f7768e)'
-vimcmd_symbol = '[󰕷](green)'
-
-[palettes.tokyonight_night]
-red = "#f7768e"
-orange = "#ff9e64"
-yellow = "#e0af68"
-light-green = "#9ece6a"
-green = "#73daca"
-turquoise = "#89ddff"
-light-cyan = "#b4f9f8"
-teal = "#2ac3de"
-cyan = "#7dcfff"
-blue = "#7aa2f7"
-magenta = "#bb9af7"
-white = "#c0caf5"
-light-gray = "#9aa5ce"
-parameters = "#cfc9c2"
-comment = "#565f89"
-black = "#414868"
-foreground = "#a9b1d6"
-foreground_highlight = "#c0caf5"
-foreground_gutter = "#363b54"
-background = "#1a1b26"
-background_highlight = "#30374b"
-background_menu = "#16161e"

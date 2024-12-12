@@ -188,6 +188,7 @@ export PATH="$HOME/.tmux/plugins/t-smart-tmux-session-manager/bin:$PATH"
 export PATH="/usr/local/opt/findutils/libexec/gnubin:$PATH"
 export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
 export PATH="/$HOME/.pyenv/shims/djlint:$PATH"
+export PATH="/Applications/WezTerm.app/Contents/MacOS/wezterm:$PATH"
 
 # ohmyposh
 eval "$(oh-my-posh init zsh --config ~/.config/ohmyposh/config.toml)"

@@ -93,7 +93,7 @@ local function addOrUpdateWorkspaceItem(workspaceName, monitorId, isSelected)
 		local space_bracket = sbar.add("bracket", { spaceId }, {
 			background = {
 				color = colors.transparent,
-				border_color = colors.transparent,
+				border_color = colors.grey,
 				height = 26,
 				border_width = 1,
 				corner_radius = 7,

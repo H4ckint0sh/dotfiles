@@ -14,6 +14,8 @@ return {
 	dirty_white = 0xffa9b1d6,
 	dark_grey = 0xff282a36,
 	transparent = 0x00000000,
+	bg1 = hex_to_rgba(colors["h4ckint0sh_color10"]),
+	bg2 = hex_to_rgba(colors["h4ckint0sh_color10"], "0xcf"),
 	bar = {
 		bg = 0xff0C0E14,
 		border = 0xff3a3c42,
