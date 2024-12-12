@@ -1,5 +1,5 @@
 return {
-	black = 0xff737aa2, -- Background color
+	black = 0xff1a1b26, -- Background color
 	white = 0xffc0caf5, -- Foreground color
 	red = 0xfff7768e,
 	green = 0xff9ece6a,
@@ -15,15 +15,15 @@ return {
 	dark_grey = 0xff282a36,
 	transparent = 0x00000000,
 	bar = {
-		bg = 0xff1a1b26,
+		bg = 0xcf1a1b26,
 		border = 0xff3a3c42,
 	},
 	popup = {
-		bg = 0xff282a36,
+		bg = 0xcf1a1b26,
 		border = 0xff3a3c42,
 	},
-	bg1 = 0xff282a36,
-	bg2 = 0xff3a3c42,
+	bg1 = 0xff1a1b26,
+	bg2 = 0xcf1a1b26,
 
 	with_alpha = function(color, alpha)
 		if alpha > 1.0 or alpha < 0.0 then
