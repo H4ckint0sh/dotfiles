@@ -11,6 +11,10 @@ return {
 	-- Use nightly build
 	build = "cargo +nightly build --release",
 	opts = {
+		appearance = {
+			use_nvim_cmp_as_default = true,
+			nerd_font_variant = "normal",
+		},
 		completion = {
 			menu = {
 				min_width = 25,
@@ -19,8 +23,8 @@ return {
 					columns = { { "label", "label_description", gap = 4 }, { "kind_icon", gap = 1, "kind" } },
 				},
 			},
-			signature = {
-				border = "rounded",
+			documentation = {
+				auto_show = false,
 			},
 		},
 		sources = {
@@ -28,7 +32,11 @@ return {
 			providers = {
 				dadbod = { name = "Dadbod", module = "vim_dadbod_completion.blink" },
 			},
+			cmdline = {
+				enabled = true,
+			},
 		},
+		signature = { enabled = true },
 		keymap = {
 			["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
 			["<C-e>"] = { "hide", "fallback" },
@@ -42,13 +50,5 @@ return {
 			["<C-b>"] = { "scroll_documentation_up", "fallback" },
 			["<C-f>"] = { "scroll_documentation_down", "fallback" },
 		},
-
-		highlight = {
-			use_nvim_cmp_as_default = true,
-		},
-		nerd_font_variant = "normal",
-
-		-- experimental auto-brackets support
-		accept = { auto_brackets = { enabled = true } },
 	},
 }
