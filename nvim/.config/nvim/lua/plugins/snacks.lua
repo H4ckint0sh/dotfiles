@@ -18,6 +18,15 @@ return {
 				},
 			},
 		},
+		indent = {
+			char = "│",
+			scope = { hl = "Normal" },
+			chunk = {
+				enabled = true,
+				hl = "Normal",
+			},
+		},
+		scope = {},
 		lazygit = {
 			theme = {
 				activeBorderColor = { fg = "MatchParen", bold = true },
@@ -67,7 +76,7 @@ return {
 					},
 					{
 						icon = "󰒲 ",
-						key = "L",
+						key = "l",
 						desc = "Lazy",
 						action = ":Lazy",
 						enabled = package.loaded.lazy ~= nil,

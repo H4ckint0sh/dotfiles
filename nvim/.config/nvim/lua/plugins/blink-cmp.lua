@@ -45,7 +45,12 @@ return {
 				return {}
 			end,
 		},
-		signature = { enabled = true },
+		signature = {
+			enabled = true,
+			window = {
+				border = "rounded",
+			},
+		},
 		keymap = {
 			["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
 			["<C-e>"] = { "hide", "fallback" },
