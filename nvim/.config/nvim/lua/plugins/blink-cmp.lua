@@ -51,6 +51,9 @@ return {
 				border = "rounded",
 			},
 		},
+		enabled = function()
+			return not vim.tbl_contains({ "NvimTree" }, vim.bo.filetype) and vim.bo.buftype ~= "prompt"
+		end,
 		keymap = {
 			["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
 			["<C-e>"] = { "hide", "fallback" },
