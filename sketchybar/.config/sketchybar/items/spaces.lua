@@ -59,7 +59,7 @@ local function addOrUpdateWorkspaceItem(workspaceName, monitorId, isSelected)
 	if not spaces[spaceId] then
 		local space_item = sbar.add("item", spaceId, {
 			icon = {
-				font = { family = settings.font.numbers },
+				font = "sketchybar-app-font:Bold:15.0",
 				string = workspaceName,
 				padding_left = 12,
 				padding_right = 12,
@@ -71,7 +71,7 @@ local function addOrUpdateWorkspaceItem(workspaceName, monitorId, isSelected)
 				padding_left = 0,
 				color = colors.grey,
 				highlight_color = colors.white,
-				font = "sketchybar-app-font:Regular:12.0",
+				font = "sketchybar-app-font:Regular:15.0",
 				y_offset = -1,
 			},
 			padding_left = 2,
@@ -80,6 +80,7 @@ local function addOrUpdateWorkspaceItem(workspaceName, monitorId, isSelected)
 				border_width = 1,
 				height = 24,
 				corner_radius = 7,
+				color = colors.bg2,
 			},
 			click_script = "aerospace workspace " .. workspaceName,
 			display = monitorId,
@@ -108,7 +109,7 @@ local function addOrUpdateWorkspaceItem(workspaceName, monitorId, isSelected)
 		label = { highlight = isSelected },
 	})
 	spaces[spaceId].bracket:set({
-		background = { border_color = isSelected and colors.dirty_white or colors.transparent },
+		background = { border_color = isSelected and colors.transparent or colors.transparent },
 	})
 
 	updateSpaceIcons(spaceId, workspaceName)
