@@ -192,7 +192,8 @@ alias delds="find . -name ".DS_Store" -type f -delete"
 # GIT ALIASES -----------------------------------------------------------------
 alias v='nvim'
 alias gc='git commit'
-alias ls='eza -1 -T --icons -a'
+alias ls="eza --icons --group-directories-first"
+alias ll="eza --icons --group-directories-first -l"
 alias gco='git checkout'
 alias ga='git add'
 alias gb='git branch'
