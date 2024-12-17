@@ -37,6 +37,9 @@ export ZSH_CUSTOM=$DOTFILES
 # export LANG=en_US.UTF-8
 # export LC_ALL=$LANG
 
+# scripts
+source $HOME/bin/grep-open-file.sh
+
 # Created with https://vitormv.github.io/fzf-themes/
 export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
       --height=40% \
