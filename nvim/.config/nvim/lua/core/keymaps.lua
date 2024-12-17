@@ -38,7 +38,9 @@ keymap.set("n", "L", "vg_")
 keymap.set("n", "x", '"_x')
 
 -- paste over whole file
-keymap.set("n", "<leader>v", "ggVGp")
+keymap.set("n", "<leader>v", function()
+	vim.cmd("normal! ggVGp")
+end, { desc = "Paste over entire buffer" })
 
 -- Remove highlights
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
