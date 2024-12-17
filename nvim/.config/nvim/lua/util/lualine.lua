@@ -183,39 +183,6 @@ M.gap = {
 	padding = 0,
 }
 
--- M.neocodeium_status = {
--- 	function()
--- 		local status, serverstatus = require("neocodeium").get_status()
---
--- 		-- Tables to map serverstatus and status to corresponding symbols
--- 		local server_status_symbols = {
--- 			[0] = "󰣺 ", -- Connected
--- 			[1] = "󱤚 ", -- Connecting
--- 			[2] = "󰣽 ", -- Disconnected
--- 		}
---
--- 		local status_symbols = {
--- 			[0] = "󰚩 ", -- Enabled
--- 			[1] = "󱚧 ", -- Disabled Globally
--- 			[3] = "󱚢 ", -- Disabled for Buffer filetype
--- 			[5] = "󱚠 ", -- Disabled for Buffer encoding
--- 			[2] = "󱙻 ", -- Disabled for Buffer (catch-all)
--- 		}
---
--- 		-- Handle serverstatus and status fallback (safeguard against any unexpected value)
--- 		local luacodeium = server_status_symbols[serverstatus] or "󰣼 "
--- 		luacodeium = luacodeium .. (status_symbols[status] or "󱙻 ")
---
--- 		return luacodeium
--- 	end,
--- 	-- cond = require("neocodeium").is_enabled,
--- 	padding = { left = 0, right = 0 },
--- 	separator = { right = "", left = "" },
--- 	color = function()
--- 		return { fg = colors.green, bg = colors.bg_dark }
--- 	end,
--- }
-
 -- Function to get the width of the NvimTree window
 M.nvim_tree_width = function()
 	for _, win in ipairs(vim.api.nvim_list_wins()) do
@@ -248,6 +215,17 @@ M.custom_nvimtree_component = function()
 	end
 	return ""
 end
+
+M.macro = {
+	function()
+		return vim.fn.reg_recording()
+	end,
+	icon = icons.Recording,
+	separator = { left = "", right = "" },
+	color = function()
+		return { fg = colors.magenta, bg = colors.bg }
+	end,
+}
 
 M.filetree = {
 	function()
