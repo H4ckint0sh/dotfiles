@@ -28,9 +28,10 @@ return {
 			},
 		},
 		sources = {
-			default = { "lsp", "path", "snippets", "buffer", "dadbod" },
+			default = { "lsp", "path", "snippets", "buffer", "dadbod", "lazydev" },
 			providers = {
 				dadbod = { name = "Dadbod", module = "vim_dadbod_completion.blink" },
+				lazydev = { name = "LazyDev", module = "lazydev.integrations.blink" },
 			},
 			cmdline = function()
 				local type = vim.fn.getcmdtype()
