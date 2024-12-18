@@ -27,7 +27,7 @@ git:
     autoWrapWidth: 72
   paging:
     colorArg: always
-    pager: delta --dark --paging=never --line-numbers --side-by-side
+    pager: ""
   merging:
     # only applicable to unix users
     manualCommit: false
