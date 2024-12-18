@@ -37,6 +37,9 @@ keymap.set("n", "L", "vg_")
 -- Dont copy the deleted text
 keymap.set("n", "x", '"_x')
 
+-- Scape to normal mode from terminal mode
+keymap.set("t", "<esc><esc>", "<C-\\><C-n>")
+
 -- paste over whole file
 keymap.set("n", "<leader>v", function()
 	vim.cmd("normal! ggVGp")
