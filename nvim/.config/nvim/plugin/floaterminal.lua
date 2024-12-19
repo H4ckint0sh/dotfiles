@@ -51,4 +51,4 @@ local toggle_terminal = function()
 end
 
 vim.api.nvim_create_user_command("ToggleFloatingTerminal", toggle_terminal, {})
-vim.keymap.set({ "n", "t" }, "<leader>;", toggle_terminal, { silent = true })
+vim.keymap.set({ "n", "t" }, "<F12>", toggle_terminal, { silent = true })
