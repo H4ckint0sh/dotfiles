@@ -5,7 +5,6 @@ require("core.options")
 require("core.lazy")
 
 -- Custom
-require("custom.substitute") -- Substitutes in the statusline
 require("custom.session") -- Substitutes in the statusline
 
 -- LSP
