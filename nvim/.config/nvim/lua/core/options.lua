@@ -31,7 +31,7 @@ local options = {
 	backspace = "indent,eol,start", --- Making sure backspace works
 	swapfile = false,
 	undofile = true,
-	timeoutlen = 300, --- Faster completion (cannot be lower than 200 because then commenting doesn't work)
+	timeoutlen = 200, --- Faster completion (cannot be lower than 200 because then commenting doesn't work)
 	updatetime = 100, --- Faster completion
 	conceallevel = 2,
 	concealcursor = "", --- Set to an empty string to expand tailwind class when on cursorline
@@ -45,6 +45,7 @@ local options = {
 	inccommand = "split", -- Show what is changing shen substituting
 	autoread = true, -- disable neovim generating a swapfile and showing the error
 }
+
 local globals = {
 	mapleader = " ", --- Map leader key to SPC
 	maplocalleader = " ", --- Map local leader key to comma
