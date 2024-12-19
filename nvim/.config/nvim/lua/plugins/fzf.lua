@@ -5,6 +5,9 @@ return {
 	config = function()
 		require("fzf-lua").setup({
 			{ "telescope" },
+			oldfiles = {
+				include_current_session = true,
+			},
 			winopts = {
 				preview = {
 					horizontal = "right:60%",
@@ -35,6 +38,9 @@ return {
 					"--hidden",
 					"-e",
 				}, " "),
+				rg_glob = true, -- enable glob parsing
+				glob_flag = "--iglob", -- case insensitive globs
+				glob_separator = "%s%-%-", -- query separator pattern (lua): ' --'
 			},
 		})
 	end,
