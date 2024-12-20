@@ -59,7 +59,11 @@ local function addOrUpdateWorkspaceItem(workspaceName, monitorId, isSelected)
 	if not spaces[spaceId] then
 		local space_item = sbar.add("item", spaceId, {
 			icon = {
-				font = "sketchybar-app-font:Regular:14.0",
+				font = {
+					family = settings.font.text,
+					style = settings.font.style_map["Bold"],
+					size = 15.0,
+				},
 				string = workspaceName,
 				padding_left = 12,
 				padding_right = 12,
