@@ -1,8 +1,8 @@
 palette = "tokyonight_night"
 format = """
-[░▒▓](#c0caf5)\
-[  ](bg:#c0caf5 fg:#16161e)\
-[](bg:#292e42 fg:#c0caf5)\
+[░▒▓](bg:#1a1b26, fg:#7aa2f7)\
+[  ](bg:#7aa2f7 fg:#16161e)\
+[](bg:#292e42 fg:#7aa2f7)\
 $directory\
 [](fg:#292e42 bg:#394b70)\
 $nodejs\
@@ -15,7 +15,7 @@ $character\
 """
 
 [directory]
-style = "fg:#bb9af7 bg:#292e42"
+style = "fg:#c0caf5 bg:#292e42"
 format = "[ $path ]($style)"
 truncation_length = 3
 truncation_symbol = "…/"
@@ -38,7 +38,7 @@ format = '[[($all_status$ahead_behind )](fg:#7dcfff bg:#394b70)]($style)'
 [nodejs]
 symbol = ""
 style = "bg:#212736"
-format = '[[ $symbol ($version) ](fg:#7dcfff bg:#394b70)]($style)'
+format = '[[ $symbol ($version) ](fg:#9ece6a bg:#394b70)]($style)'
 
 [rust]
 symbol = ""
@@ -57,7 +57,7 @@ format = '[[ $symbol ($version) ](fg:#7dcfff bg:#212736)]($style)'
 
 [time]
 disabled = false
-time_format = "%R" # Hour:Minute Format
+time_format = "%R"                                      # Hour:Minute Format
 style = "bg:#1d2230"
 format = '[[  $time ](fg:#a0a9cb bg:#1d2230)]($style)'
 
@@ -89,4 +89,3 @@ foreground_gutter = "#363b54"
 background = "#1a1b26"
 background_highlight = "#30374b"
 background_menu = "#16161e"
-
