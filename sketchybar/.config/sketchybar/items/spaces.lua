@@ -176,7 +176,7 @@ end
 local function updateAllWorkspaces()
 	getMonitors(function(monitorList)
 		getFocusedWorkspace(function(focusedWorkspace)
-			local updatedSpaces = {} -- Guarda todos los worskpaces independiente de los monitores
+			local updatedSpaces = {}
 			for _, monitorId in ipairs(monitorList) do
 				getWorkspacesForMonitor(monitorId, function(workspaces)
 					for _, workspaceName in ipairs(workspaces) do
