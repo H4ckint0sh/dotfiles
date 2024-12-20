@@ -1,8 +1,5 @@
 local keymap = vim.keymap
 
--- Escape from terminal mode
-keymap.set("t", "<esc><esc>", "<C-\\><C-n>")
-
 -- same behavior like alt + up/down in vscode
 -- the selected line will move one line up/down
 keymap.set("v", "K", ":m '<-2<CR>gv=gv")
@@ -59,7 +56,7 @@ keymap.set("n", "<leader>w", ":w<CR>", { silent = true })
 keymap.set("n", "R", ":%s/\\v/g<left><left>", { silent = false }) -- replace
 keymap.set("n", "ss", ":s/", { silent = false }) -- search and replace
 keymap.set("n", "SS", ":%s/\\v", { silent = false }) -- search and replace
-keymap.set("v", "<leader><C-r>", ":s/\\%V") -- Search only in visual selection usingb%V atom
+keymap.set("v", "<leader>;", ":s/\\%V") -- Search only in visual selection usingb%V atom
 keymap.set("v", "<leader>w", '"hy:%s/\\v<C-r>h//g<left><left>', { silent = false }) -- change selection
 
 -- General keymaps
