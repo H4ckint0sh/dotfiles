@@ -1,13 +1,12 @@
 local keymap = vim.keymap
 
--- Terminal
--- Define terminal mode mapping in Lua
+-- Escape from terminal mode
 keymap.set("t", "<esc><esc>", "<C-\\><C-n>")
 
 -- same behavior like alt + up/down in vscode
 -- the selected line will move one line up/down
-keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 
 -- Select whole file
 keymap.set("n", "<leader>sa", "ggVG")
@@ -20,13 +19,15 @@ keymap.set("n", "N", "Nzzzv")
 keymap.set("v", "<", "<gv")
 keymap.set("v", ">", ">gv")
 
--- Duplicate line up
-keymap.set("n", "<A-S-u>", "yypk")
-keymap.set("v", "<A-S-u>", "yP`[V`]")
+-- Duplicate line(s) up
+keymap.set("i", "<S-A-Up>", "<Esc>yypki")
+keymap.set("n", "<S-A-Up>", "yypk")
+keymap.set("v", "<S-A-Up>", "yP`[V`]")
 
--- Duplicate line down
-keymap.set("n", "<A-S-d>", "yyp")
-keymap.set("v", "<A-S-d>", "y`>pgv")
+-- Duplicate line(s) down
+keymap.set("i", "<S-A-Down>", "<Esc>yypi")
+keymap.set("n", "<S-A-Down>", "yyp")
+keymap.set("v", "<S-A-Down>", "y`>pgv")
 
 -- move to first non-blank character
 keymap.set("n", "<BS>", "^")
