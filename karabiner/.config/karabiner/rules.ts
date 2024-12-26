@@ -75,7 +75,7 @@ const rules: KarabinerRules[] = [
       s: app("Simulator"),
       z: app("Zed"),
       d: app("Discord"),
-      t: app("Wezterm"),
+      t: app("ghostty"),
       f: app("Finder"),
       m: app("Messages"),
       p: app("Spotify"),

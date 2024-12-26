@@ -1,0 +1,52 @@
+# theme
+theme = tokyonight_night
+
+# window macos
+macos-titlebar-style = hidden
+# window-padding-x = 10
+window-padding-y = 10,0
+macos-window-shadow = false
+clipboard-read = "allow"
+
+# cursor
+mouse-hide-while-typing = true
+cursor-style = block
+
+# font
+font-family = "Maple Mono"
+font-size = 14
+
+# Keybinds for ghostty
+keybind = cmd+r=reload_config
+
+# Keybinds for tmux
+keybind = cmd+left=text:\x02\x08
+keybind = cmd+right=text:\x02\x0c
+keybind = cmd+up=text:\x02\x0b
+keybind = cmd+down=text:\x02\x0a
+keybind = cmd+alt+left=text:\x02p
+keybind = cmd+alt+right=text:\x02n
+
+keybind = cmd+0=text:\x02\x30
+keybind = cmd+one=text:\x02\x31
+keybind = cmd+two=text:\x02\x32
+keybind = cmd+three=text:\x02\x33
+keybind = cmd+four=text:\x02\x34
+keybind = cmd+five=text:\x02\x35
+keybind = cmd+six=text:\x02\x36
+keybind = cmd+seven=text:\x02\x37
+keybind = cmd+eight=text:\x02\x38
+keybind = cmd+nine=text:\x02\x39
+
+keybind = cmd+b=text:\x02\x42
+keybind = cmd+c=text:\x02\x43
+keybind = cmd+d=text:\x02\x44
+keybind = cmd+k=text:\x02\x4b
+keybind = cmd+l=text:\x02\x4c
+keybind = cmd+n=text:\x02\x22
+keybind = cmd+N=text:\x02\x25
+keybind = cmd+t=text:\x02\x63
+keybind = cmd+s=text:\x02\x73
+keybind = cmd+i=text:\x02\x69
+keybind = cmd+w=text:\x02\x26
+

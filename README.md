@@ -2,7 +2,7 @@
 
 This is my dotfiles for MacOS.
 
-![Alacritty](screenshots/Screenshot.png)
+![Ghostty](screenshots/Screenshot.png)
 
 ## Setup
 
@@ -22,7 +22,7 @@ Run `./cleanenv` to unlink the configs.
 ## Apps
 
 - Text editor: [Neovim](https://neovim.io/)
-- Terminal emulator: [wezterm](https://github.com/wez/wezterm)
+- Terminal emulator: [Ghostty](https://github.com/ghost-cli/ghostty)
 - Terminal multiplexer: [tmux](https://github.com/tmux/tmux)
 - Status bar: [sketchybar](https://github.com/FelixKratz/SketchyBar)
 - Window manager: [aerospace](https://github.com/nikitabobko/AeroSpace)

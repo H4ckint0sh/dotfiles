@@ -4,7 +4,7 @@ start-at-login = true
 after-login-command = []
 
 after-startup-command = [
-  'exec-and-forget open -a Wezterm & open -a Microsoft\ Teams & open -a Chromium',
+  'exec-and-forget open -a Ghostty & open -a Microsoft\ Teams & open -a Chromium',
   'exec-and-forget /opt/homebrew/bin/sketchybar',
 ]
 
@@ -160,7 +160,7 @@ if.app-id = 'com.microsoft.Outlook'
 run = 'move-node-to-workspace M'
 
 [[on-window-detected]]
-if.app-id = 'com.github.wez.wezterm'
+if.app-id = 'com.mitchellh.ghostty'
 run = 'move-node-to-workspace T'
 
 [[on-window-detected]]
