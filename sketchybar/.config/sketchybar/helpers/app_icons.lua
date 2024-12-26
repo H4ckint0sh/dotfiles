@@ -81,6 +81,7 @@ return {
 	["Firefox Developer Edition"] = ":firefox_developer_edition:",
 	["Firefox Nightly"] = ":firefox_developer_edition:",
 	["Folx"] = ":folx:",
+	["Ghostty"] = "󰊠",
 	["Fusion"] = ":fusion:",
 	["System Preferences"] = ":gear:",
 	["System Settings"] = ":gear:",
