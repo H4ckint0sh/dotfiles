@@ -35,6 +35,7 @@ cursor-style = block
 font-family = "Maple Mono"
 adjust-cell-height = 5%
 font-size = 15
+font-feature = -calt
 
 # Keybinds for ghostty
 keybind = cmd+r=reload_config
