@@ -68,5 +68,5 @@ keybind = cmd+shift+n=text:\x02\x25
 keybind = cmd+t=text:\x02\x63
 keybind = cmd+s=text:\x02\x73
 keybind = cmd+i=text:\x02\x69
-keybind = cmd+w=text:\x02\x26
+keybind = cmd+w=text:\x02\x78
 
