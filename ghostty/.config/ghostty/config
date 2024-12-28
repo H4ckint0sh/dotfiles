@@ -19,10 +19,13 @@ custom-shader = shaders/bloom025.glsl
 
 # window macos
 macos-titlebar-style = hidden
-# window-padding-x = 10
 window-padding-y = 10,0
+window-padding-x = 10,10
 macos-window-shadow = false
 clipboard-read = "allow"
+
+# Other
+confirm-close-surface = false 
 
 # cursor
 mouse-hide-while-typing = true
@@ -61,7 +64,7 @@ keybind = cmd+d=text:\x02\x44
 keybind = cmd+k=text:\x02\x4b
 keybind = cmd+l=text:\x02\x4c
 keybind = cmd+n=text:\x02\x22
-keybind = cmd+N=text:\x02\x25
+keybind = cmd+shift+n=text:\x02\x25
 keybind = cmd+t=text:\x02\x63
 keybind = cmd+s=text:\x02\x73
 keybind = cmd+i=text:\x02\x69
