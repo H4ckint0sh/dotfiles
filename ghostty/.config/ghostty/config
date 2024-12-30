@@ -1,5 +1,5 @@
 # theme
-theme = tokyonight_night
+theme = tokyonight
 
 # Some shaders can be found in this repo, they're usually uploaded to discord
 # https://github.com/hackrmomo/ghostty-shaders
@@ -26,15 +26,16 @@ clipboard-read = "allow"
 
 # Other
 confirm-close-surface = false 
+macos-option-as-alt = true
 
 # cursor
 mouse-hide-while-typing = true
 cursor-style = block
 
 # font
-font-family = "Maple Mono"
-adjust-cell-height = 5%
-font-size = 15
+font-family = "Maple Mono Semibold"
+adjust-cell-height = 15%
+font-size = 14
 font-feature = -calt
 
 # Keybinds for ghostty
@@ -70,4 +71,5 @@ keybind = cmd+t=text:\x02\x63
 keybind = cmd+s=text:\x02\x73
 keybind = cmd+i=text:\x02\x69
 keybind = cmd+w=text:\x02\x78
-
+keybind = super+z=text:\x02\x7a
+keybind = super+o=text:\x02\x6f
