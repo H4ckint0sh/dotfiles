@@ -3,7 +3,11 @@ return {
 	priority = 1000,
 	lazy = false,
 	opts = {
-		bigfile = { enabled = true },
+		bigfile = {
+			enabled = true,
+			notify = true,
+			size = 100 * 1024, -- 100 KB
+		},
 		notifier = {
 			enabled = true,
 			timeout = 3000,

@@ -2,7 +2,6 @@ return {
 	{
 		"nvim-treesitter/nvim-treesitter",
 		dependencies = {
-			"hiphish/rainbow-delimiters.nvim",
 			"nvim-treesitter/nvim-treesitter-textobjects",
 			"RRethy/nvim-treesitter-textsubjects",
 		},
