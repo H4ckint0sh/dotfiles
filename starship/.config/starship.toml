@@ -1,7 +1,7 @@
 palette = "tokyonight_night"
 format = """
 [░▒▓](bg:#1a1b26, fg:#7aa2f7)\
-[  ](bg:#7aa2f7 fg:#16161e)\
+[ 􀣺 ](bg:#7aa2f7 fg:#16161e)\
 [](bg:#292e42 fg:#7aa2f7)\
 $directory\
 [](fg:#292e42 bg:#394b70)\
@@ -62,8 +62,8 @@ style = "bg:#1d2230"
 format = '[[  $time ](fg:#a0a9cb bg:#1d2230)]($style)'
 
 [character]
-success_symbol = '[ ](bold green) '
-error_symbol = '[ ](#E84D44) '
+success_symbol = '[􀁣 ](bold green) '
+error_symbol = '[􀁡 ](#E84D44) '
 vimcmd_symbol = '[󰕷 ](bold green) '
 
 [palettes.tokyonight_night]
