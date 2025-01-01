@@ -18,30 +18,20 @@ export interface Parameters {
   "basic.simultaneous_threshold_milliseconds"?: number;
 }
 
-type Conditions =
-  | FrontMostApplicationCondition
-  | DeviceCondition
-  | KeybaordTypeCondition
-  | InputSourceCondition
-  | VaribaleCondition
-  | EventChangedCondition;
+type Conditions = FrontMostApplicationCondition | DeviceCondition | KeybaordTypeCondition | InputSourceCondition | VaribaleCondition | EventChangedCondition;
 
 type FrontMostApplicationCondition = {
-  type: "frontmost_application_if" | "frontmost_application_unless";
-  bundle_identifiers?: string[];
-  file_paths?: string[];
-  description?: string;
-};
+  type: "frontmost_application_if" | "frontmost_application_unless",
+  bundle_identifiers?: string[],
+  file_paths?: string[],
+  description?: string,
+}
 
 type DeviceCondition = {
-  type:
-    | "device_if"
-    | "device_unless"
-    | "device_exists_if"
-    | "device_exists_unless";
-  identifiers: Identifiers;
-  description?: string;
-};
+  type: "device_if" | "device_unless" | "device_exists_if" | "device_exists_unless",
+  identifiers: Identifiers,
+  description?: string,
+}
 
 interface Identifiers {
   vendor_id?: number;
@@ -54,65 +44,48 @@ interface Identifiers {
 }
 
 type KeybaordTypeCondition = {
-  type: "keyboard_type_if" | "keyboard_type_unless";
-  keyboard_types: string[];
-  description?: string;
-};
+  type: "keyboard_type_if" | "keyboard_type_unless",
+  keyboard_types: string[],
+  description?: string,
+}
 
 type InputSourceCondition = {
-  type: "input_source_if" | "input_source_unless";
-  input_sources: InputSource[];
-  description?: string;
-};
+  type: "input_source_if" | "input_source_unless",
+  input_sources: InputSource[],
+  description?: string,
+}
 
 interface InputSource {
-  language?: string;
-  input_source_id?: string;
-  input_mode_id?: string;
+  language?: string,
+  input_source_id?: string,
+  input_mode_id?: string,
 }
 
 type VaribaleCondition = {
-  type: "variable_if" | "variable_unless";
-  name: string | number | boolean;
-  value: string | number;
-  description?: string;
-};
+  type: "variable_if" | "variable_unless",
+  name: string | number | boolean,
+  value: string,
+  description?: string,
+}
 
 type EventChangedCondition = {
-  type: "event_changed_if" | "event_changed_unless";
-  value: boolean;
-  description?: string;
-};
+  type: "event_changed_if" | "event_changed_unless",
+  value: boolean,
+  description?: string,
+}
 
 export interface SimultaneousFrom {
-  key_code: KeyCode;
+  key_code?: KeyCode;
+  pointing_button?: string;  // <-- Add this line
+
 }
 
 export interface SimultaneousOptions {
   key_down_order?: "insensitive" | "strict" | "strict_inverse";
   detect_key_down_uninterruptedly?: boolean;
+  key_up_when?: string;   // If key_up_when is also used, consider adding it as well
+  key_up_order?: string;  // Add this line
 }
-
-type ModifiersKeys =
-  | "caps_lock"
-  | "left_command"
-  | "left_control"
-  | "left_option"
-  | "left_shift"
-  | "right_command"
-  | "right_control"
-  | "right_option"
-  | "right_shift"
-  | "fn"
-  | "command"
-  | "control"
-  | "option"
-  | "shift"
-  | "left_alt"
-  | "left_gui"
-  | "right_alt"
-  | "right_gui"
-  | "any";
 
 export interface From {
   key_code?: KeyCode;
@@ -122,38 +95,25 @@ export interface From {
 }
 
 export interface Modifiers {
-  optional?: ModifiersKeys[];
-  mandatory?: ModifiersKeys[];
+  optional?: string[];
+  mandatory?: string[];
 }
 
 export interface To {
   key_code?: KeyCode;
-  modifiers?: ModifiersKeys[];
+  modifiers?: string[];
   shell_command?: string;
   set_variable?: {
     name: string;
     value: boolean | number | string;
   };
   mouse_key?: MouseKey;
-  pointing_button?: string;
-  /**
-   * Power Management plugin
-   * @example: sleep system
-   * @see: {@link https://karabiner-elements.pqrs.org/docs/json/complex-modifications-manipulator-definition/to/software_function/iokit_power_management_sleep_system/}
-   */
-  software_function?: SoftwareFunction;
 }
 
 export interface MouseKey {
   y?: number;
   x?: number;
   speed_multiplier?: number;
-  vertical_wheel?: number;
-  horizontal_wheel?: number;
-}
-
-export interface SoftwareFunction {
-  iokit_power_management_sleep_system?: {};
 }
 
 export type KeyCode =

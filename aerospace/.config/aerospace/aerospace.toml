@@ -74,14 +74,14 @@ alt-shift-l = 'move right'
 
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#workspace
-alt-cmd-c = 'workspace C'
-alt-cmd-x = 'workspace X'
-alt-cmd-b = 'workspace B'
-alt-cmd-t = 'workspace T'
-alt-cmd-d = 'workspace D'
-alt-cmd-m = 'workspace M'
-alt-cmd-y = 'workspace Y'
-alt-cmd-z = 'workspace Z'
+ctrl-alt-shift-cmd-c = 'workspace C'
+ctrl-alt-shift-cmd-x = 'workspace X'
+ctrl-alt-shift-cmd-b = 'workspace B'
+ctrl-alt-shift-cmd-t = 'workspace T'
+ctrl-alt-shift-cmd-d = 'workspace D'
+ctrl-alt-shift-cmd-m = 'workspace M'
+ctrl-alt-shift-cmd-y = 'workspace Y'
+ctrl-alt-shift-cmd-z = 'workspace Z'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
 alt-shift-c = ['move-node-to-workspace C', 'workspace C']

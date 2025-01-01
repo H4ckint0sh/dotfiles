@@ -33,7 +33,12 @@ export function createHyperSubLayer(
       from: {
         key_code: sublayer_key,
         modifiers: {
-          optional: ["any"],
+          mandatory: [
+            "left_command",
+            "left_control",
+            "left_shift",
+            "left_option",
+          ],
         },
       },
       to_after_key_up: [
@@ -57,22 +62,13 @@ export function createHyperSubLayer(
       // This enables us to press other sublayer keys in the current sublayer
       // (e.g. Hyper + O > M even though Hyper + M is also a sublayer)
       // basically, only trigger a sublayer if no other sublayer is active
-      conditions: [
-        ...allSubLayerVariables
-          .filter(
-            (subLayerVariable) => subLayerVariable !== subLayerVariableName
-          )
-          .map((subLayerVariable) => ({
-            type: "variable_if" as const,
-            name: subLayerVariable,
-            value: 0,
-          })),
-        {
+      conditions: allSubLayerVariables
+        .filter((subLayerVariable) => subLayerVariable !== subLayerVariableName)
+        .map((subLayerVariable) => ({
           type: "variable_if",
-          name: "hyper",
-          value: 1,
-        },
-      ],
+          name: subLayerVariable,
+          value: 0,
+        })),
     },
     // Define the individual commands that are meant to trigger in the sublayer
     ...(Object.keys(commands) as (keyof typeof commands)[]).map(
@@ -82,7 +78,8 @@ export function createHyperSubLayer(
         from: {
           key_code: command_key,
           modifiers: {
-            optional: ["any"],
+            // Mandatory modifiers are *not* added to the "to" event
+            mandatory: ["any"],
           },
         },
         // Only trigger this command if the variable is 1 (i.e., if Hyper + sublayer is held)
@@ -121,21 +118,15 @@ export function createHyperSubLayers(subLayers: {
               from: {
                 key_code: key as KeyCode,
                 modifiers: {
-                  optional: ["any"],
+                  // Mandatory modifiers are *not* added to the "to" event
+                  mandatory: [
+                    "left_command",
+                    "left_control",
+                    "left_shift",
+                    "left_option",
+                  ],
                 },
               },
-              conditions: [
-                {
-                  type: "variable_if",
-                  name: "hyper",
-                  value: 1,
-                },
-                ...allSubLayerVariables.map((subLayerVariable) => ({
-                  type: "variable_if" as const,
-                  name: subLayerVariable,
-                  value: 0,
-                })),
-              ],
             },
           ],
         }
@@ -157,51 +148,14 @@ function generateSubLayerVariableName(key: KeyCode) {
 /**
  * Shortcut for "open" shell command
  */
-export function open(...what: string[]): LayerCommand {
-  return {
-    to: what.map((w) => ({
-      shell_command: `open ${w}`,
-    })),
-    description: `Open ${what.join(" & ")}`,
-  };
-}
-
-/**
- * Utility function to create a LayerCommand from a tagged template literal
- * where each line is a shell command to be executed.
- */
-export function shell(
-  strings: TemplateStringsArray,
-  ...values: any[]
-): LayerCommand {
-  const commands = strings.reduce((acc, str, i) => {
-    const value = i < values.length ? values[i] : "";
-    const lines = (str + value)
-      .split("\n")
-      .filter((line) => line.trim() !== "");
-    acc.push(...lines);
-    return acc;
-  }, [] as string[]);
-
-  return {
-    to: commands.map((command) => ({
-      shell_command: command.trim(),
-    })),
-    description: commands.join(" && "),
-  };
-}
-
-/**
- * Shortcut for managing window sizing with Rectangle
- */
-export function rectangle(name: string): LayerCommand {
+export function open(what: string): LayerCommand {
   return {
     to: [
       {
-        shell_command: `open -g rectangle://execute-action?name=${name}`,
+        shell_command: `open ${what}`,
       },
     ],
-    description: `Window: ${name}`,
+    description: `Open ${what}`,
   };
 }
 
