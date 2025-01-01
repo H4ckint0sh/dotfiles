@@ -76,7 +76,6 @@ local function addOrUpdateWorkspaceItem(workspaceName, monitorId, isSelected)
 				color = colors.grey,
 				highlight_color = colors.white,
 				font = "sketchybar-app-font:Regular:14.0",
-				y_offset = -1,
 			},
 			padding_left = 2,
 			padding_right = 2,
@@ -85,19 +84,10 @@ local function addOrUpdateWorkspaceItem(workspaceName, monitorId, isSelected)
 				height = 24,
 				corner_radius = 7,
 				color = colors.bg2,
+				border_color = isSelected and colors.white or colors.grey,
 			},
 			click_script = "aerospace workspace " .. workspaceName,
 			display = monitorId,
-		})
-
-		local space_bracket = sbar.add("bracket", { spaceId }, {
-			background = {
-				color = colors.transparent,
-				border_color = colors.transparent,
-				height = 26,
-				border_width = 1,
-				corner_radius = 7,
-			},
 		})
 
 		space_item:subscribe("mouse.clicked", function()
@@ -112,10 +102,6 @@ local function addOrUpdateWorkspaceItem(workspaceName, monitorId, isSelected)
 		icon = { highlight = isSelected },
 		label = { highlight = isSelected },
 	})
-	spaces[spaceId].bracket:set({
-		background = { border_color = isSelected and colors.transparent or colors.transparent },
-	})
-
 	updateSpaceIcons(spaceId, workspaceName)
 end
 
