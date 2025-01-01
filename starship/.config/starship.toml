@@ -18,13 +18,14 @@ $character\
 style = "fg:#c0caf5 bg:#292e42"
 format = "[ $path ]($style)"
 truncation_length = 3
-truncation_symbol = "…/"
+truncation_symbol = "􀍠 /"
 
 [directory.substitutions]
-"Documents" = "󰈙 "
-"Downloads" = " "
-"Music" = " "
-"Pictures" = " "
+"Documents" = "􀈷 "
+"Downloads" = "􀁸 "
+"Music" = "􀫀 "
+"Pictures" = "􀏅 "
+".dotfiles" = " 􀣍  "
 
 [git_branch]
 symbol = ""

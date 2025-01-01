@@ -52,40 +52,40 @@ return {
 			preset = {
 				pick = nil,
 				keys = {
-					{ icon = " ", key = "f", desc = "Find File", action = ":lua Snacks.dashboard.pick('files')" },
-					{ icon = " ", key = "n", desc = "New File", action = ":ene | startinsert" },
+					{ icon = "􀊫 ", key = "f", desc = "Find File", action = ":lua Snacks.dashboard.pick('files')" },
+					{ icon = "􀣗 ", key = "n", desc = "New File", action = ":ene | startinsert" },
 					{
-						icon = " ",
+						icon = "􀭥 ",
 						key = "g",
 						desc = "Find Text",
 						action = ":lua Snacks.dashboard.pick('live_grep')",
 					},
 					{
-						icon = " ",
+						icon = "􀉁 ",
 						key = "r",
 						desc = "Recent Files",
 						action = ":lua Snacks.dashboard.pick('oldfiles')",
 					},
 					{
-						icon = " ",
+						icon = "􀍟 ",
 						key = "c",
 						desc = "Config",
 						action = ":lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})",
 					},
 					{
-						icon = " ",
+						icon = "􀍿 ",
 						key = "s",
 						desc = "Restore Session",
 						action = "<cmd>SessionLoad<cr>",
 					},
 					{
-						icon = "󰒲 ",
+						icon = "􀖃 ",
 						key = "l",
 						desc = "Lazy",
 						action = ":Lazy",
 						enabled = package.loaded.lazy ~= nil,
 					},
-					{ icon = " ", key = "q", desc = "Quit", action = ":qa" },
+					{ icon = "􀷃 ", key = "q", desc = "Quit", action = ":qa" },
 				},
 				-- Used by the `header` section
 				header = [[

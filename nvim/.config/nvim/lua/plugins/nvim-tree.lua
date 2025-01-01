@@ -104,15 +104,41 @@ return {
 					},
 				},
 				icons = {
+					git_placement = "after",
+					modified_placement = "after",
+					hidden_placement = "after",
+					diagnostics_placement = "signcolumn",
+					bookmarks_placement = "signcolumn",
+
 					show = {
 						file = true,
 						folder = true,
-						folder_arrow = true,
+						folder_arrow = false,
 						git = true,
 						modified = true,
 					},
 					glyphs = {
-						git = git_icons,
+						default = "􀈷 ", -- Default file icon
+						symlink = "􀉣 ", -- Symlink icon
+						folder = {
+							arrow_closed = "􀆊", -- Closed folder arrow
+							arrow_open = "􀆈 ", -- Open folder arrow
+							default = "􀈖 ", -- Default folder
+							open = "􀈕 ", -- Open folder
+							empty = "􀬕 ", -- Empty folder
+							empty_open = "􀬔 ", -- Empty open folder
+							symlink = "􀉣 ", -- Folder symlink
+							symlink_open = "􀉣 􀈕 ", -- Open symlinked folder
+						},
+						git = {
+							unstaged = "􂫅", -- Unstaged changes
+							staged = "􀃲", -- Staged changes
+							unmerged = "􀂸", -- Unmerged changes
+							renamed = "􀻡", -- Renamed
+							untracked = "􀠧", -- Untracked files
+							deleted = "􀃞", -- Deleted
+							ignored = "􁊓", -- Ignored files
+						},
 					},
 				},
 			},
