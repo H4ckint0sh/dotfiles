@@ -18,10 +18,10 @@ return {
 		options = {
 			component_separators = { left = " ", right = "" },
 			section_separators = { left = " ", right = "" },
-			ignore_focus = { "NvimTree" },
+			globalstatus = true, -- Unified statusline across splits
 		},
 		sections = {
-			lualine_a = { sources.filetree, sources.mode },
+			lualine_a = { sources.mode },
 			lualine_b = { sources.branch, sources.diff },
 			lualine_c = { sources.filetype, sources.macro },
 			lualine_x = { sources.lsp_formater_linter, sources.diagnostics },

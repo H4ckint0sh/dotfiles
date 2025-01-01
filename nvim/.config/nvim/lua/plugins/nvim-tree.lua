@@ -1,4 +1,3 @@
-vim.api.nvim_set_keymap("n", "<leader>wp", "<cmd>lua create_window_picker()<CR>", { noremap = true, silent = true })
 -- File Explorer / Tree
 return {
 	-- https://github.com/nvim-tree/nvim-tree.lua
@@ -11,7 +10,7 @@ return {
 		"NvimTreeFindFileToggle",
 	},
 	keys = {
-		{ "<C-e>", "<cmd>lua require('nvim-tree.api').tree.toggle()<CR>", desc = "NvimTree" },
+		{ "<leader>e", "<cmd>lua require('nvim-tree.api').tree.toggle()<CR>", desc = "NvimTree" },
 	},
 	config = function()
 		local api = require("nvim-tree.api")
@@ -39,6 +38,7 @@ return {
 			vim.keymap.set("n", "<C-]>", api.tree.change_root_to_node, opts("CD"))
 			vim.keymap.set("n", "<C-v>", api.node.open.vertical, opts("Open: Vertical Split"))
 			vim.keymap.set("n", "<C-x>", api.node.open.horizontal, opts("Open: Horizontal Split"))
+			vim.keymap.set("n", "<C-t>", api.node.open.tab, opts("Open: New Tab"))
 			vim.keymap.set("n", "<", api.node.navigate.sibling.prev, opts("Previous Sibling"))
 			vim.keymap.set("n", ">", api.node.navigate.sibling.next, opts("Next Sibling"))
 			vim.keymap.set("n", "P", api.node.navigate.parent, opts("Parent Directory"))
@@ -89,30 +89,6 @@ return {
 					warning = "",
 					error = "",
 				},
-			},
-			view = {
-				float = {
-					enable = true,
-					open_win_config = function()
-						local screen_w = vim.opt.columns:get()
-						local screen_h = vim.opt.lines:get() - vim.opt.cmdheight:get()
-						local w_h = 70
-						local s_h = 42
-						local center_x = (screen_w - w_h) / 2
-						local center_y = ((vim.opt.lines:get() - s_h) / 5) - vim.opt.cmdheight:get()
-						return {
-							border = "rounded",
-							relative = "editor",
-							row = center_y,
-							col = center_x,
-							width = w_h,
-							height = s_h,
-						}
-					end,
-				},
-				width = function()
-					return math.floor(vim.opt.columns:get() * 5)
-				end,
 			},
 			renderer = {
 				group_empty = true,
@@ -176,6 +152,14 @@ return {
 						},
 					},
 				},
+			},
+			view = {
+				-- width of the window, can be either a number (columns) or a string in `%`
+				width = 40,
+				-- side of the tree, can be one of 'left' | 'right' | 'top' | 'bottom'
+				side = "right",
+				number = false,
+				relativenumber = false,
 			},
 		})
 	end,
