@@ -11,6 +11,10 @@ return {
 	-- Use nightly build
 	build = "cargo +nightly build --release",
 	opts = {
+		enabled = function()
+			local disabled_filetypes = { "NvimTree", "prompt", "DressingInput" } -- Add extra fileypes you do not want blink enabled.
+			return not vim.tbl_contains(disabled_filetypes, vim.bo.filetype)
+		end,
 		appearance = {
 			use_nvim_cmp_as_default = true,
 			nerd_font_variant = "normal",
@@ -52,9 +56,6 @@ return {
 				border = "rounded",
 			},
 		},
-		enabled = function()
-			return not vim.tbl_contains({ "NvimTree" }, vim.bo.filetype) and vim.bo.buftype ~= "prompt"
-		end,
 		keymap = {
 			["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
 			["<C-e>"] = { "hide", "fallback" },
