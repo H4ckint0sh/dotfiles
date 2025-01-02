@@ -29,16 +29,32 @@ local cal = sbar.add("item", {
 -- german Date
 cal:subscribe({ "forced", "routine", "system_woke" }, function(env)
 	local weekdayNames = {
-		"So.", "Mo.", "Di.", "Mi.", "Do.", "Fr.", "Sa."
+		"Sö.",
+		"Må.",
+		"Ti.",
+		"On.",
+		"To.",
+		"Fr.",
+		"Lö.",
 	}
 	local monthNames = {
-		"Jan.", "Feb.", "März", "Apr.", "Mai", "Juni", "Juli", "Aug.", "Sep.", "Okt.", "Nov.", "Dez."
+		"Jan.",
+		"Feb.",
+		"Mar.",
+		"Apr.",
+		"Maj",
+		"Jun.",
+		"Jul.",
+		"Aug.",
+		"Sep.",
+		"Okt.",
+		"Nov.",
+		"Dec.",
 	}
 
 	cal:set({
-		icon = weekdayNames[tonumber(os.date("%w")) + 1] ..
-			os.date("%d") .. " " .. monthNames[tonumber(os.date("%m"))],
-		label = "｜" .. os.date("%H:%M:%S")
+		icon = weekdayNames[tonumber(os.date("%w")) + 1] .. os.date("%d") .. " " .. monthNames[tonumber(os.date("%m"))],
+		label = "｜" .. os.date("%H:%M:%S"),
 	})
 end)
 
