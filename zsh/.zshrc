@@ -141,6 +141,9 @@ function prs {
 }
 
 # OTHER ALIASES----------------------------------------------------------------
+alias v='nvim'
+alias ls="eza --icons --group-directories-first"
+alias ll="eza --icons --group-directories-first -l"
 alias c="clear"
 alias gpath="find -type f | fzf | sed 's/^..//' | tr -d '\n' | pbcopy"
 alias kp="ps aux | fzf | awk '{print \$2}' | xargs kill"
@@ -177,8 +180,8 @@ eval "$(zoxide init zsh)"
 # TheFuck
 eval $(thefuck --alias)
 
-# Starship
-eval "$(starship init zsh)"
+# ohmyposh
+eval "$(oh-my-posh init zsh --config ~/.config/ohmyposh/config.toml)"
 
 # Felix (return to LWD)
 source <(command fx --init)
