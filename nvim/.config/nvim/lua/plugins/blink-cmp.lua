@@ -12,7 +12,7 @@ return {
 	build = "cargo +nightly build --release",
 	opts = {
 		enabled = function()
-			local disabled_filetypes = { "NvimTree", "prompt", "DressingInput" } -- Add extra fileypes you do not want blink enabled.
+			local disabled_filetypes = { "NvimTree", "DressingInput" } -- Add extra fileypes you do not want blink enabled.
 			return not vim.tbl_contains(disabled_filetypes, vim.bo.filetype)
 		end,
 		appearance = {
