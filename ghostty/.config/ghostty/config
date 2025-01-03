@@ -33,7 +33,7 @@ font-feature = -calt
 
 # icon
 macos-icon = custom-style
-macos-icon-ghost-color = c0caf5
+macos-icon-ghost-color = 9ece6a
 macos-icon-screen-color = 1a1b26
 
 # Keybinds for ghostty

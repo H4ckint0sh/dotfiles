@@ -11,7 +11,7 @@ local LIST_CURRENT = "aerospace list-workspaces --focused"
 local spaces = {}
 local workspaceToMonitorMap = {}
 
--- Cache para íconos de aplicaciones para evitar búsquedas repetitivas
+-- Cache
 local icon_cache = {}
 
 -- Function to get the icon for an application
