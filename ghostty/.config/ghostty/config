@@ -7,7 +7,6 @@ theme = tokyonight
 # custom-shader = shaders/bloom050.glsl
 custom-shader = shaders/bloom025.glsl
 # custom-shader = shaders/sparks-from-fire.glsl
-
 # custom-shader = shaders/sparks-from-fire.glsl
 
 # window macos
@@ -16,6 +15,7 @@ window-padding-y = 10,0
 window-padding-x = 10,10
 macos-window-shadow = false
 clipboard-read = "allow"
+background-opacity = 1
 
 # Other
 confirm-close-surface = false 
@@ -29,7 +29,7 @@ cursor-style = block
 font-family = "Maple Mono Semibold"
 adjust-cell-height = 15%
 font-size = 14
-font-feature = -calt
+# font-feature = -calt
 
 # icon
 macos-icon = custom-style
