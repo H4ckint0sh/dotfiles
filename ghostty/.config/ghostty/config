@@ -2,20 +2,13 @@
 theme = tokyonight
 
 # Some shaders can be found in this repo, they're usually uploaded to discord
-# https://github.com/hackrmomo/ghostty-shaders
-# custom-shader = shaders/animated-gradient-shader.glsl
-# custom-shader = shaders/bloom.glsl
-# custom-shader = shaders/bloom1.glsl
 # custom-shader = shaders/bloom075.glsl
 # custom-shader = shaders/bloom060.glsl
 # custom-shader = shaders/bloom050.glsl
 custom-shader = shaders/bloom025.glsl
-# custom-shader = shaders/crt.glsl
-# custom-shader = shaders/cubes.glsl
-# custom-shader = shaders/gradient-background.glsl
-# custom-shader = shaders/just-snow.glsl
-# custom-shader = shaders/starfield-colors.glsl
-# custom-shader = shaders/starfield.glsl
+# custom-shader = shaders/sparks-from-fire.glsl
+
+# custom-shader = shaders/sparks-from-fire.glsl
 
 # window macos
 macos-titlebar-style = hidden
@@ -37,6 +30,11 @@ font-family = "Maple Mono Semibold"
 adjust-cell-height = 15%
 font-size = 14
 font-feature = -calt
+
+# icon
+macos-icon = custom-style
+macos-icon-ghost-color = c0caf5
+macos-icon-screen-color = 1a1b26
 
 # Keybinds for ghostty
 keybind = cmd+r=reload_config
