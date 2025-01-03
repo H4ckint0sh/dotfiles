@@ -42,8 +42,7 @@ return {
 			H.NeogitSectionHeader = { fg = C.magenta }
 
 			-- NvimTree
-			H.NvimTreeWinSeparator = { fg = C.fg, bg = C.bg_dark }
-			H.NvimTreeFolderIcon = { fg = C.yellow }
+			H.NvimTreeWinSeparator = { fg = C.comment, bg = C.bg_dark }
 
 			-- Fzf
 			H.FzfLuaBorder = { fg = C.comment }
@@ -55,13 +54,6 @@ return {
 			H.FzfLuaFzfBorder = { fg = C.comment }
 			H.FzfLuaPreviewTitle = { fg = C.fg }
 			H.FzfLuaCursorLine = { bg = C.bg_highlight }
-
-			-- Neocodeium
-			H.NeoCodeiumSuggestion = { bg = "NONE", fg = C.comment }
-			H.NeoCodeiumLabel = { bg = "NONE", fg = C.comment }
-
-			-- indent blankline
-			H.IblScope = { fg = C.fg }
 
 			-- Float
 			H.FloatBorder = { fg = C.comment, bg = "NONE" }
