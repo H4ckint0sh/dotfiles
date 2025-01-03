@@ -147,29 +147,6 @@ const rules: KarabinerRules[] = [
           },
         ],
       },
-      // Previous song
-      y: {
-        to: [
-          {
-            key_code: "rewind",
-          },
-        ],
-      },
-      // Next song
-      o: {
-        to: [
-          {
-            key_code: "fastforward",
-          },
-        ],
-      },
-      p: {
-        to: [
-          {
-            key_code: "play_or_pause",
-          },
-        ],
-      },
     },
 
     u: {
