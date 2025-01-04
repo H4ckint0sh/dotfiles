@@ -28,7 +28,7 @@ return {
 			H["@tag.builtin.tsx"] = { fg = C.red }
 
 			H.CursorLine = { bg = C.bg_highlight }
-			H.CursorLineNr = { fg = C.fg }
+			H.CursorLineNr = { fg = C.orange }
 			H.LspInlayHint = { bg = "NONE", fg = C.comment }
 			H.GitSignsCurrentLineBlame = { fg = C.comment }
 			H.DiagnosticVirtualTextError = { bg = "NONE", fg = C.red }
