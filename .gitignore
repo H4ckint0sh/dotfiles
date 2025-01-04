@@ -15,3 +15,4 @@ fish/.config/fish/conf.d/nvm.fish
 helix/.config/helix/external-snippets/github.com/rafamadriz
 **/node_modules/
 
+ohmyposh/.config/ohmyposh/config.toml.bak
