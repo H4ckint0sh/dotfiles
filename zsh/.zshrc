@@ -8,6 +8,30 @@ if [ $(ps ax | grep "[s]sh-agent" | wc -l) -eq 0 ] ; then
     fi
 fi
 
+# FZF --------------------------------------------------------------
+export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
+      --height=40% \
+      --highlight-line \
+      --info=inline-right \
+      --ansi \
+      --layout=reverse \
+      --color=fg:#565f89 \
+      --color=fg+:#c0caf5 \
+      --color=bg:#1a1b26 \
+      --color=bg+:#1a1b26
+      --color=hl:#3d59a1 \
+      --color=hl+:#7aa2f7 \
+      --color=info:#7aa2f7 \
+      --color=marker:#87ff00 \
+      --color=prompt:#ff007c \
+      --color=spinner:#bb9af7 \
+      --color=pointer:#bb9af7 \
+      --color=header:#ff9e64 \
+      --color=border:#565f89 \
+      --color=label:#c0caf5 \
+      --color=query:#d9d9d9 \
+"
+
 # Node- sass
 export SKIP_SASS_BINARY_DOWNLOAD_FOR_CI=true
 export SKIP_NODE_SASS_TESTS=true
@@ -64,6 +88,12 @@ zinit snippet OMZL::git.zsh
 zinit snippet OMZP::git
 zinit snippet OMZP::sudo
 zinit snippet OMZP::command-not-found
+zinit snippet OMZP::brew
+zinit snippet OMZP::tmux
+zinit snippet OMZP::yarn
+zinit snippet OMZP::npm
+zinit snippet OMZP::fzf
+zinit snippet OMZP::frontend-search
 
 # Load completions
 autoload -Uz compinit && compinit
@@ -72,8 +102,8 @@ zinit cdreplay -q
 
 # Keybindings
 bindkey -e
-bindkey '^k' history-search-backward
-bindkey '^j' history-search-forward
+bindkey '^p' history-search-backward
+bindkey '^n' history-search-forward
 bindkey '^[w' kill-region
 
 # History --------------------------------------------------------------
@@ -95,30 +125,9 @@ zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zstyle ':completion:*' menu no
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
+# fzf options
+zstyle ':fzf-tab:*' fzf-flags --color=fg:#565f89,fg+:#c0caf5,bg:#1a1b26,bg+:#1a1b26
 
-# FZF --------------------------------------------------------------
-export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
-      --height=40% \
-      --highlight-line \
-      --info=inline-right \
-      --ansi \
-      --layout=reverse \
-      --color=fg:#565f89 \
-      --color=fg+:#c0caf5 \
-      --color=bg:#1a1b26 \
-      --color=bg+:#1a1b26
-      --color=hl:#3d59a1 \
-      --color=hl+:#7aa2f7 \
-      --color=info:#7aa2f7 \
-      --color=marker:#87ff00 \
-      --color=prompt:#ff007c \
-      --color=spinner:#bb9af7 \
-      --color=pointer:#bb9af7 \
-      --color=header:#ff9e64 \
-      --color=border:#565f89 \
-      --color=label:#c0caf5 \
-      --color=query:#d9d9d9 \
-"
 
 # FUNCTIONS --------------------------------------------------------------
 function fo() {
@@ -174,14 +183,18 @@ export PATH="/usr/local/opt/findutils/libexec/gnubin:$PATH"
 export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
 export PATH="/$HOME/.pyenv/shims/djlint:$PATH"
 
+# ohmyposh
+eval "$(oh-my-posh init zsh --config ~/.config/ohmyposh/config.toml)"
+
+
 # zoxide
 eval "$(zoxide init zsh)"
 
+# fzf shell integration
+eval "$(fzf --zsh)"
+
 # TheFuck
 eval $(thefuck --alias)
-
-# ohmyposh
-eval "$(oh-my-posh init zsh --config ~/.config/ohmyposh/config.toml)"
 
 # Felix (return to LWD)
 source <(command fx --init)
