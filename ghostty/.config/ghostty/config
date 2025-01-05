@@ -27,7 +27,7 @@ cursor-style = block
 
 # font
 font-family = "Maple Mono Semibold"
-adjust-cell-height = 15%
+adjust-cell-height = 20%
 font-size = 14
 # font-feature = -calt
 

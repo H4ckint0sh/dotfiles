@@ -2,7 +2,7 @@ palette = "tokyonight_night"
 
 format = """
 [░▒▓](bg:##9ece6a, fg:#9ece6a)\
-[ 􀣺 ](bg:#9ece6a fg:#16161e)\
+[  ](bg:#9ece6a fg:#16161e)\
 [](bg:#ff9e64 fg:#9ece6a)\
 $directory\
 [](fg:#ff9e64 bg:#394b70)\
@@ -11,7 +11,7 @@ $nodejs\
 $rust\
 $golang\
 $php\
-[ ](fg:#1d2230)\
+[](fg:#1d2230)\
 $line_break\
 $character\ 
 """
@@ -20,14 +20,7 @@ $character\
 style = "fg:#1a1b26 bg:#ff9e64"
 format = "[ $path ]($style)"
 truncation_length = 3
-truncation_symbol = "􀍠 /"
-
-[directory.substitutions]
-"Documents" = "􀈷 "
-"Downloads" = "􀁸 "
-"Music" = "􀫀 "
-"Pictures" = "􀏅 "
-".dotfiles" = " 􀣍  "
+truncation_symbol = ".../"
 
 [git_branch]
 symbol = ""

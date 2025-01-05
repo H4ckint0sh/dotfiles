@@ -118,26 +118,26 @@ return {
 						modified = true,
 					},
 					glyphs = {
-						default = "􀈷 ", -- Default file icon
-						symlink = "􀉣 ", -- Symlink icon
+						default = " ", -- Default file icon
+						symlink = " ", -- Symlink icon
 						folder = {
-							arrow_closed = "􀆊", -- Closed folder arrow
-							arrow_open = "􀆈 ", -- Open folder arrow
-							default = "􀈖 ", -- Default folder
-							open = "􀈕 ", -- Open folder
-							empty = "􀬕 ", -- Empty folder
-							empty_open = "􀬔 ", -- Empty open folder
-							symlink = "􀉣 ", -- Folder symlink
-							symlink_open = "􀉣 􀈕 ", -- Open symlinked folder
+							arrow_closed = "", -- Closed folder arrow
+							arrow_open = " ", -- Open folder arrow
+							default = "󰉋 ", -- Default folder
+							open = "󰝰 ", -- Open folder
+							empty = "󰉖 ", -- Empty folder
+							empty_open = "󰷏 ", -- Empty open folder
+							symlink = " ", -- Folder symlink
+							symlink_open = "  󰷏 ", -- Open symlinked folder
 						},
 						git = {
-							unstaged = "􂫅", -- Unstaged changes
-							staged = "􀃲", -- Staged changes
-							unmerged = "􀂸", -- Unmerged changes
-							renamed = "􀻡", -- Renamed
-							untracked = "􀠧", -- Untracked files
-							deleted = "􀃞", -- Deleted
-							ignored = "􁊓", -- Ignored files
+							unstaged = " ", -- Unstaged changes
+							staged = " ", -- Staged changes
+							unmerged = " ", -- Unmerged changes
+							renamed = " ", -- Renamed
+							untracked = " ", -- Untracked files
+							deleted = " ", -- Deleted
+							ignored = " ", -- Ignored files
 						},
 					},
 				},
