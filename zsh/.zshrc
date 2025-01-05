@@ -188,7 +188,7 @@ eval "$(oh-my-posh init zsh --config ~/.config/ohmyposh/config.toml)"
 
 
 # zoxide
-e`zinit …ice-spec… for …(plugin or snippet)val "$(zoxide init --cmd cd zsh)"
+eval "$(zoxide init --cmd cd zsh)"
 
 # fzf shell integration
 eval "$(fzf --zsh)"
