@@ -58,8 +58,8 @@ style = "bg:#1d2230"
 format = '[[  $time ](fg:#a0a9cb bg:#1d2230)]($style)'
 
 [character]
-success_symbol = '[](bold #7aa2f7)'
-error_symbol = '[](bold #f7768e)'
+success_symbol = '[](bold #7aa2f7)'
+error_symbol = '[](bold #f7768e)'
 vimcmd_symbol = '[󰕷](green)'
 
 [palettes.tokyonight_night]
