@@ -1,21 +1,23 @@
 palette = "tokyonight_night"
+
 format = """
-[░▒▓](bg:#1a1b26, fg:#7aa2f7)\
-[ 􀣺 ](bg:#7aa2f7 fg:#16161e)\
-[](bg:#292e42 fg:#7aa2f7)\
+[░▒▓](bg:##9ece6a, fg:#9ece6a)\
+[ 􀣺 ](bg:#9ece6a fg:#16161e)\
+[](bg:#ff9e64 fg:#9ece6a)\
 $directory\
-[](fg:#292e42 bg:#394b70)\
+[](fg:#ff9e64 bg:#394b70)\
 $nodejs\
 [](fg:#394b70 bg:#212736)\
 $rust\
 $golang\
 $php\
 [ ](fg:#1d2230)\
+$line_break\
 $character\ 
 """
 
 [directory]
-style = "fg:#c0caf5 bg:#292e42"
+style = "fg:#1a1b26 bg:#ff9e64"
 format = "[ $path ]($style)"
 truncation_length = 3
 truncation_symbol = "􀍠 /"
@@ -63,9 +65,9 @@ style = "bg:#1d2230"
 format = '[[  $time ](fg:#a0a9cb bg:#1d2230)]($style)'
 
 [character]
-success_symbol = '[􀁣 ](bold green) '
-error_symbol = '[􀁡 ](#E84D44) '
-vimcmd_symbol = '[󰕷 ](bold green) '
+success_symbol = '[](bold #7aa2f7)'
+error_symbol = '[](bold #f7768e)'
+vimcmd_symbol = '[󰕷](green)'
 
 [palettes.tokyonight_night]
 red = "#f7768e"
