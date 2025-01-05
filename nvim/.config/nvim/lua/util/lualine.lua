@@ -90,7 +90,7 @@ M.progress = {
 		return vim.trim(location)
 	end,
 	color = function()
-		return { fg = colors.black, bg = colors.fg }
+		return { fg = colors.black, bg = colors.orange }
 	end,
 }
 
@@ -100,7 +100,7 @@ M.location = {
 		return vim.trim(location)
 	end,
 	color = function()
-		return { fg = colors.black, bg = colors.fg }
+		return { fg = colors.black, bg = colors.orange }
 	end,
 }
 
