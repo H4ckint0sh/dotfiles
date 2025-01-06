@@ -91,6 +91,34 @@ const rules: KarabinerRules[] = [
       o: app("Microsoft Outlook"),
     },
 
+    // write the swedish letters more like swedish keyboards
+    w: {
+      semicolon: {
+        to: [
+          {
+            key_code: "p",
+            modifiers: ["option"],
+          },
+        ],
+      },
+      quote: {
+        to: [
+          {
+            key_code: "q",
+            modifiers: ["option"],
+          },
+        ],
+      },
+      open_bracket: {
+        to: [
+          {
+            key_code: "w",
+            modifiers: ["option"],
+          },
+        ],
+      },
+    },
+
     // r = "Raycast"
     r: {
       y: open(
