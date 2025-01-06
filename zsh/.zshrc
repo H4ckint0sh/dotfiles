@@ -109,7 +109,7 @@ bindkey '^n' history-search-forward
 bindkey '^[w' kill-region
 
 # History --------------------------------------------------------------
-HISTSIZE=5000
+HISTSIZE=10000000
 HISTFILE=~/.zsh_history
 SAVEHIST=$HISTSIZE
 HISTDUP=erase
@@ -157,9 +157,13 @@ alias lg="lazygit"
 alias ls="eza --icons --group-directories-first"
 alias ll="eza --icons --group-directories-first -l"
 alias c="clear"
-alias gpath="find -type f | fzf | sed 's/^..//' | tr -d '\n' | pbcopy"
 alias kp="ps aux | fzf | awk '{print \$2}' | xargs kill"
 alias delds="find . -name ".DS_Store" -type f -delete"
+alias mv='mv -i'            
+alias rm='rm -i'            
+alias cp='cp -i'            
+alias mkdir='mkdir -pv'     
+alias path='echo -e ${PATH//:/\\n} | less'
 
 export HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND="bg=white,fg=black,bold"
 
