@@ -64,6 +64,9 @@ export ZSH_CUSTOM=$DOTFILES
 # scripts
 source $HOME/bin/grep-open-file.sh
 
+# settings
+set -o vi
+
 # Zinit --------------------------------------------------------------
 # Set the directory we want to store zinit and plugins
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
@@ -151,6 +154,7 @@ function prs {
 
 # OTHER ALIASES----------------------------------------------------------------
 alias v='nvim'
+alias lg="lazygit"
 alias ls="eza --icons --group-directories-first"
 alias ll="eza --icons --group-directories-first -l"
 alias c="clear"
@@ -185,7 +189,6 @@ export PATH="/$HOME/.pyenv/shims/djlint:$PATH"
 
 # ohmyposh
 eval "$(oh-my-posh init zsh --config ~/.config/ohmyposh/config.toml)"
-
 
 # zoxide
 eval "$(zoxide init --cmd cd zsh)"
