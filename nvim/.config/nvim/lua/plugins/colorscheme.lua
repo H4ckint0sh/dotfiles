@@ -57,6 +57,9 @@ return {
 
 			-- Float
 			H.FloatBorder = { fg = C.comment, bg = "NONE" }
+
+			-- Snacks
+			H.SnacksDashboardHeader = { fg = C.green }
 		end,
 	},
 	config = function(_, opts)
