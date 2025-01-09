@@ -103,7 +103,6 @@ autoload -Uz compinit && compinit
 zinit cdreplay -q
 
 # Keybindings
-bindkey -e
 bindkey '^p' history-search-backward
 bindkey '^n' history-search-forward
 bindkey '^[w' kill-region
@@ -192,6 +191,7 @@ export PATH="/$HOME/.pyenv/shims/djlint:$PATH"
 
 # ohmyposh
 eval "$(oh-my-posh init zsh --config ~/.config/ohmyposh/config.toml)"
+# eval "$(starship init zsh)"
 
 # zoxide
 eval "$(zoxide init --cmd cd zsh)"
@@ -230,3 +230,5 @@ fi
 
 # fnm
 eval "$(fnm env --use-on-cd --version-file-strategy=recursive --shell zsh)"
+
+# source ~/.transient-prompt.zsh
