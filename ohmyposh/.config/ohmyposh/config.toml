@@ -35,18 +35,7 @@ style = 'full'
 template = ' {{ if .PackageManagerIcon }}{{ .PackageManagerIcon }}{{ else }}{{ end }} {{ .Full }}'
 foreground = 'green'
 type = 'node'
-style = 'plain'
-
-[blocks.segments.properties]
-cache_duration = 'none'
-package_manager_icon = true
-
-[[blocks.segments]]
-template = ' {{ .HEAD }}{{ if or (.Working.Changed) (.Staging.Changed) }}*{{ end }} <cyan>{{ if gt .Behind 0 }}⇣{{ end }}{{ if gt .Ahead 0 }}⇡{{ end }}</>'
-foreground = 'grey'
-background = 'transparent'
-type = 'git'
-style = 'plain'
+style = 'powerline'
 
 [blocks.segments.properties]
 branch_icon = ''
