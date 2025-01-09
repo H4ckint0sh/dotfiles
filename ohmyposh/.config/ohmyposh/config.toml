@@ -11,37 +11,34 @@ background = 'transparent'
 template = ' '
 background = 'transparent'
 foreground_templates = [
-  '{{if gt .Code 0}}red{{end}}',
-  '{{if eq .Code 0}}magenta{{end}}',
+  '{{if gt .Code 0}}#f7768e{{end}}',
+  '{{if eq .Code 0}}#9d7cd8{{end}}',
 ]
 
 [[blocks]]
-type = 'prompt'
-alignment = 'left'
+alignment = "left"
+type = "prompt"
 newline = true
 
 [[blocks.segments]]
-template = '{{ .Path }}'
-foreground = 'blue'
-background = 'transparent'
-type = 'path'
-style = 'plain'
+background = "#9ece6a"
+foreground = "#1a1b26"
+leading_diamond = "░▒▓"
+trailing_diamond = ""
+style = "diamond"
+template = " {{ .Path }} "
+type = "path"
 
 [blocks.segments.properties]
-cache_duration = 'none'
-style = 'full'
+style = "full"
 
 [[blocks.segments]]
+background = "#e0af68"
+foreground = "#1a1b26"
+style = "diamond"
+trailing_diamond = ""
 template = ' {{ if .PackageManagerIcon }}{{ .PackageManagerIcon }}{{ else }}{{ end }} {{ .Full }}'
-foreground = 'green'
-type = 'node'
-style = 'powerline'
-
-[blocks.segments.properties]
-branch_icon = ''
-cache_duration = 'none'
-commit_icon = '@'
-fetch_status = true
+type = "node"
 
 [[blocks]]
 type = 'rprompt'
@@ -49,14 +46,14 @@ overflow = 'hidden'
 
 [[blocks.segments]]
 template = '{{ .FormattedMs }}'
-foreground = 'yellow'
+foreground = '#e0af68'
 background = 'transparent'
 type = 'executiontime'
 style = 'plain'
 
 [blocks.segments.properties]
 cache_duration = 'none'
-threshold = 5000
+threshold = 50
 
 [[blocks]]
 type = 'prompt'
@@ -69,8 +66,8 @@ background = 'transparent'
 type = 'text'
 style = 'plain'
 foreground_templates = [
-  '{{if gt .Code 0}}red{{end}}',
-  '{{if eq .Code 0}}magenta{{end}}',
+  '{{if gt .Code 0}}#f7768e{{end}}',
+  '{{if eq .Code 0}}#9d7cd8{{end}}',
 ]
 
 [blocks.segments.properties]
