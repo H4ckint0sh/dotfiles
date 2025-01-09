@@ -1,3 +1,4 @@
+---@diagnostic disable: missing-fields
 return {
 	{
 		"nvim-treesitter/nvim-treesitter",
@@ -103,10 +104,10 @@ return {
 					swap = {
 						enable = true,
 						swap_next = {
-							["<leader>a"] = "@parameter.inner",
+							["<leader>ns"] = "@parameter.inner",
 						},
 						swap_previous = {
-							["<leader>A"] = "@parameter.inner",
+							["<leader>ps"] = "@parameter.inner",
 						},
 					},
 				},
