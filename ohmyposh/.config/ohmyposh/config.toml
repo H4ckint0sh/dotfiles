@@ -3,12 +3,12 @@ version = 3
 final_space = true
 
 [secondary_prompt]
-template = '􀊃 '
+template = ' '
 foreground = 'magenta'
 background = 'transparent'
 
 [transient_prompt]
-template = '􀣔  '
+template = ' '
 background = 'transparent'
 foreground_templates = [
   '{{if gt .Code 0}}red{{end}}',
@@ -75,7 +75,7 @@ alignment = 'left'
 newline = true
 
 [[blocks.segments]]
-template = '􀊃 '
+template = ' '
 background = 'transparent'
 type = 'text'
 style = 'plain'
