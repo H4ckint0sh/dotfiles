@@ -30,7 +30,30 @@ const rules: KarabinerRules[] = [
   },
 
   {
-    description: "left_option -> cmd+v if pressed alone",
+    description: "left_command -> cmd+v if pressed alone",
+    manipulators: [
+      {
+        from: {
+          key_code: "left_command",
+        },
+        to: [
+          {
+            key_code: "left_command",
+          },
+        ],
+        to_if_alone: [
+          {
+            key_code: "v",
+            modifiers: ["command"],
+          },
+        ],
+        type: "basic",
+      },
+    ],
+  },
+
+  {
+    description: "left_option -> cmd+k if pressed alone to open sesh sessions",
     manipulators: [
       {
         from: {
@@ -43,7 +66,7 @@ const rules: KarabinerRules[] = [
         ],
         to_if_alone: [
           {
-            key_code: "v",
+            key_code: "k",
             modifiers: ["command"],
           },
         ],
