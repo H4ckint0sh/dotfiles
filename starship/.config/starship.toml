@@ -8,9 +8,9 @@ $character\
 """
 
 [character]
-success_symbol = '[  ](#9ece6a bold) '
-error_symbol = '[  ](#f7768e bold) '
-vicmd_symbol = '[󰕷  ](#9d7cd8 bold) '
+success_symbol = '[  ](#fdf2bb bold) '
+error_symbol = '[  ](#f62d14 bold) '
+vicmd_symbol = '[󰕷  ](#fbe260 bold) '
 
 [directory]
 style = " bold"
@@ -25,12 +25,12 @@ disabled = true
 disabled = true
 
 [username]
-style_user = '#e0af68 bold'
+style_user = '#fad61d bold'
 style_root = 'white bold'
 format = '[$user]($style).@.'
 show_always = true
 
 [nodejs]
 symbol = " "
-format = '[[$symbol($version)](#9ece6a)]($style) '
+format = '[[$symbol($version)](#fdf2bb)]($style) '
 
