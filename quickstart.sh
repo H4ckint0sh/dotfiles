@@ -42,19 +42,6 @@ echo "Importing defaults ..."
 chmod +x import-defaults.sh
 sh defaults-import.sh ~/defaults/defaults.zip
 
-echo "checking if ~/.nvm directory exists ..."
-DIR=~/.nvm
-if [ -d "$DIR" ];
-then
-    echo "$DIR directory exists, aborting nvm installation."
-else
-	echo "$DIR directory does not exist, installing nvm ..."
-  mkdir ~/.nvm
-  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
-  nvm install 'lts/*'
-fi
-
-
 echo "checking if ~/.tmux/plugins/tpm directory exists ..."
 DIR=~/.tmux/plugins/tpm
 if [ -d "$DIR" ];

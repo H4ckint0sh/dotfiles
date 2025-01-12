@@ -52,7 +52,7 @@ export JAVA_HOME=$(/usr/libexec/java_home)
 # terminal
 export TERM=tmux-256color
 
-# Set helix as EDITOR
+# Set neovim as EDITOR
 export EDITOR=nvim
 # export OPENAI_API_KEY=$(security find-generic-password -s 'openapi token' -w)
 

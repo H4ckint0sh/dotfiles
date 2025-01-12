@@ -16,8 +16,10 @@ brew "thefuck"
 brew "chafa"
 brew "tldr"
 brew "bat"
+brew "eza"
 brew "gh"
 brew "git"
+brew "sesh"
 brew "cmake"
 brew "diff-so-fancy"
 brew "findutils"
@@ -41,9 +43,6 @@ brew "jq" # Used for spatie/visit
 brew "mas" # Mac App Store manager
 brew "pkg-config" # https://github.com/driesvints/dotfiles/issues/20
 
-# language Servers
-brew "lua-language-server"
-
 # Development
 brew "php"
 brew "python@3.9"
@@ -58,3 +57,6 @@ cask "the-unarchiver"
 cask "transmission"
 cask "raycast"
 cask "mouse-fix"
+cask "oh-my-posh"
+cask "karabiner-elements"
+cask "nikitabobko/tap/aerospace"
