@@ -82,6 +82,30 @@
             ]
           },
           {
+            "description": "left_shift -> command+l in tmux for last session if pressed alone",
+            "manipulators": [
+              {
+                "from": {
+                  "key_code": "left_shift"
+                },
+                "to": [
+                  {
+                    "key_code": "left_shift"
+                  }
+                ],
+                "to_if_alone": [
+                  {
+                    "key_code": "l",
+                    "modifiers": [
+                      "command"
+                    ]
+                  }
+                ],
+                "type": "basic"
+              }
+            ]
+          },
+          {
             "description": "Hyper Key sublayer \"a\"",
             "manipulators": [
               {

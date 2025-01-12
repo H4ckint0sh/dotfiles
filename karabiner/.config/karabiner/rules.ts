@@ -75,6 +75,30 @@ const rules: KarabinerRules[] = [
     ],
   },
 
+  {
+    description:
+      "left_shift -> command+l in tmux for last session if pressed alone",
+    manipulators: [
+      {
+        from: {
+          key_code: "left_shift",
+        },
+        to: [
+          {
+            key_code: "left_shift",
+          },
+        ],
+        to_if_alone: [
+          {
+            key_code: "l",
+            modifiers: ["command"],
+          },
+        ],
+        type: "basic",
+      },
+    ],
+  },
+
   ...createHyperSubLayers({
     // All the following combinations require the "hyper" key as well
     a: {
