@@ -2,18 +2,18 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
 version = 3
 final_space = true
 
-[secondary_prompt]
-template = ' '
-foreground = 'magenta'
-background = 'transparent'
-
 [transient_prompt]
-template = ' '
-background = 'transparent'
+background = "transparent"
+template = " "
 foreground_templates = [
   '{{if gt .Code 0}}#f7768e{{end}}',
   '{{if eq .Code 0}}#9d7cd8{{end}}',
 ]
+
+[secondary_prompt]
+background = "transparent"
+foreground = "#c0caf5"
+template = "╰─❯ "
 
 [[blocks]]
 alignment = "left"
@@ -21,23 +21,18 @@ type = "prompt"
 newline = true
 
 [[blocks.segments]]
-background = "#9ece6a"
-foreground = "#1a1b26"
-leading_diamond = "░▒▓"
-trailing_diamond = ""
-style = "diamond"
-template = " {{ .Path }} "
+foreground = "#9ece6a"
+style = "plain"
+template = "<#565f89>╭─(</>{{ .Path }}<#565f89>)</>"
 type = "path"
 
 [blocks.segments.properties]
 style = "full"
 
 [[blocks.segments]]
-background = "#e0af68"
-foreground = "#1a1b26"
-style = "diamond"
-trailing_diamond = ""
-template = ' {{ if .PackageManagerIcon }}{{ .PackageManagerIcon }}{{ else }}{{ end }} {{ .Full }}'
+foreground = "#e0af68"
+style = "plain"
+template = "<#565f89> - (</>{{ if .PackageManagerIcon }}{{ .PackageManagerIcon }}{{ else }}{{ end }} {{ .Full }}<#565f89>)</>"
 type = "node"
 
 [[blocks]]
@@ -61,27 +56,33 @@ alignment = 'left'
 newline = true
 
 [[blocks.segments]]
-template = '{{ if .Env.POSH_VI_MODE }}{{ .Env.POSH_VI_MODE }}{{ end }} '
-background = '#16161e'
-type = 'text'
-style = 'plain'
-foreground_templates = [
-  "{{if contains \"N\" .Env.POSH_VI_MODE}}blue{{end}}",
-  "{{if contains \"I\" .Env.POSH_VI_MODE}}magenta{{end}}",
-  "{{if contains \"V\" .Env.POSH_VI_MODE}}cyan{{end}}",
-  "{{if contains \"V-L\" .Env.POSH_VI_MODE}}cyan{{end}}",
-  "{{if contains \"R\" .Env.POSH_VI_MODE}}yellow{{end}}",
-]
+foreground = "#565f89"
+style = "plain"
+template = "╰─"
+type = "text"
 
 [[blocks.segments]]
-template = ' '
+template = "<#565f89>(</>{{ if .Env.POSH_VI_MODE }}{{ .Env.POSH_VI_MODE }}{{ end }}<#565f89>)</>"
 background = 'transparent'
 type = 'text'
 style = 'plain'
+
+[[blocks.segments]]
+template = '❯'
+background = 'transparent'
+foreground = '#565f89'
+type = 'text'
+style = 'plain'
+
+[[blocks.segments]]
+background = "transparent"
 foreground_templates = [
-  '{{if gt .Code 0}}#f7768e{{end}}',
-  '{{if eq .Code 0}}#9d7cd8{{end}}',
+  "{{if gt .Code 0}}#f7768e{{end}}",
+  "{{if eq .Code 0}}#c0caf5{{end}}",
 ]
+style = "plain"
+template = "❯"
+type = "status"
 
 [blocks.segments.properties]
 cache_duration = 'none'
