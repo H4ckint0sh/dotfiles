@@ -38,15 +38,15 @@ macos-icon-screen-color = 1a1b26
 
 # Keybinds for ghostty
 keybind = cmd+r=reload_config
+keybind = global:cmd+grave_accent=toggle_quick_terminal
 
-# Keybinds for tmux
+# tmux prefix keybindings
 keybind = cmd+left=text:\x02\x08
 keybind = cmd+right=text:\x02\x0c
 keybind = cmd+up=text:\x02\x0b
 keybind = cmd+down=text:\x02\x0a
 keybind = cmd+alt+left=text:\x02p
 keybind = cmd+alt+right=text:\x02n
-
 keybind = cmd+0=text:\x02\x30
 keybind = cmd+one=text:\x02\x31
 keybind = cmd+two=text:\x02\x32
@@ -57,7 +57,6 @@ keybind = cmd+six=text:\x02\x36
 keybind = cmd+seven=text:\x02\x37
 keybind = cmd+eight=text:\x02\x38
 keybind = cmd+nine=text:\x02\x39
-
 keybind = cmd+b=text:\x02\x42
 keybind = cmd+c=text:\x02\x43
 keybind = cmd+d=text:\x02\x44
@@ -72,4 +71,8 @@ keybind = cmd+w=text:\x02\x78
 keybind = super+z=text:\x02\x7a
 keybind = super+o=text:\x02\x6f
 
-keybind = global:cmd+grave_accent=toggle_quick_terminal
+# tmux navigation
+keybind = ctrl+h=text:\x02\x68
+keybind = ctrl+j=text:\x02\x6a
+keybind = ctrl+k=text:\x02\x6b
+keybind = ctrl+l=text:\x02\x6c
