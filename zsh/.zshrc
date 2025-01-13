@@ -60,12 +60,6 @@ export ZSH_CUSTOM=$DOTFILES
 # export LANG=en_US.UTF-8
 # export LC_ALL=$LANG
 
-# scripts
-source $HOME/bin/grep-open-file.sh
-
-# settings
-set -o vi
-
 # Zinit --------------------------------------------------------------
 # Set the directory we want to store zinit and plugins
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
@@ -101,6 +95,10 @@ zinit snippet OMZP::frontend-search
 autoload -Uz compinit && compinit
 
 zinit cdreplay -q
+
+#vi modep
+zinit ice depth=1
+zinit light jeffreytse/zsh-vi-mode
 
 # Keybindings
 bindkey '^p' history-search-backward
@@ -191,7 +189,38 @@ export PATH="/$HOME/.pyenv/shims/djlint:$PATH"
 
 # ohmyposh
 eval "$(oh-my-posh init zsh --config ~/.config/ohmyposh/config.toml)"
-# eval "$(starship init zsh)"
+# OMP zsh-vi-mode integration
+_omp_redraw-prompt() {
+  local precmd
+  for precmd in "${precmd_functions[@]}"; do
+    "$precmd"
+  done
+
+  zle .reset-prompt
+}
+
+export POSH_VI_MODE="I"
+
+function zvm_after_select_vi_mode() {
+  case $ZVM_MODE in
+  $ZVM_MODE_NORMAL)
+    POSH_VI_MODE="N"
+    ;;
+  $ZVM_MODE_INSERT)
+    POSH_VI_MODE="I"
+    ;;
+  $ZVM_MODE_VISUAL)
+    POSH_VI_MODE="V"
+    ;;
+  $ZVM_MODE_VISUAL_LINE)
+    POSH_VI_MODE="V-L"
+    ;;
+  $ZVM_MODE_REPLACE)
+    POSH_VI_MODE="R"
+    ;;
+  esac
+  _omp_redraw-prompt
+}
 
 # zoxide
 eval "$(zoxide init --cmd cd zsh)"
