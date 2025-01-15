@@ -36,6 +36,9 @@ macos-icon = custom-style
 macos-icon-ghost-color = 9ece6a
 macos-icon-screen-color = 1a1b26
 
+# unbind
+keybind = ctrl+h=ignore
+
 # Keybinds for ghostty
 keybind = cmd+r=reload_config
 keybind = global:cmd+grave_accent=toggle_quick_terminal
@@ -72,7 +75,7 @@ keybind = super+z=text:\x02\x7a
 keybind = super+o=text:\x02\x6f
 
 # tmux navigation
-keybind = ctrl+h=text:\x02\x68
-keybind = ctrl+j=text:\x02\x6a
-keybind = ctrl+k=text:\x02\x6b
-keybind = ctrl+l=text:\x02\x6c
+# keybind = ctrl+h=text:\x02\x68
+# keybind = ctrl+j=text:\x02\x6a
+# keybind = ctrl+k=text:\x02\x6b
+# keybind = ctrl+l=text:\x02\x6c
