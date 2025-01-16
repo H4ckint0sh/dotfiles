@@ -94,8 +94,6 @@ zinit snippet OMZP::frontend-search
 # Load completions
 autoload -Uz compinit && compinit
 
-zinit cdreplay -q
-
 #vi modep
 zinit ice depth=1
 zinit light jeffreytse/zsh-vi-mode
@@ -230,25 +228,6 @@ eval "$(fzf --zsh)"
 
 # TheFuck
 eval $(thefuck --alias)
-
-# Felix (return to LWD)
-source <(command fx --init)
-
-# bun completions
-[ -s "/Users/ali/.bun/_bun" ] && source "/Users/ali/.bun/_bun"
-
-# bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
-
-function y() {
-	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
-	yazi "$@" --cwd-file="$tmp"
-	if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
-		builtin cd -- "$cwd"
-	fi
-	rm -f -- "$tmp"
-}
 
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
