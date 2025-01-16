@@ -4,7 +4,7 @@ final_space = true
 
 [transient_prompt]
 background = "transparent"
-template = " "
+template = '❯'
 foreground_templates = [
   '{{if gt .Code 0}}#f7768e{{end}}',
   '{{if eq .Code 0}}#9d7cd8{{end}}',
@@ -62,27 +62,20 @@ template = "╰─"
 type = "text"
 
 [[blocks.segments]]
-template = "<#565f89>(</>{{ if .Env.POSH_VI_MODE }}{{ .Env.POSH_VI_MODE }}{{ end }}<#565f89>)</>"
+template = "<#565f89>(</>{{ if .Env.POSH_VI_MODE }}{{ .Env.POSH_VI_MODE }}{{ end }}<#565f89>)─</>"
 background = 'transparent'
 type = 'text'
 style = 'plain'
 
 [[blocks.segments]]
-template = '❯'
+template = '❯'
 background = 'transparent'
-foreground = '#565f89'
-type = 'text'
-style = 'plain'
-
-[[blocks.segments]]
-background = "transparent"
 foreground_templates = [
-  "{{if gt .Code 0}}#f7768e{{end}}",
-  "{{if eq .Code 0}}#c0caf5{{end}}",
+  '{{if gt .Code 0}}#f7768e{{end}}',
+  '{{if eq .Code 0}}#9d7cd8{{end}}',
 ]
-style = "plain"
-template = "❯"
-type = "status"
+type = 'text'
+style = 'plain'
 
 [blocks.segments.properties]
 cache_duration = 'none'
