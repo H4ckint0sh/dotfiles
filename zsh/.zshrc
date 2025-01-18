@@ -99,6 +99,7 @@ zinit ice depth=1
 zinit light jeffreytse/zsh-vi-mode
 
 # Keybindings
+bindkey -e
 bindkey '^p' history-search-backward
 bindkey '^n' history-search-forward
 bindkey '^[w' kill-region
