@@ -1,6 +1,11 @@
 ---@diagnostic disable: missing-fields
 return {
 	{
+		"bezhermoso/tree-sitter-ghostty",
+		build = "make nvim_install",
+	},
+
+	{
 		"nvim-treesitter/nvim-treesitter",
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter-textobjects",
