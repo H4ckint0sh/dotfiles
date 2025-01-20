@@ -5,10 +5,13 @@ return {
 		"sindrets/diffview.nvim",
 	},
 	keys = {
-		{ "<leader>n", ":Neogit<CR>", desc = "Neogit" },
+		{ "<leader>g", ":Neogit<CR>", desc = "Neogit" },
 	},
 	cmd = "Neogit",
 	opts = {
 		graph_style = "kitty",
+		commit_editor = {
+			staged_diff_split_kind = "vsplit",
+		},
 	},
 }
