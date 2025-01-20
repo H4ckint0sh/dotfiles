@@ -88,6 +88,7 @@ zinit snippet OMZP::brew
 zinit snippet OMZP::tmux
 zinit snippet OMZP::yarn
 zinit snippet OMZP::npm
+zinit ice lucid wait
 zinit snippet OMZP::fzf
 zinit snippet OMZP::frontend-search
 
@@ -99,10 +100,13 @@ zinit ice depth=1
 zinit light jeffreytse/zsh-vi-mode
 
 # Keybindings
-bindkey -e
-bindkey '^p' history-search-backward
-bindkey '^n' history-search-forward
-bindkey '^[w' kill-region
+# The plugin will auto execute this zvm_after_init function
+function zvm_after_init() {
+  bindkey -e
+  bindkey '^p' history-search-backward
+  bindkey '^n' history-search-forward
+  bindkey '^[w' kill-region
+}
 
 # History --------------------------------------------------------------
 HISTSIZE=10000000

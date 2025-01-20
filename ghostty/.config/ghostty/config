@@ -70,9 +70,3 @@ keybind = cmd+i=text:\x02\x69
 keybind = cmd+w=text:\x02\x78
 keybind = super+z=text:\x02\x7a
 keybind = super+o=text:\x02\x6f
-
-# tmux navigation
-# keybind = ctrl+h=text:\x02\x68
-# keybind = ctrl+j=text:\x02\x6a
-# keybind = ctrl+k=text:\x02\x6b
-# keybind = ctrl+l=text:\x02\x6c
