@@ -140,7 +140,6 @@ return {
 	-- stylua: ignore
     keys = {
 		{ '<leader>N', function() Snacks.notifier.hide() end },
-		{ '<leader>g', function() Snacks.lazygit.open() end },
 		{ "<c-t>", function() Snacks.terminal.toggle() end },
 		{ "<leader>x", function() Snacks.bufdelete() end },
 		{ "<leader>br", function() Snacks.gitbrowse() end },
@@ -152,7 +151,7 @@ return {
 		{ "[[",         function() Snacks.words.jump(-vim.v.count1) end, desc = "Prev Reference" },
 		{ "<leader>z",  function() Snacks.zen() end, desc = "ZEN" },
 		{ "<leader>,", function() Snacks.picker.buffers() end, desc = "Buffers" },
-		{ "<leader>t", function() Snacks.picker.grep({ layout = { preset = "ivy" } }) end, desc = "Grep" },
+		{ "<leader>t", function() Snacks.picker.grep({ layout = { preset = "ivy" } , hidden = true }) end, desc = "Grep" },
 		{ "<leader>:", function() Snacks.picker.command_history() end, desc = "Command History" },
 		{ "<leader>f", function() Snacks.picker.files({hidden = true}) end, desc = "Find Files" },
 		-- find
