@@ -109,14 +109,16 @@ function zvm_after_init() {
 }
 
 # History --------------------------------------------------------------
-HISTSIZE=10000000
-HISTFILE=~/.zsh_history
-SAVEHIST=$HISTSIZE
-HISTDUP=erase
+export HISTSIZE=10000000
+export HISTIGNORE="rm -rf*:ls:echo:ll:gallery-dl:c"
+export HISTFILE=~/.zsh_history
+export SAVEHIST=$HISTSIZE
+export HISTDUP=erase
 setopt appendhistory
 setopt sharehistory
 setopt hist_ignore_space
 setopt hist_ignore_all_dups
+setopt hist_reduce_blanks
 setopt hist_save_no_dups
 setopt hist_ignore_dups
 setopt hist_find_no_dups
