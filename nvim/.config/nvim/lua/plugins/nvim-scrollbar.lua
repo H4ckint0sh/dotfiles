@@ -76,6 +76,7 @@ return {
 			},
 			excluded_filetypes = {
 				"dropbar_menu",
+				"snacks_picker_input",
 				"dropbar_menu_fzf",
 				"DressingInput",
 				"cmp_docs",
