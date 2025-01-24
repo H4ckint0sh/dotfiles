@@ -35,7 +35,7 @@ return {
 			H.DiagnosticVirtualTextHint = { bg = "NONE", fg = C.teal }
 			H.DiagnosticVirtualTextInfo = { bg = "NONE", fg = C.green }
 			H.DiagnosticVirtualTextWarn = { bg = "NONE", fg = C.yellow }
-			H.WinSeparator = { fg = C.fg, bg = "NONE" }
+			H.WinSeparator = { fg = C.comment, bg = "NONE" }
 			H.TroubleNormal = { bg = "NONE", fg = C.fg }
 
 			-- Neogit
