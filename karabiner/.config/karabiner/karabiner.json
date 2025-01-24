@@ -82,7 +82,7 @@
             ]
           },
           {
-            "description": "left_ctrl -> cmd+tab if pressed alone",
+            "description": "left_ctrl -> alt+tab if pressed alone",
             "manipulators": [
               {
                 "from": {
@@ -97,7 +97,7 @@
                   {
                     "key_code": "tab",
                     "modifiers": [
-                      "command"
+                      "option"
                     ]
                   }
                 ],
