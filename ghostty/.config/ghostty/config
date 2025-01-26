@@ -1,5 +1,5 @@
 # theme
-theme = tokyonight
+theme = nord
 
 # Some shaders can be found in this repo, they're usually uploaded to discord
 # custom-shader = shaders/bloom075.glsl
