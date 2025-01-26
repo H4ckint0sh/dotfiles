@@ -3,6 +3,9 @@ return {
 	priority = 1000,
 	lazy = false,
 	opts = {
+		win = {
+			backdrop = false,
+		},
 		bigfile = {
 			enabled = true,
 			notify = true,
@@ -153,7 +156,7 @@ return {
 		{ "<leader>,", function() Snacks.picker.buffers() end, desc = "Buffers" },
 		{ "<leader>t", function() Snacks.picker.grep({ layout = { preset = "ivy" } , hidden = true }) end, desc = "Grep" },
 		{ "<leader>:", function() Snacks.picker.command_history() end, desc = "Command History" },
-		{ "<leader>f", function() Snacks.picker.files({layout = { preset = "vertical" }, hidden = true }) end, desc = "Find Files" },
+		{ "<leader>f", function() Snacks.picker.files({layout = { preset = "default" }, hidden = true }) end, desc = "Find Files" },
 		-- find
 		{ "<leader>b", function() Snacks.picker.buffers({ layout = { preset = "select" } }) end, desc = "Buffers" },
 		{ "<leader>fc", function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end, desc = "Find Config File" },

@@ -1,7 +1,7 @@
 return {
-	"gbprod/nord.nvim",
+	"H4ckint0sh/nord.nvim",
 	priority = 1000,
-
+	lazy = false,
 	config = function()
 		require("nord").setup({
 			styles = {
@@ -20,11 +20,25 @@ return {
 				},
 			},
 			on_highlights = function(highlights, colors)
-				-- Native
-				highlights["@tag.builtin.tsx"] = { fg = colors.red }
-
-				-- Snacks
-				highlights.SnacksDashboardHeader = { fg = colors.green }
+				print(colors)
+				highlights["@tag.builtin.tsx"] = {
+					fg = colors.aurora.orange,
+				}
+				highlights["SnacksDashboardHeader"] = {
+					fg = colors.aurora.green,
+				}
+				highlights["SnacksDashboardFooter"] = {
+					fg = colors.frost.artic_water,
+				}
+				highlights["Special"] = {
+					fg = colors.frost.ice,
+				}
+				highlights["Pmenu"] = {
+					bg = colors.polar_night.origin,
+				}
+				highlights["BlinkCmpMenuBorder"] = {
+					fg = colors.frost.ice,
+				}
 			end,
 		})
 		vim.cmd.colorscheme("nord")
