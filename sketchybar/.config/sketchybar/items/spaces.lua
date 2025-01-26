@@ -113,7 +113,7 @@ local function addOrUpdateWorkspaceItem(workspaceName, monitorId, isSelected)
 		label = { highlight = isSelected },
 	})
 	spaces[spaceId].bracket:set({
-		background = { border_color = isSelected and colors.orange or colors.transparent },
+		background = { border_color = isSelected and colors.white or colors.transparent },
 	})
 
 	updateSpaceIcons(spaceId, workspaceName)

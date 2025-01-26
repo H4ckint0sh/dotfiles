@@ -4,6 +4,7 @@ return {
 	lazy = false,
 	config = function()
 		require("nord").setup({
+			errors = { mode = "fg" },
 			styles = {
 				-- Style to be applied to different syntax groups
 				-- Value is any valid attr-list value for `:help nvim_set_hl`
@@ -20,7 +21,6 @@ return {
 				},
 			},
 			on_highlights = function(highlights, colors)
-				print(colors)
 				highlights["@tag.builtin.tsx"] = {
 					fg = colors.aurora.orange,
 				}
