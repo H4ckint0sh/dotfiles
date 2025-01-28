@@ -26,12 +26,15 @@ mouse-hide-while-typing = true
 cursor-style = block
 
 # font
-font-family = "Maple Mono SemiBold"
+font-family = MonoLisa
+font-style = Medium
 font-style-bold = false
-font-style-bold-italic = false
 adjust-cell-height = 20%
-font-size = 14
-# font-feature = -calt
+font-size = 15
+font-feature = ss02
+font-feature = liga
+font-feature = zero
+font-feature = ss03
 
 # icon
 macos-icon = custom-style
