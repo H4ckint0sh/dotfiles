@@ -26,7 +26,8 @@ mouse-hide-while-typing = true
 cursor-style = block
 
 # font
-font-family = "Maple Mono Semibold"
+font-family = "Maple Mono SemiBold"
+font-style-bold = SemiBold
 adjust-cell-height = 20%
 font-size = 14
 # font-feature = -calt

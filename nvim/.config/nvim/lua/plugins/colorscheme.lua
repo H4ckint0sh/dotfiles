@@ -39,6 +39,31 @@ return {
 				highlights["BlinkCmpMenuBorder"] = {
 					fg = colors.frost.ice,
 				}
+				highlights["IncSearch"] = {
+					fg = colors.frost.ice,
+				}
+				highlights["NeogitGraphBoldGray"] = {
+					bold = false,
+				}
+				highlights["NeogitGraphBlue"] = {
+					bold = false,
+				}
+				highlights["NeogitGraphCyan"] = {
+					bold = false,
+				}
+				highlights["NeogitGraphGreen"] = {
+					bold = false,
+				}
+				highlights["NeogitGraphYellow"] = {
+					bold = false,
+				}
+
+				highlights["NeogitGraphWhite"] = {
+					bold = false,
+				}
+				highlights["NeogitGraphOrange"] = {
+					bold = false,
+				}
 			end,
 		})
 		vim.cmd.colorscheme("nord")
