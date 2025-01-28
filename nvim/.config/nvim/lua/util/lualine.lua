@@ -104,17 +104,6 @@ M.location = {
 	end,
 }
 
-M.macro = {
-	function()
-		return vim.fn.reg_recording()
-	end,
-	icon = icons.Recording,
-	separator = { left = "", right = "" },
-	color = function()
-		return { fg = palette.aurora.purple, bg = palette.polar_night.origin }
-	end,
-}
-
 M.lsp_formater_linter = {
 	function()
 		-- Get active clients for current buffer
