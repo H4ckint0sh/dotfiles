@@ -11,9 +11,7 @@ return {
 			file_history_panel = { ["q"] = "<Cmd>DiffviewClose<CR>" },
 		},
 	},
-	keys = {
-		{ "q", "<cmd>DiffviewClose<CR>", mode = "n", desc = "Close Diffview" },
-	},
+	keys = {},
 	config = function()
 		require("diffview").setup(opts)
 	end,
