@@ -9,9 +9,85 @@ return {
 			size = 100 * 1024, -- 100 KB
 		},
 		picker = {
-			enabled = true,
 			files = {
 				hidden = true,
+			},
+			layout = {
+				preset = function()
+					return vim.o.columns >= 120 and "default" or "vertical"
+				end,
+			},
+			layouts = {
+				telescope = {
+					reverse = true,
+					layout = {
+						box = "horizontal",
+						backdrop = false,
+						width = 0.9,
+						height = 0.9,
+						border = "none",
+						{
+							box = "vertical",
+							border = "rounded",
+							{ win = "list", border = "none" },
+							{
+								win = "input",
+								height = 1,
+								border = "top",
+								title = "{title} {live} {flags}",
+								title_pos = "center",
+							},
+						},
+						{
+							win = "preview",
+							title = "{preview:Preview}",
+							width = 0.55,
+							border = "rounded",
+							title_pos = "center",
+						},
+					},
+				},
+				default = {
+					layout = {
+						box = "horizontal",
+						width = 0.9,
+						min_width = 120,
+						height = 0.8,
+						{
+							box = "vertical",
+							border = "rounded",
+							title = "{title} {live} {flags}",
+							{ win = "input", height = 1, border = "bottom" },
+							{ win = "list", border = "none" },
+						},
+						{ win = "preview", title = "{preview}", border = "rounded", width = 0.6 },
+					},
+				},
+				select = {
+					preview = false,
+					layout = {
+						backdrop = false,
+						width = 0.3,
+						min_width = 80,
+						height = 0.4,
+						min_height = 10,
+						box = "vertical",
+						border = "rounded",
+						title = " Select ",
+						title_pos = "center",
+						{ win = "input", height = 1, border = "bottom" },
+						{ win = "list", border = "none" },
+						{ win = "preview", title = "{preview}", height = 0.4, border = "top" },
+					},
+				},
+			},
+			win = {
+				input = {
+					keys = {
+						["<Esc>"] = { "close", mode = { "n", "i" } },
+						["<a-.>"] = { "toggle_hidden", mode = { "i", "n" } },
+					},
+				},
 			},
 		},
 		notifier = {
