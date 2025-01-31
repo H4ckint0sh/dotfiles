@@ -50,6 +50,7 @@ return {
 				default = {
 					layout = {
 						box = "horizontal",
+						backdrop = false,
 						width = 0.9,
 						min_width = 120,
 						height = 0.8,
