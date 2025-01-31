@@ -67,6 +67,7 @@ M.encoding = {
 
 M.fileformat = {
 	"fileformat",
+	symbols = { unix = "􀣺 " },
 	color = function()
 		return { fg = colors.blue, bg = colors.bg_highlight }
 	end,
