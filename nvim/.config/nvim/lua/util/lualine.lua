@@ -67,6 +67,7 @@ M.encoding = {
 
 M.fileformat = {
 	"fileformat",
+	symbols = { unix = "􀣺 " },
 	color = function()
 		return { fg = palette.frost.artic_water, bg = palette.polar_night.bright }
 	end,
