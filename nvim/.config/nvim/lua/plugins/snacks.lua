@@ -3,9 +3,6 @@ return {
 	priority = 1000,
 	lazy = false,
 	opts = {
-		win = {
-			backdrop = false,
-		},
 		bigfile = {
 			enabled = true,
 			notify = true,
@@ -53,6 +50,7 @@ return {
 				default = {
 					layout = {
 						box = "horizontal",
+						backdrop = false,
 						width = 0.9,
 						min_width = 120,
 						height = 0.8,
