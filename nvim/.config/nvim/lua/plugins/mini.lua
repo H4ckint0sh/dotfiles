@@ -1,31 +1,22 @@
--- Catppuccin Theme
 return {
-	-- Collection of various small independent plugins/modules
 	"echasnovski/mini.nvim",
 	config = function()
-		-- Better Around/Inside textobjects
-		--
-		-- Examples:
-		--  - va)  - [V]isually select [A]round [)]paren
-		--  - yinq - [Y]ank [I]nside [N]ext [']quote
-		--  - ci'  - [C]hange [I]nside [']quote
-		require("mini.ai").setup({ n_lines = 500 })
-
-		-- Add/delete/replace surroundings (brackets, quotes, etc.)
-		--
-		-- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
-		-- - sd'   - [S]urround [D]elete [']quotes
-		-- - sr)'  - [S]urround [R]eplace [)] [']
+		local extra = require("mini.extra")
+		local ai = require("mini.ai")
+		ai.setup({
+			custom_textobjects = {
+				b = extra.gen_ai_spec.buffer(),
+				d = extra.gen_ai_spec.diagnostic(),
+				i = extra.gen_ai_spec.indent(),
+				n = extra.gen_ai_spec.number(),
+				f = ai.gen_spec.treesitter({ a = "@function.outer", i = "@function.inner" }),
+				k = ai.gen_spec.treesitter({ a = "@parameter.outer", i = "@parameter.inner" }),
+				l = ai.gen_spec.treesitter({ a = "@loop.outer", i = "@loop.inner" }),
+				c = ai.gen_spec.treesitter({ a = "@class.outer", i = "@class.inner" }),
+				["="] = ai.gen_spec.treesitter({ a = "@assignment.rhs", i = "@assignment.lhs" }),
+				s = ai.gen_spec.treesitter({ a = "@assignment.outer", i = "@assignment.inner" }),
+			},
+		})
 		require("mini.surround").setup()
-
-		-- Simple and easy statusline.
-		--  You could remove this setup call if you don't like it,
-		--  and try some other statusline plugin
-		-- local statusline = require 'mini.statusline'
-		-- set use_icons to true if you have a Nerd Font
-		-- statusline.setup { use_icons = vim.g.have_nerd_font }
-
-		-- ... and there is more!
-		--  Check out: https://github.com/echasnovski/mini.nvim
 	end,
 }
