@@ -11,7 +11,7 @@ return {
 	other_purple = 0xffB48EAD,
 	cyan = 0xff88C0D0,
 	grey = 0xff616E88,
-	dirty_white = 0xff616E88,
+	dirty_white = 0xffE5E9F0,
 	dark_grey = 0xff282a36,
 	transparent = 0x00000000,
 	bar = {
