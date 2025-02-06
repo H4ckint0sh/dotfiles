@@ -42,6 +42,9 @@ macos-icon = custom-style
 macos-icon-ghost-color = 9ece6a
 macos-icon-screen-color = 1a1b26
 
+# Quiccj terminal
+quick-terminal-position = center    
+
 # Keybinds for ghostty
 keybind = cmd+r=reload_config
 keybind = global:cmd+grave_accent=toggle_quick_terminal
