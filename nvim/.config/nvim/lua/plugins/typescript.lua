@@ -6,7 +6,7 @@ local filterReactDTS = require("lsp.utils.filterReactDTS").filterReactDTS
 local handlers = {
 	["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
 		silent = true,
-		border = "rounded",
+		border = "roumnded",
 	}),
 	["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" }),
 	["textDocument/publishDiagnostics"] = vim.lsp.with(
@@ -56,6 +56,8 @@ return {
 					},
 				},
 			})
+			-- enable inlay hints
+			vim.lsp.inlay_hint.enable(true)
 		end,
 	},
 
