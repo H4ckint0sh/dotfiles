@@ -369,8 +369,8 @@ return {
 				vim.print = _G.dd -- Override print to use snacks for `:=` command
 
 				-- Create some toggle mappings
-				Snacks.toggle.diagnostics():map("<leader>ud")
-				Snacks.toggle.inlay_hints():map("<leader>uh")
+				Snacks.toggle.diagnostics():map("<leader>sd")
+				Snacks.toggle.inlay_hints():map("<leader>sh")
 			end,
 		})
 	end,
