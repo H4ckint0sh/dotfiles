@@ -32,10 +32,15 @@ return {
 			},
 		},
 		sources = {
-			default = { "lsp", "path", "snippets", "buffer", "dadbod", "lazydev" },
+			default = { "lazydev", "lsp", "path", "snippets", "buffer", "dadbod" },
 			providers = {
 				dadbod = { name = "Dadbod", module = "vim_dadbod_completion.blink" },
-				lazydev = { name = "LazyDev", module = "lazydev.integrations.blink" },
+				lazydev = {
+					name = "LazyDev",
+					module = "lazydev.integrations.blink",
+					-- make lazydev completions top priority (see `:h blink.cmp`)
+					score_offset = 100,
+				},
 			},
 			cmdline = function()
 				local type = vim.fn.getcmdtype()
