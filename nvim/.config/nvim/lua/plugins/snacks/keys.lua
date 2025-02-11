@@ -71,7 +71,7 @@ return {
           }) end, desc = "Buffers" },
 		{ "<leader>fc", function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end, desc = "Find Config File" },
 		{ "<leader>fg", function() Snacks.picker.git_files() end, desc = "Find Git Files" },
-		{ "<leader>fh", function() Snacks.picker.recent({layout = { preset = "select" } }) end, desc = "Recent" },
+		{ "<leader>fh", function() Snacks.picker.recent({ hidden = true, filter = { cwd = true } }) end, desc = "Recent", },
 		-- git
 		{ "<leader>gc", function() Snacks.picker.git_log() end, desc = "Git Log" },
 		{ "<leader>gs", function() Snacks.picker.git_status() end, desc = "Git Status" },
