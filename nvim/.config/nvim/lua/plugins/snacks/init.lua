@@ -32,11 +32,6 @@ return {
 			},
 		},
 		scope = {},
-		lazygit = {
-			theme = {
-				activeBorderColor = { fg = "MatchParen", bold = true },
-			},
-		},
 		scroll = {
 			enabled = false,
 			animate = {
