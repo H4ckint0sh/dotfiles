@@ -14,8 +14,20 @@ return {
 			timeout = 3000,
 		},
 		quickfile = { enabled = true },
-		statuscolumn = { enabled = false },
+		statuscolumn = {
+			left = { "mark", "sign", "git" },
+			right = { "fold" },
+			folds = {
+				open = true,
+				git_hl = true,
+			},
+			git = {
+				patterns = { "GitSigns" },
+			},
+			refresh = 50,
+		},
 		words = { enabled = true },
+		image = { enabled = true },
 		styles = {
 			notification = {
 				wo = {
