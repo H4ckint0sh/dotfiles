@@ -3,7 +3,6 @@ return {
 		{ '<leader>N', function() Snacks.notifier.hide() end },
 		{ "<c-t>", function() Snacks.terminal.toggle() end },
 		{ "<leader>x", function() Snacks.bufdelete() end },
-		{ "<leader>br", function() Snacks.gitbrowse() end },
 		{"<leader>fr", function() Snacks.rename.rename_file() end},
 		{ "<leader>X", function() Snacks.bufdelete.all() end, desc = "Delete all buffer" },
 		{ "<leader>gb", function() Snacks.gitbrowse() end, desc = "Git Browse" },
@@ -73,6 +72,7 @@ return {
 		{ "<leader>fg", function() Snacks.picker.git_files() end, desc = "Find Git Files" },
 		{ "<leader>fh", function() Snacks.picker.recent({ hidden = true, filter = { cwd = true } }) end, desc = "Recent", },
 		-- git
+		{ "<leader>lg", function() Snacks.lazygit() end, desc = "Lazygit" },
 		{ "<leader>gc", function() Snacks.picker.git_log() end, desc = "Git Log" },
 		{ "<leader>gs", function() Snacks.picker.git_status() end, desc = "Git Status" },
 		-- Grep

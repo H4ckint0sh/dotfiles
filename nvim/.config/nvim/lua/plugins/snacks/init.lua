@@ -27,12 +27,20 @@ return {
 			refresh = 50,
 		},
 		words = { enabled = true },
+		lazygit = {
+			win = { backdrop = false },
+		},
+
 		image = { enabled = true },
 		styles = {
 			notification = {
 				wo = {
 					winblend = 0,
 				},
+			},
+			lazygit = {
+				width = 0,
+				height = 0,
 			},
 		},
 		indent = {
