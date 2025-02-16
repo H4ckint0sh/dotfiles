@@ -42,7 +42,14 @@ return {
 					score_offset = 100,
 				},
 			},
-			cmdline = function()
+		},
+		cmdline = {
+			keymap = {
+				preset = "super-tab",
+				["<C-k>"] = { "select_prev", "fallback" },
+				["<C-j>"] = { "select_next", "fallback" },
+			},
+			sources = function()
 				local type = vim.fn.getcmdtype()
 				-- Search forward and backward
 				if type == "/" or type == "?" then
@@ -73,11 +80,6 @@ return {
 			["<C-j>"] = { "select_next", "fallback" },
 			["<C-b>"] = { "scroll_documentation_up", "fallback" },
 			["<C-f>"] = { "scroll_documentation_down", "fallback" },
-			cmdline = {
-				preset = "super-tab",
-				["<C-k>"] = { "select_prev", "fallback" },
-				["<C-j>"] = { "select_next", "fallback" },
-			},
 		},
 	},
 }
