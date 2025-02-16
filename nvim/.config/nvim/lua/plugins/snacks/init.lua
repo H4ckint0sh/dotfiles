@@ -32,6 +32,10 @@ return {
 		},
 
 		image = { enabled = true },
+		input = {
+			enabled = true,
+			icon = "",
+		},
 		styles = {
 			notification = {
 				wo = {
@@ -41,6 +45,12 @@ return {
 			lazygit = {
 				width = 0,
 				height = 0,
+			},
+			input = {
+				relative = "cursor",
+				col = 0,
+				row = -3,
+				height = 1,
 			},
 		},
 		indent = {
