@@ -78,7 +78,7 @@ return {
 				"dropbar_menu",
 				"snacks_picker_input",
 				"dropbar_menu_fzf",
-				"DressingInput",
+				"snacks_input",
 				"cmp_docs",
 				"cmp_menu",
 				"noice",
