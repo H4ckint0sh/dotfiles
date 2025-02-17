@@ -36,6 +36,12 @@ return {
 		) end, desc = "Buffers" },
 		{ "<leader>t", function() Snacks.picker.grep({ layout = { preset = "ivy" } , hidden = true }) end, desc = "Grep" },
 		{ "<leader>:", function() Snacks.picker.command_history() end, desc = "Command History" },
+		{ "<leader>n", function() Snacks.picker.notifications({
+			-- I always want my notification History picker to start in normal mode
+			on_show = function()
+				vim.cmd.stopinsert()
+			end,
+		}) end, desc = "Notification History" },
 		{ "<leader>f", function() Snacks.picker.files({
             finder = "files",
             format = "file",
@@ -81,7 +87,7 @@ return {
 		{ "<leader>sg", function() Snacks.picker.grep({ layout = { preset = "ivy" } }) end, desc = "Grep" },
 		{ "<leader>sw", function() Snacks.picker.grep_word({layout = { preset = "ivy" } }) end, desc = "Visual selection or word", mode = { "n", "x" } },
 		-- search
-		{ '<leader>s"', function() Snacks.picker.registers() end, desc = "Registers" },
+		{ '<leader>sr', function() Snacks.picker.registers() end, desc = "Registers" },
 		{ "<leader>sa", function() Snacks.picker.autocmds() end, desc = "Autocmds" },
 		{ "<leader>sc", function() Snacks.picker.command_history() end, desc = "Command History" },
 		{ "<leader>sC", function() Snacks.picker.commands({ layout = { preset = "vscode" } }) end, desc = "Commands" },
