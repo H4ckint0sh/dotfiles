@@ -11,9 +11,9 @@ custom-shader = shaders/bloom025.glsl
 
 # window macos
 macos-titlebar-style = hidden
-window-padding-y = 10,0
-window-padding-x = 10,0
-macos-window-shadow = false
+window-padding-y = 13,0
+window-padding-x = 10,10
+macos-window-shadow = true 
 clipboard-read = "allow"
 background-opacity = 1
 
@@ -31,7 +31,7 @@ font-style = SemiBold
 font-style-italic = SemiBold Italic
 font-style-bold = false
 adjust-cell-height = 15%
-font-size = 13
+font-size = 14
 font-feature = ss02
 font-feature = liga
 font-feature = zero
