@@ -12,7 +12,6 @@ end
 M.on_attach = on_attach
 
 M.settings = {
-	useFlatConfig = false,
 	codeAction = {
 		disableRuleComment = {
 			enable = true,
