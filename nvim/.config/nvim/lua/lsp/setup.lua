@@ -92,16 +92,33 @@ require("mason-lspconfig").setup_handlers({
 
 	["jdtls"] = function() end, -- Prevent Mason from attaching `jdtls`
 
-	["ts_ls"] = function() end, -- disabel to use typescript-tools
+	["ts_ls"] = function()
+		require("typescript-tools").setup({
+			capabilities = capabilities or vim.lsp.protocol.make_client_capabilities(),
+			handlers = require("lsp.servers.ts_ls").handlers,
+			on_attach = require("lsp.servers.ts_ls").on_attach,
+			settings = require("lsp.servers.ts_ls").settings,
+		})
+	end, -- disabel to use typescript-tools
 
 	["tailwindcss"] = function()
+		capabilities.textDocument.completion.completionItem.snippetSupport = true
+		capabilities.textDocument.colorProvider = { dynamicRegistration = false }
+		capabilities.textDocument.foldingRange = {
+			dynamicRegistration = false,
+			lineFoldingOnly = true,
+		}
+
 		lspconfig.tailwindcss.setup({
-			capabilities = require("lsp.servers.tailwindcss").capabilities,
+			capabilities = capabilities,
 			filetypes = require("lsp.servers.tailwindcss").filetypes,
 			handlers = handlers,
 			init_options = require("lsp.servers.tailwindcss").init_options,
 			on_attach = require("lsp.servers.tailwindcss").on_attach,
 			settings = require("lsp.servers.tailwindcss").settings,
+			flags = {
+				debounce_text_changes = 1000,
+			},
 		})
 	end,
 
@@ -120,6 +137,11 @@ require("mason-lspconfig").setup_handlers({
 			handlers = handlers,
 			on_attach = require("lsp.servers.eslint").on_attach,
 			settings = require("lsp.servers.eslint").settings,
+			flags = {
+				allow_incremental_sync = false,
+				debounce_text_changes = 1000,
+				exit_timeout = 1500,
+			},
 		})
 	end,
 
@@ -151,9 +173,11 @@ require("mason-lspconfig").setup_handlers({
 			settings = require("lsp.servers.vuels").settings,
 		})
 	end,
+
 	["astro"] = function()
 		lspconfig.astro.setup({})
 	end,
+
 	-- ["glint"] = function()
 	-- 	lspconfig.glint.setup({
 	-- 		cmd = { "glint-language-server" },
@@ -161,6 +185,7 @@ require("mason-lspconfig").setup_handlers({
 	-- 		root_dir = vim.uv.cwd,
 	-- 	})
 	-- end,
+
 	["ember"] = function()
 		lspconfig.ember.setup({
 			cmd = { "ember-language-server", "--stdio" },

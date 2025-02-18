@@ -14,7 +14,7 @@ local handlers = {
 		{ virtual_text = true }
 	),
 	["textDocument/definition"] = function(err, result, method, ...)
-		if vim.isarray(result) and #result > 1 then
+		if vim.tbl_islist(result) and #result > 1 then
 			local filtered_result = filter(result, filterReactDTS)
 			return vim.lsp.handlers["textDocument/definition"](err, filtered_result, method, ...)
 		end
@@ -23,48 +23,78 @@ local handlers = {
 	end,
 }
 
-local init_options = {
-	maxTsServerMemory = 8192, -- Increase memory allocation
-}
-
 local settings = {
-	typescript = {
-		inlayHints = {
-			parameterNames = { enabled = "literals" },
-			parameterTypes = { enabled = false },
-			variableTypes = { enabled = false },
-			propertyDeclarationTypes = { enabled = true },
-			functionLikeReturnTypes = { enabled = false },
-			enumMemberValues = { enabled = true },
-		},
-		suggest = {
-			includeCompletionsForModuleExports = false,
-		},
-	},
-	javascript = {
-		inlayHints = {
-			parameterNames = { enabled = "literals" },
-			parameterTypes = { enabled = false },
-			variableTypes = { enabled = false },
-			propertyDeclarationTypes = { enabled = true },
-			functionLikeReturnTypes = { enabled = false },
-			enumMemberValues = { enabled = true },
-		},
-		suggest = {
-			includeCompletionsForModuleExports = false,
-		},
-	},
-}
+	-- Performance settings
+	separate_diagnostic_server = true,
+	publish_diagnostic_on = "insert_leave",
+	tsserver_max_memory = "auto",
 
-settings.javascript = vim.tbl_deep_extend("force", {}, settings.typescript, settings.javascript or {})
+	-- Formatting preferences (from default_format_options)
+	tsserver_format_options = {
+		insertSpaceAfterCommaDelimiter = true,
+		insertSpaceAfterConstructor = false,
+		insertSpaceAfterSemicolonInForStatements = true,
+		insertSpaceBeforeAndAfterBinaryOperators = true,
+		insertSpaceAfterKeywordsInControlFlowStatements = true,
+		insertSpaceAfterFunctionKeywordForAnonymousFunctions = true,
+		insertSpaceBeforeFunctionParenthesis = false,
+		insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis = false,
+		insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets = false,
+		insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces = true,
+		insertSpaceAfterOpeningAndBeforeClosingEmptyBraces = true,
+		insertSpaceAfterOpeningAndBeforeClosingTemplateStringBraces = false,
+		insertSpaceAfterOpeningAndBeforeClosingJsxExpressionBraces = false,
+		insertSpaceAfterTypeAssertion = false,
+		placeOpenBraceOnNewLineForFunctions = false,
+		placeOpenBraceOnNewLineForControlBlocks = false,
+		semicolons = "ignore",
+		indentSwitchCase = true,
+	},
+
+	-- File preferences (combining your inlay hints with default preferences)
+	tsserver_file_preferences = {
+		-- Your current inlay hint settings
+		includeInlayParameterNameHints = "all",
+		includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+		includeInlayFunctionParameterTypeHints = true,
+		includeInlayVariableTypeHints = false,
+		includeInlayVariableTypeHintsWhenTypeMatchesName = false,
+		includeInlayPropertyDeclarationTypeHints = false,
+		includeInlayFunctionLikeReturnTypeHints = false,
+		includeInlayEnumMemberValueHints = true,
+
+		-- Important default preferences
+		quotePreference = "auto",
+		importModuleSpecifierEnding = "auto",
+		jsxAttributeCompletionStyle = "auto",
+		allowTextChangesInNewFiles = true,
+		providePrefixAndSuffixTextForRename = true,
+		allowRenameOfImportPath = true,
+		includeAutomaticOptionalChainCompletions = true,
+		provideRefactorNotApplicableReason = true,
+		generateReturnInDocTemplate = true,
+		includeCompletionsForImportStatements = true,
+		includeCompletionsWithSnippetText = true,
+		includeCompletionsWithClassMemberSnippets = true,
+		includeCompletionsWithObjectLiteralMethodSnippets = true,
+		useLabelDetailsInCompletionEntries = true,
+		allowIncompleteCompletions = true,
+		displayPartsForJSDoc = true,
+		disableLineTextInReferences = true,
+	},
+
+	-- Feature settings
+	expose_as_code_action = "all",
+	complete_function_calls = false,
+	include_completions_with_insert_text = true,
+	code_lens = "implementations_only",
+}
 
 local on_attach = function(client, bufnr)
 	vim.lsp.inlay_hint.enable(true, { bufnr })
-	require("workspace-diagnostics").populate_workspace_diagnostics(client, bufnr)
 end
 
 M.handlers = handlers
-M.init_options = init_options
 M.settings = settings
 M.on_attach = on_attach
 
