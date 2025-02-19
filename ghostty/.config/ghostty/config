@@ -10,10 +10,11 @@ custom-shader = shaders/bloom025.glsl
 # custom-shader = shaders/sparks-from-fire.glsl
 
 # window macos
+window-decoration = none
+window-padding-balance = true
 macos-titlebar-style = hidden
-window-padding-y = 13,0
-window-padding-x = 10,10
-macos-window-shadow = true 
+window-padding-y = 2,0 
+window-padding-x = 5,5
 clipboard-read = "allow"
 background-opacity = 1
 
