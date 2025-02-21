@@ -31,6 +31,23 @@ return {
 		cycle = false,
 	},
 	layouts = {
+		custom = {
+			layout = {
+				box = "horizontal",
+				backdrop = false,
+				width = 0.8,
+				min_width = 120,
+				height = 0.8,
+				{
+					box = "vertical",
+					border = "rounded",
+					title = "{title} {live} {flags}",
+					{ win = "input", height = 1, border = "bottom" },
+					{ win = "list", border = "none" },
+				},
+				{ win = "preview", title = "{preview}", border = "rounded", width = 0.6 },
+			},
+		},
 		-- I wanted to modify the ivy layout height and preview pane width,
 		-- this is the only way I was able to do it
 		-- NOTE: I don't think this is the right way as I'm declaring all the
