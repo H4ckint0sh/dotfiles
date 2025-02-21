@@ -49,7 +49,7 @@ return {
             show_empty = true,
             supports_live = true,
             -- In case you want to override the layout for this keymap
-            -- layout = "vscode",
+            layout = "custom",
           }) end, desc = "Find Files" },
 		-- find
 		{ "<leader>b", function() Snacks.picker.buffers({
