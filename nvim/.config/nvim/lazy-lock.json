@@ -5,6 +5,7 @@
   "blink.compat": { "branch": "main", "commit": "4104671562c663d059d91a99da3780bead5bc467" },
   "cmp-tailwind-colors": { "branch": "main", "commit": "4b200e280e9051a26ade776589c2ac246350f5dc" },
   "conform.nvim": { "branch": "master", "commit": "a6f5bdb78caa305496357d17e962bbc4c0b392e2" },
+  "devdocs.nvim": { "branch": "main", "commit": "eee96feefa74bb9846bdad3ae04a682a1c094a7a" },
   "diffview.nvim": { "branch": "main", "commit": "4516612fe98ff56ae0415a259ff6361a89419b0a" },
   "fastaction.nvim": { "branch": "main", "commit": "c43684448470e732387beccaff12e6667a534800" },
   "flash.nvim": { "branch": "main", "commit": "3c942666f115e2811e959eabbdd361a025db8b63" },
