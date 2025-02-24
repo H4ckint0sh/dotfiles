@@ -4,7 +4,7 @@ start-at-login = true
 after-login-command = []
 
 after-startup-command = [
-  'exec-and-forget open -a Ghostty & open -a Microsoft\ Teams & open -a Chromium',
+  'exec-and-forget open -a Ghostty & open -a Microsoft\ Teams & open -a Zen\ Browser',
   'exec-and-forget /opt/homebrew/bin/sketchybar',
 ]
 
@@ -165,6 +165,10 @@ run = 'move-node-to-workspace T'
 
 [[on-window-detected]]
 if.app-id = 'org.chromium.Chromium'
+run = 'move-node-to-workspace B'
+
+[[on-window-detected]]
+if.app-id = 'app.zen-browser.zen'
 run = 'move-node-to-workspace B'
 
 [[on-window-detected]] # Goole Chrome
