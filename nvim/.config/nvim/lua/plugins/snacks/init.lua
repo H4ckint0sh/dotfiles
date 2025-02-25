@@ -71,6 +71,9 @@ return {
 			},
 		},
 		scope = {},
+		zen = {
+			enabled = false,
+		},
 		scroll = {
 			enabled = false,
 			animate = {

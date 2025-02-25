@@ -9,7 +9,6 @@ return {
 		{ "<leader>fh", function() Snacks.lazygit.log_file() end, desc = "Lazygit Current File History" },
 		{ "]]",         function() Snacks.words.jump(vim.v.count1) end, desc = "Next Reference" },
 		{ "[[",         function() Snacks.words.jump(-vim.v.count1) end, desc = "Prev Reference" },
-		{ "<leader>z",  function() Snacks.zen() end, desc = "ZEN" },
 		{ "<leader>,", function() Snacks.picker.buffers(
 			{
             -- I always want my buffers picker to start in normal mode
