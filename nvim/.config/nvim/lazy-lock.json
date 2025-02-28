@@ -1,5 +1,6 @@
 {
   "SchemaStore.nvim": { "branch": "main", "commit": "acf16353b88d9ebf8ab69e7fd42522bbb277e0ba" },
+  "avante.nvim": { "branch": "main", "commit": "ebadba7420a5f9b85829273b8c9cd2be56d9b074" },
   "barbecue": { "branch": "main", "commit": "cd7e7da622d68136e13721865b4d919efd6325ed" },
   "blink.cmp": { "branch": "main", "commit": "54fd2943c5fe54659670498e25070d235d539bd4" },
   "blink.compat": { "branch": "main", "commit": "4104671562c663d059d91a99da3780bead5bc467" },
