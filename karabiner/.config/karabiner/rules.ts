@@ -7,7 +7,7 @@ const rules: KarabinerRules[] = [
     description: "Hyper Key (⌃⌥⇧⌘)",
     manipulators: [
       {
-        description: "right_command -> Hyper Key",
+        description: "Escape -> Hyper Key",
         from: {
           key_code: "caps_lock",
         },
@@ -136,6 +136,26 @@ const rules: KarabinerRules[] = [
       f: app("Finder"),
       w: app("Microsoft Word"),
       o: app("Microsoft Outlook"),
+    },
+
+    // K to swutch worksoace in Zen browser
+    k: {
+      to: [
+        {
+          key_code: "q",
+          modifiers: ["left_option", "left_command"],
+        },
+      ],
+    },
+
+    // J to change between tabs in Zen browser
+    j: {
+      to: [
+        {
+          key_code: "tab",
+          modifiers: ["left_control"],
+        },
+      ],
     },
 
     // write the swedish letters more like swedish keyboards
