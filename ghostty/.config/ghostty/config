@@ -77,6 +77,6 @@ keybind = cmd+shift+n=text:\x02\x25
 keybind = cmd+t=text:\x02\x63
 keybind = cmd+s=text:\x02\x73
 keybind = cmd+i=text:\x02\x69
-keybind = cmd+w=text:\x11\x71
+keybind = cmd+w=text:\x02\x78
 keybind = super+z=text:\x02\x7a
 keybind = super+o=text:\x02\x6f
