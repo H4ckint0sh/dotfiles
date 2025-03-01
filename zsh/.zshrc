@@ -54,7 +54,9 @@ export TERM=tmux-256color
 
 # Set neovim as EDITOR
 export EDITOR=nvim
-# export OPENAI_API_KEY=$(security find-generic-password -s 'openapi token' -w)
+
+# Gemini API Key
+export GEMINI_API_KEY=$(security find-generic-password -s "gemini_api_key" -w)
 
 export ZSH_CUSTOM=$DOTFILES
 # export LANG=en_US.UTF-8
