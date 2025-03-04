@@ -77,7 +77,7 @@ return {
 		{ "<leader>fg", function() Snacks.picker.git_files() end, desc = "Find Git Files" },
 		{ "<leader>fh", function() Snacks.picker.recent({ hidden = true, filter = { cwd = true } }) end, desc = "Recent", },
 		-- git
-		{ "<leader>gl", function() Snacks.lazygit() end, desc = "Lazygit" },
+		{ "<leader>g", function() Snacks.lazygit() end, desc = "Lazygit" },
 		{ "<leader>gc", function() Snacks.picker.git_log() end, desc = "Git Log" },
 		{ "<leader>gs", function() Snacks.picker.git_status() end, desc = "Git Status" },
 		-- Grep
