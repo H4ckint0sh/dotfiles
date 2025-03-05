@@ -28,7 +28,12 @@ return {
 				},
 			},
 			documentation = {
-				auto_show = false,
+				auto_show = true,
+				auto_show_delay_ms = 200,
+				window = {
+					border = "rounded",
+					winhighlight = "FloatBorder:boolean",
+				},
 			},
 		},
 		sources = {
