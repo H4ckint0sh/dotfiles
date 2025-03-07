@@ -33,6 +33,7 @@ mason_lsp.setup({
 		"astro",
 		"ts_ls",
 		"jdtls",
+		"emmet_language_server",
 	},
 	automatic_installation = true,
 })
@@ -88,6 +89,15 @@ require("mason-lspconfig").setup_handlers({
 			capabilities = capabilities,
 			handlers = handlers,
 			on_attach = on_attach,
+		})
+	end,
+
+	["emmet_language_server"] = function()
+		lspconfig.emmet_language_server.setup({
+			capabilities = capabilities,
+			handlers = handlers,
+			on_attach = on_attach,
+			settings = require("lsp.servers.emmet-language-server").settings,
 		})
 	end,
 
@@ -193,8 +203,5 @@ require("mason-lspconfig").setup_handlers({
 			filetypes = { "handlebars" },
 			root_dir = vim.uv.cwd,
 		})
-	end,
-	["emmet_language_server"] = function()
-		lspconfig.emmet_language_server.setup({})
 	end,
 })
