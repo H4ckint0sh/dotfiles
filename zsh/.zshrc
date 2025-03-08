@@ -52,6 +52,9 @@ export JAVA_HOME=$(/usr/libexec/java_home)
 # terminal
 export TERM=tmux-256color
 
+# PostgresSQL
+export PGDATA='/Users/ali/.postgres'
+
 # Set neovim as EDITOR
 export EDITOR=nvim
 
