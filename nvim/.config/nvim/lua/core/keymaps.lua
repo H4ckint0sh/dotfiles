@@ -80,6 +80,8 @@ keymap.set("n", "<leader>#", ":b#<CR>")
 -- Git-blame
 keymap.set("n", "<leader>gb", ":GitBlameToggle<CR>") -- toggle git blame
 
+keymap.set("n", "<leader>o", vim.diagnostic.open_float, { noremap = true, silent = true })
+
 -- Keybindings for LSP functionalities
 keymap.set("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>") -- Go to Definition
 keymap.set("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>") -- Go to Implementation
