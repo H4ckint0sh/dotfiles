@@ -1,4 +1,5 @@
 require("util.globals")
+require("core.diagnostics")
 require("core.options")
 
 -- lazy
@@ -8,8 +9,7 @@ require("core.lazy")
 require("custom.session") -- Substitutes in the statusline
 
 -- LSP
-require("lsp.config")
-require("lsp.setup")
+require("core.lsp")
 
 -- These are not Loaded by lazy.nvim
 require("core.autocmds")
