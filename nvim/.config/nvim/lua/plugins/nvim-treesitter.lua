@@ -20,6 +20,7 @@ return {
 					"javascript",
 					"html",
 					"css",
+					"scss",
 					"vue",
 					"astro",
 					"svelte",
