@@ -52,6 +52,12 @@ keymap.set("n", "<S-u>", ":redo<CR>", { silent = true })
 -- Save
 keymap.set("n", "<leader>w", ":w<CR>", { silent = true })
 
+-- Virtual lines
+vim.keymap.set("n", "<leader>vl", function()
+	local new_config = not vim.diagnostic.config().virtual_lines
+	vim.diagnostic.config({ virtual_lines = new_config })
+end, { desc = "Toggle diagnostic virtual_lines" })
+
 -- Search
 keymap.set("n", "R", ":%s/\\v/g<left><left>", { silent = false }) -- replace
 keymap.set("n", "ss", ":s/", { silent = false }) -- search and replace
