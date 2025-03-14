@@ -3,7 +3,6 @@ return {
 	lazy = false, -- lazy loading handled internally
 	-- optional: provides snippets for the snippet source
 	dependencies = {
-		{ "rafamadriz/friendly-snippets" },
 		-- add blink.compat to dependencies
 		{ "saghen/blink.compat" },
 		-- add source to dependencies
@@ -35,6 +34,9 @@ return {
 					winhighlight = "FloatBorder:boolean",
 				},
 			},
+		},
+		snippets = {
+			preset = "luasnip",
 		},
 		sources = {
 			default = { "lazydev", "lsp", "path", "snippets", "buffer", "dadbod" },
