@@ -90,23 +90,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	end,
 })
 
---[[ vim.api.nvim_create_autocmd('LspAttach', {
-                group = au,
-                desc = 'LSP signature help',
-                callback = function(args)
-                    local bufnr = args.buf
-                    local client = vim.lsp.get_client_by_id(args.data.client_id)
-                    if client:supports_method 'textDocument/signatureHelp' then
-                        vim.api.nvim_create_autocmd('CursorHoldI', {
-                            buffer = bufnr,
-                            callback = function()
-                                vim.defer_fn(vim.lsp.buf.signature_help, 200)
-                            end,
-                        })
-                    end
-                end,
-            }) ]]
-
 vim.api.nvim_create_autocmd("LspAttach", {
 	group = au,
 	desc = "LSP notify",
@@ -154,7 +137,7 @@ vim.lsp.enable({
 	"css_ls",
 	"docker_compose_ls",
 	"docker_ls",
-	"emmylua_ls",
+	"emmet_ls",
 	"html_ls",
 	"json_ls",
 	"lua_ls",
