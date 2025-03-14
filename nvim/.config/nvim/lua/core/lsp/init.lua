@@ -146,6 +146,6 @@ vim.lsp.enable({
 	"yaml_ls",
 	"tailwindcss_ls",
 	"taplo",
-	"esllint-ls",
+	"eslint-ls",
 	"astro_ls",
 })
