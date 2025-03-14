@@ -5,7 +5,7 @@ return {
 		"sindrets/diffview.nvim",
 	},
 	keys = {
-		{ "<leader>ng", ":Neogit<CR>", desc = "Neogit" },
+		{ "<leader>g", ":Neogit<CR>", desc = "Neogit" },
 	},
 	cmd = "Neogit",
 	opts = {
