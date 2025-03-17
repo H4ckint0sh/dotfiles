@@ -45,7 +45,10 @@ keymap.set("n", "<leader>v", function()
 end, { desc = "Paste over entire buffer" })
 
 -- Remove highlights
-vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
+vim.keymap.set("n", "<leader>nh", "<cmd>nohlsearch<CR>")
+
+-- Removie console.log
+keymap.set("n", "<leader>cl", ":%g/console.log/d<CR>")
 
 -- Redo
 keymap.set("n", "<S-u>", ":redo<CR>", { silent = true })
