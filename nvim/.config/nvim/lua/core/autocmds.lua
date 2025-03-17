@@ -77,3 +77,23 @@ vim.api.nvim_create_autocmd("CursorHold", {
 	pattern = "*",
 	command = "checktime",
 })
+
+vim.api.nvim_create_autocmd("FileType", {
+	group = vim.api.nvim_create_augroup("UserConfig", {}),
+
+	pattern = {
+		"checkhealth",
+		"help",
+		"lspinfo",
+		"qf",
+		"query",
+		"startuptime",
+		"tsplayground",
+	},
+	callback = function(e)
+		-- Map q to exit in non-filetype buffers
+		vim.bo[e.buf].buflisted = false
+		vim.keymap.set("n", "q", ":q<CR>", { buffer = e.buf })
+	end,
+	desc = "Maps q to exit on non-filetypes",
+})
