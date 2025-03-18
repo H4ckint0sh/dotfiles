@@ -99,6 +99,7 @@ zinit snippet OMZP::frontend-search
 # The jeffreytse/zsh-vi-mode plugin clashes with fzf keybindings AND history-search-*
 # See https://github.com/jeffreytse/zsh-vi-mode/issues/24
 zinit snippet OMZP::vi-mode
+VI_MODE_SET_CURSOR=true
 
 # Load completions
 autoload -Uz compinit && compinit

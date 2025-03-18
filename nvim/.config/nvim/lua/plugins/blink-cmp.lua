@@ -39,7 +39,7 @@ return {
 			preset = "luasnip",
 		},
 		sources = {
-			default = { "lazydev", "lsp", "path", "snippets", "buffer", "dadbod" },
+			default = { "lsp", "path", "snippets", "buffer", "dadbod", "lazydev" },
 			providers = {
 				dadbod = { name = "Dadbod", module = "vim_dadbod_completion.blink" },
 				lazydev = {
@@ -51,7 +51,7 @@ return {
 			},
 		},
 		cmdline = {
-			enabled = true,
+			enabled = false,
 			keymap = {
 				preset = "none",
 				["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
