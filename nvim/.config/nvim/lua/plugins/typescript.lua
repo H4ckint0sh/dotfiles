@@ -1,5 +1,21 @@
 return {
 	{
+		"pmizio/typescript-tools.nvim",
+		event = "LspAttach",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			{
+				"saghen/blink.cmp",
+				-- Ensure blink.cmp is loaded before typescript-tools
+				lazy = false,
+				priority = 1000,
+			},
+		},
+		config = function()
+			require("typescript-tools").setup({})
+		end,
+	},
+	{
 		"razak17/tailwind-fold.nvim",
 		opts = {
 			min_chars = 50,

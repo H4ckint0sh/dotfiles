@@ -93,3 +93,39 @@ keymap.set("n", "<leader>r", "<cmd>lua vim.lsp.buf.rename()<CR>") -- Rename Symb
 keymap.set("n", "<leader>a", "<cmd>lua vim.lsp.buf.code_action()<CR>") -- Code Actions
 keymap.set("n", "gy", "<cmd>lua vim.lsp.buf.type_definition()<CR>") -- Type Definition
 keymap.set("n", "sh", "<cmd>lua vim.lsp.buf.signature_help()<CR>") -- Signature Help
+
+-- Keybindings for vim.diagnostic
+keymap.set("n", "[d", function()
+	vim.diagnostic.jump({ count = -1, float = false })
+end, { desc = "Prev diagnostic" })
+keymap.set("n", "]d", function()
+	vim.diagnostic.jump({ count = 1, float = false })
+end, { desc = "Next diagnostic" })
+keymap.set("n", "[e", function()
+	vim.diagnostic.jump({
+		count = -1,
+		enable_popup = false,
+		severity = vim.diagnostic.severity.ERROR,
+	})
+end, { desc = "Prev error" })
+keymap.set("n", "]e", function()
+	vim.diagnostic.jump({
+		count = 1,
+		enable_popup = false,
+		severity = vim.diagnostic.severity.ERROR,
+	})
+end, { desc = "Next error" })
+keymap.set("n", "[w", function()
+	vim.diagnostic.jump({
+		count = -1,
+		enable_popup = false,
+		severity = vim.diagnostic.severity.WARN,
+	})
+end, { desc = "Prev warning" })
+keymap.set("n", "]w", function()
+	vim.diagnostic.jump({
+		count = 1,
+		enable_popup = false,
+		severity = vim.diagnostic.severity.WARN,
+	})
+end, { desc = "Next warning" })
