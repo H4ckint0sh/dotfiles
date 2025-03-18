@@ -123,7 +123,8 @@ vim.diagnostic.config({
 			[vim.diagnostic.severity.HINT] = "DiagnosticHint",
 		},
 	},
-	underline = true,
+	underline = false,
+	virtual_lines = true,
 	update_in_insert = false,
 	virtual_text = false,
 })
