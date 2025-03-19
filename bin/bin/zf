@@ -1,0 +1,43 @@
+#!/usr/bin/env zsh
+
+# Don't have same projects in both HOST and GUEST.
+# Currently there is no way to find that, but it also
+# forces me to not edit and leave one uncommitted.
+
+list_projects() {
+    echo "$HOME/.dotfiles"
+    find "$HOME/Desktop/projects" -maxdepth 1 -type d -print0 | while IFS= read -r -d $'\0' dir; do
+        echo "$dir"
+    done}
+
+find_and_open_projects() {
+    projects=$(list_projects)
+
+    # Choose a project with fzf
+    selected=$(echo "$projects" | fzf --preview 'tree -a {}')
+
+    if [ -z "$selected" ]; then
+        echo "Empty selection, exiting loop"
+        exit 1
+    fi
+
+    selected_basename=$(basename "$selected")
+    aerospace_window_id=$(aerospace list-windows --all | grep -w Zed | grep -w "$selected_basename —" | head -n 1 | awk '{print $1}')
+    # Example command output looks like
+    # ❯ aerospace list-windows --all | grep -w Zed | grep -w .dotfiles
+    # 5277 | Zed       | .dotfiles — e
+    # 5302 | Zed       | .dotfiles-private — config
+
+
+    if [[ $? == 0 ]] && [[ -n "$aerospace_window_id" ]]; then
+        aerospace focus --window-id $aerospace_window_id
+    else
+        zed "$selected"
+        break
+    fi
+}
+
+# Run in loop to allow multiple project selections
+while true; do
+    find_and_open_projects
+done
