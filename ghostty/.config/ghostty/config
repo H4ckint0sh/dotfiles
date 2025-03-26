@@ -1,5 +1,5 @@
 # theme
-theme = nord
+theme = tokyonight-storm 
 
 # Some shaders can be found in this repo, they're usually uploaded to discord
 # custom-shader = shaders/bloom075.glsl
@@ -45,6 +45,8 @@ macos-icon-screen-color = 1a1b26
 
 # Quiccj terminal
 quick-terminal-position = center    
+quick-terminal-animation-duration = 0
+quick-terminal-autohide = true
 
 # Keybinds for ghostty
 keybind = cmd+r=reload_config

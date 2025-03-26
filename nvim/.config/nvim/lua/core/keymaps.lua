@@ -36,11 +36,8 @@ keymap.set("n", "L", "vg_")
 -- Dont copy the deleted text
 keymap.set("n", "x", '"_x')
 
--- Y to yank to end of line
-keymap.set("n", "Y", "y$")
-
--- Easy repeat of q@
-keymap.set("n", "Q", "@q")
+-- Select to end of line
+keymap.set("n", "V", "v$")
 
 -- Scape to normal mode from terminal mode
 keymap.set("t", "<esc><esc>", "<C-\\><C-n>")

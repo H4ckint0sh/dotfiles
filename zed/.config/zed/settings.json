@@ -1,68 +1,68 @@
 {
-  "features": {
-    "copilot": false,
-    "edit_prediction_provider": "supermaven"
-  },
-  "theme": "Tokyo Night Storm",
-  "experimental.theme_overrides": {
-    "syntax": {
-      "comment": {
-        "font_style": "italic"
-      },
-      "keyword": {
-        "font_style": "italic"
-      }
-    }
-  },
-  "tab_bar": {
-    "show": false
-  },
-  "terminal": {
-    "font_family": "Maple Mono",
-    "font_fallbacks": ["Symbols Nerd Font Mono"],
-    "font_size": 14,
-    "line_height": "standard",
-    "alternate_scroll": "off",
-    "blinking": "terminal_controlled",
-    "copy_on_select": true,
-    "toolbar": {
-      "title": true
-    },
-    "working_directory": "current_project_directory",
-    "button": false
-  },
-  "base_keymap": "VSCode",
-  "ui_font_size": 17,
-  "relative_line_numbers": true,
-  "preferred_line_length": 100,
-  "autosave": "on_focus_change",
-  "buffer_font_family": "Maple Mono",
-  "font_fallbacks": ["Symbols Nerd Font Mono"],
-  "buffer_font_size": 14,
-  "inlay_hints": {
-    "enabled": true,
-    "show_type_hints": true,
-    "show_parameter_hints": true,
-    "show_other_hints": true
-  },
-  "vim_mode": true,
-  "vim": {
-    "leader": "space",
-    "keymap": "vim",
-    "show_cursor_line": true,
-    "show_cursor_column": true,
-    "show_mode": true,
-    "show_command": true,
-    "show_insert": true,
-    "use_multiline_find": true,
-    "use_system_clipboard": "always",
-    "use_smartcase_find": true,
-    "show_visual": true,
-    "show_replace": true,
-    "show_block_insert": true,
-    "show_block_visual": true,
-    "show_block_replace": true,
-    "show_block_visual_line": true,
-    "show_block_visual_blockd": true
-  }
+	"features": {
+		"copilot": false,
+		"edit_prediction_provider": "supermaven"
+	},
+	"theme": "Tokyo Night Storm",
+	"experimental.theme_overrides": {
+		"syntax": {
+			"comment": {
+				"font_style": "italic"
+			},
+			"keyword": {
+				"font_style": "italic"
+			}
+		}
+	},
+	"tab_bar": {
+		"show": false
+	},
+	"terminal": {
+		"font_family": "MonoLisa",
+		"font_fallbacks": ["Symbols Nerd Font Mono"],
+		"font_size": 14,
+		"line_height": "standard",
+		"alternate_scroll": "off",
+		"blinking": "terminal_controlled",
+		"copy_on_select": true,
+		"toolbar": {
+			"title": true
+		},
+		"working_directory": "current_project_directory",
+		"button": false
+	},
+	"base_keymap": "VSCode",
+	"ui_font_size": 17,
+	"relative_line_numbers": true,
+	"preferred_line_length": 100,
+	"autosave": "on_focus_change",
+	"buffer_font_family": "Maple Mono",
+	"font_fallbacks": ["Symbols Nerd Font Mono"],
+	"buffer_font_size": 14,
+	"inlay_hints": {
+		"enabled": true,
+		"show_type_hints": true,
+		"show_parameter_hints": true,
+		"show_other_hints": true
+	},
+	"vim_mode": true,
+	"vim": {
+		"leader": "space",
+		"keymap": "vim",
+		"show_cursor_line": true,
+		"show_cursor_column": true,
+		"show_mode": true,
+		"show_command": true,
+		"show_insert": true,
+		"use_multiline_find": true,
+		"use_system_clipboard": "always",
+		"use_smartcase_find": true,
+		"show_visual": true,
+		"show_replace": true,
+		"show_block_insert": true,
+		"show_block_visual": true,
+		"show_block_replace": true,
+		"show_block_visual_line": true,
+		"show_block_visual_blockd": true
+	}
 }
