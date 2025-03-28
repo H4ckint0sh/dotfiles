@@ -15,21 +15,21 @@ export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
       --info=inline-right \
       --ansi \
       --layout=reverse \
-      --color=fg:#616E88 \
-      --color=fg+:#D8DEE9 \
-      --color=bg:#2E3440 \
-      --color=bg+:#2E3440
-      --color=hl:#5E81AC \
-      --color=hl+:#81A1C1 \
-      --color=info:#81A1C1 \
-      --color=marker:#B48EAD \
-      --color=prompt:#B48EAD \
-      --color=spinner:#B48EAD \
-      --color=pointer:#B48EAD \
-      --color=header:#D08770 \
-      --color=border:#616E88 \
-      --color=label:#D8DEE9 \
-      --color=query:#E5E9F0 \
+      --color=fg:#a9b1d6 \
+      --color=fg+:#5f6996 \
+      --color=bg:#1f2335 \
+      --color=bg+:#292e42
+      --color=hl:#3d59a1 \
+      --color=hl+:#7aa2f7 \
+      --color=info:#9ece6a \
+      --color=marker:#87ff00 \
+      --color=prompt:#ff007c \
+      --color=spinner:#bb9af7 \
+      --color=pointer:#bb9af7 \
+      --color=header:#ff9e64 \
+      --color=border:#5f6996 \
+      --color=label:#c0caf5 \
+      --color=query:#d9d9d9 \
 "
 
 # Node- sass
@@ -93,7 +93,6 @@ zinit snippet OMZP::brew
 zinit snippet OMZP::tmux
 zinit snippet OMZP::yarn
 zinit snippet OMZP::npm
-zinit ice lucid wait
 zinit snippet OMZP::fzf
 zinit snippet OMZP::frontend-search
 # Use oh-my-zsh vi-mode plugin instead of jeffreytse/zsh-vi-mode.
@@ -104,6 +103,7 @@ VI_MODE_SET_CURSOR=true
 
 # Load completions
 autoload -Uz compinit && compinit
+zinit cdreplay -q
 
 # #vi modep
 # zinit ice depth=1
@@ -111,12 +111,10 @@ autoload -Uz compinit && compinit
 
 # Keybindings
 # The plugin will auto execute this zvm_after_init function
-function zvm_after_init() {
-  bindkey -e
-  bindkey '^p' history-search-backward
-  bindkey '^n' history-search-forward
-  bindkey '^[w' kill-region
-}
+bindkey -e
+bindkey '^p' history-search-backward
+bindkey '^n' history-search-forward
+bindkey '^[w' kill-region
 
 # History --------------------------------------------------------------
 export HISTSIZE=10000000
@@ -140,7 +138,7 @@ zstyle ':completion:*' menu no
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 # fzf options
-zstyle ':fzf-tab:*' fzf-flags --color=fg:#616E88,fg+:#D8DEE9,bg:#2E3440,bg+:#2E3440
+zstyle ':fzf-tab:*' fzf-flags --color=fg:#a9b1d6,fg+:#5f6996,bg:#1f2335,bg+:#292e42
 
 
 # FUNCTIONS --------------------------------------------------------------
