@@ -28,10 +28,10 @@ cursor-style = block
 
 # font
 font-family = MonoLisa
-font-style = SemiBold
-font-style-italic = SemiBold Italic
+font-style = Medium
+font-style-italic = Medium Italic
 font-style-bold = false
-adjust-cell-height = 5%
+adjust-cell-height = 8%
 font-size = 13
 font-feature = ss02
 font-feature = liga
