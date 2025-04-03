@@ -31,6 +31,27 @@ return {
 		cycle = false,
 	},
 	layouts = {
+		custom_sidebar = {
+			layout = {
+				backdrop = false,
+				width = 40,
+				min_width = 40,
+				height = 0,
+				position = "left",
+				border = "none",
+				box = "vertical",
+				{
+					win = "input",
+					height = 1,
+					-- border = "rounded",
+					border = { " ", " ", " ", " ", " ", "", " ", " " },
+					title = "{title} {live} {flags}",
+					title_pos = "center",
+				},
+				{ win = "list", border = "none" },
+				{ win = "preview", title = "{preview}", height = 0.4, border = "top" },
+			},
+		},
 		custom = {
 			layout = {
 				box = "horizontal",
@@ -129,6 +150,31 @@ return {
 				-- ["L"] = { "preview_scroll_right", mode = { "i", "n" } },
 				["<a-s>"] = { "flash", mode = { "n", "i" } },
 				["s"] = { "flash" },
+			},
+		},
+	},
+	sources = {
+		explorer = {
+			follow_file = true,
+			tree = true,
+			jump = { close = true },
+			auto_close = true,
+			hidden = true,
+			layout = {
+				preset = "custom_sidebar",
+				layout = {
+					width = 0.15,
+					position = "right",
+				},
+			},
+			win = {
+				list = {
+					keys = {
+						["<ESC>"] = function()
+							vim.cmd("TmuxNavigateRight")
+						end,
+					},
+				},
 			},
 		},
 	},

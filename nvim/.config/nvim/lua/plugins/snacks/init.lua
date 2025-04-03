@@ -1,3 +1,4 @@
+local explorer = require("plugins.snacks.explorer")
 return {
 	"folke/snacks.nvim",
 	dependencies = {
@@ -12,6 +13,7 @@ return {
 			size = 100 * 1024, -- 100 KB
 		},
 		picker = require("plugins.snacks.picker"),
+		explorer = require("plugins.snacks.explorer"),
 		notifier = {
 			enabled = true,
 			timeout = 3000,
