@@ -27,43 +27,40 @@ return {
 			H["@tag.tsx"] = { fg = C.blue2 }
 			H["@tag.builtin.tsx"] = { fg = C.red }
 
-			H.CursorLine = { bg = C.bg_highlight }
-			H.CursorLineNr = { fg = C.orange }
-			H.LspInlayHint = { bg = "NONE", fg = C.comment }
-			H.GitSignsCurrentLineBlame = { fg = C.comment }
-			H.DiagnosticVirtualTextError = { bg = "NONE", fg = C.red }
-			H.DiagnosticVirtualTextHint = { bg = "NONE", fg = C.teal }
-			H.DiagnosticVirtualTextInfo = { bg = "NONE", fg = C.green }
-			H.DiagnosticVirtualTextWarn = { bg = "NONE", fg = C.yellow }
-			H.WinSeparator = { fg = C.fg, bg = "NONE" }
-			H.TroubleNormal = { bg = "NONE", fg = C.fg }
-
-			-- Neogit
-			H.NeogitSectionHeader = { fg = C.magenta }
-
-			-- NvimTree
-			H.NvimTreeWinSeparator = { fg = C.comment, bg = C.bg_dark }
-
-			-- Fzf
-			H.FzfLuaBorder = { fg = C.comment }
-			H.FzfLuaCursorLine = { bg = C.bg_dark }
-			H.FzfLuaScrollFloatEmpty = { bg = C.fg }
-			H.FzfLuaScrollFloatEmpty = { bg = C.fg }
-			H.FzfLuaScrollFloatFull = { bg = C.fg }
-			H.FzfLuaFzfScrollbar = { fg = C.comment }
-			H.FzfLuaFzfBorder = { fg = C.comment }
-			H.FzfLuaPreviewTitle = { fg = C.fg }
-			H.FzfLuaCursorLine = { bg = C.bg_highlight }
-
-			-- Float
-			H.FloatBorder = { fg = C.comment, bg = "NONE" }
-
-			-- Snacks
-			H.SnacksDashboardHeader = { fg = C.green }
-		end,
-	},
-	config = function(_, opts)
-		require("tokyonight").setup(opts) -- Replace this with your favorite colorscheme
-		vim.cmd("colorscheme tokyonight") -- Replace this with your favorite colorscheme
+				-- To customize lualine/bufferline
+				bufferline = {
+					current = {},
+					modified = { italic = true },
+				},
+			},
+			on_highlights = function(highlights, colors)
+				highlights["@tag.builtin.tsx"] = {
+					fg = colors.aurora.orange,
+				}
+				highlights["SnacksDashboardHeader"] = {
+					fg = colors.aurora.green,
+				}
+				highlights["SnacksDashboardFooter"] = {
+					fg = colors.frost.artic_water,
+				}
+				highlights["Special"] = {
+					fg = colors.frost.ice,
+				}
+				highlights["Pmenu"] = {
+					bg = colors.polar_night.origin,
+				}
+				highlights["BlinkCmpMenuBorder"] = {
+					fg = colors.frost.ice,
+				}
+				highlights["IncSearch"] = {
+					fg = colors.frost.ice,
+				}
+			end,
+		})
+		vim.cmd.colorscheme("nord")
+		vim.api.nvim_set_hl(0, "SnacksPickerDir", { link = "Text" })
+		vim.api.nvim_set_hl(0, "SnacksPickerPathHidden", { link = "Text" })
+		vim.api.nvim_set_hl(0, "SnacksPickerPathIgnored", { link = "Comment" })
+		vim.api.nvim_set_hl(0, "SnacksPickerGitStatusUntracked", { link = "Special" })
 	end,
 }

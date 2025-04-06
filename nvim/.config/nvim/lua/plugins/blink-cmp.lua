@@ -39,7 +39,7 @@ return {
 			preset = "luasnip",
 		},
 		sources = {
-			default = { "lsp", "path", "snippets", "buffer", "dadbod", "lazydev" },
+			default = { "lsp", "path", "snippets", "buffer", "dadbod", "lazydev", "html-css" },
 			providers = {
 				dadbod = { name = "Dadbod", module = "vim_dadbod_completion.blink" },
 				lazydev = {
@@ -47,6 +47,10 @@ return {
 					module = "lazydev.integrations.blink",
 					-- make lazydev completions top priority (see `:h blink.cmp`)
 					score_offset = 100,
+				},
+				["html-css"] = {
+					name = "html-css",
+					module = "blink.compat.source",
 				},
 			},
 		},
