@@ -163,7 +163,7 @@ return {
 			layout = {
 				preset = "custom_sidebar",
 				layout = {
-					width = 0.15,
+					width = 0.20,
 					position = "right",
 				},
 			},

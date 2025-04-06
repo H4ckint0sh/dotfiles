@@ -1,12 +1,6 @@
 -- stylua: ignore
 return {
-		 {
-    "<leader>e",
-    function()
-      Snacks.explorer.open()
-    end,
-    desc = "File Explorer",
-  },
+		{ "<leader>e", function() Snacks.explorer.open() end, desc = "File Explorer", },
 		{ '<leader>N', function() Snacks.notifier.hide() end },
 		{ "<c-t>", function() Snacks.terminal.toggle() end },
 		{ "<leader>x", function() Snacks.bufdelete() end },

@@ -27,6 +27,11 @@ path = "/Users/ali/Desktop/projects/special-electronics"
 startup_command = "litium"
 
 [[session]]
+name = "Accelerator S5 "
+path = "/Users/ali/Desktop/projects/litium-accelerator-s5/"
+startup_command = "litium"
+
+[[session]]
 name = "Lindab "
 path = "/Users/ali/Desktop/projects/lindab-2019-frontend"
 startup_command = "lindab"
