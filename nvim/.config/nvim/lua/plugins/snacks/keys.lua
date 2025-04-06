@@ -10,32 +10,9 @@ return {
 		{ "<leader>fh", function() Snacks.lazygit.log_file() end, desc = "Lazygit Current File History" },
 		{ "]]",         function() Snacks.words.jump(vim.v.count1) end, desc = "Next Reference" },
 		{ "[[",         function() Snacks.words.jump(-vim.v.count1) end, desc = "Prev Reference" },
-		{ "<leader>,", function() Snacks.picker.buffers(
-			{
-            -- I always want my buffers picker to start in normal mode
-            on_show = function()
-              vim.cmd.stopinsert()
-            end,
-            finder = "buffers",
-            format = "buffer",
-            hidden = false,
-            unloaded = true,
-            current = true,
-            sort_lastused = true,
-            win = {
-              input = {
-                keys = {
-                  ["d"] = "bufdelete",
-                },
-              },
-              list = { keys = { ["d"] = "bufdelete" } },
-            },
-            -- In case you want to override the layout for this keymap
-            -- layout = "ivy",
-          }
-		) end, desc = "Buffers" },
 		{ "<leader>t", function() Snacks.picker.grep({ layout = { preset = "ivy" } , hidden = true }) end, desc = "Grep" },
 		{ "<leader>:", function() Snacks.picker.command_history() end, desc = "Command History" },
+		{ "<leader>s", function() Snacks.picker.smart() end, desc = "Command History" },
 		{ "<leader>n", function() Snacks.picker.notifications({
 			-- I always want my notification History picker to start in normal mode
 			on_show = function()
