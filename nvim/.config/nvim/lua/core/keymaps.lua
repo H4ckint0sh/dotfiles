@@ -1,3 +1,4 @@
+local lsp_custom = require("core.lsp.custom")
 local keymap = vim.keymap
 
 -- same behavior like alt + up/down in vscode
@@ -35,6 +36,12 @@ keymap.set("n", "L", "vg_")
 -- Dont copy the deleted text
 keymap.set("n", "x", '"_x')
 
+-- Y to yank to end of line
+keymap.set("n", "Y", "y$")
+
+-- Easy repeat of q@
+keymap.set("n", "Q", "@q")
+
 -- Scape to normal mode from terminal mode
 keymap.set("t", "<esc><esc>", "<C-\\><C-n>")
 
@@ -44,7 +51,10 @@ keymap.set("n", "<leader>v", function()
 end, { desc = "Paste over entire buffer" })
 
 -- Remove highlights
-vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
+vim.keymap.set("n", "<leader>nh", "<cmd>nohlsearch<CR>")
+
+-- Removie console.log
+keymap.set("n", "<leader>cl", ":%g/console.log/d<CR>")
 
 -- Redo
 keymap.set("n", "<S-u>", ":redo<CR>", { silent = true })
@@ -89,9 +99,45 @@ keymap.set("n", "<leader>gb", ":GitBlameToggle<CR>") -- toggle git blame
 keymap.set("n", "<leader>o", vim.diagnostic.open_float, { noremap = true, silent = true })
 
 -- Keybindings for LSP functionalities
-keymap.set("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>") -- Go to Definition
+keymap.set("n", "gd", lsp_custom.definition) -- Go to Definition
 keymap.set("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>") -- Go to Implementation
 keymap.set("n", "<leader>r", "<cmd>lua vim.lsp.buf.rename()<CR>") -- Rename Symbol
 keymap.set("n", "<leader>a", "<cmd>lua vim.lsp.buf.code_action()<CR>") -- Code Actions
 keymap.set("n", "gy", "<cmd>lua vim.lsp.buf.type_definition()<CR>") -- Type Definition
 keymap.set("n", "sh", "<cmd>lua vim.lsp.buf.signature_help()<CR>") -- Signature Help
+
+-- Keybindings for vim.diagnostic
+keymap.set("n", "[d", function()
+	vim.diagnostic.jump({ count = -1, float = false })
+end, { desc = "Prev diagnostic" })
+keymap.set("n", "]d", function()
+	vim.diagnostic.jump({ count = 1, float = false })
+end, { desc = "Next diagnostic" })
+keymap.set("n", "[e", function()
+	vim.diagnostic.jump({
+		count = -1,
+		enable_popup = false,
+		severity = vim.diagnostic.severity.ERROR,
+	})
+end, { desc = "Prev error" })
+keymap.set("n", "]e", function()
+	vim.diagnostic.jump({
+		count = 1,
+		enable_popup = false,
+		severity = vim.diagnostic.severity.ERROR,
+	})
+end, { desc = "Next error" })
+keymap.set("n", "[w", function()
+	vim.diagnostic.jump({
+		count = -1,
+		enable_popup = false,
+		severity = vim.diagnostic.severity.WARN,
+	})
+end, { desc = "Prev warning" })
+keymap.set("n", "]w", function()
+	vim.diagnostic.jump({
+		count = 1,
+		enable_popup = false,
+		severity = vim.diagnostic.severity.WARN,
+	})
+end, { desc = "Next warning" })

@@ -19,13 +19,4 @@ return {
 			underline = false,
 		},
 	},
-	init = function()
-		vim.api.nvim_create_autocmd({ "FileType" }, {
-			pattern = { "NeogitStatus", "NeogitPopup", "NeogitLogView" },
-			callback = function()
-				require("ufo").detach()
-				vim.opt_local.foldenable = false
-			end,
-		})
-	end,
 }

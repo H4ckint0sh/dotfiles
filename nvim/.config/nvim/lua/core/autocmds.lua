@@ -77,3 +77,38 @@ vim.api.nvim_create_autocmd("CursorHold", {
 	pattern = "*",
 	command = "checktime",
 })
+
+vim.api.nvim_create_autocmd("FileType", {
+	group = vim.api.nvim_create_augroup("UserConfig", {}),
+
+	pattern = {
+		"checkhealth",
+		"help",
+		"lspinfo",
+		"qf",
+		"query",
+		"startuptime",
+		"tsplayground",
+	},
+	callback = function(e)
+		-- Map q to exit in non-filetype buffers
+		vim.bo[e.buf].buflisted = false
+		vim.keymap.set("n", "q", ":q<CR>", { buffer = e.buf })
+	end,
+	desc = "Maps q to exit on non-filetypes",
+})
+
+-- Owes's LSP
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "markdown",
+	callback = function(args)
+		vim.lsp.start({
+			name = "iwes",
+			cmd = { "iwes" },
+			root_dir = vim.fs.root(args.buf, { ".iwe" }),
+			flags = {
+				debounce_text_changes = 500,
+			},
+		})
+	end,
+})

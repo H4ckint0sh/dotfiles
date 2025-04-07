@@ -104,28 +104,31 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	end,
 })
 
--- TODO: still needed? without it Pylance was messing up buffer highlights at some point
---[[ local function periodic_refresh_semantic_tokens()
-    Snacks.notify('periodic refresh semantic tokens', {
-        level = vim.log.levels.DEBUG,
-        title = 'LSP',
-    })
-    if not vim.api.nvim_buf_is_loaded(0) then
-        return
-    end
-    vim.lsp.semantic_tokens.force_refresh(0)
-    vim.defer_fn(periodic_refresh_semantic_tokens, 30000)
-end
+-- Auto-close imports on open
+vim.api.nvim_create_autocmd("LspNotify", {
+	callback = function(args)
+		if args.data.method == "textDocument/didOpen" then
+			vim.lsp.foldclose("imports", vim.fn.bufwinid(args.buf))
+			vim.lsp.foldclose("comment", vim.fn.bufwinid(args.buf))
+		end
+	end,
+})
 
-vim.api.nvim_create_autocmd({ 'TextChanged', 'InsertLeave' }, {
-    callback = Snacks.util.throttle(function()
-        Snacks.notify('refresh semantic tokens', {
-            level = vim.log.levels.DEBUG,
-            title = 'LSP',
-        })
-        vim.lsp.semantic_tokens.force_refresh(0)
-    end, { ms = 1000 }),
-}) ]]
+vim.api.nvim_create_autocmd("LspAttach", {
+	callback = function(args)
+		local client = vim.lsp.get_client_by_id(args.data.client_id)
+		if client:supports_method("textDocument/foldingRange") then
+			local win = vim.api.nvim_get_current_win()
+			vim.wo[win][0].foldmethod = "expr"
+			vim.wo[win][0].foldexpr = "v:lua.vim.lsp.foldexpr()"
+			vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
+			vim.o.foldcolumn = "1" -- '0' is not bad
+			vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
+			vim.o.foldlevelstart = 99
+			vim.o.foldenable = true
+		end
+	end,
+})
 
 vim.lsp.config("*", {
 	root_markers = { ".git" },
@@ -138,6 +141,7 @@ vim.lsp.enable({
 	"docker_compose_ls",
 	"docker_ls",
 	"emmet_ls",
+	"emmylua_ls",
 	"html_ls",
 	"json_ls",
 	"lua_ls",

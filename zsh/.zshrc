@@ -87,7 +87,6 @@ zinit light Aloxaf/fzf-tab
 # Add in snippets
 zinit snippet OMZL::git.zsh
 zinit snippet OMZP::git
-zinit snippet OMZP::sudo
 zinit snippet OMZP::command-not-found
 zinit snippet OMZP::brew
 zinit snippet OMZP::tmux
@@ -96,13 +95,18 @@ zinit snippet OMZP::npm
 zinit ice lucid wait
 zinit snippet OMZP::fzf
 zinit snippet OMZP::frontend-search
+# Use oh-my-zsh vi-mode plugin instead of jeffreytse/zsh-vi-mode.
+# The jeffreytse/zsh-vi-mode plugin clashes with fzf keybindings AND history-search-*
+# See https://github.com/jeffreytse/zsh-vi-mode/issues/24
+zinit snippet OMZP::vi-mode
+VI_MODE_SET_CURSOR=true
 
 # Load completions
 autoload -Uz compinit && compinit
 
-#vi modep
-zinit ice depth=1
-zinit light jeffreytse/zsh-vi-mode
+# #vi modep
+# zinit ice depth=1
+# zinit light jeffreytse/zsh-vi-mode with-fzf
 
 # Keybindings
 # The plugin will auto execute this zvm_after_init function
@@ -198,6 +202,7 @@ export PATH="/$HOME/.pyenv/shims/djlint:$PATH"
 
 # ohmyposh
 eval "$(oh-my-posh init zsh --config ~/.config/ohmyposh/config.toml)"
+
 # OMP zsh-vi-mode integration
 _omp_redraw-prompt() {
   local precmd

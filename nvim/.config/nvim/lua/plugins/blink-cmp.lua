@@ -3,7 +3,6 @@ return {
 	event = { "InsertEnter", "CmdlineEnter" },
 	-- optional: provides snippets for the snippet source
 	dependencies = {
-		{ "rafamadriz/friendly-snippets" },
 		-- add blink.compat to dependencies
 		{ "saghen/blink.compat" },
 		-- add source to dependencies
@@ -36,8 +35,11 @@ return {
 				},
 			},
 		},
+		snippets = {
+			preset = "luasnip",
+		},
 		sources = {
-			default = { "lazydev", "lsp", "path", "snippets", "buffer", "dadbod" },
+			default = { "lsp", "path", "snippets", "buffer", "dadbod", "lazydev", "html-css" },
 			providers = {
 				dadbod = { name = "Dadbod", module = "vim_dadbod_completion.blink" },
 				lazydev = {
@@ -46,11 +48,33 @@ return {
 					-- make lazydev completions top priority (see `:h blink.cmp`)
 					score_offset = 100,
 				},
+				["html-css"] = {
+					name = "html-css",
+					module = "blink.compat.source",
+				},
 			},
 		},
 		cmdline = {
-			enabled = true,
-			keymap = { preset = "cmdline" },
+			enabled = false,
+			keymap = {
+				preset = "none",
+				["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
+				["<C-e>"] = { "hide" },
+				["<CR>"] = { "select_accept_and_enter" },
+
+				["<Up>"] = { "select_prev", "fallback" },
+				["<Down>"] = { "select_next", "fallback" },
+				["<C-k>"] = { "select_prev", "fallback_to_mappings" },
+				["<C-j>"] = { "select_next", "fallback_to_mappings" },
+
+				["<C-b>"] = { "scroll_documentation_up", "fallback" },
+				["<C-f>"] = { "scroll_documentation_down", "fallback" },
+
+				["<Tab>"] = { "snippet_forward", "fallback" },
+				["<S-Tab>"] = { "snippet_backward", "fallback" },
+
+				["<C-s>"] = { "show_signature", "hide_signature", "fallback" },
+			},
 			sources = function()
 				local type = vim.fn.getcmdtype()
 				-- Search forward and backward
