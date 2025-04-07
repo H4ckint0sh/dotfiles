@@ -4,7 +4,7 @@ start-at-login = true
 after-login-command = []
 
 after-startup-command = [
-  'exec-and-forget open -a Ghostty & open -a Microsoft\ Teams & open -a Zen\ Browser',
+  'exec-and-forget open -a Ghostty & open -a Microsoft\ Teams & open -a Chromium',
   'exec-and-forget /opt/homebrew/bin/sketchybar',
 ]
 
