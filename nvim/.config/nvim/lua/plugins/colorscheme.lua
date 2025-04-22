@@ -1,31 +1,18 @@
--- tokyonight Theme
 return {
-	-- https://github.com/tokyonight/nvim
-	"folke/tokyonight.nvim",
-	lazy = false,
+	"H4ckint0sh/nord.nvim",
 	priority = 1000,
-	opts = {
-		style = "night", -- The theme comes in three styles, `storm`, a darker variant `night` and
-		transparent = true, -- Enable this to disable setting the background color.
-		terminal_colors = true, -- Configure the colors used when opening a `:terminal` in Neovim.
-		dim_inactive = false, -- dim inactive windows
-		styles = {
-			-- Style to be applied to different syntax groups
-			-- Value is any valid attr-list value for `:help nvim_set_hl`
-			comments = { italic = true },
-			keywords = { italic = true },
-			conditionals = { italic = true },
-			functions = {},
-			variables = {},
-			-- Background styles. Can be "dark", "transparent" or "normal"
-			sidebars = "normal", -- style for sidebars, see below
-			floats = "normal", -- style for floating windows
-		},
-		on_highlights = function(H, C)
-			-- Native
-			H["@keyword.import"] = { fg = C.purple, italic = true }
-			H["@tag.tsx"] = { fg = C.blue2 }
-			H["@tag.builtin.tsx"] = { fg = C.red }
+	lazy = false,
+	config = function()
+		require("nord").setup({
+			errors = { mode = "fg" },
+			styles = {
+				-- Style to be applied to different syntax groups
+				-- Value is any valid attr-list value for `:help nvim_set_hl`
+				comments = { italic = true },
+				keywords = { italic = true },
+				constants = { italic = true },
+				functions = {},
+				variables = {},
 
 				-- To customize lualine/bufferline
 				bufferline = {

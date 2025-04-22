@@ -1,5 +1,5 @@
 ---@diagnostic disable-next-line: missing-fields
-local colors = require("tokyonight.colors").setup({ style = "night" })
+local colors = require("nord.colors").palette
 
 return {
 	"petertriho/nvim-scrollbar",

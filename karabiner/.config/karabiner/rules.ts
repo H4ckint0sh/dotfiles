@@ -76,7 +76,7 @@ const rules: KarabinerRules[] = [
   },
 
   {
-    description: "left_ctrl -> cmd+tab if pressed alone",
+    description: "left_ctrl -> alt+tab if pressed alone",
     manipulators: [
       {
         from: {
@@ -90,7 +90,7 @@ const rules: KarabinerRules[] = [
         to_if_alone: [
           {
             key_code: "tab",
-            modifiers: ["command"],
+            modifiers: ["option"],
           },
         ],
         type: "basic",

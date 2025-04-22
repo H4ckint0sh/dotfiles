@@ -12,30 +12,27 @@ end
 M.on_attach = on_attach
 
 M.settings = {
-	codeAction = {
-		disableRuleComment = {
-			enable = true,
-			location = "separateLine",
+	slint = {
+		packageManager = "npm",
+		run = "onSave",
+		rulesCustomizations = {},
+		validate = "on", -- Validate JS/TS files
+		codeAction = {
+			disableRuleComment = {
+				enable = true,
+				location = "separateLine",
+			},
+			showDocumentation = {
+				enable = true,
+			},
 		},
-		showDocumentation = {
-			enable = true,
+		-- Critical performance flags:
+		experimental = {
+			useFlatConfig = true, -- For eslint.config.js (new config system)
 		},
-	},
-	codeActionOnSave = {
-		enable = false,
-		mode = "all",
-	},
-	format = true,
-	nodePath = "",
-	onIgnoredFiles = "off",
-	packageManager = "npm",
-	quiet = false,
-	rulesCustomizations = {},
-	run = "onType",
-	useESLintClass = false,
-	validate = "on",
-	workingDirectory = {
-		mode = "location",
+		workingDirectory = {
+			mode = "auto", -- Auto-detect project root
+		},
 	},
 }
 

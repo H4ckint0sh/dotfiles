@@ -15,21 +15,21 @@ export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
       --info=inline-right \
       --ansi \
       --layout=reverse \
-      --color=fg:#565f89 \
-      --color=fg+:#c0caf5 \
-      --color=bg:#1a1b26 \
-      --color=bg+:#1a1b26
-      --color=hl:#3d59a1 \
-      --color=hl+:#7aa2f7 \
-      --color=info:#7aa2f7 \
-      --color=marker:#87ff00 \
-      --color=prompt:#ff007c \
-      --color=spinner:#bb9af7 \
-      --color=pointer:#bb9af7 \
-      --color=header:#ff9e64 \
-      --color=border:#565f89 \
-      --color=label:#c0caf5 \
-      --color=query:#d9d9d9 \
+      --color=fg:#616E88 \
+      --color=fg+:#D8DEE9 \
+      --color=bg:#2E3440 \
+      --color=bg+:#2E3440
+      --color=hl:#5E81AC \
+      --color=hl+:#81A1C1 \
+      --color=info:#81A1C1 \
+      --color=marker:#B48EAD \
+      --color=prompt:#B48EAD \
+      --color=spinner:#B48EAD \
+      --color=pointer:#B48EAD \
+      --color=header:#D08770 \
+      --color=border:#616E88 \
+      --color=label:#D8DEE9 \
+      --color=query:#E5E9F0 \
 "
 
 # Node- sass
@@ -139,7 +139,7 @@ zstyle ':completion:*' menu no
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 # fzf options
-zstyle ':fzf-tab:*' fzf-flags --color=fg:#565f89,fg+:#c0caf5,bg:#1a1b26,bg+:#1a1b26
+zstyle ':fzf-tab:*' fzf-flags --color=fg:#616E88,fg+:#D8DEE9,bg:#2E3440,bg+:#2E3440
 
 
 # FUNCTIONS --------------------------------------------------------------
