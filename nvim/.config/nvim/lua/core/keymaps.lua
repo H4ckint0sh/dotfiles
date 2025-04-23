@@ -96,7 +96,7 @@ keymap.set("n", "<leader>o", vim.diagnostic.open_float, { noremap = true, silent
 keymap.set("n", "gd", lsp_custom.definition) -- Go to Definition
 keymap.set("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>") -- Go to Implementation
 keymap.set("n", "<leader>r", "<cmd>lua vim.lsp.buf.rename()<CR>") -- Rename Symbol
-keymap.set("n", "<leader>a", "<cmd>lua vim.lsp.buf.code_action()<CR>") -- Code Actions
+keymap.set("n", "<leader>a", '<cmd>lua require("fastaction").code_action()<CR>') -- Code Actions
 keymap.set("n", "gy", "<cmd>lua vim.lsp.buf.type_definition()<CR>") -- Type Definition
 keymap.set("n", "sh", "<cmd>lua vim.lsp.buf.signature_help()<CR>") -- Signature Help
 
