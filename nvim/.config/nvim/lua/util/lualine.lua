@@ -1,6 +1,6 @@
 local icons = require("util.icons").icons
 ---@diagnostic disable-next-line: missing-fields
-local palette = require("nord.colors").palette
+local colors = require("tokyonight.colors").setup({ style = "storm" })
 local M = {}
 
 M.mode = {
@@ -24,19 +24,19 @@ M.mode = {
 	color = function()
 		local mode = vim.fn.mode()
 		local map = {
-			n = palette.frost.artic_water,
-			i = palette.aurora.green,
-			c = palette.aurora.yellow,
-			t = palette.frost.ice,
-			R = palette.aurora.red,
-			v = palette.aurora.purple,
-			V = palette.aurora.purple,
-			s = palette.aurora.purple,
-			S = palette.aurora.purple,
+			n = colors.blue,
+			i = colors.green,
+			c = colors.yellow,
+			t = colors.cyan,
+			R = colors.red,
+			v = colors.magenta,
+			V = colors.magenta,
+			s = colors.magenta,
+			S = colors.magenta,
 		}
 		return {
-			bg = map[mode] or palette.aurora.purple,
-			fg = palette.polar_night.origin,
+			bg = map[mode] or colors.magenta,
+			fg = colors.bg_dark,
 		}
 	end,
 	separator = { right = "", left = "░▒▓" },
@@ -45,7 +45,7 @@ M.mode = {
 M.filetype = {
 	"filetype",
 	color = function()
-		return { fg = palette.frost.artic_water, bg = palette.polar_night.bright }
+		return { fg = colors.blue, bg = colors.bg_highlight }
 	end,
 	separator = { right = "", left = "" },
 }
@@ -53,7 +53,7 @@ M.filetype = {
 M.diagnostics = {
 	"diagnostics",
 	color = function()
-		return { bg = palette.polar_night.bright }
+		return { bg = colors.bg_highlight }
 	end,
 	separator = { right = "", left = "" },
 }
@@ -61,15 +61,14 @@ M.diagnostics = {
 M.encoding = {
 	"encoding",
 	color = function()
-		return { fg = palette.frost.artic_water, bg = palette.polar_night.bright }
+		return { fg = colors.blue, bg = colors.bg_highlight }
 	end,
 }
 
 M.fileformat = {
 	"fileformat",
-	symbols = { unix = "􀣺 " },
 	color = function()
-		return { fg = palette.frost.artic_water, bg = palette.polar_night.bright }
+		return { fg = colors.blue, bg = colors.bg_highlight }
 	end,
 }
 
@@ -81,7 +80,7 @@ M.indentation = {
 		return type .. ": " .. value
 	end,
 	color = function()
-		return { fg = palette.frost.artic_water, bg = palette.polar_night.bright }
+		return { fg = colors.blue, bg = colors.bg_highlight }
 	end,
 }
 
@@ -91,7 +90,7 @@ M.progress = {
 		return vim.trim(location)
 	end,
 	color = function()
-		return { fg = palette.polar_night.origin, bg = palette.snow_storm.origin }
+		return { fg = colors.black, bg = colors.fg }
 	end,
 }
 
@@ -101,7 +100,18 @@ M.location = {
 		return vim.trim(location)
 	end,
 	color = function()
-		return { fg = palette.polar_night.origin, bg = palette.snow_storm.origin }
+		return { fg = colors.black, bg = colors.fg }
+	end,
+}
+
+M.macro = {
+	function()
+		return vim.fn.reg_recording()
+	end,
+	icon = icons.Recording,
+	separator = { left = "", right = "" },
+	color = function()
+		return { fg = colors.magenta, bg = colors.bg_dark }
 	end,
 }
 
@@ -159,7 +169,7 @@ M.lsp_formater_linter = {
 	icon = icons.Braces,
 	separator = { right = "", left = "" },
 	color = function()
-		return { fg = palette.snow_storm.origin, bg = palette.polar_night.origin }
+		return { fg = colors.fg, bg = colors.bg_highlight }
 	end,
 }
 
@@ -168,7 +178,7 @@ M.gap = {
 		return " "
 	end,
 	color = function()
-		return { bg = palette.polar_night.bright }
+		return { bg = colors.bg_highlight }
 	end,
 	padding = 0,
 }
@@ -213,7 +223,7 @@ M.macro = {
 	icon = icons.Recording,
 	separator = { left = "", right = "" },
 	color = function()
-		return { fg = palette.aurora.purple, bg = palette.polar_night.origin }
+		return { fg = colors.magenta, bg = colors.bg }
 	end,
 }
 
@@ -223,7 +233,7 @@ M.filetree = {
 	end,
 	separator = { left = "", right = "" },
 	color = function()
-		return { fg = palette.snow_storm.origin, bg = palette.polar_night.origin }
+		return { fg = colors.fg, bg = colors.bg }
 	end,
 }
 

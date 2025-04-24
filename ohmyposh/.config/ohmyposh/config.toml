@@ -6,13 +6,13 @@ final_space = true
 background = "transparent"
 template = '❯ '
 foreground_templates = [
-  '{{if gt .Code 0}}#BF616A{{end}}',
-  '{{if eq .Code 0}}#88C0D0{{end}}',
+  '{{if gt .Code 0}}#f7768e{{end}}',
+  '{{if eq .Code 0}}#9d7cd8{{end}}',
 ]
 
 [secondary_prompt]
 background = "transparent"
-foreground = "#D8DEE9"
+foreground = "#c0caf5"
 template = "╰─❯ "
 
 [[blocks]]
@@ -21,18 +21,18 @@ type = "prompt"
 newline = true
 
 [[blocks.segments]]
-foreground = "#A3BE8C"
+foreground = "#9ece6a"
 style = "plain"
-template = "<#81A1C1>╭─(</>{{ .Path }}<#81A1C1>)</>"
+template = "<#565f89>╭─(</>{{ .Path }}<#565f89>)</>"
 type = "path"
 
 [blocks.segments.properties]
 style = "full"
 
 [[blocks.segments]]
-foreground = "#EBCB8B"
+foreground = "#e0af68"
 style = "plain"
-template = "<#81A1C1> - (</>{{ if .PackageManagerIcon }}{{ .PackageManagerIcon }}{{ else }}{{ end }} {{ .Full }}<#81A1C1>)</>"
+template = "<#565f89> - (</>{{ if .PackageManagerIcon }}{{ .PackageManagerIcon }}{{ else }}{{ end }} {{ .Full }}<#565f89>)</>"
 type = "node"
 
 [[blocks]]
@@ -41,7 +41,7 @@ overflow = 'hidden'
 
 [[blocks.segments]]
 template = '{{ .FormattedMs }}'
-foreground = '#EBCB8B'
+foreground = '#e0af68'
 background = 'transparent'
 type = 'executiontime'
 style = 'plain'
@@ -56,13 +56,13 @@ alignment = 'left'
 newline = true
 
 [[blocks.segments]]
-foreground = "#81A1C1"
+foreground = "#565f89"
 style = "plain"
 template = "╰─"
 type = "text"
 
 [[blocks.segments]]
-template = "<#81A1C1>(</>{{ if .Env.POSH_VI_MODE }}{{ .Env.POSH_VI_MODE }}{{ end }}<#81A1C1>)─</>"
+template = "<#565f89>(</>{{ if .Env.POSH_VI_MODE }}{{ .Env.POSH_VI_MODE }}{{ end }}<#565f89>)─</>"
 background = 'transparent'
 type = 'text'
 style = 'plain'
@@ -71,8 +71,8 @@ style = 'plain'
 template = '❯'
 background = 'transparent'
 foreground_templates = [
-  '{{if gt .Code 0}}#BF616A{{end}}',
-  '{{if eq .Code 0}}#88C0D0{{end}}',
+  '{{if gt .Code 0}}#f7768e{{end}}',
+  '{{if eq .Code 0}}#9d7cd8{{end}}',
 ]
 type = 'text'
 style = 'plain'

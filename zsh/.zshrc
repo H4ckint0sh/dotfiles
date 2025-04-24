@@ -15,21 +15,21 @@ export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
       --info=inline-right \
       --ansi \
       --layout=reverse \
-      --color=fg:#616E88 \
-      --color=fg+:#D8DEE9 \
-      --color=bg:#2E3440 \
-      --color=bg+:#2E3440
-      --color=hl:#5E81AC \
-      --color=hl+:#81A1C1 \
-      --color=info:#81A1C1 \
-      --color=marker:#B48EAD \
-      --color=prompt:#B48EAD \
-      --color=spinner:#B48EAD \
-      --color=pointer:#B48EAD \
-      --color=header:#D08770 \
-      --color=border:#616E88 \
-      --color=label:#D8DEE9 \
-      --color=query:#E5E9F0 \
+      --color=fg:#565f89 \
+      --color=fg+:#c0caf5 \
+      --color=bg:#24283b \
+      --color=bg+:#24283b
+      --color=hl:#3d59a1 \
+      --color=hl+:#7aa2f7 \
+      --color=info:#7aa2f7 \
+      --color=marker:#87ff00 \
+      --color=prompt:#ff007c \
+      --color=spinner:#bb9af7 \
+      --color=pointer:#bb9af7 \
+      --color=header:#ff9e64 \
+      --color=border:#565f89 \
+      --color=label:#c0caf5 \
+      --color=query:#d9d9d9 \
 "
 
 # Node- sass
@@ -82,6 +82,7 @@ source "${ZINIT_HOME}/zinit.zsh"
 zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
+zinit light jeffreytse/zsh-vi-mode
 zinit light Aloxaf/fzf-tab
 
 # Add in snippets
@@ -92,26 +93,14 @@ zinit snippet OMZP::brew
 zinit snippet OMZP::tmux
 zinit snippet OMZP::yarn
 zinit snippet OMZP::npm
-zinit ice lucid wait
 zinit snippet OMZP::fzf
 zinit snippet OMZP::frontend-search
-# Use oh-my-zsh vi-mode plugin instead of jeffreytse/zsh-vi-mode.
-# The jeffreytse/zsh-vi-mode plugin clashes with fzf keybindings AND history-search-*
-# See https://github.com/jeffreytse/zsh-vi-mode/issues/24
-zinit snippet OMZP::vi-mode
-VI_MODE_SET_CURSOR=true
 
 # Load completions
 autoload -Uz compinit && compinit
 
-# #vi modep
-# zinit ice depth=1
-# zinit light jeffreytse/zsh-vi-mode with-fzf
-
-# Keybindings
-# The plugin will auto execute this zvm_after_init function
+#The plugin will auto execute this zvm_after_init function
 function zvm_after_init() {
-  bindkey -e
   bindkey '^p' history-search-backward
   bindkey '^n' history-search-forward
   bindkey '^[w' kill-region
@@ -120,14 +109,13 @@ function zvm_after_init() {
 # History --------------------------------------------------------------
 export HISTSIZE=10000000
 export HISTIGNORE="rm -rf*:ls:echo:ll:gallery-dl:c"
-export HISTFILE=~/.zsh_history
-export SAVEHIST=$HISTSIZE
-export HISTDUP=erase
+HISTFILE=~/.zsh_history
+SAVEHIST=$HISTSIZE
+HISTDUP=erase
 setopt appendhistory
 setopt sharehistory
 setopt hist_ignore_space
 setopt hist_ignore_all_dups
-setopt hist_reduce_blanks
 setopt hist_save_no_dups
 setopt hist_ignore_dups
 setopt hist_find_no_dups
@@ -139,7 +127,7 @@ zstyle ':completion:*' menu no
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 # fzf options
-zstyle ':fzf-tab:*' fzf-flags --color=fg:#616E88,fg+:#D8DEE9,bg:#2E3440,bg+:#2E3440
+zstyle ':fzf-tab:*' fzf-flags --color=fg:#565f89,fg+:#c0caf5,bg:#24283b,bg+:#24283b
 
 
 # FUNCTIONS --------------------------------------------------------------

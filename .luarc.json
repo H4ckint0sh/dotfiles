@@ -8,5 +8,6 @@
     ],
     "diagnostics.disable": [
         "undefined-global"
-    ]
+    ],
+    "runtime.version": "Lua 5.4"
 }

@@ -5,18 +5,18 @@ return {
 	event = { "BufReadPost", "BufNewFile" },
 	dependencies = { "nvim-tree/nvim-web-devicons" },
 	config = function(_, opts)
-		local colors = require("nord.colors").palette
-		local nord = require("lualine.themes.nord")
+		local colors = require("tokyonight.colors").setup({ style = "storm" })
+		local tokyonight = require("lualine.themes.tokyonight")
 
 		vim.opt.laststatus = 3
-		nord.normal.c.bg = colors.polar_night.origin
-		opts.options.theme = nord
+		tokyonight.normal.c.bg = colors.bg
+		opts.options.theme = tokyonight
 
 		require("lualine").setup(opts)
 	end,
 	opts = {
 		options = {
-			component_separators = { left = " ", right = " " },
+			component_separators = { left = " ", right = "" },
 			section_separators = { left = " ", right = "" },
 			globalstatus = true, -- Unified statusline across splits
 		},
