@@ -16,8 +16,9 @@ return {
 		},
 		priority = {
 			typescript = {
-				{ pattern = "to existing import declaration", key = "a", order = 2 },
-				{ pattern = "from module", key = "i", order = 1 },
+				{ pattern = "Fix all auto-fixable problems", key = "a", order = 2 },
+				{ pattern = "Organize Imports", key = "o", order = 1 },
+				{ pattern = "Add all missing imports", key = "m", order = 3 },
 			},
 		},
 	},
