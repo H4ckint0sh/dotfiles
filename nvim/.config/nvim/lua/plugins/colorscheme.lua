@@ -41,25 +41,14 @@ return {
 			-- Neogit
 			H.NeogitSectionHeader = { fg = C.magenta }
 
-			-- NvimTree
-			H.NvimTreeWinSeparator = { fg = C.comment, bg = C.bg_dark }
-
-			-- Fzf
-			H.FzfLuaBorder = { fg = C.comment }
-			H.FzfLuaCursorLine = { bg = C.bg_dark }
-			H.FzfLuaScrollFloatEmpty = { bg = C.fg }
-			H.FzfLuaScrollFloatEmpty = { bg = C.fg }
-			H.FzfLuaScrollFloatFull = { bg = C.fg }
-			H.FzfLuaFzfScrollbar = { fg = C.comment }
-			H.FzfLuaFzfBorder = { fg = C.comment }
-			H.FzfLuaPreviewTitle = { fg = C.fg }
-			H.FzfLuaCursorLine = { bg = C.bg_highlight }
-
 			-- Float
 			H.FloatBorder = { fg = C.comment, bg = "NONE" }
 
 			-- Snacks
 			H.SnacksDashboardHeader = { fg = C.green }
+
+			-- Barbecue
+			H.WinBar = { bg = C.bg }
 		end,
 	},
 	config = function(_, opts)
