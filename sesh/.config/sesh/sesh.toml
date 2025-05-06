@@ -52,6 +52,11 @@ path = "/Users/ali/Desktop/projects/isp.website.umbraco10"
 startup_command = "isp"
 
 [[session]]
+name = "AGV "
+path = "/Users/ali/Desktop/projects/arbetsgivarverket-2022-frontend/"
+startup_command = "agv"
+
+[[session]]
 name = "Hem "
 path = "/Users/ali/Desktop/projects/hem-2023-frontend"
 startup_command = "hem"

@@ -1,0 +1,10 @@
+# #!/usr/bin/env bash
+
+tmux send-keys 'nvim' Enter
+tmux new-window -c "#{session_path}"
+tmux send-keys 'yarn dev' Enter
+tmux select-window -p
+open http://localhost:3000
+
+
+
