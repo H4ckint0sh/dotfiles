@@ -138,10 +138,7 @@ vim.lsp.config("*", {
 vim.lsp.enable({
 	"bash_ls",
 	"css_ls",
-	"docker_compose_ls",
-	"docker_ls",
 	"emmet_ls",
-	"emmylua_ls",
 	"html_ls",
 	"json_ls",
 	"lua_ls",
@@ -150,6 +147,6 @@ vim.lsp.enable({
 	"yaml_ls",
 	"tailwindcss_ls",
 	"taplo",
-	"esllint-ls",
+	"eslint-ls",
 	"astro_ls",
 })

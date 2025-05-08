@@ -4,6 +4,7 @@ return {
 	-- 	event = "LspAttach",
 	-- 	dependencies = {
 	-- 		"nvim-lua/plenary.nvim",
+	-- 		"neovim/nvim-lspconfig",
 	-- 		{
 	-- 			"saghen/blink.cmp",
 	-- 			-- Ensure blink.cmp is loaded before typescript-tools
@@ -12,6 +13,7 @@ return {
 	-- 		},
 	-- 	},
 	-- 	config = function()
+	-- 		vim.lsp.start({ name = "typescript-tools" })
 	-- 		require("typescript-tools").setup({})
 	-- 	end,
 	-- 	keys = {

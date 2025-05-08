@@ -2,10 +2,10 @@
 ---@type LazySpec[]
 return {
 	{
-		"williamboman/mason.nvim",
+		"mason-org/mason.nvim",
 		cmd = "Mason",
 		dependencies = {
-			"williamboman/mason-lspconfig.nvim",
+			"mason-org/mason-lspconfig.nvim",
 			"WhoIsSethDaniel/mason-tool-installer.nvim",
 		},
 		init = function()
@@ -19,7 +19,6 @@ return {
 			registries = {
 				"github:mason-org/mason-registry",
 				"github:mistweaverco/zana-registry",
-				"lua:plugins.lsp.custom",
 			},
 			ui = {
 				-- The border to use for the UI window. Accepts same border values as |nvim_open_win()|.
@@ -58,7 +57,7 @@ return {
 		end,
 	},
 	{
-		"williamboman/mason-lspconfig.nvim",
+		"mason-org/mason-lspconfig.nvim",
 		lazy = true,
 		opts = {
 			ensure_installed = {
