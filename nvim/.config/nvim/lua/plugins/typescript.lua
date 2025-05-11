@@ -1,7 +1,7 @@
 return {
 	{
 		"pmizio/typescript-tools.nvim",
-		event = "LspAttach",
+		event = { "BufReadPre", "BufNewFile" },
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			{
@@ -11,9 +11,19 @@ return {
 				priority = 1000,
 			},
 		},
-		config = function()
-			require("typescript-tools").setup({})
-		end,
+		opts = {
+			settings = {
+				separate_diagnostic_server = true,
+				publish_diagnostic_on = "insert_leave",
+				tsserver_max_memory = "auto",
+				tsserver_locale = "en",
+				complete_function_calls = true,
+				jsx_close_tag = {
+					enable = true,
+					filetypes = { "javascriptreact", "typescriptreact" },
+				},
+			},
+		},
 		keys = {
 			{ "<leader>oi", "<CMD>TSToolsOrganizeImports<CR>", desc = "Organize Imports" },
 			{ "<leader>ui", "<CMD>TSToolsRemoveUnusedImports<CR>", desc = "Remove Unused Imports" },
