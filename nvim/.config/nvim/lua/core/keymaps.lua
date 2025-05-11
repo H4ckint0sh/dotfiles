@@ -1,4 +1,3 @@
-local lsp_custom = require("core.lsp.custom")
 local keymap = vim.keymap
 
 -- same behavior like alt + up/down in vscode

@@ -1,3 +1,4 @@
+---@diagnostic disable: missing-fields
 local au = vim.api.nvim_create_augroup("LspAttach", { clear = true })
 
 -- client log level
@@ -15,36 +16,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		vim.api.nvim_set_option_value("tagfunc", "v:lua.vim.lsp.tagfunc", { buf = bufnr })
 	end,
 })
-
--- NOTE: disabled in favor of Snacks.words
---[[ vim.api.nvim_create_autocmd('LspAttach', {
-    group = au,
-    desc = 'LSP highlight',
-    callback = function(args)
-        local bufnr = args.buf
-        local client = vim.lsp.get_client_by_id(args.data.client_id)
-        if
-            client
-            and client:supports_method 'textDocument/documentHighlight'
-        then
-            local augroup_lsp_highlight = 'lsp_highlight'
-            vim.api.nvim_create_augroup(
-                augroup_lsp_highlight,
-                { clear = false }
-            )
-            vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
-                group = augroup_lsp_highlight,
-                buffer = bufnr,
-                callback = vim.lsp.buf.document_highlight,
-            })
-            vim.api.nvim_create_autocmd('CursorMoved', {
-                group = augroup_lsp_highlight,
-                buffer = bufnr,
-                callback = vim.lsp.buf.clear_references,
-            })
-        end
-    end,
-}) ]]
 
 vim.api.nvim_create_autocmd("LspAttach", {
 	group = au,
@@ -90,23 +61,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	end,
 })
 
---[[ vim.api.nvim_create_autocmd('LspAttach', {
-                group = au,
-                desc = 'LSP signature help',
-                callback = function(args)
-                    local bufnr = args.buf
-                    local client = vim.lsp.get_client_by_id(args.data.client_id)
-                    if client:supports_method 'textDocument/signatureHelp' then
-                        vim.api.nvim_create_autocmd('CursorHoldI', {
-                            buffer = bufnr,
-                            callback = function()
-                                vim.defer_fn(vim.lsp.buf.signature_help, 200)
-                            end,
-                        })
-                    end
-                end,
-            }) ]]
-
 vim.api.nvim_create_autocmd("LspAttach", {
 	group = au,
 	desc = "LSP notify",
@@ -147,25 +101,105 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	end,
 })
 
-vim.lsp.config("*", {
-	root_markers = { ".git" },
-	capabilities = require("core.lsp.protocol").capabilties,
-})
+return {
+	{
+		"neovim/nvim-lspconfig",
+		dependencies = {
+			"mason-org/mason.nvim",
+			"mason-org/mason-lspconfig.nvim",
+		},
+		config = function()
+			local blink_cmp_ok, blink_cmp = pcall(require, "blink.cmp")
 
-vim.lsp.enable({
-	"bash_ls",
-	"css_ls",
-	"docker_compose_ls",
-	"docker_ls",
-	"emmylua_ls",
-	"html_ls",
-	"json_ls",
-	"lua_ls",
-	"taplo",
-	"vtsls",
-	"yaml_ls",
-	"tailwindcss_ls",
-	"taplo",
-	"esllint-ls",
-	"astro_ls",
-})
+			vim.lsp.config("*", {
+				vim.tbl_deep_extend(
+					"force",
+					vim.lsp.protocol.make_client_capabilities(),
+					blink_cmp.get_lsp_capabilities()
+				),
+			})
+
+			require("mason").setup()
+			require("mason-lspconfig").setup({
+				ensure_installed = {
+					"bashls",
+					"cssls",
+					"eslint",
+					"graphql",
+					"html",
+					"jsonls",
+					"lua_ls",
+					"zls",
+					"ember",
+					"prismals",
+					"tailwindcss",
+					"astro",
+					"ts_ls",
+					"jdtls",
+					"emmet_language_server",
+				},
+				automatic_enable = {
+					exclude = {
+						"ts_ls",
+					},
+				},
+			})
+		end,
+	},
+	{
+		"WhoIsSethDaniel/mason-tool-installer.nvim",
+		lazy = true,
+		opts = {
+			ensure_installed = {
+				"prettier", -- prettier formatter
+				"djlint", -- handlebars formatter
+				"eslint", -- javascript formatter
+			},
+		},
+	},
+	{
+		"folke/neoconf.nvim",
+		cmd = "Neoconf",
+		opts = {},
+	},
+	{
+		"folke/lazydev.nvim",
+		ft = "lua",
+		opts = {
+			library = {
+				-- Load luvit types when the `vim.uv` word is found
+				{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
+				{ path = "snacks.nvim", words = { "Snacks" } },
+			},
+		},
+	},
+	{
+		"antosha417/nvim-lsp-file-operations",
+		name = "nvim-lsp-file-operations",
+		dependencies = { "nvim-lua/plenary.nvim" },
+		lazy = true,
+		opts = {},
+	},
+	{
+		"joechrisellis/lsp-format-modifications.nvim",
+		lazy = true,
+		dependencies = { "nvim-lua/plenary.nvim" },
+		init = function()
+			vim.api.nvim_create_user_command("FormatModified", function()
+				local bufnr = vim.api.nvim_get_current_buf()
+				local clients = vim.lsp.get_clients({
+					bufnr = bufnr,
+					method = "textDocument/rangeFormatting",
+				})
+
+				if #clients == 0 then
+					Snacks.notify.error("Format request failed, no matching language servers", { title = "LSP" })
+				end
+
+				for _, client in pairs(clients) do
+					require("lsp-format-modifications").format_modifications(client, bufnr)
+				end
+			end, {})
+		end,
+	},
+}
