@@ -17,6 +17,17 @@ return {
 			"astro",
 			"tmpl",
 		},
+		handlers = {
+			definition = {
+				bind = "<leader>gd",
+			},
+			hover = {
+				bind = "K",
+				wrap = true,
+				border = "none",
+				position = "cursor",
+			},
+		},
 		documentation = {
 			auto_show = true,
 		},
