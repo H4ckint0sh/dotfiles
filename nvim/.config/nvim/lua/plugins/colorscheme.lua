@@ -23,9 +23,9 @@ return {
 		},
 		on_highlights = function(H, C)
 			-- Native
-			-- H["@keyword.import"] = { fg = C.purple, italic = true }
+			H["@keyword.import"] = { fg = C.purple, italic = true }
 			H["@tag.tsx"] = { fg = C.blue2 }
-			H["@tag.builtin.tsx"] = { fg = C.red }
+			H["@tag.builtin.tsx"] = { fg = C.cyan }
 			--
 			-- H.CursorLine = { bg = C.bg_highlight }
 			-- H.CursorLineNr = { fg = C.orange }
