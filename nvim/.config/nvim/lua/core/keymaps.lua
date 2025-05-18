@@ -130,3 +130,50 @@ keymap.set("n", "]w", function()
 		severity = vim.diagnostic.severity.WARN,
 	})
 end, { desc = "Next warning" })
+
+-- Open git modified files directly in buffers
+vim.keymap.set("n", "<leader>mf", function()
+	-- Check if in git repo
+	local git_check = io.popen("git rev-parse --is-inside-work-tree 2>&1")
+	local is_git_repo = git_check:read("*a")
+	git_check:close()
+
+	if not is_git_repo or is_git_repo:match("fatal:") then
+		vim.notify("Not in a git repository", vim.log.levels.WARN)
+		return
+	end
+
+	-- Get modified files
+	local handle = io.popen("git diff --name-only 2>&1")
+	if not handle then
+		vim.notify("Failed to check git status", vim.log.levels.ERROR)
+		return
+	end
+
+	local result = handle:read("*a")
+	handle:close()
+
+	-- Check for errors
+	if result:match("fatal:") then
+		vim.notify("Git error: " .. result, vim.log.levels.ERROR)
+		return
+	end
+
+	-- Process files
+	result = result:gsub("^%s*(.-)%s*$", "%1")
+	if result == "" then
+		vim.notify("No modified files in git repository", vim.log.levels.INFO)
+		return
+	end
+
+	-- Open each file in a buffer
+	local count = 0
+	for file in result:gmatch("[^\n]+") do
+		if file ~= "" then
+			vim.cmd("edit " .. vim.fn.fnameescape(file))
+			count = count + 1
+		end
+	end
+
+	vim.notify(string.format("Opened %d modified files", count), vim.log.levels.INFO)
+end, { desc = "Open git modified files in buffers" })
