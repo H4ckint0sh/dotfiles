@@ -34,12 +34,36 @@ return {
 					winhighlight = "FloatBorder:boolean",
 				},
 			},
+
+			accept = {
+				-- Experimental auto-brackets support
+				auto_brackets = {
+					-- Whether to auto-insert brackets for functions
+					enabled = true,
+					-- Default brackets to use for unknown languages
+					default_brackets = { "(", ")" },
+					-- Overrides the default blocked filetypes
+					override_brackets_for_filetypes = {},
+					-- Synchronously use the kind of the item to determine if brackets should be added
+					kind_resolution = {
+						enabled = true,
+						blocked_filetypes = { "typescriptreact", "javascriptreact", "vue" },
+					},
+					-- Asynchronously use semantic token to determine if brackets should be added
+					semantic_token_resolution = {
+						enabled = true,
+						blocked_filetypes = {},
+						-- How long to wait for semantic tokens to return before assuming no brackets should be added
+						timeout_ms = 400,
+					},
+				},
+			},
 		},
 		snippets = {
 			preset = "luasnip",
 		},
 		sources = {
-			default = { "lsp", "path", "snippets", "buffer", "dadbod", "lazydev", "html-css" },
+			default = { "lsp", "path", "buffer", "snippets", "dadbod", "lazydev", "html-css" },
 			providers = {
 				dadbod = { name = "Dadbod", module = "vim_dadbod_completion.blink" },
 				lazydev = {
@@ -54,56 +78,17 @@ return {
 				},
 			},
 		},
-		cmdline = {
-			enabled = false,
-			keymap = {
-				preset = "none",
-				["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
-				["<C-e>"] = { "hide" },
-				["<CR>"] = { "select_accept_and_enter" },
-
-				["<Up>"] = { "select_prev", "fallback" },
-				["<Down>"] = { "select_next", "fallback" },
-				["<C-k>"] = { "select_prev", "fallback_to_mappings" },
-				["<C-j>"] = { "select_next", "fallback_to_mappings" },
-
-				["<C-b>"] = { "scroll_documentation_up", "fallback" },
-				["<C-f>"] = { "scroll_documentation_down", "fallback" },
-
-				["<Tab>"] = { "snippet_forward", "fallback" },
-				["<S-Tab>"] = { "snippet_backward", "fallback" },
-
-				["<C-s>"] = { "show_signature", "hide_signature", "fallback" },
-			},
-			sources = function()
-				local type = vim.fn.getcmdtype()
-				-- Search forward and backward
-				if type == "/" or type == "?" then
-					return { "buffer" }
-				end
-				-- Commands
-				if type == ":" or type == "@" then
-					return { "cmdline" }
-				end
-				return {}
-			end,
-			completion = {
-				trigger = {
-					show_on_blocked_trigger_characters = {},
-					show_on_x_blocked_trigger_characters = {},
-				},
-				list = {
-					selection = {
-						-- When `true`, will automatically select the first item in the completion list
-						preselect = true,
-						-- When `true`, inserts the completion item automatically when selecting it
-						auto_insert = true,
-					},
-				},
-				-- Whether to automatically show the window when new completion items are available
-				menu = { auto_show = true },
-				-- Displays a preview of the selected item on the current line
-				ghost_text = { enabled = true },
+		fuzzy = {
+			sorts = {
+				function(a, b)
+					if (a.client_name == nil or b.client_name == nil) or (a.client_name == b.client_name) then
+						return
+					end
+					return b.client_name == "emmet_ls"
+				end,
+				-- default sorts
+				"score",
+				"sort_text",
 			},
 		},
 		signature = {
@@ -113,17 +98,12 @@ return {
 			},
 		},
 		keymap = {
-			["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
-			["<C-e>"] = { "hide", "fallback" },
-			["<CR>"] = { "accept", "fallback" },
-			["<Tab>"] = { "snippet_forward", "fallback" },
-			["<S-Tab>"] = { "snippet_backward", "fallback" },
-			["<Up>"] = { "select_prev", "fallback" },
-			["<Down>"] = { "select_next", "fallback" },
-			["<C-k>"] = { "select_prev", "fallback" },
+			-- set to 'none' to disable the 'default' preset
+			preset = "default",
+
 			["<C-j>"] = { "select_next", "fallback" },
-			["<C-b>"] = { "scroll_documentation_up", "fallback" },
-			["<C-f>"] = { "scroll_documentation_down", "fallback" },
+			["<C-k>"] = { "select_prev", "fallback" },
+			["<CR>"] = { "accept", "fallback" },
 		},
 	},
 }
