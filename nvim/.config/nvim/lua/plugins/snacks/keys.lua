@@ -1,3 +1,4 @@
+local custom_lsp_definitions = require("custom.custom-lsp-definitions")
 -- stylua: ignore
 return {
 		{ "<leader>e", function() Snacks.explorer.open() end, desc = "File Explorer", },
@@ -81,7 +82,7 @@ return {
 		{ "<leader>u", function() Snacks.picker.colorschemes() end, desc = "Colorschemes" },
 		{ "<leader>qp", function() Snacks.picker.projects() end, desc = "Projects" },
 		-- LSP
-		{ "gd", function() Snacks.picker.lsp_definitions() end, desc = "Goto Definition" },
+		{ "gd", function() custom_lsp_definitions.definition() end, desc = "Custom Goto Definition" },
 		{ "gr", function() Snacks.picker.lsp_references() end, nowait = true, desc = "References" },
 		{ "gi", function() Snacks.picker.lsp_implementations() end, desc = "Goto Implementation" },
 		{ "gy", function() Snacks.picker.lsp_type_definitions() end, desc = "Goto T[y]pe Definition" },
