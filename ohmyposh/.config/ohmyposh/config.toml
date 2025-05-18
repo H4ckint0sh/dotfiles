@@ -4,10 +4,10 @@ final_space = true
 
 [transient_prompt]
 background = "transparent"
-template = '❯ '
+template = '> '
 foreground_templates = [
-  '{{if gt .Code 0}}#f7768e{{end}}',
-  '{{if eq .Code 0}}#9d7cd8{{end}}',
+  '{{if gt .Code 0}}#565f89{{end}}',
+  '{{if eq .Code 0}}#565f89{{end}}',
 ]
 
 [secondary_prompt]
@@ -68,11 +68,11 @@ type = 'text'
 style = 'plain'
 
 [[blocks.segments]]
-template = '❯'
+template = '>'
 background = 'transparent'
 foreground_templates = [
-  '{{if gt .Code 0}}#f7768e{{end}}',
-  '{{if eq .Code 0}}#9d7cd8{{end}}',
+  '{{if gt .Code 0}}#565f89{{end}}',
+  '{{if eq .Code 0}}#565f89{{end}}',
 ]
 type = 'text'
 style = 'plain'
