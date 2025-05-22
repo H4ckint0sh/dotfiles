@@ -28,7 +28,7 @@ return {
 			if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
 				return
 			end
-			return { timeout_ms = 500, lsp_format = "never" }
+			return { timeout_ms = 500, lsp_format = "never", lsp_fallback = false }
 		end,
 	},
 	config = function(_, opts)

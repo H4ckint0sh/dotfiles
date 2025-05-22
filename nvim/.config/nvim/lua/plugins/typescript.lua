@@ -12,15 +12,41 @@ return {
 			},
 		},
 		opts = {
+			handlers = {
+				["textDocument/publishDiagnostics"] = function(err, result, ctx, config)
+					if result and result.diagnostics then
+						-- Filter out specific diagnostic codes (e.g., 6133 for unused var)
+						result.diagnostics = vim.tbl_filter(function(diagnostic)
+							local ignore_codes = {
+								[6133] = true, -- unused variable
+								[6192] = true, -- unused import
+								[80001] = true, -- convert to ES module
+								[1005] = true,
+							}
+							return not ignore_codes[diagnostic.code]
+						end, result.diagnostics)
+					end
+					vim.lsp.diagnostic.on_publish_diagnostics(err, result, ctx, config)
+				end,
+			},
 			settings = {
 				separate_diagnostic_server = true,
-				publish_diagnostic_on = "insert_leave",
+				publish_diagnostic_on = "change",
 				tsserver_max_memory = "auto",
 				tsserver_locale = "en",
 				complete_function_calls = true,
 				jsx_close_tag = {
 					enable = true,
 					filetypes = { "javascriptreact", "typescriptreact" },
+				},
+				tsserver_file_preferences = {
+					disableSuggestions = true,
+				},
+				tsserver_plugins = {
+					-- for TypeScript v4.9+
+					-- "@styled/typescript-styled-plugin",
+					-- or for older TypeScript versions
+					"typescript-styled-plugin",
 				},
 			},
 		},
