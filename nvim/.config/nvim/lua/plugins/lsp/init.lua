@@ -75,6 +75,53 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	end,
 })
 
+local function fold_virt_text(result, s, lnum, coloff)
+	if not coloff then
+		coloff = 0
+	end
+	local text = ""
+	local hl
+	for i = 1, #s do
+		local char = s:sub(i, i)
+		local hls = vim.treesitter.get_captures_at_pos(0, lnum, coloff + i - 1)
+		local _hl = hls[#hls]
+		if _hl then
+			local new_hl = "@" .. _hl.capture
+			if new_hl ~= hl then
+				table.insert(result, { text, hl })
+				text = ""
+				hl = nil
+			end
+			text = text .. char
+			hl = new_hl
+		else
+			text = text .. char
+		end
+	end
+	table.insert(result, { text, hl })
+end
+
+function _G.custom_foldtext()
+	local start_line = vim.fn.getline(vim.v.foldstart):gsub("\t", string.rep(" ", vim.o.tabstop))
+	local end_line_raw = vim.fn.getline(vim.v.foldend)
+	local end_line_trimmed = vim.trim(end_line_raw)
+	local folded_lines = vim.v.foldend - vim.v.foldstart + 1
+
+	local result = {}
+	fold_virt_text(result, start_line, vim.v.foldstart - 1)
+
+	-- Insert middle marker and folded line count
+	table.insert(result, { " ... ", "comment" })
+	table.insert(result, { string.format("%d lines)", folded_lines), "comment" })
+	table.insert(result, { " ... ", "comment" })
+
+	fold_virt_text(result, end_line_trimmed, vim.v.foldend, #(end_line_raw:match("^(%s*)") or ""))
+
+	return result
+end
+
+vim.opt.foldtext = "v:lua.custom_foldtext()"
+
 -- Auto-close imports on open
 vim.api.nvim_create_autocmd("LspNotify", {
 	callback = function(args)
@@ -85,6 +132,18 @@ vim.api.nvim_create_autocmd("LspNotify", {
 	end,
 })
 
+-- local function filter_diagnostics(diagnostic)
+-- 	if diagnostic.source == "tsserver" then
+-- 		return false
+-- 	end
+-- 	return true
+-- end
+--
+-- vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(function(_, result, ctx, config)
+-- 	result.diagnostics = vim.tbl_filter(filter_diagnostics, result.diagnostics)
+-- 	vim.lsp.diagnostic.on_publish_diagnostics(_, result, ctx, config)
+-- end, {})
+
 vim.api.nvim_create_autocmd("LspAttach", {
 	callback = function(args)
 		local client = vim.lsp.get_client_by_id(args.data.client_id)
@@ -92,11 +151,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 			local win = vim.api.nvim_get_current_win()
 			vim.wo[win][0].foldmethod = "expr"
 			vim.wo[win][0].foldexpr = "v:lua.vim.lsp.foldexpr()"
-			vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
-			vim.o.foldcolumn = "1" -- '0' is not bad
-			vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
-			vim.o.foldlevelstart = 99
-			vim.o.foldenable = true
 		end
 	end,
 })

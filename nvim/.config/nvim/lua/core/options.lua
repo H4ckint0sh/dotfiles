@@ -47,7 +47,11 @@ local options = {
 	foldlevel = 99,
 	foldmethod = "expr",
 	foldexpr = "nvim_treesitter#foldexpr()",
-	foldtext = "",
+	foldopen = "insert,mark,search,tag", --Which commands to open a fold
+	fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]],
+	foldlevel = 999, -- Close all folds.
+	foldlevelstart = 99, -- Start with all folds closed.
+	-- foldtext = "v:lua.require('util.fold').foldLines()",
 	autoread = true, -- disable neovim generating a swapfile and showing the error
 }
 local globals = {
