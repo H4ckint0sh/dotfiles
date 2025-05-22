@@ -1,4 +1,4 @@
-vim.lsp.config["astro"] = {
+return {
 	before_init = function(params, config)
 		-- print("THIS IS THE CONFIG BEFORE INIT: " .. vim.inspect(config))
 		-- print("THIS IS THE PARAMS BEFORE INIT: " .. vim.inspect(params))
