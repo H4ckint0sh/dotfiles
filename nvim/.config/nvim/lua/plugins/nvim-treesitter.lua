@@ -46,6 +46,7 @@ return {
 					"gitignore",
 					"yaml",
 					"razor",
+					"git_config",
 				}, -- one of "all", or a list of languages
 				sync_install = false, -- install languages synchronously (only applied to `ensure_installed`)
 				ignore_install = { "haskell" }, -- list of parsers to ignore installing
