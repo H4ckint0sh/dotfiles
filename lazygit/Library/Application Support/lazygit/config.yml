@@ -37,7 +37,6 @@ git:
   autoFetch: true
   autoRefresh: true
   branchLogCmd: "git log --graph --color=always --abbrev-commit --decorate --date=relative --pretty=medium {{branchName}} --"
-  allBranchesLogCmd: "git log --graph --all --color=always --abbrev-commit --decorate --date=relative  --pretty=medium"
   overrideGpg: false # prevents lazygit from spawning a separate process when using GPG
   disableForcePushing: false
   parseEmoji: true
@@ -51,6 +50,8 @@ git:
     showGraph: "always"
     # displays the whole git graph by default in the commits panel (equivalent to passing the `--all` argument to `git log`)
     showWholeGraph: false
+  allBranchesLogCmds:
+    - git log --graph --all --color=always --abbrev-commit --decorate --date=relative  --pretty=medium
 os:
   editCommand: "nvim"
   editCommandTemplate: "{{editor}} {{filename}}"
@@ -77,9 +78,9 @@ customCommands:
     context: "files"
     command: "gitmoji -c"
     loadingText: "Loading gitmoji"
-    subprocess: true
+    output: terminal
   - key: "z"
     command: "~/.config/bin/gc"
     context: "files"
     loadingText: "Commitizen prompt"
-    subprocess: true
+    output: terminal
