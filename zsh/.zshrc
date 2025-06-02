@@ -32,6 +32,13 @@ export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
       --color=query:#d9d9d9 \
 "
 
+# Left-pad command output with 2 spaces
+precmd() {
+  tput cuf 2  # Adds 2 spaces before each command output
+} 
+
+precmd()
+
 # Node- sass
 export SKIP_SASS_BINARY_DOWNLOAD_FOR_CI=true
 export SKIP_NODE_SASS_TESTS=true
@@ -149,6 +156,28 @@ function prs {
   awk '{print $1}' |
   xargs gh pr checkout
 }
+
+# GIT ALIASES ----------------------------------------------------------------
+# Aliases: git
+alias ga='git add'
+alias gap='ga --patch'
+alias gb='git branch'
+alias gba='gb --all'
+alias gc='git commit'
+alias gca='gc --amend --no-edit'
+alias gce='gc --amend'
+alias gco='git checkout'
+alias gcl='git clone --recursive'
+alias gd='git diff --output-indicator-new=" " --output-indicator-old=" "'
+alias gds='gd --staged'
+alias gi='git init'
+alias gl='git log --graph --all --pretty=format:"%C(magenta)%h %C(white) %an  %ar%C(blue)  %D%n%s%n"'
+alias gm='git merge'
+alias gn='git checkout -b'  # new branch
+alias gp='git push'
+alias gr='git reset'
+alias gs='git status --short'
+alias gu='git pull'
 
 # OTHER ALIASES----------------------------------------------------------------
 alias v='nvim'
