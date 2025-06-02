@@ -65,11 +65,17 @@ return {
 			},
 		},
 		indent = {
-			char = "│",
 			scope = { hl = "Normal" },
 			chunk = {
 				enabled = true,
 				hl = "Normal",
+				char = {
+					corner_top = "╭",
+					corner_bottom = "╰",
+					horizontal = "─",
+					vertical = "│",
+					arrow = "󰁔",
+				},
 			},
 		},
 		scope = {},
