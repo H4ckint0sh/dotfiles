@@ -11,10 +11,9 @@ custom-shader = shaders/bloom025.glsl
 
 # window macos
 window-decoration = none
-window-padding-balance = true
 macos-titlebar-style = hidden
-window-padding-y = 2,0 
-window-padding-x = 5,5
+window-padding-y = 0 
+window-padding-x = 0
 clipboard-read = "allow"
 background-opacity = 1
 
