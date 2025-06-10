@@ -147,7 +147,7 @@ vim.api.nvim_create_autocmd("LspNotify", {
 vim.api.nvim_create_autocmd("LspAttach", {
 	callback = function(args)
 		local client = vim.lsp.get_client_by_id(args.data.client_id)
-		if client:supports_method("textDocument/foldingRange") then
+		if client and client:supports_method("textDocument/foldingRange") then
 			local win = vim.api.nvim_get_current_win()
 			vim.wo[win][0].foldmethod = "expr"
 			vim.wo[win][0].foldexpr = "v:lua.vim.lsp.foldexpr()"
@@ -163,22 +163,11 @@ return {
 			"mason-org/mason-lspconfig.nvim",
 		},
 		config = function()
-			local blink_cmp_ok, blink_cmp = pcall(require, "blink.cmp")
-
-			vim.lsp.config("*", {
-				vim.tbl_deep_extend(
-					"force",
-					vim.lsp.protocol.make_client_capabilities(),
-					blink_cmp.get_lsp_capabilities()
-				),
-			})
-
 			require("mason").setup()
 			require("mason-lspconfig").setup({
 				ensure_installed = {
 					"bashls",
 					"cssls",
-					"eslint",
 					"graphql",
 					"html",
 					"jsonls",
@@ -207,7 +196,6 @@ return {
 			ensure_installed = {
 				"prettier", -- prettier formatter
 				"djlint", -- handlebars formatter
-				"eslint", -- javascript formatter
 			},
 		},
 	},
