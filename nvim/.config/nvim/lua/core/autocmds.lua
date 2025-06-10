@@ -1,8 +1,3 @@
--- Disable diagnostics in node_modules (0 is current buffer only)
-vim.api.nvim_create_autocmd(
-	{ "BufRead", "BufNewFile" },
-	{ pattern = "*/node_modules/*", command = "lua vim.diagnostic.disable(0)" }
-)
 -- Enable spell checking for certain file types
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 	pattern = { "*.txt", "*.md", "*.tex" },
@@ -99,10 +94,9 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 -- Force diagnostic update
-vim.api.nvim_create_autocmd({ "TextChanged", "TextChangedI", "InsertLeave", "TextYankPost" }, {
-	pattern = "*",
+vim.api.nvim_create_autocmd({ "TextChangedI", "InsertLeave", "TextYankPost" }, {
+	pattern = { "*.ts", "*.tsx", "*.js", "*.jsx" },
 	callback = function()
-		print("Forced diagnostic update")
 		vim.diagnostic.setloclist({ open = false }) -- or vim.diagnostic.show()
 	end,
 })
