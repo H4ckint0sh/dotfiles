@@ -60,3 +60,8 @@ startup_command = "agv"
 name = "Hem "
 path = "/Users/ali/Desktop/projects/hem-2023-frontend"
 startup_command = "hem"
+
+[[session]]
+name = "Purus "
+path = "/Users/ali/Desktop/projects/purus-configurator-frontend/"
+startup_command = "purus"
