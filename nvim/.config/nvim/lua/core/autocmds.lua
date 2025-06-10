@@ -98,17 +98,11 @@ vim.api.nvim_create_autocmd("FileType", {
 	desc = "Maps q to exit on non-filetypes",
 })
 
--- Owes's LSP
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = "markdown",
-	callback = function(args)
-		vim.lsp.start({
-			name = "iwes",
-			cmd = { "iwes" },
-			root_dir = vim.fs.root(args.buf, { ".iwe" }),
-			flags = {
-				debounce_text_changes = 500,
-			},
-		})
+-- Force diagnostic update
+vim.api.nvim_create_autocmd({ "TextChanged", "TextChangedI", "InsertLeave", "TextYankPost" }, {
+	pattern = "*",
+	callback = function()
+		print("Forced diagnostic update")
+		vim.diagnostic.setloclist({ open = false }) -- or vim.diagnostic.show()
 	end,
 })
