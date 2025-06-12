@@ -168,6 +168,7 @@ return {
 				ensure_installed = {
 					"bashls",
 					"cssls",
+					"eslint",
 					"graphql",
 					"html",
 					"jsonls",
@@ -196,6 +197,7 @@ return {
 			ensure_installed = {
 				"prettier", -- prettier formatter
 				"djlint", -- handlebars formatter
+				"eslint", -- javascript formatter
 			},
 		},
 	},
