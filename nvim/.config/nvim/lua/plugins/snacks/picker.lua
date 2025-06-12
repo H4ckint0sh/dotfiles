@@ -107,6 +107,17 @@ return {
 				end,
 			})
 		end,
+		toggle_live_case_sens = function(picker)
+			picker.opts.args = picker.opts.args or {}
+			picker.case_sens = picker.case_sens == nil and true or picker.case_sens
+			if picker.case_sens then
+				picker.opts.args = { "--case-sensetive" }
+			else
+				picker.opts.args = { "--ignore-case" }
+			end
+			picker.case_sens = not picker.case_sens
+			picker:find({ refresh = true })
+		end,
 	},
 	win = {
 		input = {
@@ -121,6 +132,8 @@ return {
 				-- ["L"] = { "preview_scroll_right", mode = { "i", "n" } },
 				["<a-s>"] = { "flash", mode = { "n", "i" } },
 				["s"] = { "flash" },
+				-- toggel case sensitive
+				["<F1>"] = { "toggle_live_case_sens", mode = { "i", "n" } },
 			},
 		},
 	},
