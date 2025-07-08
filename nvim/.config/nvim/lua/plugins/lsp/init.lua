@@ -132,18 +132,6 @@ vim.api.nvim_create_autocmd("LspNotify", {
 	end,
 })
 
--- local function filter_diagnostics(diagnostic)
--- 	if diagnostic.source == "tsserver" then
--- 		return false
--- 	end
--- 	return true
--- end
---
--- vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(function(_, result, ctx, config)
--- 	result.diagnostics = vim.tbl_filter(filter_diagnostics, result.diagnostics)
--- 	vim.lsp.diagnostic.on_publish_diagnostics(_, result, ctx, config)
--- end, {})
-
 vim.api.nvim_create_autocmd("LspAttach", {
 	callback = function(args)
 		local client = vim.lsp.get_client_by_id(args.data.client_id)
