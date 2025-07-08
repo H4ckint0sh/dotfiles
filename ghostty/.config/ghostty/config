@@ -10,11 +10,11 @@ custom-shader = shaders/bloom025.glsl
 # custom-shader = shaders/sparks-from-fire.glsl
 
 # window macos
-window-decoration = none
+window-decoration = auto
 window-padding-balance = true
 macos-titlebar-style = hidden
-window-padding-y = 0 
-window-padding-x = 0
+window-padding-y = 0,0
+window-padding-x = 0,0
 clipboard-read = "allow"
 background-opacity = 1
 
@@ -39,11 +39,9 @@ font-feature = zero
 font-feature = ss03
 
 # icon
-macos-icon = custom-style
-macos-icon-ghost-color = 9ece6a
-macos-icon-screen-color = 1a1b26
+macos-icon = paper
 
-# Quiccj terminal
+# Quick terminal
 quick-terminal-position = center    
 
 # Keybinds for ghostty
