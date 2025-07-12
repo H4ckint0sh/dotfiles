@@ -149,9 +149,28 @@ return {
 		dependencies = {
 			"mason-org/mason.nvim",
 			"mason-org/mason-lspconfig.nvim",
+			"WhoIsSethDaniel/mason-tool-installer.nvim",
 		},
 		config = function()
-			require("mason").setup()
+			require("mason").setup({
+				-- Registries that should be used.
+				registries = {
+					"github:mason-org/mason-registry",
+					-- Adds a custom registry containing the roslyn and rzls packages.
+					-- These packages are currently not included in the mason registry itself.
+					-- Source: https://github.com/seblj/roslyn.nvim / https://github.com/tris203/rzls.nvim
+					-- TODO: As soon as the packages beeing added to the mason registry we can remove this.
+					"github:crashdummyy/mason-registry",
+				},
+				-- ui config
+				ui = {
+					icons = {
+						package_installed = "✓",
+						package_pending = "➜",
+						package_uninstalled = "✗",
+					},
+				},
+			})
 			require("mason-lspconfig").setup({
 				ensure_installed = {
 					"bashls",
@@ -176,18 +195,16 @@ return {
 					},
 				},
 			})
+			require("mason-tool-installer").setup({
+				ensure_installed = {
+					"prettier", -- prettier formatter
+					"djlint", -- handlebars formatter
+					"eslint", -- javascript formatter
+					"rzls",
+					"roslyn",
+				},
+			})
 		end,
-	},
-	{
-		"WhoIsSethDaniel/mason-tool-installer.nvim",
-		lazy = true,
-		opts = {
-			ensure_installed = {
-				"prettier", -- prettier formatter
-				"djlint", -- handlebars formatter
-				"eslint", -- javascript formatter
-			},
-		},
 	},
 	{
 		"folke/neoconf.nvim",
