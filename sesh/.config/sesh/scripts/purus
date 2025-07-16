@@ -2,5 +2,5 @@
 
 tmux send-keys 'nvim' Enter
 tmux new-window -c "#{session_path}"
-tmux send-keys 'npm run start' Enter
+tmux send-keys 'npm run start:test' Enter
 tmux select-window -p
