@@ -4,9 +4,23 @@ start-at-login = true
 after-login-command = []
 
 after-startup-command = [
-  'exec-and-forget open -a Ghostty & open -a Microsoft\ Teams & open -a Google\ Chrome',
+  'exec-and-forget open -a Ghostty & open -a Microsoft\ Teams & open -a Chromium',
   'exec-and-forget /opt/homebrew/bin/sketchybar',
 ]
+  const [isOpen, setIsOpen] = useState(false);
+  const [showLoginForm, setShowLoginForm] = useState(false);
+  const [showAccountDropDown, setShowAccountDropDown] = useState(false);
+  // eslint-disable-next-line no-unused-vars
+  const [showAccountRequestForm, setShowAccountRequestForm] = useState(false);
+  const { t } = useTranslation();
+
+    const [isOpen, setIsOpen] = useState(false);
+    const [showLoginForm, setShowLoginForm] = useState(false);
+    const [showForgottenPasswordForm, setShowForgottenPasswordForm] = useState(false);
+    const [showAccountDropDown, setShowAccountDropDown] = useState(false);
+    // eslint-disable-next-line no-unused-vars
+    const [showAccountRequestForm, setShowAccountRequestForm] = useState(false);
+    const {t} = useTranslation();
 
 # Notify Sketchybar about workspace change
 exec-on-workspace-change = [
