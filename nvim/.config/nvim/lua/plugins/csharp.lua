@@ -1,7 +1,7 @@
 return {
 	{
 		"seblyng/roslyn.nvim",
-		ft = { "cs", "razor" },
+		ft = { "cs", "razor", "cshtml" },
 		dependencies = {
 			{
 				-- By loading as a dependencies, we ensure that we are available to set
