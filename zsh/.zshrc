@@ -68,6 +68,10 @@ export EDITOR=nvim
 # Gemini API Key
 export GEMINI_API_KEY=$(security find-generic-password -s "gemini_api_key" -w)
 
+# DeepSeek API Key
+export GEMINI_API_KEY=$(security find-generic-password -s "gemini_api_key" -w)
+
+
 export ZSH_CUSTOM=$DOTFILES
 # export LANG=en_US.UTF-8
 # export LC_ALL=$LANG

@@ -1,0 +1,111 @@
+theme = "myTokyoNight"
+
+[editor]
+line-number = "relative"
+mouse = true
+auto-format = true
+bufferline = "multiple"
+color-modes = true
+popup-border = "all"
+jump-label-alphabet = "fjdkslaeiwovncmgh"
+
+[editor.auto-save]
+focus-lost = true
+after-delay.enable = true
+after-delay.timeout = 30000
+
+[editor.lsp]
+auto-signature-help = false
+display-messages = true
+display-inlay-hints = true
+display-signature-help-docs = true
+
+[editor.inline-diagnostics]
+other-lines = "error"
+cursor-line = "hint"
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+select = "underline"
+
+[editor.statusline]
+left = ["mode", "spinner"]
+center = ["file-name"]
+right = [
+  "diagnostics",
+  "selections",
+  "position",
+  "file-encoding",
+  "file-line-ending",
+  "file-type",
+]
+separator = "│"
+mode.normal = "NORMAL"
+mode.insert = "INSERT"
+mode.select = "SELECT"
+
+[editor.file-picker]
+hidden = false
+
+[editor.soft-wrap]
+enable = true
+max-wrap = 25         # increase value to reduce forced mid-word wrapping
+max-indent-retain = 0
+wrap-indicator = ""   # set wrap-indicator to "" to hide it
+
+[editor.auto-pairs]
+'(' = ')'
+'{' = '}'
+'[' = ']'
+'"' = '"'
+'`' = '`'
+'<' = '>'
+"'" = "'"
+
+[editor.indent-guides]
+render = true
+character = "▏" # Some characters that work well: "▏", "┆", "┊", "⸽"
+skip-levels = 1
+
+[keys.insert]
+C-space = "signature_help"
+
+[keys.select]
+X = ["extend_line_up", "extend_to_line_bounds"]
+# Ctrl/Alt-based line modifications
+# Move line down
+C-j = ["extend_to_line_bounds", "delete_selection", "paste_after"]
+# Move line up
+C-k = ["extend_to_line_bounds", "delete_selection", "move_line_up", "paste_before"]
+# Copy line down
+C-A-j = ["normal_mode", "extend_to_line_bounds", "yank", "open_below", "replace_with_yanked", "collapse_selection", "normal_mode"]
+# Copy line up
+C-A-k = ["normal_mode", "extend_to_line_bounds", "yank", "open_above", "replace_with_yanked", "collapse_selection", "normal_mode"]
+
+[keys.normal]
+C-q = ":quit"
+tab = ":buffer-next"
+S-tab = ":buffer-previous"
+X = ["extend_line_up", "extend_to_line_bounds"]
+#like c-d in vscode
+"C-n" = [
+  "move_prev_word_start",
+  "move_next_word_end",
+  "search_selection",
+  "extend_search_next",
+]
+# "*" = ["move_prev_word_start", "move_next_word_end", "search_selection"]
+C-g = [":new", ":insert-output lazygit", ":buffer-close!", ":redraw"]
+C-r = [":new", ":insert-output serpl", ":buffer-close!", ":redraw"]
+
+
+[keys.normal.space]
+"F" = "file_picker_in_current_buffer_directory"
+q = ":q"
+x = ":bc"
+"," = ":w"
+"!" = ":q!"
+o = ":reload-all"
+# Toggle
+t = { h = ":toggle file-picker.hidden", f = ":toggle auto-format", i = ":toggle lsp.display-inlay-hints" ,z = ":toggle gutters.line-numbers.min-width 48 3"}
