@@ -1,17 +1,12 @@
 # Taps
-tap "homebrew/cask"
 tap "epk/epk"
 tap "arl/arl"
-tap "homebrew/cask-versions"
-tap "homebrew/bundle"
-tap "homebrew/core"
 tap "jesseduffield/lazygit"
 
 # Binaries
 brew "bash" # Latest Bash version
 brew "coreutils" # Those that come with macOS are outdated
 brew "fzf"
-brew "borders"
 brew "thefuck"
 brew "chafa"
 brew "tldr"
@@ -30,7 +25,6 @@ brew "tmux"
 brew "gitmux"
 brew "ripgrep"
 brew "pandoc"
-brew "starship"
 brew "wget"
 brew "choose"
 brew "yarn"
@@ -52,12 +46,10 @@ brew "nginx"
 brew "yarn"
 
 # Apps
-cask "docker"
 cask "appcleaner"
-cask "the-unarchiver"
 cask "transmission"
 cask "raycast"
 cask "mouse-fix"
-cask "oh-my-posh"
 cask "karabiner-elements"
 cask "nikitabobko/tap/aerospace"
+cask "ace-link"

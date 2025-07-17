@@ -35,7 +35,7 @@ export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
 # Left-pad command output with 2 spaces
 precmd() {
   tput cuf 2  # Adds 2 spaces before each command output
-} 
+}
 
 precmd()
 
@@ -154,7 +154,7 @@ fd() {
   cd "$dir"
 }
 
-function prs { 
+function prs {
   GH_FORCE_TTY=100% gh pr list --limit 300 |
   fzf --ansi --preview 'GH_FORCE_TTY=100% gh pr view --comments {1}' --preview-window 'down,70%' --header-lines 3 |
   awk '{print $1}' |
@@ -191,10 +191,10 @@ alias ll="eza --icons --group-directories-first -l -T"
 alias c="clear"
 alias kp="ps aux | fzf | awk '{print \$2}' | xargs kill"
 alias delds="find . -name ".DS_Store" -type f -delete"
-alias mv='mv -i'            
-alias rm='rm -i'            
-alias cp='cp -i'            
-alias mkdir='mkdir -pv'     
+alias mv='mv -i'
+alias rm='rm -i'
+alias cp='cp -i'
+alias mkdir='mkdir -pv'
 alias path='echo -e ${PATH//:/\\n} | less'
 
 export HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND="bg=white,fg=black,bold"

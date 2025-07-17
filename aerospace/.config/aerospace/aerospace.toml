@@ -7,20 +7,6 @@ after-startup-command = [
   'exec-and-forget open -a Ghostty & open -a Microsoft\ Teams & open -a Chromium',
   'exec-and-forget /opt/homebrew/bin/sketchybar',
 ]
-  const [isOpen, setIsOpen] = useState(false);
-  const [showLoginForm, setShowLoginForm] = useState(false);
-  const [showAccountDropDown, setShowAccountDropDown] = useState(false);
-  // eslint-disable-next-line no-unused-vars
-  const [showAccountRequestForm, setShowAccountRequestForm] = useState(false);
-  const { t } = useTranslation();
-
-    const [isOpen, setIsOpen] = useState(false);
-    const [showLoginForm, setShowLoginForm] = useState(false);
-    const [showForgottenPasswordForm, setShowForgottenPasswordForm] = useState(false);
-    const [showAccountDropDown, setShowAccountDropDown] = useState(false);
-    // eslint-disable-next-line no-unused-vars
-    const [showAccountRequestForm, setShowAccountRequestForm] = useState(false);
-    const {t} = useTranslation();
 
 # Notify Sketchybar about workspace change
 exec-on-workspace-change = [
@@ -109,6 +95,12 @@ alt-shift-z = ['move-node-to-workspace Z', 'workspace Z']
 
 alt-shift-f = 'fullscreen'
 
+alt-f = [
+  'layout floating tiling',
+  'mode main',
+] # Toggle between floating and tiling layout
+
+
 # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
 alt-tab = 'workspace-back-and-forth'
 # See: https://nikitabobko.github.io/AeroSpace/commands#move-workspace-to-monitor
@@ -137,10 +129,6 @@ equal = 'resize smart +50'
 esc = ['reload-config', 'mode main']
 r = ['flatten-workspace-tree', 'mode main'] # reset layout
 #s = ['layout sticky tiling', 'mode main'] # sticky is not yet supported https://github.com/nikitabobko/AeroSpace/issues/2
-f = [
-  'layout floating tiling',
-  'mode main',
-] # Toggle between floating and tiling layout
 
 backspace = ['close-all-windows-but-current', 'mode main']
 
