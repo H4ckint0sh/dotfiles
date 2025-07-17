@@ -182,8 +182,8 @@ alias gu='git pull'
 # OTHER ALIASES----------------------------------------------------------------
 alias v='nvim'
 alias lg="lazygit"
-alias ls="eza --icons --group-directories-first"
-alias ll="eza --icons --group-directories-first -l"
+alias ls="eza --icons --group-directories-first -1 -T"
+alias ll="eza --icons --group-directories-first -l -T"
 alias c="clear"
 alias kp="ps aux | fzf | awk '{print \$2}' | xargs kill"
 alias delds="find . -name ".DS_Store" -type f -delete"
