@@ -1,4 +1,3 @@
-local explorer = require("plugins.snacks.explorer")
 return {
 	"folke/snacks.nvim",
 	dependencies = {
@@ -48,12 +47,7 @@ return {
 			icon = "",
 		},
 		styles = {
-			notification = {
-				wo = {
-					winblend = 0,
-				},
-			},
-			lazygit = {
+					lazygit = {
 				width = 0,
 				height = 0,
 			},

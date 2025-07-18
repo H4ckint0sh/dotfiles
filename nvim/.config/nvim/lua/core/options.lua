@@ -66,3 +66,14 @@ end
 for k, v in pairs(globals) do
 	vim.g[k] = v
 end
+
+-- Disable unused providers
+vim.g.loaded_python3_provider = 0
+vim.g.loaded_ruby_provider = 0
+vim.g.loaded_node_provider = 0
+vim.g.loaded_perl_provider = 0
+
+-- Disable unused plugins
+vim.g.loaded_gzip = 0
+vim.g.loaded_tar = 0
+vim.g.loaded_tutor = 0

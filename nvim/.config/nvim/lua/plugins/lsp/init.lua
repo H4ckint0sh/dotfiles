@@ -146,8 +146,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
 return {
 	{
 		"neovim/nvim-lspconfig",
+		event = "LspAttach",
 		dependencies = {
-			"mason-org/mason.nvim",
+			{ "mason-org/mason.nvim", cmd = "Mason" },
 			"mason-org/mason-lspconfig.nvim",
 			"WhoIsSethDaniel/mason-tool-installer.nvim",
 		},

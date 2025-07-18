@@ -2,8 +2,8 @@
 return {
 	-- https://github.com/tokyonight/nvim
 	"folke/tokyonight.nvim",
-	lazy = false,
-	priority = 1000,
+	lazy = false, -- still load early, but could try lazy-loading
+	priority = 1000, -- make sure it loads first
 	opts = {
 		style = "storm", -- The theme comes in three styles, `storm`, a darker variant `night` and
 		transparent = true, -- Enable this to disable setting the background color.
@@ -29,6 +29,8 @@ return {
 			-- Neogit
 			H.NeogitSectionHeader = { fg = C.magenta }
 
+			H.WinSeparator = { fg = C.comment, bg = "NONE" }
+
 			-- Float
 			H.FloatBorder = { fg = C.comment, bg = "NONE" }
 
@@ -37,6 +39,11 @@ return {
 
 			-- Barbecue
 			H.WinBar = { fg = C.fg, bg = "NONE" }
+
+			-- Inlay Hints
+			H.InlayHintsNormal = { fg = C.comment, bg = "NONE" }
+			H.LspInlayHint = { fg = C.comment, bg = "NONE" }
+			H.TreesitterInlayHint = { fg = C.comment, bg = "NONE" }
 		end,
 	},
 	config = function(_, opts)
