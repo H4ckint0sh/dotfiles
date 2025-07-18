@@ -18,6 +18,7 @@ return {
 				},
 			})
 			require("mini.surround").setup()
+			require("mini.diff").setup()
 		end,
 	},
 }

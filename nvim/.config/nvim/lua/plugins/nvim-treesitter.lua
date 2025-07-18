@@ -29,6 +29,7 @@ return {
 					"json5",
 					"lua",
 					"markdown",
+					"markdown_inline",
 					"prisma",
 					"glimmer",
 					"regex",
