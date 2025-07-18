@@ -192,6 +192,7 @@ return {
 				automatic_enable = {
 					exclude = {
 						"ts_ls",
+						"emmet_language_server",
 					},
 				},
 			})
@@ -204,6 +205,8 @@ return {
 					"roslyn",
 				},
 			})
+			-- Emmet language server requires this
+			require("lspconfig").emmet_language_server.setup({})
 		end,
 	},
 	{
