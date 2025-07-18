@@ -2,6 +2,9 @@
 
 This is my dotfiles for MacOS.
 
+> [!WARNING]
+> This has only been tested on MacOS.
+
 ![Ghostty](screenshots/Screenshot.png)
 
 ## Setup
