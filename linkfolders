@@ -1,6 +1,6 @@
 #! /bin/sh
 if [[ -z $STOW_FOLDERS ]]; then
-    STOW_FOLDERS="ghostty,exported-defaults,ssh,lazygit,aerospace,tmux,zsh,ohmyposh,sketchybar,eza,gitmux,git,bin,sesh,nvim,karabiner,bat,bash"
+    STOW_FOLDERS="ghostty,exported-defaults,ssh,lazygit,aerospace,tmux,zsh,ohmyposh,eza,gitmux,git,bin,sesh,nvim,karabiner,bat,bash"
 fi
 
 if [[ -z $DOTFILES ]]; then

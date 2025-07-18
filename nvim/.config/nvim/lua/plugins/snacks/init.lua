@@ -20,7 +20,7 @@ return {
 		},
 		quickfile = { enabled = true },
 		statuscolumn = {
-			left = { "mark", "sign", "git" },
+			left = { "git" },
 			right = { "fold" },
 			folds = {
 				open = true,

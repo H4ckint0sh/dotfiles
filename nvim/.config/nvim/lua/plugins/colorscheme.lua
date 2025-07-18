@@ -6,7 +6,7 @@ return {
 	priority = 1000,
 	opts = {
 		style = "storm", -- The theme comes in three styles, `storm`, a darker variant `night` and
-		transparent = false, -- Enable this to disable setting the background color.
+		transparent = true, -- Enable this to disable setting the background color.
 		terminal_colors = true, -- Configure the colors used when opening a `:terminal` in Neovim.
 		dim_inactive = false, -- dim inactive windows
 		styles = {
@@ -17,26 +17,14 @@ return {
 			conditionals = { italic = true },
 			functions = {},
 			variables = {},
-			-- Background styles. Can be "dark", "transparent" or "normal"
-			sidebars = "normal", -- style for sidebars, see below
-			floats = "normal", -- style for floating windows
+			sidebars = "transparent",
+			floats = "transparent",
 		},
 		on_highlights = function(H, C)
 			-- Native
 			H["@keyword.import"] = { fg = C.purple, italic = true }
 			H["@tag.tsx"] = { fg = C.blue2 }
 			H["@tag.builtin.tsx"] = { fg = C.cyan }
-			--
-			-- H.CursorLine = { bg = C.bg_highlight }
-			-- H.CursorLineNr = { fg = C.orange }
-			-- H.LspInlayHint = { bg = "NONE", fg = C.comment }
-			-- H.GitSignsCurrentLineBlame = { fg = C.comment }
-			-- H.DiagnosticVirtualTextError = { bg = "NONE", fg = C.red }
-			-- H.DiagnosticVirtualTextHint = { bg = "NONE", fg = C.teal }
-			-- H.DiagnosticVirtualTextInfo = { bg = "NONE", fg = C.green }
-			-- H.DiagnosticVirtualTextWarn = { bg = "NONE", fg = C.yellow }
-			-- H.WinSeparator = { fg = C.comment, bg = "NONE" }
-			-- H.TroubleNormal = { bg = "NONE", fg = C.fg }
 
 			-- Neogit
 			H.NeogitSectionHeader = { fg = C.magenta }
@@ -48,7 +36,7 @@ return {
 			H.SnacksDashboardHeader = { fg = C.green }
 
 			-- Barbecue
-			H.WinBar = { fg = C.fg, bg = C.bg }
+			H.WinBar = { fg = C.fg, bg = "NONE" }
 		end,
 	},
 	config = function(_, opts)
