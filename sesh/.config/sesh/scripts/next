@@ -4,6 +4,3 @@ tmux send-keys 'nvim' Enter
 tmux new-window -c "#{session_path}"
 tmux send-keys 'npm run dev' Enter
 tmux select-window -p
-
-
-
