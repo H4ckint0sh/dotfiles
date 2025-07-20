@@ -4,7 +4,6 @@ return {
 		"nvim-tree/nvim-web-devicons",
 	},
 	priority = 1000,
-	lazy = false,
 	opts = {
 		bigfile = {
 			enabled = true,
@@ -47,8 +46,8 @@ return {
 			icon = "",
 		},
 		styles = {
-					lazygit = {
-				width = 0,
+			lazygit = {
+
 				height = 0,
 			},
 			input = {
