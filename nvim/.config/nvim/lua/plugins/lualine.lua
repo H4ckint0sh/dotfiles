@@ -23,8 +23,8 @@ return {
 		sections = {
 			lualine_a = { sources.mode },
 			lualine_b = { sources.branch, sources.diff },
-			lualine_c = { sources.filetype, sources.macro },
-			lualine_x = { sources.lsp_formater_linter, sources.diagnostics },
+			lualine_c = { sources.fullpath, sources.macro },
+			lualine_x = { sources.diagnostics },
 			lualine_y = { sources.indentation, sources.encoding, sources.fileformat },
 			lualine_z = { sources.progress, sources.location },
 		},

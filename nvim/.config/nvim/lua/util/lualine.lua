@@ -154,39 +154,6 @@ M.gap = {
 	padding = 0,
 }
 
--- Function to get the width of the NvimTree window
-M.nvim_tree_width = function()
-	for _, win in ipairs(vim.api.nvim_list_wins()) do
-		local buf = vim.api.nvim_win_get_buf(win)
-		local filetype = vim.bo[buf].filetype
-		if filetype == "NvimTree" then
-			return vim.api.nvim_win_get_width(win)
-		end
-	end
-	return 0
-end
-
--- Custom lualine component to display NvimTree text with icon centered
-M.custom_nvimtree_component = function()
-	local tree_open = false
-	for _, win in ipairs(vim.api.nvim_list_wins()) do
-		local buf = vim.api.nvim_win_get_buf(win)
-		local filetype = vim.bo[buf].filetype
-		if filetype == "NvimTree" then
-			tree_open = true
-			break
-		end
-	end
-
-	if tree_open then
-		local width = M.nvim_tree_width() -- Get the width of NvimTree
-
-		-- Center the content
-		return string.rep(" ", width - 1)
-	end
-	return ""
-end
-
 M.macro = {
 	function()
 		return vim.fn.reg_recording()
@@ -198,14 +165,40 @@ M.macro = {
 	end,
 }
 
-M.filetree = {
+M.fullpath = {
 	function()
-		return M.custom_nvimtree_component()
+		-- Configuration
+		local max_length = 40 -- Maximum length before truncation
+		local truncation_marker = " 󰇘  " -- Character to show truncation
+
+		-- Get full file path
+		local path = vim.fn.expand("%:p")
+
+		-- Shorten home directory path if on Unix-like system
+		if vim.fn.has("unix") == 1 then
+			local shortened = vim.fn.fnamemodify(path, ":~")
+			if shortened ~= path then -- Only if modification happened
+				path = shortened
+			end
+		end
+
+		-- Truncate path if too long (keeping beginning and end)
+		if #path > max_length then
+			local keep_start = math.floor(max_length * 0.6) -- 60% of space for start
+			local keep_end = max_length - keep_start - 1 -- Remaining for end (minus 1 for trunc marker)
+
+			local start_part = path:sub(1, keep_start)
+			local end_part = path:sub(-keep_end)
+
+			path = start_part .. truncation_marker .. end_part
+		end
+
+		return path
 	end,
-	separator = { left = "", right = "" },
 	color = function()
-		return { fg = colors.fg, bg = colors.bg }
+		return { fg = colors.blue, bg = colors.bg_highlight }
 	end,
+	separator = { right = "", left = "" },
 }
 
 return M
