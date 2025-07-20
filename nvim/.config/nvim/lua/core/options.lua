@@ -7,7 +7,7 @@ local options = {
 	ignorecase = true, --- Needed for smart case
 	laststatus = 3, --- Have a global status line at the bottom instead of one for each window
 	mouse = "a", --- Enable mouse
-	number = true, --- Shows current line number
+	number = false, --- Shows current line number
 	pumheight = 15, --- Max num of items in completion menu
 	relativenumber = true, --- Enables relative number
 	scrolloff = 8, --- Always keep space when scrolling to bottom/top edge
@@ -66,14 +66,3 @@ end
 for k, v in pairs(globals) do
 	vim.g[k] = v
 end
-
--- Disable unused providers
-vim.g.loaded_python3_provider = 0
-vim.g.loaded_ruby_provider = 0
-vim.g.loaded_node_provider = 0
-vim.g.loaded_perl_provider = 0
-
--- Disable unused plugins
-vim.g.loaded_gzip = 0
-vim.g.loaded_tar = 0
-vim.g.loaded_tutor = 0
