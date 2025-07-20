@@ -11,8 +11,8 @@ end, {})
 vim.api.nvim_create_autocmd("LspAttach", {
 	group = au,
 	desc = "LSP tagfunc",
-	callback = function(args)
-		local bufnr = args.buf
+	callback = function(attach_args)
+		local bufnr = attach_args.buf
 		vim.api.nvim_set_option_value("tagfunc", "v:lua.vim.lsp.tagfunc", { buf = bufnr })
 	end,
 })
@@ -20,9 +20,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
 vim.api.nvim_create_autocmd("LspAttach", {
 	group = au,
 	desc = "LSP inlay hints",
-	callback = function(args)
-		local bufnr = args.buf
-		local client = vim.lsp.get_client_by_id(args.data.client_id)
+	callback = function(attach_args)
+		local bufnr = attach_args.buf
+		local client = vim.lsp.get_client_by_id(attach_args.data.client_id)
 		if client and client:supports_method("textDocument/inlayHint") then
 			Snacks.notify("registered inlay hints", {
 				level = vim.log.levels.DEBUG,
@@ -41,10 +41,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
 			})
 			vim.api.nvim_create_autocmd("ModeChanged", {
 				buffer = bufnr,
-				callback = function(args)
-					local _, new_mode = unpack(vim.split(args.match, ":"))
+				callback = function(mode_args)
+					local split_result = vim.split(mode_args.match, ":")
+					local _, new_mode = split_result[1], split_result[2]
 					if
-
 						vim.tbl_contains({ "i", "v", "V", "\22", "R" }, new_mode)
 						and vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr })
 					then
@@ -64,10 +64,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
 vim.api.nvim_create_autocmd("LspAttach", {
 	group = au,
 	desc = "LSP notify",
-	callback = function(args)
-		local client = vim.lsp.get_client_by_id(args.data.client_id)
+	callback = function(attach_args)
+		local client = vim.lsp.get_client_by_id(attach_args.data.client_id)
 		if client then
-			Snacks.notify(("attached to buffer %i"):format(args.buf), {
+			Snacks.notify(("attached to buffer %i"):format(attach_args.buf), {
 				level = vim.log.levels.DEBUG,
 				title = "LSP: " .. client.name,
 			})
@@ -122,25 +122,37 @@ end
 
 vim.opt.foldtext = "v:lua.custom_foldtext()"
 
--- Auto-close imports on open
-vim.api.nvim_create_autocmd("LspNotify", {
-	callback = function(args)
-		if args.data.method == "textDocument/didOpen" then
-			vim.lsp.foldclose("imports", vim.fn.bufwinid(args.buf))
-			vim.lsp.foldclose("comment", vim.fn.bufwinid(args.buf))
+vim.api.nvim_create_autocmd("LspAttach", {
+	callback = function(attach_args)
+		local client = vim.lsp.get_client_by_id(attach_args.data.client_id)
+		if client and client:supports_method("textDocument/foldingRange") then
+			local bufnr = attach_args.buf
+			-- Set foldmethod and foldexpr for all windows displaying the buffer
+			for _, winid in ipairs(vim.api.nvim_list_wins()) do
+				if vim.api.nvim_win_get_buf(winid) == bufnr then
+					vim.api.nvim_set_option_value("foldmethod", "expr", { win = winid })
+					vim.api.nvim_set_option_value("foldexpr", "v:lua.vim.lsp.foldexpr()", { win = winid })
+
+					-- Defer the automatic fold closing to ensure LSP has time to provide folding ranges
+					vim.defer_fn(function()
+						-- Check if the buffer is still valid and has LSP client attached
+						if
+							vim.api.nvim_buf_is_valid(bufnr)
+							and vim.lsp.buf_is_attached(bufnr, attach_args.data.client_id)
+						then
+							vim.lsp.foldclose("imports", winid)
+							vim.lsp.foldclose("comment", winid)
+						end
+					end, 100) -- 100ms delay
+				end
+			end
 		end
 	end,
 })
 
-vim.api.nvim_create_autocmd("LspAttach", {
-	callback = function(args)
-		local client = vim.lsp.get_client_by_id(args.data.client_id)
-		if client and client:supports_method("textDocument/foldingRange") then
-			local win = vim.api.nvim_get_current_win()
-			vim.wo[win][0].foldmethod = "expr"
-			vim.wo[win][0].foldexpr = "v:lua.vim.lsp.foldexpr()"
-		end
-	end,
+vim.api.nvim_create_autocmd("LspDetach", {
+	command = "setl foldexpr<",
+	group = au,
 })
 
 return {
