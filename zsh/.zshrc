@@ -234,6 +234,11 @@ _omp_redraw-prompt() {
   zle .reset-prompt
 }
 
+function zshaddhistory() {
+  emulate -L zsh
+  [[ $1 != *gallery-dl* ]]
+}
+
 export POSH_VI_MODE="I"
 
 function zvm_after_select_vi_mode() {

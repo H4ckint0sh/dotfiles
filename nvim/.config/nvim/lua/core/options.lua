@@ -22,6 +22,7 @@ local options = {
 	smarttab = false, --- Makes tabbing smarter will realize you have 4 vs 4
 	softtabstop = 4, --- Insert 4 spaces for a tab
 	splitright = true, --- Vertical splits will automatically be to the right
+	winborder = "rounded", --- Borders for windows
 	tabstop = 4, --- Insert 4 spaces for a tab
 	termguicolors = true, --- Correct terminal colors
 	viminfo = "'1000", --- Increase the size of file history
