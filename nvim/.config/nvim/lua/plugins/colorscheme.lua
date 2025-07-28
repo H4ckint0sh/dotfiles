@@ -1,54 +1,73 @@
--- tokyonight Theme
 return {
-	-- https://github.com/tokyonight/nvim
-	"folke/tokyonight.nvim",
-	lazy = false, -- still load early, but could try lazy-loading
-	priority = 1000, -- make sure it loads first
-	opts = {
-		style = "storm", -- The theme comes in three styles, `storm`, a darker variant `night` and
-		transparent = true, -- Enable this to disable setting the background color.
-		terminal_colors = true, -- Configure the colors used when opening a `:terminal` in Neovim.
-		dim_inactive = false, -- dim inactive windows
-		styles = {
-			-- Style to be applied to different syntax groups
-			-- Value is any valid attr-list value for `:help nvim_set_hl`
-			comments = { italic = true },
-			keywords = { italic = true },
-			conditionals = { italic = true },
-			functions = {},
-			variables = {},
-			sidebars = "transparent",
-			floats = "transparent",
-		},
-		on_highlights = function(H, C)
-			-- Native
-			H["@keyword.import"] = { fg = C.purple, italic = true }
-			H["@tag.tsx"] = { fg = C.blue2 }
-			H["@tag.builtin.tsx"] = { fg = C.cyan }
+	"H4ckint0sh/nord.nvim",
+	priority = 1000,
+	lazy = false,
+	config = function()
+		require("nord").setup({
+			transparent = true,
+			errors = { mode = "fg" },
+			styles = {
+				-- Style to be applied to different syntax groups
+				-- Value is any valid attr-list value for `:help nvim_set_hl`
+				comments = { italic = true },
+				keywords = { italic = true },
+				constants = { italic = true },
+				functions = {},
+				variables = {},
 
-			-- Neogit
-			H.NeogitSectionHeader = { fg = C.magenta }
+				-- To customize lualine/bufferline
+				bufferline = {
+					current = {},
+					modified = { italic = true },
+				},
+			},
+			on_highlights = function(highlights, colors)
+				highlights["@tag.builtin.tsx"] = {
+					fg = colors.aurora.orange,
+				}
+				highlights["SnacksDashboardHeader"] = {
+					fg = colors.aurora.green,
+				}
+				highlights["SnacksDashboardFooter"] = {
+					fg = colors.frost.artic_water,
+				}
+				highlights["Special"] = {
+					fg = colors.frost.ice,
+				}
+				highlights["Pmenu"] = {
+					bg = colors.polar_night.origin,
+				}
+				highlights["BlinkCmpMenuBorder"] = {
+					fg = colors.frost.ice,
+				}
+				highlights["IncSearch"] = {
+					fg = colors.frost.ice,
+				}
+				highlights["NeogitGraphBoldGray"] = {
+					bold = false,
+				}
+				highlights["NeogitGraphBlue"] = {
+					bold = false,
+				}
+				highlights["NeogitGraphCyan"] = {
+					bold = false,
+				}
+				highlights["NeogitGraphGreen"] = {
+					bold = false,
+				}
+				highlights["NeogitGraphYellow"] = {
+					bold = false,
+				}
 
-			H.WinSeparator = { fg = C.comment, bg = "NONE" }
-
-			-- Float
-			H.FloatBorder = { fg = C.comment, bg = "NONE" }
-
-			-- Snacks
-			H.SnacksDashboardHeader = { fg = C.green }
-
-			-- Barbecue
-			H.WinBar = { fg = C.fg, bg = "NONE" }
-
-			-- Inlay Hints
-			H.InlayHintsNormal = { fg = C.comment, bg = "NONE" }
-			H.LspInlayHint = { fg = C.comment, bg = "NONE" }
-			H.TreesitterInlayHint = { fg = C.comment, bg = "NONE" }
-		end,
-	},
-	config = function(_, opts)
-		require("tokyonight").setup(opts) -- Replace this with your favorite colorscheme
-		vim.cmd("colorscheme tokyonight") -- Replace this with your favorite colorscheme
+				highlights["NeogitGraphWhite"] = {
+					bold = false,
+				}
+				highlights["NeogitGraphOrange"] = {
+					bold = false,
+				}
+			end,
+		})
+		vim.cmd.colorscheme("nord")
 		vim.api.nvim_set_hl(0, "SnacksPickerDir", { link = "Text" })
 		vim.api.nvim_set_hl(0, "SnacksPickerPathHidden", { link = "Text" })
 		vim.api.nvim_set_hl(0, "SnacksPickerPathIgnored", { link = "Comment" })

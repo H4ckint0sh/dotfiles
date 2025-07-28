@@ -1,6 +1,6 @@
 local icons = require("util.icons").icons
 ---@diagnostic disable-next-line: missing-fields
-local colors = require("tokyonight.colors").setup({ style = "storm" })
+local palette = require("nord.colors").palette
 local M = {}
 
 M.mode = {
@@ -24,19 +24,19 @@ M.mode = {
 	color = function()
 		local mode = vim.fn.mode()
 		local map = {
-			n = colors.blue,
-			i = colors.green,
-			c = colors.yellow,
-			t = colors.cyan,
-			R = colors.red,
-			v = colors.magenta,
-			V = colors.magenta,
-			s = colors.magenta,
-			S = colors.magenta,
+			n = palette.frost.artic_water,
+			i = palette.aurora.green,
+			c = palette.aurora.yellow,
+			t = palette.frost.ice,
+			R = palette.aurora.red,
+			v = palette.aurora.purple,
+			V = palette.aurora.purple,
+			s = palette.aurora.purple,
+			S = palette.aurora.purple,
 		}
 		return {
-			bg = map[mode] or colors.magenta,
-			fg = colors.bg_dark,
+			bg = map[mode] or palette.aurora.purple,
+			fg = palette.polar_night.origin,
 		}
 	end,
 	separator = { right = "", left = "░▒▓" },
@@ -45,7 +45,7 @@ M.mode = {
 M.filetype = {
 	"filetype",
 	color = function()
-		return { fg = colors.blue, bg = colors.bg_highlight }
+		return { fg = palette.frost.artic_water, bg = palette.polar_night.bright }
 	end,
 	separator = { right = "", left = "" },
 }
@@ -53,7 +53,7 @@ M.filetype = {
 M.diagnostics = {
 	"diagnostics",
 	color = function()
-		return { bg = colors.bg_highlight }
+		return { bg = palette.polar_night.bright }
 	end,
 	separator = { right = "", left = "" },
 }
@@ -61,14 +61,14 @@ M.diagnostics = {
 M.encoding = {
 	"encoding",
 	color = function()
-		return { fg = colors.blue, bg = colors.bg_highlight }
+		return { fg = palette.frost.artic_water, bg = palette.polar_night.bright }
 	end,
 }
 
 M.fileformat = {
 	"fileformat",
 	color = function()
-		return { fg = colors.blue, bg = colors.bg_highlight }
+		return { fg = palette.frost.artic_water, bg = palette.polar_night.bright }
 	end,
 }
 
@@ -80,7 +80,7 @@ M.indentation = {
 		return type .. ": " .. value
 	end,
 	color = function()
-		return { fg = colors.blue, bg = colors.bg_highlight }
+		return { fg = palette.frost.artic_water, bg = palette.polar_night.bright }
 	end,
 }
 
@@ -90,7 +90,7 @@ M.progress = {
 		return vim.trim(location)
 	end,
 	color = function()
-		return { fg = colors.black, bg = colors.fg }
+		return { fg = palette.polar_night.origin, bg = palette.snow_storm.origin }
 	end,
 }
 
@@ -100,7 +100,7 @@ M.location = {
 		return vim.trim(location)
 	end,
 	color = function()
-		return { fg = colors.black, bg = colors.fg }
+		return { fg = palette.polar_night.origin, bg = palette.snow_storm.origin }
 	end,
 }
 
@@ -111,7 +111,7 @@ M.macro = {
 	icon = icons.Recording,
 	separator = { left = "", right = "" },
 	color = function()
-		return { fg = colors.magenta, bg = colors.bg_dark }
+		return { fg = palette.aurora.purple, bg = palette.polar_night.origin }
 	end,
 }
 
@@ -132,6 +132,35 @@ M.lsp_formater_linter = {
 			buf_client_names[num_client_names] = client.name
 		end
 
+		-- Add linters for the current filetype (nvim-lint)
+		-- local lint_success, lint = pcall(require, "lint")
+		-- if lint_success then
+		-- 	for ft, ft_linters in pairs(lint.linters_by_ft) do
+		-- 		if ft == buf_ft then
+		-- 			if type(ft_linters) == "table" then
+		-- 				for _, linter in pairs(ft_linters) do
+		-- 					num_client_names = num_client_names + 1
+		-- 					buf_client_names[num_client_names] = linter
+		-- 				end
+		-- 			else
+		-- 				num_client_names = num_client_names + 1
+		-- 				buf_client_names[num_client_names] = ft_linters
+		-- 			end
+		-- 		end
+		-- 	end
+		-- end
+		--
+		-- -- Add formatters (conform.nvim)
+		-- local conform_success, conform = pcall(require, "conform")
+		-- if conform_success then
+		-- 	for _, formatter in pairs(conform.list_formatters_for_buffer(0)) do
+		-- 		if formatter then
+		-- 			num_client_names = num_client_names + 1
+		-- 			buf_client_names[num_client_names] = formatter
+		-- 		end
+		-- 	end
+		-- end
+
 		local client_names_str = table.concat(buf_client_names, ", ")
 		local language_servers = string.format("[%s]", client_names_str)
 
@@ -140,7 +169,7 @@ M.lsp_formater_linter = {
 	icon = icons.Braces,
 	separator = { right = "", left = "" },
 	color = function()
-		return { fg = colors.fg, bg = colors.bg_highlight }
+		return { fg = palette.snow_storm.origin, bg = palette.polar_night.origin }
 	end,
 }
 
@@ -149,10 +178,43 @@ M.gap = {
 		return " "
 	end,
 	color = function()
-		return { bg = colors.bg_highlight }
+		return { bg = palette.polar_night.bright }
 	end,
 	padding = 0,
 }
+
+-- Function to get the width of the NvimTree window
+M.nvim_tree_width = function()
+	for _, win in ipairs(vim.api.nvim_list_wins()) do
+		local buf = vim.api.nvim_win_get_buf(win)
+		local filetype = vim.bo[buf].filetype
+		if filetype == "NvimTree" then
+			return vim.api.nvim_win_get_width(win)
+		end
+	end
+	return 0
+end
+
+-- Custom lualine component to display NvimTree text with icon centered
+M.custom_nvimtree_component = function()
+	local tree_open = false
+	for _, win in ipairs(vim.api.nvim_list_wins()) do
+		local buf = vim.api.nvim_win_get_buf(win)
+		local filetype = vim.bo[buf].filetype
+		if filetype == "NvimTree" then
+			tree_open = true
+			break
+		end
+	end
+
+	if tree_open then
+		local width = M.nvim_tree_width() -- Get the width of NvimTree
+
+		-- Center the content
+		return string.rep(" ", width - 1)
+	end
+	return ""
+end
 
 M.macro = {
 	function()
@@ -161,44 +223,18 @@ M.macro = {
 	icon = icons.Recording,
 	separator = { left = "", right = "" },
 	color = function()
-		return { fg = colors.magenta, bg = colors.bg }
+		return { fg = palette.aurora.purple, bg = palette.polar_night.origin }
 	end,
 }
 
-M.fullpath = {
+M.filetree = {
 	function()
-		-- Configuration
-		local max_length = 40 -- Maximum length before truncation
-		local truncation_marker = " 󰇘  " -- Character to show truncation
-
-		-- Get full file path
-		local path = vim.fn.expand("%:p")
-
-		-- Shorten home directory path if on Unix-like system
-		if vim.fn.has("unix") == 1 then
-			local shortened = vim.fn.fnamemodify(path, ":~")
-			if shortened ~= path then -- Only if modification happened
-				path = shortened
-			end
-		end
-
-		-- Truncate path if too long (keeping beginning and end)
-		if #path > max_length then
-			local keep_start = math.floor(max_length * 0.6) -- 60% of space for start
-			local keep_end = max_length - keep_start - 1 -- Remaining for end (minus 1 for trunc marker)
-
-			local start_part = path:sub(1, keep_start)
-			local end_part = path:sub(-keep_end)
-
-			path = start_part .. truncation_marker .. end_part
-		end
-
-		return path
+		return M.custom_nvimtree_component()
 	end,
+	separator = { left = "", right = "" },
 	color = function()
-		return { fg = colors.blue, bg = colors.bg_highlight }
+		return { fg = palette.snow_storm.origin, bg = palette.polar_night.origin }
 	end,
-	separator = { right = "", left = "" },
 }
 
 return M

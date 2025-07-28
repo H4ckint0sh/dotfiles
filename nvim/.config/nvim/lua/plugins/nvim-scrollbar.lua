@@ -1,5 +1,5 @@
 ---@diagnostic disable-next-line: missing-fields
-local colors = require("tokyonight.colors").setup({ style = "storm" })
+local palette = require("nord.colors").palette
 
 return {
 	"petertriho/nvim-scrollbar",
@@ -15,19 +15,19 @@ return {
 			handle = {
 				text = " ",
 				blend = 0,
-				color = colors.bg_highlight,
+				color = palette.polar_night.bright,
 				hide_if_all_visible = true, -- Hides handle if all lines are visible
 			},
 			marks = {
 				Cursor = {
 					text = "",
 					priority = 0,
-					color = colors.orange,
+					color = palette.aurora.orange,
 				},
 				Search = {
 					text = { "󰿟", "󰿟" },
 					priority = 1,
-					color = colors.bg_search,
+					color = palette.frost.polar_water,
 				},
 				Error = {
 					text = { "-", "=" },

@@ -15,21 +15,21 @@ export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
       --info=inline-right \
       --ansi \
       --layout=reverse \
-      --color=fg:#565f89 \
-      --color=fg+:#c0caf5 \
-      --color=bg:#24283b \
-      --color=bg+:#24283b
-      --color=hl:#3d59a1 \
-      --color=hl+:#7aa2f7 \
-      --color=info:#7aa2f7 \
-      --color=marker:#87ff00 \
-      --color=prompt:#ff007c \
-      --color=spinner:#bb9af7 \
-      --color=pointer:#bb9af7 \
-      --color=header:#ff9e64 \
-      --color=border:#565f89 \
-      --color=label:#c0caf5 \
-      --color=query:#d9d9d9 \
+      --color=fg:#616E88 \
+      --color=fg+:#D8DEE9 \
+      --color=bg:#2E3440 \
+      --color=bg+:#2E3440
+      --color=hl:#5E81AC \
+      --color=hl+:#81A1C1 \
+      --color=info:#81A1C1 \
+      --color=marker:#B48EAD \
+      --color=prompt:#B48EAD \
+      --color=spinner:#B48EAD \
+      --color=pointer:#B48EAD \
+      --color=header:#D08770 \
+      --color=border:#616E88 \
+      --color=label:#D8DEE9 \
+      --color=query:#E5E9F0 \
 "
 
 # Left-pad command output with 2 spaces
