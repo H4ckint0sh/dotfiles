@@ -192,7 +192,7 @@ return {
 					"graphql",
 					"html",
 					"jsonls",
-					"lua_ls",
+					"emmylua_ls",
 					"zls",
 					"ember",
 					"prismals",
