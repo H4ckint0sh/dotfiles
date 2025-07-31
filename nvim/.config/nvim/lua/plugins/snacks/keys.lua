@@ -53,6 +53,7 @@ return {
             -- layout = "ivy",
           }) end, desc = "Buffers" },
 		{ "<leader>fc", function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end, desc = "Find Config File" },
+		{ "<leader>hl", function() Snacks.picker.highlights({pattern = "hl_group:^Snacks"}) end, desc = "Find Git Files" },
 		{ "<leader>fg", function() Snacks.picker.git_files() end, desc = "Find Git Files" },
 		{ "<leader>fh", function() Snacks.picker.recent({ hidden = true, filter = { cwd = true } }) end, desc = "Recent", },
 		-- git

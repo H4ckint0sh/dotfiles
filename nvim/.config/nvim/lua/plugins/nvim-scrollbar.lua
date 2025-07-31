@@ -22,7 +22,7 @@ return {
 				Cursor = {
 					text = "",
 					priority = 0,
-					color = palette.aurora.orange,
+					color = palette.snow_storm.origin,
 				},
 				Search = {
 					text = { "󰿟", "󰿟" },

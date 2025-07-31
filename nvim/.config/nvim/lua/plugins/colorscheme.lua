@@ -23,7 +23,7 @@ return {
 			},
 			on_highlights = function(highlights, colors)
 				highlights["@tag.builtin.tsx"] = {
-					fg = colors.aurora.orange,
+					fg = colors.aurora.purple,
 				}
 				highlights["SnacksDashboardHeader"] = {
 					fg = colors.aurora.green,
@@ -58,20 +58,23 @@ return {
 				highlights["NeogitGraphYellow"] = {
 					bold = false,
 				}
-
 				highlights["NeogitGraphWhite"] = {
 					bold = false,
 				}
 				highlights["NeogitGraphOrange"] = {
 					bold = false,
 				}
+				highlights["NormalFloat"] = {
+					bg = "NONE",
+				}
+				highlights["StatusLine"] = {
+					bg = "NONE",
+				}
 			end,
 		})
 		vim.cmd.colorscheme("nord")
 		vim.api.nvim_set_hl(0, "SnacksPickerDir", { link = "Text" })
 		vim.api.nvim_set_hl(0, "SnacksPickerPathHidden", { link = "Text" })
-		vim.api.nvim_set_hl(0, "SnacksPickerPathIgnored", { link = "Comment" })
 		vim.api.nvim_set_hl(0, "SnacksPickerGitStatusUntracked", { link = "Special" })
-		vim.cmd(":hi statusline guibg=NONE")
 	end,
 }

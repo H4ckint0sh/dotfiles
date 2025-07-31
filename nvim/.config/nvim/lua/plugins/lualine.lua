@@ -5,11 +5,10 @@ return {
 	event = { "BufReadPost", "BufNewFile" },
 	dependencies = { "nvim-tree/nvim-web-devicons" },
 	config = function(_, opts)
-		local colors = require("nord.colors").palette
 		local nord = require("lualine.themes.nord")
 
 		vim.opt.laststatus = 3
-		nord.normal.c.bg = colors.polar_night.origin
+		nord.normal.c.bg = "NONE" -- set background color to transparent
 		opts.options.theme = nord
 
 		require("lualine").setup(opts)

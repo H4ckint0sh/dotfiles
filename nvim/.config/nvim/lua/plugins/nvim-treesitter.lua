@@ -43,7 +43,6 @@ return {
 					"diff",
 					"git_rebase",
 					"toml",
-					"tmux",
 					"gitignore",
 					"yaml",
 					"razor",
