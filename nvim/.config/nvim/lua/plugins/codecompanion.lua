@@ -86,7 +86,4 @@ return {
 
 		vim.cmd([[cab cc CodeCompanion]])
 	end,
-	init = function()
-		require("custom.noice-spinner").init()
-	end,
 }
