@@ -2,7 +2,7 @@
 
 This is my dotfiles for MacOS.
 
-> [!WARNING]
+> [!NOTE]
 > This has only been tested on MacOS.
 
 ![Ghostty](screenshots/Screenshot.png)
@@ -27,7 +27,6 @@ Run `./cleanenv` to unlink the configs.
 - Text editor: [Neovim](https://neovim.io/)
 - Terminal emulator: [Ghostty](https://github.com/ghost-cli/ghostty)
 - Terminal multiplexer: [tmux](https://github.com/tmux/tmux)
-- Status bar: [sketchybar](https://github.com/FelixKratz/SketchyBar)
 - Window manager: [aerospace](https://github.com/nikitabobko/AeroSpace)
 - Git TUI: [lazygit](https://github.com/jesseduffield/lazygit)
 - Shell: [zsh](https://www.zsh.org)
