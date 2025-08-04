@@ -1,0 +1,188 @@
+# This file contains Gitu's default configuration.
+# It is possible to override settings with an equivalent file at:
+# `~/.config/gitu/config.toml`
+
+[general]
+always_show_help.enabled = false
+confirm_quit.enabled = false
+collapsed_sections = []
+refresh_on_file_change.enabled = true
+confirm_discard = "line"
+
+[style]
+# Base colors
+section_header = { fg = "#5e81ac" }
+file_header = { fg = "#81a1c1" }
+hunk_header = { fg = "#88c0d0" }
+
+# Diff highlighting
+diff_highlight.tag_old = { fg = "#bf616a" }
+diff_highlight.tag_new = { fg = "#a3be8c" }
+diff_highlight.unchanged_old = { fg = "#d8dee9" }
+diff_highlight.unchanged_new = { fg = "#d8dee9" }
+diff_highlight.changed_old = { fg = "#bf616a" }
+diff_highlight.changed_new = { fg = "#a3be8c" }
+
+# Syntax highlighting
+syntax_highlight.enabled = true
+syntax_highlight.attribute = { fg = "#ebcb8b" }
+syntax_highlight.comment = { fg = "#4c566a" }
+syntax_highlight.constant_builtin = { fg = "#d08770" }
+syntax_highlight.constant = { fg = "#d08770" }
+syntax_highlight.constructor = { fg = "#8fbcbb" }
+syntax_highlight.embedded = { fg = "#b48ead" }
+syntax_highlight.function_builtin = { fg = "#88c0d0" }
+syntax_highlight.function = { fg = "#81a1c1" }
+syntax_highlight.keyword = { fg = "#81a1c1" }
+syntax_highlight.number = { fg = "#d08770" }
+syntax_highlight.module = { fg = "#8fbcbb" }
+syntax_highlight.property = { fg = "#8fbcbb" }
+syntax_highlight.operator = { fg = "#81a1c1" }
+syntax_highlight.punctuation_bracket = { fg = "#d8dee9" }
+syntax_highlight.punctuation_delimiter = { fg = "#d8dee9" }
+syntax_highlight.string_special = { fg = "#ebcb8b" }
+syntax_highlight.string = { fg = "#a3be8c" }
+syntax_highlight.tag = { fg = "#81a1c1" }
+syntax_highlight.type = { fg = "#8fbcbb" }
+syntax_highlight.type_builtin = { fg = "#8fbcbb" }
+syntax_highlight.variable_builtin = { fg = "#81a1c1" }
+syntax_highlight.variable_parameter = { fg = "#d08770" }
+
+# UI elements
+cursor = { symbol = "▌", fg = "#d8dee9", bg = "#5e81ac" }
+selection_bar = { symbol = "▌", fg = "#5e81ac" }
+selection_line = { bg = "#3b4252" }
+selection_area = { mode = "NONE", bg = "#3b4252" }
+
+# Git elements
+hash = { fg = "#ebcb8b" }
+branch = { fg = "#a3be8c" }
+remote = { fg = "#bf616a" }
+tag = { fg = "#b48ead" }
+
+# Command line
+command = { fg = "#81a1c1", mods = "BOLD" }
+active_arg = { fg = "#bf616a", mods = "BOLD" }
+hotkey = { fg = "#b48ead" }
+
+[bindings]
+root.quit = ["q", "<esc>"]
+root.refresh = ["g"]
+root.toggle_section = ["<tab>"]
+root.move_up = ["k", "<up>"]
+root.move_down = ["j", "<down>"]
+root.move_up_line = ["<ctrl+k>", "<ctrl+up>"]
+root.move_down_line = ["<ctrl+j>", "<ctrl+down>"]
+root.move_prev_section = ["<alt+k>", "<alt+up>"]
+root.move_next_section = ["<alt+j>", "<alt+down>"]
+root.move_parent_section = ["<alt+h>", "<alt+left>"]
+root.half_page_up = ["<ctrl+u>"]
+root.half_page_down = ["<ctrl+d>"]
+root.show_refs = ["Y"]
+root.show = ["<enter>"]
+root.discard = ["K"]
+root.stage = ["s"]
+root.unstage = ["u"]
+root.copy_hash = ["y"]
+
+root.help_menu = ["h", "?"]
+help_menu.quit = ["q", "h", "?", "<esc>"]
+
+root.branch_menu = ["b"]
+branch_menu.checkout = ["b"]
+branch_menu.checkout_new_branch = ["c"]
+branch_menu.delete = ["K"]
+branch_menu.quit = ["q", "<esc>"]
+
+root.commit_menu = ["c"]
+commit_menu.--all = ["-a"]
+commit_menu.--allow-empty = ["-e"]
+commit_menu.--verbose = ["-v"]
+commit_menu.--no-verify = ["-n"]
+commit_menu.--reset-author = ["-R"]
+commit_menu.--signoff = ["-s"]
+commit_menu.commit = ["c"]
+commit_menu.commit_amend = ["a"]
+commit_menu.commit_extend = ["e"]
+commit_menu.commit_fixup = ["f"]
+commit_menu.commit_instant_fixup = ["F"]
+commit_menu.quit = ["q", "<esc>"]
+
+root.fetch_menu = ["f"]
+fetch_menu.--prune = ["-p"]
+fetch_menu.--tags = ["-t"]
+fetch_menu.fetch_all = ["a"]
+fetch_menu.quit = ["q", "<esc>"]
+fetch_menu.fetch_elsewhere = ["e"]
+
+root.log_menu = ["l"]
+log_menu.log_current = ["l"]
+log_menu.log_other = ["o"]
+log_menu.quit = ["q", "<esc>"]
+log_menu.-n = ["-n"]
+log_menu.--grep = ["-F"]
+
+root.pull_menu = ["F"]
+pull_menu.--rebase = ["-r"]
+pull_menu.pull_from_push_remote = ["p"]
+pull_menu.pull_from_upstream = ["u"]
+pull_menu.pull_from_elsewhere = ["e"]
+pull_menu.quit = ["q", "<esc>"]
+
+root.push_menu = ["P"]
+push_menu.--force-with-lease = ["-f"]
+push_menu.--force = ["-F"]
+push_menu.--no-verify = ["-h"]
+push_menu.--dry-run = ["-n"]
+push_menu.push_to_push_remote = ["p"]
+push_menu.push_to_upstream = ["u"]
+push_menu.push_to_elsewhere = ["e"]
+push_menu.quit = ["q", "<esc>"]
+
+root.rebase_menu = ["r"]
+rebase_menu.--keep-empty = ["-k"]
+rebase_menu.--preserve-merges = ["-p"]
+rebase_menu.--committer-date-is-author-date = ["-d"]
+rebase_menu.--autosquash = ["-a"]
+rebase_menu.--autostash = ["-A"]
+rebase_menu.--interactive = ["-i"]
+rebase_menu.--no-verify = ["-h"]
+rebase_menu.rebase_interactive = ["i"]
+rebase_menu.rebase_abort = ["a"]
+rebase_menu.rebase_continue = ["c"]
+rebase_menu.rebase_elsewhere = ["e"]
+rebase_menu.rebase_autosquash = ["f"]
+rebase_menu.quit = ["q", "<esc>"]
+
+root.remote_menu = ["M"]
+remote_menu.add_remote = ["a"]
+remote_menu.remove_remote = ["K"]
+remote_menu.rename_remote = ["r"]
+remote_menu.quit = ["q", "<esc>"]
+
+root.reset_menu = ["X"]
+reset_menu.reset_soft = ["s"]
+reset_menu.reset_mixed = ["m"]
+reset_menu.reset_hard = ["h"]
+reset_menu.quit = ["q", "<esc>"]
+
+root.revert_menu = ["V"]
+revert_menu.--edit = ["-e"]
+revert_menu.--no-edit = ["-E"]
+revert_menu.--signoff = ["-s"]
+revert_menu.revert_abort = ["a"]
+revert_menu.revert_continue = ["c"]
+revert_menu.revert_commit = ["V"]
+revert_menu.quit = ["q", "<esc>"]
+
+root.stash_menu = ["z"]
+stash_menu.--all = ["-a"]
+stash_menu.--include-untracked = ["-u"]
+stash_menu.stash = ["z"]
+stash_menu.stash_index = ["i"]
+stash_menu.stash_worktree = ["w"]
+stash_menu.stash_keep_index = ["x"]
+stash_menu.stash_pop = ["p"]
+stash_menu.stash_apply = ["a"]
+stash_menu.stash_drop = ["k"]
+stash_menu.quit = ["q", "<esc>"]
