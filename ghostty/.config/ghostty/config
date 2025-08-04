@@ -5,7 +5,7 @@ theme = nord
 # custom-shader = shaders/bloom075.glsl
 # custom-shader = shaders/bloom060.glsl
 # custom-shader = shaders/bloom050.glsl
-custom-shader = shaders/bloom025.glsl
+# custom-shader = shaders/bloom025.glsl
 # custom-shader = shaders/sparks-from-fire.glsl
 # custom-shader = shaders/sparks-from-fire.glsl
 
