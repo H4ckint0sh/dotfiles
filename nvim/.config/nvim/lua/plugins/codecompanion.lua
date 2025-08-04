@@ -15,6 +15,7 @@ return {
 		"nvim-lua/plenary.nvim",
 		"nvim-treesitter/nvim-treesitter",
 		"folke/snacks.nvim",
+		"franco-ruggeri/codecompanion-spinner.nvim",
 	},
 	config = function(_, _)
 		require("codecompanion").setup({
@@ -29,6 +30,9 @@ return {
 			},
 			display = {
 				action_palette = { provider = "snacks" },
+			},
+			extensions = {
+				spinner = {},
 			},
 			strategies = {
 				diff = {

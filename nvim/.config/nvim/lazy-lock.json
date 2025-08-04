@@ -3,6 +3,7 @@
   "blink.cmp": { "branch": "main", "commit": "33f0789297cfec5279c30c8f8980c035fdc91e34" },
   "blink.compat": { "branch": "main", "commit": "1454f14a8d855a578ceeba77c62538fa1459a67c" },
   "cmp-tailwind-colors": { "branch": "main", "commit": "4b200e280e9051a26ade776589c2ac246350f5dc" },
+  "codecompanion-spinner.nvim": { "branch": "main", "commit": "1f53b8d402de2a5ee6f9d64793f5eda49ed12a64" },
   "codecompanion.nvim": { "branch": "main", "commit": "638b643a17a656a34d15c884e1fd059d0992d660" },
   "conform.nvim": { "branch": "master", "commit": "973f3cb73887d510321653044791d7937c7ec0fa" },
   "devdocs.nvim": { "branch": "main", "commit": "1f39d611427af27befbf0edb3284ef0def830dd7" },
