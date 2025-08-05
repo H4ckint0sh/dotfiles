@@ -138,7 +138,7 @@ zstyle ':completion:*' menu no
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 # fzf options
-zstyle ':fzf-tab:*' fzf-flags --color=fg:#565f89,fg+:#c0caf5,bg:#24283b,bg+:#24283b
+zstyle ':fzf-tab:*' fzf-flags --color=fg:#616E88,fg+:#D8DEE9,bg:-1,bg+:-1
 
 
 # FUNCTIONS --------------------------------------------------------------
