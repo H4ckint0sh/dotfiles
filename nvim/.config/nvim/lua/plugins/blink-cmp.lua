@@ -5,6 +5,14 @@ return {
 	dependencies = {
 		-- add blink.compat to dependencies
 		{ "saghen/blink.compat" },
+		{
+			"supermaven-inc/supermaven-nvim",
+			opts = {
+				disable_inline_completion = true, -- disables inline completion for use with cmp
+				disable_keymaps = true, -- disables built in keymaps for more manual control
+			},
+		},
+		{ "huijiro/blink-cmp-supermaven" },
 		-- add source to dependencies
 	},
 	-- Use nightly build
@@ -19,6 +27,9 @@ return {
 			nerd_font_variant = "normal",
 		},
 		completion = {
+			ghost_text = {
+				enabled = true,
+			},
 			menu = {
 				min_width = 25,
 				border = "rounded",
@@ -63,7 +74,7 @@ return {
 			preset = "luasnip",
 		},
 		sources = {
-			default = { "lsp", "path", "buffer", "snippets", "dadbod", "lazydev", "html-css" },
+			default = { "lsp", "path", "supermaven", "buffer", "snippets", "dadbod", "lazydev", "html-css" },
 			providers = {
 				dadbod = { name = "Dadbod", module = "vim_dadbod_completion.blink" },
 				lazydev = {
@@ -75,6 +86,11 @@ return {
 				["html-css"] = {
 					name = "html-css",
 					module = "blink.compat.source",
+				},
+				supermaven = {
+					name = "supermaven",
+					module = "blink-cmp-supermaven",
+					async = true,
 				},
 			},
 		},
@@ -99,7 +115,7 @@ return {
 		},
 		keymap = {
 			-- set to 'none' to disable the 'default' preset
-			preset = "default",
+			preset = "super-tab",
 
 			["<C-j>"] = { "select_next", "fallback" },
 			["<C-k>"] = { "select_prev", "fallback" },
