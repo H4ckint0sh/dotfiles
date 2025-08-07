@@ -75,30 +75,43 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	end,
 })
 
-local function fold_virt_text(result, s, lnum, coloff)
+local function fold_virt_text(result, s, lnum, coloff, force_hl)
 	if not coloff then
 		coloff = 0
 	end
+
+	if force_hl then
+		-- If force_hl is provided, treat the entire string as one highlight group
+		table.insert(result, { s, force_hl })
+		return
+	end
+
 	local text = ""
 	local hl
 	for i = 1, #s do
 		local char = s:sub(i, i)
 		local hls = vim.treesitter.get_captures_at_pos(0, lnum, coloff + i - 1)
 		local _hl = hls[#hls]
+		local new_hl = nil
+
 		if _hl then
-			local new_hl = "@" .. _hl.capture
-			if new_hl ~= hl then
-				table.insert(result, { text, hl })
-				text = ""
-				hl = nil
-			end
-			text = text .. char
-			hl = new_hl
-		else
-			text = text .. char
+			new_hl = "@" .. _hl.capture
 		end
+
+		if new_hl ~= hl then
+			-- Append previous segment if it exists
+			if text ~= "" then
+				table.insert(result, { text, hl })
+			end
+			text = ""
+			hl = new_hl
+		end
+		text = text .. char
 	end
-	table.insert(result, { text, hl })
+	-- Append the last segment
+	if text ~= "" then
+		table.insert(result, { text, hl })
+	end
 end
 
 function _G.custom_foldtext()
@@ -112,10 +125,11 @@ function _G.custom_foldtext()
 
 	-- Insert middle marker and folded line count
 	table.insert(result, { " ... ", "comment" })
-	table.insert(result, { string.format("%d lines)", folded_lines), "comment" })
+	table.insert(result, { string.format("(%d lines)", folded_lines), "comment" })
 	table.insert(result, { " ... ", "comment" })
 
-	fold_virt_text(result, end_line_trimmed, vim.v.foldend, #(end_line_raw:match("^(%s*)") or ""))
+	-- Highlight the last line of the fold as Comment
+	fold_virt_text(result, end_line_trimmed, vim.v.foldend, #(end_line_raw:match("^(%s*)") or ""), "Comment")
 
 	return result
 end
