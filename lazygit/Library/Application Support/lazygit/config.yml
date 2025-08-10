@@ -19,8 +19,30 @@ gui:
   showCommandLog: true
   showBottomLine: true
   commandLogSize: 8
+  theme:
+    activeBorderColor:
+      - "#aeaed1"
+      - "bold"
+    inactiveBorderColor:
+      - "#606079"
+    optionsTextColor:
+      - "#606079"
+    selectedLineBgColor:
+      - "#252530"
+    cherryPickedCommitFgColor:
+      - "#d8647e"
+    cherryPickedCommitBgColor:
+      - "bg"
+    markedBaseCommitFgColor:
+      - "#f3be7c"
+    markedBaseCommitBgColor:
+      - "bg"
+    unstagedChangesColor:
+      - "#d8647e"
+    defaultFgColor:
+      - "#cdcdcd"
   authorColors: # in case you're not happy with the randomly assigned colour
-    "Alijan Adeli": "#b4befe"
+    "Alijan Adeli": "f3be7c"
 git:
   commit:
     autoWrapCommitMessage: true

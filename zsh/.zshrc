@@ -9,28 +9,26 @@ if [ $(ps ax | grep "[s]sh-agent" | wc -l) -eq 0 ] ; then
 fi
 
 # FZF --------------------------------------------------------------
-export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
-      --height=40% \
-      --highlight-line \
-      --info=inline-right \
-      --ansi \
-      --layout=reverse \
-      --color=fg:#616E88 \
-      --color=fg+:#D8DEE9 \
-      --color=bg:-1 \
-      --color=bg+:-1 \
-      --color=hl:#5E81AC \
-      --color=hl+:#81A1C1 \
-      --color=info:#81A1C1 \
-      --color=marker:#B48EAD \
-      --color=prompt:#B48EAD \
-      --color=spinner:#B48EAD \
-      --color=pointer:#B48EAD \
-      --color=header:#D08770 \
-      --color=border:#616E88 \
-      --color=label:#D8DEE9 \
-      --color=query:#E5E9F0 \
-"
+export FZF_DEFAULT_OPTS="
+    --height=99% 
+    --layout=reverse 
+    --pointer='█'
+    --scrollbar='▌'
+    --highlight-line
+    --color=hl:#f3be7c
+    --color=bg:-1
+    --color=gutter:-1
+    --color=bg+:#252530
+    --color=fg+:#aeaed1
+    --color=hl+:#f3be7c
+    --color=border:#606079
+    --color=prompt:#bb9dbd
+    --color=query:#aeaed1:bold
+    --color=pointer:#aeaed1
+    --color=scrollbar:#aeaed1
+    --color=info:#f3be7c
+    --color=spinner:#7fa563
+    "
 
 # Left-pad command output with 2 spaces
 precmd() {
