@@ -18,6 +18,7 @@ local options = {
 	numberwidth = 3, --- Number of digits to display when printing line numbers
 	signcolumn = "yes:1",
 	smartcase = true, --- Uses case in search
+	jumpoptions = "", -- Jump to a newly closed buffer or open it
 	smartindent = true, --- Makes indenting smart
 	smarttab = false, --- Makes tabbing smarter will realize you have 4 vs 4
 	softtabstop = 4, --- Insert 4 spaces for a tab
