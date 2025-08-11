@@ -31,7 +31,7 @@ return {
 		},
 		words = { enabled = true },
 		lazygit = {
-			win = { backdrop = false },
+			enabled = false,
 		},
 
 		image = {
