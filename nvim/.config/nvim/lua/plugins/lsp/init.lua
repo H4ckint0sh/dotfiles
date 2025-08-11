@@ -129,6 +129,7 @@ function _G.custom_foldtext()
 	table.insert(result, { " ... ", "comment" })
 
 	-- Highlight the last line of the fold as Comment
+
 	fold_virt_text(result, end_line_trimmed, vim.v.foldend, #(end_line_raw:match("^(%s*)") or ""), "Comment")
 
 	return result
