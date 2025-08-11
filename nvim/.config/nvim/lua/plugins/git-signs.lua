@@ -9,6 +9,14 @@ return {
 		end
 
 		signs.setup({
+			signs = {
+				add = { text = "+" }, -- or '│' for a thin line
+				change = { text = "~" },
+				delete = { text = "_" },
+				topdelete = { text = "‾" },
+				changedelete = { text = "~_" },
+				untracked = { text = "┆" }, -- optional for untracked files
+			},
 			signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
 			numhl = false, -- Toggle with `:Gitsigns toggle_numhl`
 			linehl = false, -- Toggle with `:Gitsigns toggle_linehl`
