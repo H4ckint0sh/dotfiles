@@ -13,7 +13,7 @@ confirm_discard = "line"
 # Base colors
 section_header = { fg = "#5e81ac" }
 file_header = { fg = "#81a1c1" }
-hunk_header = { fg = "#88c0d0" }
+hunk_header = { fg = "#88C0D0" }
 
 # Diff highlighting
 diff_highlight.tag_old = { fg = "#bf616a" }
@@ -57,7 +57,7 @@ selection_area = { mode = "NONE", bg = "#3b4252" }
 # Git elements
 hash = { fg = "#ebcb8b" }
 branch = { fg = "#a3be8c" }
-remote = { fg = "#bf616a" }
+remote = { fg = "#B48EAD" }
 tag = { fg = "#b48ead" }
 
 # Command line
