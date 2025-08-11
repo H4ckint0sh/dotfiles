@@ -76,30 +76,28 @@ vim.api.nvim_create_autocmd("LspAttach", {
 })
 
 local function fold_virt_text(result, s, lnum, coloff, force_hl)
-	if not coloff then
-		coloff = 0
-	end
+	coloff = coloff or 0
 
 	if force_hl then
-		-- If force_hl is provided, treat the entire string as one highlight group
+		-- If forced highlight group, treat the whole string as one group
 		table.insert(result, { s, force_hl })
 		return
 	end
 
 	local text = ""
-	local hl
+	local hl = nil
 	for i = 1, #s do
 		local char = s:sub(i, i)
-		local hls = vim.treesitter.get_captures_at_pos(0, lnum, coloff + i - 1)
-		local _hl = hls[#hls]
+		-- Get Treesitter captures at position
+		local captures = vim.treesitter.get_captures_at_pos(0, lnum, coloff + i - 1)
+		local last_capture = captures[#captures]
 		local new_hl = nil
-
-		if _hl then
-			new_hl = "@" .. _hl.capture
+		if last_capture then
+			new_hl = "@" .. last_capture.capture
 		end
 
 		if new_hl ~= hl then
-			-- Append previous segment if it exists
+			-- Append previous text with previous hl
 			if text ~= "" then
 				table.insert(result, { text, hl })
 			end
@@ -108,49 +106,50 @@ local function fold_virt_text(result, s, lnum, coloff, force_hl)
 		end
 		text = text .. char
 	end
-	-- Append the last segment
+
 	if text ~= "" then
 		table.insert(result, { text, hl })
 	end
 end
 
 function _G.custom_foldtext()
-	local start_line = vim.fn.getline(vim.v.foldstart):gsub("\t", string.rep(" ", vim.o.tabstop))
-	local end_line_raw = vim.fn.getline(vim.v.foldend)
+	-- Get raw lines (no tab substitution) for accurate col positions
+	local start_line = vim.api.nvim_buf_get_lines(0, vim.v.foldstart - 1, vim.v.foldstart, false)[1]
+	local end_line_raw = vim.api.nvim_buf_get_lines(0, vim.v.foldend - 1, vim.v.foldend, false)[1]
 	local end_line_trimmed = vim.trim(end_line_raw)
 	local folded_lines = vim.v.foldend - vim.v.foldstart + 1
 
 	local result = {}
-	fold_virt_text(result, start_line, vim.v.foldstart - 1)
 
-	-- Insert middle marker and folded line count
-	table.insert(result, { " ... ", "comment" })
-	table.insert(result, { string.format("(%d lines)", folded_lines), "comment" })
-	table.insert(result, { " ... ", "comment" })
+	-- First line: use Treesitter highlighting (no forced hl)
+	fold_virt_text(result, start_line, vim.v.foldstart - 1, 0)
 
-	-- Highlight the last line of the fold as Comment
+	-- Middle fold marker + folded line count
+	table.insert(result, { " ... ", "Comment" })
+	table.insert(result, { string.format("(%d lines)", folded_lines), "Comment" })
+	table.insert(result, { " ... ", "Comment" })
 
-	fold_virt_text(result, end_line_trimmed, vim.v.foldend, #(end_line_raw:match("^(%s*)") or ""), "Comment")
+	-- Last line: forced Comment highlight, with col offset for indentation
+	local indent_len = #(end_line_raw:match("^(%s*)") or "")
+	fold_virt_text(result, end_line_trimmed, vim.v.foldend - 1, indent_len, "Comment")
 
 	return result
 end
 
 vim.opt.foldtext = "v:lua.custom_foldtext()"
 
+-- Your LSP autocommands stay the same:
 vim.api.nvim_create_autocmd("LspAttach", {
 	callback = function(attach_args)
 		local client = vim.lsp.get_client_by_id(attach_args.data.client_id)
 		if client and client:supports_method("textDocument/foldingRange") then
 			local bufnr = attach_args.buf
-			-- Set foldmethod and foldexpr for all windows displaying the buffer
 			for _, winid in ipairs(vim.api.nvim_list_wins()) do
 				if vim.api.nvim_win_get_buf(winid) == bufnr then
 					vim.api.nvim_set_option_value("foldmethod", "expr", { win = winid })
 					vim.api.nvim_set_option_value("foldexpr", "v:lua.vim.lsp.foldexpr()", { win = winid })
 
-					-- Defer the automatic fold closing to ensure LSP has time to provide folding ranges
 					vim.defer_fn(function()
-						-- Check if the buffer is still valid and has LSP client attached
 						if
 							vim.api.nvim_buf_is_valid(bufnr)
 							and vim.lsp.buf_is_attached(bufnr, attach_args.data.client_id)
@@ -158,7 +157,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 							vim.lsp.foldclose("imports", winid)
 							vim.lsp.foldclose("comment", winid)
 						end
-					end, 100) -- 100ms delay
+					end, 100)
 				end
 			end
 		end
@@ -167,9 +166,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 vim.api.nvim_create_autocmd("LspDetach", {
 	command = "setl foldexpr<",
-	group = au,
+	-- Make sure this autocommand group exists or define it
+	group = vim.api.nvim_create_augroup("MyFoldDetachGroup", { clear = true }),
 })
-
 return {
 	{
 		"neovim/nvim-lspconfig",
