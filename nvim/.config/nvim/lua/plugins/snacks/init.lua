@@ -22,7 +22,7 @@ return {
 			right = { "fold" },
 			folds = {
 				open = true,
-				git_hl = true,
+				git_hl = false,
 			},
 			git = {
 				patterns = { "GitSigns" },
