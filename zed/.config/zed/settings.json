@@ -1,0 +1,228 @@
+// mettings.json, generated at Wed Mar 05 2025 10:43:55 GMT+0800 (Singapore Standard Time)
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run the `open default settings` command
+// from the command palette or from `Zed` application menu.
+{
+	"icon_theme": "Zed (Default)",
+	"edit_predictions": {
+		"mode": "eager",
+		"copilot": {
+			"proxy": null,
+			"proxy_no_verify": null
+		},
+		"enabled_in_text_threads": false
+	},
+	"git_panel": {
+		"dock": "right",
+		"button": true
+	},
+	// "icon_theme": "Tokyo Night Storm",
+	"features": {
+		"edit_prediction_provider": "zed"
+	},
+	"base_keymap": "VSCode",
+	"theme": "Nord",
+	"experimental.theme_overrides": {
+		"editor.document_highlight.bracket_background": "#3B4252",
+		"syntax": {
+			"comment": {
+				"font_style": "italic"
+			},
+			"keyword": {
+				"font_style": "italic"
+			}
+		}
+	},
+	"autosave": "on_focus_change",
+	"format_on_save": "on",
+	"ui_font_size": 16,
+	"buffer_font_size": 14,
+	"buffer_font_weight": 400,
+	"soft_wrap": "editor_width",
+	"use_autoclose": false,
+	"preferred_line_length": 80,
+	"hard_tabs": true,
+	"tab_size": 2,
+	// Finder model width
+	"file_finder": {},
+	// NOTE: Change the font family to your preference
+	"buffer_font_family": "MonoLisa",
+	"buffer_font_features": {
+		"ss02": true,
+		"liga": true,
+		"zero": true
+	},
+	// Vim mode settings
+	"vim_mode": true,
+	// use relative line numbers
+	"relative_line_numbers": true,
+	"vertical_scroll_margin": 0,
+	"cursor_blink": false,
+	"tab_bar": {
+		"show": false
+	},
+	"toolbar": {
+		"breadcrumbs": true,
+		"quick_actions": false,
+		"agent_review": true
+	},
+	"scrollbar": {
+		"show": "auto",
+		"git_diff": true
+	},
+	"diagnostics": {
+		"inline": {
+			// Whether to show diagnostics inline or not
+			"enabled": true
+		}
+	},
+	// Indentation, rainbow indentation
+	"indent_guides": {
+		"enabled": true,
+		"coloring": "fixed",
+		"active_line_width": 2
+	},
+	// NOTE: Zen mode, refer https://github.com/zed-industries/zed/issues/4382 when it's resolved
+	"centered_layout": {
+		"left_padding": 0.15,
+		"right_padding": 0.15
+	},
+	// Use Copilot Chat AI as default
+	"agent": {
+		"default_model": {
+			"provider": "google",
+			"model": "gemini-2.5-flash"
+		},
+		"button": true
+	},
+	// Inlay hints preconfigured by Zed: Go, Rust, Typescript and Svelte
+	"inlay_hints": {
+		"enabled": true,
+		"show_background": false
+	},
+	// LSP
+	"lsp": {
+		"tailwindcss-language-server": {
+			"settings": {
+				"classAttributes": ["class", "className", "ngClass", "styles"]
+			}
+		},
+		"omnisharp": {
+			"binary": {
+				"path": "csharp-language-server"
+			}
+		},
+		"eslint": {
+			"settings": {
+				"codeActionOnSave": {
+					"rules": ["import/order"]
+				}
+			}
+		}
+	},
+	"git": {
+		"inline_blame": {
+			"enabled": true
+		}
+	},
+	"languages": {
+		// Refer https://zed.dev/docs/languages/javascript and https://zed.dev/docs/languages/typescript for more info
+		"TypeScript": {
+			// Refer https://github.com/jellydn/ts-inlay-hints for how to setup for Neovim and VSCode
+			"inlay_hints": {
+				"enabled": true,
+				"show_parameter_hints": false,
+				"show_other_hints": true,
+				"show_type_hints": true
+			},
+			"code_actions_on_format": {
+				"source.fixAll.eslint": true
+			}
+		},
+		"JavaScript": {
+			"inlay_hints": {
+				"enabled": true,
+				"show_parameter_hints": false,
+				"show_other_hints": true,
+				"show_type_hints": true
+			},
+			"code_actions_on_format": {
+				"source.fixAll.eslint": true
+			}
+		}
+	},
+	// Use zed commit editor
+	"terminal": {
+		"font_family": "Maple Mono",
+		"font_fallbacks": ["Symbols Nerd Font Mono"],
+		"env": {
+			"EDITOR": "zed --wait"
+		},
+		"working_directory": "current_project_directory",
+		"button": true
+	},
+	// File syntax highlighting
+	"file_types": {
+		"Dockerfile": ["Dockerfile", "Dockerfile.*"],
+		"JSON": ["json", "jsonc", "*.code-snippets"]
+	},
+	// File scan exclusions, hide on the file explorer and search
+	"file_scan_exclusions": [
+		"**/.git",
+		"**/.svn",
+		"**/.hg",
+		"**/CVS",
+		"**/.DS_Store",
+		"**/Thumbs.db",
+		"**/.classpath",
+		"**/.settings",
+		// above is default from Zed
+		".env*",
+		"**/out",
+		"**/dist",
+		"**/.husky",
+		"**/.turbo",
+		"**/.vscode-test",
+		"**/.vscode",
+		"**/.next",
+		"**/.storybook",
+		"**/.tap",
+		"**/.nyc_output",
+		"**/report",
+		"**/node_modules"
+	],
+	// Turn off telemetry
+	"telemetry": {
+		"diagnostics": false,
+		"metrics": false
+	},
+	// Move all panel to the right
+	"project_panel": {
+		"button": false,
+		"dock": "right",
+		"git_status": true
+	},
+	"outline_panel": {
+		"dock": "right",
+		"button": false
+	},
+	"collaboration_panel": {
+		"dock": "left",
+		"button": false
+	},
+	// Move some unnecessary panels to the left
+	"notification_panel": {
+		"dock": "left",
+		"button": false
+	},
+	"chat_panel": {
+		"dock": "left",
+		"button": "always"
+	},
+	"formatter": "prettier"
+}
