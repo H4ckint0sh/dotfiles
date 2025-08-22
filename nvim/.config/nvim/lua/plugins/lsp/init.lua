@@ -215,6 +215,7 @@ return {
 					"ts_ls",
 					"jdtls",
 					"emmet_language_server",
+					"some-sass-language-server",
 				},
 				automatic_enable = {
 					exclude = {
