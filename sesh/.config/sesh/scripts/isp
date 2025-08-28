@@ -2,9 +2,13 @@
 
 tmux send-keys 'nvim' Enter
 tmux new-window -c "#{session_path}"
+tmux split-window -h -l 50% 
 tmux send-keys 'dotnet build && dotnet run' Enter
+tmux select-pane -L
+tmux send-keys 'npm run dev' Enter
 tmux select-window -p
 open http://localhost:39745
+
 
 
 
