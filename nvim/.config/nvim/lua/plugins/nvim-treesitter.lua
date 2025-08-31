@@ -26,6 +26,7 @@ return {
 					"gitcommit",
 					"graphql",
 					"json",
+					"ghostty",
 					"json5",
 					"lua",
 					"markdown",
