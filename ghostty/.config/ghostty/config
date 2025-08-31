@@ -16,7 +16,7 @@ window-padding-balance = true
 window-padding-y = 2,0 
 window-padding-x = 5,5
 clipboard-read = "allow"
-background-opacity = .95
+background-opacity = .97
 
 # Other
 confirm-close-surface = false 
