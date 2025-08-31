@@ -71,6 +71,11 @@ return {
 				highlights["StatusLine"] = {
 					bg = "NONE",
 				}
+				-- ToDo: Find a way to make this work via Nord
+				highlights["FloatBorder"] = {
+					fg = colors.polar_night.brightest,
+					bg = "NONE",
+				}
 			end,
 		})
 		vim.cmd.colorscheme("nord")
