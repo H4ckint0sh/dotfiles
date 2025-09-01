@@ -74,7 +74,7 @@ return {
 				map("n", "]c", function()
 					if vim.wo.diff then
 						vim.cmd.normal({ "]c", bang = true })
-					else
+					else -- Navigate to the next hunk
 						gitsigns.nav_hunk("next")
 					end
 				end)
@@ -82,34 +82,34 @@ return {
 				map("n", "[c", function()
 					if vim.wo.diff then
 						vim.cmd.normal({ "[c", bang = true })
-					else
+					else -- Navigate to the previous hunk
 						gitsigns.nav_hunk("prev")
 					end
 				end)
 
 				-- Actions
-				map("n", "<leader>hs", gitsigns.stage_hunk)
-				map("n", "<leader>hr", gitsigns.reset_hunk)
-				map("v", "<leader>hs", function()
+				map("n", "<leader>hs", gitsigns.stage_hunk) -- Stage the current hunk
+				map("n", "<leader>hr", gitsigns.reset_hunk) -- Reset the current hunk
+				map("v", "<leader>hs", function() -- Stage the visually selected lines
 					gitsigns.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
 				end)
-				map("v", "<leader>hr", function()
+				map("v", "<leader>hr", function() -- Reset the visually selected lines
 					gitsigns.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
 				end)
-				map("n", "<leader>hS", gitsigns.stage_buffer)
-				map("n", "<leader>hR", gitsigns.reset_buffer)
-				map("n", "<leader>hp", gitsigns.preview_hunk)
-				map("n", "<leader>hb", function()
+				map("n", "<leader>hS", gitsigns.stage_buffer) -- Stage the entire buffer
+				map("n", "<leader>hR", gitsigns.reset_buffer) -- Reset the entire buffer
+				map("n", "<leader>hp", gitsigns.preview_hunk) -- Preview the current hunk
+				map("n", "<leader>hb", function() -- Show blame for the current line
 					gitsigns.blame_line({ full = true })
 				end)
-				map("n", "<leader>tb", gitsigns.toggle_current_line_blame)
-				map("n", "<leader>hd", gitsigns.diffthis)
-				map("n", "<leader>hD", function()
+				map("n", "<leader>tb", gitsigns.toggle_current_line_blame) -- Toggle current line blame
+				map("n", "<leader>hd", gitsigns.diffthis) -- Diff the current file against the index
+				map("n", "<leader>hD", function() -- Diff the current file against the last commit
 					gitsigns.diffthis("~")
 				end)
 
 				-- Text object
-				map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>")
+				map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>") -- Select the current hunk
 			end,
 		})
 	end,

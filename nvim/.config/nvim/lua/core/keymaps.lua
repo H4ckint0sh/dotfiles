@@ -5,7 +5,7 @@ local keymap = vim.keymap
 keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 
--- Select whole file
+-- Sele
 keymap.set("n", "<leader>sa", "ggVG")
 
 -- Keep stuff centred while moving around
@@ -67,6 +67,29 @@ keymap.set("n", "ss", ":s/", { silent = false }) -- search and replace
 keymap.set("n", "SS", ":%s/\\v", { silent = false }) -- search and replace
 keymap.set("v", "<leader>;", ":s/\\%V") -- Search only in visual selection usingb%V atom
 keymap.set("v", "<leader>w", '"hy:%s/\\v<C-r>h//g<left><left>', { silent = false }) -- change selection
+-- Search and replace
+vim.keymap.set({ "n", "v" }, "<leader>rr", [[:%s///gcI<Left><Left><Left><Left><Left>]], { desc = "Replace in Buffer" })
+vim.keymap.set(
+	"n",
+	"<leader>rw",
+	[[:%s/\<<C-r><C-w>\>//gcI<Left><Left><Left><Left>]],
+	{ desc = "Replace in Buffer (Word)" }
+)
+vim.keymap.set("v", "<leader>rs", [[:s///gcI<Left><Left><Left><Left><Left>]], { desc = "Replace in Selection" })
+vim.keymap.set(
+	"n",
+	"<leader>rR",
+	[[:cfdo %s///gcI | update]]
+		.. [[<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>]],
+	{ desc = "Replace in Quickfix List" }
+)
+vim.keymap.set(
+	"n",
+	"<leader>rW",
+	[[:cfdo %s/\<<C-r><C-w>\>//gcI | update]]
+		.. [[<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>]],
+	{ desc = "Replace in Quickfix List (Word)" }
+)
 
 -- General keymaps
 keymap.set("n", "<leader>%", "ggVG") -- exit insert mode with ii

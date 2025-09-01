@@ -1,12 +1,22 @@
 return {
 	"sindrets/diffview.nvim",
 	dependencies = "nvim-lua/plenary.nvim",
-	cmd = { "DiffviewOpen", "DiffviewFileHistory", "DiffviewClose" },
+	cmd = {
+		"DiffviewOpen",
+		"DiffviewClose",
+		"DiffviewToggleFiles",
+		"DiffviewFocusFiles",
+		"DiffviewRefresh",
+		"DiffviewFileHistory",
+	},
 	keys = {
-		{ "<leader>dv", "<cmd>DiffviewFileHistory %<cr>", desc = "View git history for current file" },
-		{ "<leader>dh", "<cmd>DiffviewFileHistory<cr>", desc = "View git history for repo" },
-		{ "<leader>do", "<cmd>DiffviewOpen<cr>", desc = "View modified files" },
-		{ "<leader>dc", "<cmd>DiffviewClose<cr>", desc = "Close Diffview" },
+		{ "<leader>gdo", "<cmd>DiffviewOpen<cr>", desc = "Open" },
+		{ "<leader>gdO", "<cmd>DiffviewOpen origin/HEAD...HEAD --imply-local<cr>", desc = "Open (HEAD)" },
+		{ "<leader>gdC", "<cmd>DiffviewClose<cr>", desc = "Close" },
+		{ "<leader>gdt", "<cmd>DiffviewToggleFiles<cr>", desc = "Toggle Files" },
+		{ "<leader>gdf", "<cmd>DiffviewFocusFiles<cr>", desc = "Focus Files" },
+		{ "<leader>gdhb", "<cmd>DiffviewFileHistory<cr>", desc = "Branch History" },
+		{ "<leader>gdhf", "<cmd>DiffviewFileHistory %<cr>", desc = "File History" },
 	},
 	opts = {
 		enhanced_diff_hl = true,
