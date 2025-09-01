@@ -2,6 +2,18 @@ return {
 	"folke/snacks.nvim",
 	dependencies = {
 		"nvim-tree/nvim-web-devicons",
+		{
+			"dmtrKovalenko/fff.nvim",
+			build = "cargo build --release",
+			-- scan for faster first load
+			event = "VeryLazy",
+			opts = {
+				prompt = "",
+				layout = {
+					prompt_position = "top",
+				},
+			},
+		},
 	},
 	priority = 1000,
 	opts = {

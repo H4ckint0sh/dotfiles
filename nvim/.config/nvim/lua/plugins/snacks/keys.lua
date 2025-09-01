@@ -20,7 +20,7 @@ return {
 				vim.cmd.stopinsert()
 			end,
 		}) end, desc = "Notification History" },
-		{ "<leader>f", function() Snacks.picker.files({
+		{ "<leader>F", function() Snacks.picker.files({
             finder = "files",
             format = "file",
 			hidden = true,
@@ -29,6 +29,7 @@ return {
             -- In case you want to override the layout for this keymap
             layout = "custom",
           }) end, desc = "Find Files" },
+		 { '<Space>f', function() require('plugins.snacks.fff').fff() end, desc = 'Smart Find Files', },
 		-- find
 		{ "<leader>b", function() Snacks.picker.buffers({
             -- I always want my buffers picker to start in normal mode
