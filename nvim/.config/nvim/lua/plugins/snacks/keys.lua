@@ -30,7 +30,7 @@ return {
             layout = "custom",
           }) end, desc = "Find Files" },
 		{ '<Space>f', function() require('plugins.snacks.fff').fff() end, desc = 'Smart Find Files', },
-		{ "<leader>p", function() require("plugins.snacks.command-palette").show_commands() end, desc = "Command Palette", },
+		{ "<leader>c", function() require("plugins.snacks.command-palette").show_commands() end, desc = "Command Palette", },
 		-- find
 		{ "<leader>b", function() Snacks.picker.buffers({
             -- I always want my buffers picker to start in normal mode
