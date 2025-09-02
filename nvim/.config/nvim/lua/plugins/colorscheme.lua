@@ -76,6 +76,18 @@ return {
 					fg = colors.polar_night.brightest,
 					bg = "NONE",
 				}
+				highlights["AvantePromptInputBorder"] = {
+					fg = colors.polar_night.brightest,
+					bg = "NONE",
+				}
+				highlights["AvanteSidebarWinSeparator"] = {
+					fg = colors.polar_night.brightest,
+					bg = "NONE",
+				}
+				highlights["AvanteSidebarWinHorizontalSeparator"] = {
+					fg = colors.polar_night.brightest,
+					bg = "NONE",
+				}
 			end,
 		})
 		vim.cmd.colorscheme("nord")
