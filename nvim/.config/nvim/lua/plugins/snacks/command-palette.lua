@@ -137,17 +137,6 @@ M.commands = {
 		action = "<leader>hs",
 	},
 	{
-		name = "Indent Guides: Toggle",
-		action = function()
-			local snacks_indent = require("snacks").indent
-			if snacks_indent.enabled then
-				snacks_indent.disable()
-			else
-				snacks_indent.enable()
-			end
-		end,
-	},
-	{
 		name = "LSP: Rename",
 		action = "<leader>r",
 	},
@@ -260,16 +249,32 @@ M.commands = {
 		action = ":TodoLocList",
 	},
 	{
-		name = "Words: Toggle",
-		action = function()
-			local snacks_words = require("snacks").words
-			if snacks_words.enabled then
-				snacks_words.disable()
-			else
-				snacks_words.enable()
-			end
-		end,
+		name = "Codecompanion: ActionPalette",
+		action = ":CodeCompanionActions",
 	},
+	{ name = "CodeCompanion: send a message to the LLM", action = "<CR>|<C-s>" },
+	{ name = "CodeCompanion: close the chat buffer", action = "<C-c>" },
+	{ name = "CodeCompanion: stop the current request", action = "q" },
+	{ name = "CodeCompanion: change the adapter for the currentchat", action = "ga" },
+	{ name = "CodeCompanion: insert a codeblock in the chat buffer", action = "gc" },
+	{ name = "CodeCompanion: view/debug the chat buffer's contents", action = "gd" },
+	{ name = "CodeCompanion: view the chat buffer's super diff feature", action = "gD" },
+	{ name = "CodeCompanion: fold any codeblocks in the chat buffer", action = "gf" },
+	{ name = "CodeCompanion: pin an item to the context in the chat buffer", action = "gp" },
+	{ name = "CodeCompanion: regenerate the last response", action = "gr" },
+	{
+		name = "CodeCompanion: go to the file under cursor. If the file is already opened, it'll jump to the existing window. Otherwise, it'll be opened in a new tab.",
+		action = "gR",
+	},
+	{ name = "Codecompanion: toggle the system prompt on/off", action = "gs" },
+	{ name = "Codecompanion: show copilot usage stats", action = "gS" },
+	{ name = "Codecompanion: toggle auto tool mode", action = "gta" },
+	{ name = "Codecompanion: watch a buffer as context in the chat buffer", action = "gw" },
+	{ name = "Codecompanion: clear the chat buffer's contents", action = "gx" },
+	{ name = "Codecompanion: yank the last codeblock in the chat buffer", action = "gy" },
+	{ name = "Codecompanion: move to the next header", action = "]]" },
+	{ name = "Codecompanion: move to the previous chat", action = "{" },
+	{ name = "Codecompanion: move to the next chat", action = "}" },
 }
 
 function M.show_commands()
