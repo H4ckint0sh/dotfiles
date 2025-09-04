@@ -1,5 +1,8 @@
 local keymap = vim.keymap
 
+keymap.set("n", "<leader>g", "<cmd>RunCommand lazygit<CR>", { desc = "Open lazygit in floating terminal" })
+keymap.set("n", "<leader>b", "<cmd>RunCommand btop<CR>", { desc = "Open btop in floating terminal" })
+
 -- same behavior like alt + up/down in vscode
 -- the selected line will move one line up/down
 keymap.set("v", "K", ":m '<-2<CR>gv=gv")

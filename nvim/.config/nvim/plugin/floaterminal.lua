@@ -14,13 +14,8 @@ local function create_floating_window(opts)
 	local col = math.floor((vim.o.columns - width) / 2)
 	local row = math.floor((vim.o.lines - height) / 2)
 
-	-- Create a buffer
-	local buf = nil
-	if vim.api.nvim_buf_is_valid(opts.buf) then
-		buf = opts.buf
-	else
-		buf = vim.api.nvim_create_buf(false, true)
-	end
+	-- Always create a new buffer for command execution
+	local buf = vim.api.nvim_create_buf(false, true)
 
 	-- Define window configuration
 	local win_config = {
@@ -53,5 +48,51 @@ local toggle_terminal = function()
 	end
 end
 
+-- NEW: Function to run a command and auto-close
+local function run_command_and_quit(command)
+	-- Always create a new window and buffer for commands
+	local floating_win = create_floating_window({})
+
+	-- Set up terminal with the command
+	vim.fn.termopen(command, {
+		on_exit = function()
+			-- Close the window when command finishes
+			vim.defer_fn(function()
+				if vim.api.nvim_win_is_valid(floating_win.win) then
+					vim.api.nvim_win_close(floating_win.win, true)
+				end
+				-- Clean up the buffer
+				if vim.api.nvim_buf_is_valid(floating_win.buf) then
+					vim.api.nvim_buf_delete(floating_win.buf, { force = true })
+				end
+			end, 100) -- Small delay to see the output
+		end,
+	})
+
+	-- Set some buffer options for better display
+	vim.api.nvim_buf_set_option(floating_win.buf, "filetype", "terminal")
+	vim.api.nvim_buf_set_option(floating_win.buf, "buftype", "terminal")
+
+	-- CRITICAL: Enter insert mode automatically for interactive applications
+	vim.cmd("startinsert")
+end
+
+-- NEW: Custom command that handles arguments better
+vim.api.nvim_create_user_command("RunCommandInFloatingTerminal", function(opts)
+	local command = opts.args
+	if command == "" then
+		vim.notify("No command provided", vim.log.levels.ERROR)
+		return
+	end
+
+	run_command_and_quit(command)
+end, { nargs = "*", desc = "Run command in floating terminal and auto-close" })
+
+-- Keep the original toggle functionality
 vim.api.nvim_create_user_command("ToggleFloatingTerminal", toggle_terminal, {})
 vim.keymap.set({ "n", "t" }, "<F12>", toggle_terminal, { silent = true })
+
+-- Optional: Add a specific command for lazygit since it's commonly used
+vim.api.nvim_create_user_command("LazyGit", function()
+	run_command_and_quit("lazygit")
+end, { desc = "Open lazygit in floating terminal" })
