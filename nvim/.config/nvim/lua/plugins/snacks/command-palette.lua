@@ -252,6 +252,7 @@ M.commands = {
 		name = "Codecompanion: ActionPalette",
 		action = ":CodeCompanionActions",
 	},
+	{ name = "Command History", action = "<leader>:" },
 	{ name = "CodeCompanion: send a message to the LLM", action = "<CR>|<C-s>" },
 	{ name = "CodeCompanion: close the chat buffer", action = "<C-c>" },
 	{ name = "CodeCompanion: stop the current request", action = "q" },
@@ -292,7 +293,16 @@ function M.show_commands()
 
 	Snacks.picker({
 		title = "Command Palette",
-		layout = "select",
+		layout = {
+			preset = "select",
+			layout = {
+				width = 0.4,
+				min_width = 60,
+				border = "rounded",
+				height = 0.3,
+				min_height = 17,
+			},
+		},
 		items = items,
 		format = function(item, _)
 			return {

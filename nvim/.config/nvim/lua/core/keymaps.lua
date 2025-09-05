@@ -94,6 +94,15 @@ vim.keymap.set(
 	{ desc = "Replace in Quickfix List (Word)" }
 )
 
+keymap.set("n", "<leader>:", function()
+	Snacks.picker.command_history({
+		layout = {
+			preset = "select",
+			layout = { width = 0.4, min_width = 60, border = "rounded", height = 0.4, min_height = 17 },
+		},
+	})
+end, { desc = "Command History" })
+
 -- General keymaps
 keymap.set("n", "<leader>%", "ggVG") -- exit insert mode with ii
 keymap.set("n", "<leader>wq", ":wq<CR>") -- save and quit

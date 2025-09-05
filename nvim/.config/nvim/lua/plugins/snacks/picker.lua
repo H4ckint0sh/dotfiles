@@ -91,7 +91,7 @@ return {
 	formatters = {
 		-- For fff.lua picker
 		file = {
-			filename_first = true,
+			filename_first = false,
 			truncate = 40,
 			filename_only = false,
 			icon_width = 2,
