@@ -212,7 +212,3 @@ vim.keymap.set("n", "<leader>mf", function()
 
 	vim.notify(string.format("Opened %d modified files", count), vim.log.levels.INFO)
 end, { desc = "Open git modified files in buffers" })
-
-vim.keymap.set("n", "<leader>.", function()
-	print(vim.fn.line("."))
-end, { desc = "Print current line number" })
