@@ -1,7 +1,7 @@
 local keymap = vim.keymap
 
 keymap.set("n", "<leader>g", "<cmd>RunCommand lazygit<CR>", { desc = "Open lazygit in floating terminal" })
-keymap.set("n", "<leader>b", "<cmd>RunCommand btop<CR>", { desc = "Open btop in floating terminal" })
+keymap.set("n", "<leader>z", "<cmd>RunCommand btop<CR>", { desc = "Open btop in floating terminal" })
 
 -- same behavior like alt + up/down in vscode
 -- the selected line will move one line up/down
@@ -66,8 +66,6 @@ keymap.set("n", "<leader>w", ":w<CR>", { silent = true })
 
 -- Search
 keymap.set("n", "R", ":%s/\\v/g<left><left>", { silent = false }) -- replace
-keymap.set("n", "ss", ":s/", { silent = false }) -- search and replace
-keymap.set("n", "SS", ":%s/\\v", { silent = false }) -- search and replace
 keymap.set("v", "<leader>;", ":s/\\%V") -- Search only in visual selection usingb%V atom
 keymap.set("v", "<leader>w", '"hy:%s/\\v<C-r>h//g<left><left>', { silent = false }) -- change selection
 -- Search and replace
