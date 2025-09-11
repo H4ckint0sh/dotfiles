@@ -2,6 +2,7 @@
 tap "epk/epk"
 tap "arl/arl"
 tap "jesseduffield/lazygit"
+brew tap FelixKratz/formulae
 
 # Binaries
 brew "bash" # Latest Bash version
@@ -29,6 +30,7 @@ brew "ripgrep"
 brew "pandoc"
 brew "wget"
 brew "choose"
+brew "borders"
 brew "yarn"
 brew "fnm"
 brew "mailsy"

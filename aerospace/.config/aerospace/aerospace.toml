@@ -5,15 +5,16 @@ after-login-command = []
 
 after-startup-command = [
   'exec-and-forget open -a Ghostty & open -a Microsoft\ Teams & open -a Chromium',
-  'exec-and-forget /opt/homebrew/bin/sketchybar',
+  'exec-and-forget borders active_color=0xffD8DEE9 inactive_color=0xff616E88 width=5.0',
+  # 'exec-and-forget /opt/homebrew/bin/sketchybar',
 ]
 
 # Notify Sketchybar about workspace change
-exec-on-workspace-change = [
-  '/bin/bash',
-  '-c',
-  '/opt/homebrew/bin/sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE',
-]
+# exec-on-workspace-change = [
+#   '/bin/bash',
+#   '-c',
+#   '/opt/homebrew/bin/sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE',
+# ]
 
 on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
 
@@ -172,6 +173,10 @@ run = 'move-node-to-workspace B'
 
 [[on-window-detected]]
 if.app-id = 'com.hnc.Discord'
+run = "move-node-to-workspace D"
+
+[[on-window-detected]]
+if.app-id = 'com.electron.dockerdesktop'
 run = "move-node-to-workspace D"
 
 # Exclude apps
