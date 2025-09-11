@@ -67,6 +67,11 @@ path = "/Users/ali/Desktop/projects/upphandlingsmyndigheten-dkn-2020-frontend/"
 startup_command = "uhm"
 
 [[session]]
+name = "Ambea "
+path = "/Users/ali/Desktop/projects/Ambea_ProjectQ/frontend/web-client"
+startup_command = "ambea"
+
+[[session]]
 name = "Purus "
 path = "/Users/ali/Desktop/projects/purus-configurator-frontend/"
 startup_command = "purus"
