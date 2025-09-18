@@ -2,7 +2,7 @@
 tap "epk/epk"
 tap "arl/arl"
 tap "jesseduffield/lazygit"
-brew tap FelixKratz/formulae
+brew tap "FelixKratz/formulae"
 
 # Binaries
 brew "bash" # Latest Bash version
