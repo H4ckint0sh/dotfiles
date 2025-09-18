@@ -1,5 +1,5 @@
 vim.diagnostic.config({
-	underline = true, -- use custom diagnostic handler instead to filter for which diagnostics to show an underline
+	underline = false , -- use custom diagnostic handler instead to filter for which diagnostics to show an underline
 	signs = {
 		text = {
 			[vim.diagnostic.severity.ERROR] = "", -- ◉✘
