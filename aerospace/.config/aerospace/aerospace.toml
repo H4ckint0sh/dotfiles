@@ -48,6 +48,9 @@ outer.bottom = 12
 outer.top = 12
 outer.right = 12
 
+inner.horizontal = 12
+inner.vertical = 12
+
 [mode.main.binding]
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#layout
