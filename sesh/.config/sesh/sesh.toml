@@ -13,65 +13,65 @@ startup_command = "default"
 
 [[session]]
 name = "Vyta "
-path = "/Users/ali/Desktop/projects/farghuset-frontend"
+path = "/Users/ali/projects/farghuset-frontend"
 startup_command = "litium"
 
 [[session]]
 name = "Bergkvist "
-path = "/Users/ali/Desktop/projects/litium-frontend"
+path = "/Users/ali/projects/litium-frontend"
 startup_command = "litium"
 
 [[session]]
 name = "Special Electronics "
-path = "/Users/ali/Desktop/projects/special-electronics"
+path = "/Users/ali/projects/special-electronics"
 startup_command = "litium"
 
 [[session]]
 name = "Accelerator S5 "
-path = "/Users/ali/Desktop/projects/litium-accelerator-s5/"
+path = "/Users/ali/projects/litium-accelerator-s5/"
 startup_command = "litium"
 
 [[session]]
 name = "Lindab "
-path = "/Users/ali/Desktop/projects/lindab-2019-frontend"
+path = "/Users/ali/projects/lindab-2019-frontend"
 startup_command = "lindab"
 
 [[session]]
 name = "PEAB "
-path = "/Users/ali/Desktop/projects/peab-backend/Peab.Bostad.ClientSide"
+path = "/Users/ali/projects/peab-backend/Peab.Bostad.ClientSide"
 startup_command = "peab"
 
 [[session]]
 name = "Taby "
-path = "/Users/ali/Desktop/projects/taby-frontend-2023"
+path = "/Users/ali/projects/taby-frontend-2023"
 startup_command = "next"
 
 [[session]]
 name = "ISP "
-path = "/Users/ali/Desktop/projects/isp.website.umbraco10"
+path = "/Users/ali/projects/isp.website.umbraco10"
 startup_command = "isp"
 
 [[session]]
 name = "AGV "
-path = "/Users/ali/Desktop/projects/arbetsgivarverket-2022-frontend/"
+path = "/Users/ali/projects/arbetsgivarverket-2022-frontend/"
 startup_command = "agv"
 
 [[session]]
 name = "Hem "
-path = "/Users/ali/Desktop/projects/hem-2023-frontend"
+path = "/Users/ali/projects/hem-2023-frontend"
 startup_command = "hem"
 
 [[session]]
 name = "UHM "
-path = "/Users/ali/Desktop/projects/upphandlingsmyndigheten-dkn-2020-frontend/"
+path = "/Users/ali/projects/upphandlingsmyndigheten-dkn-2020-frontend/"
 startup_command = "uhm"
 
 [[session]]
 name = "Ambea "
-path = "/Users/ali/Desktop/projects/Ambea_ProjectQ/frontend/web-client"
+path = "/Users/ali/projects/Ambea_ProjectQ/frontend/web-client"
 startup_command = "ambea"
 
 [[session]]
 name = "Purus "
-path = "/Users/ali/Desktop/projects/purus-configurator-frontend/"
+path = "/Users/ali/projects/purus-configurator-frontend/"
 startup_command = "purus"
