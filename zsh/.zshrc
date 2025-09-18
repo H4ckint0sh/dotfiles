@@ -4,7 +4,8 @@ if [ $(ps ax | grep "[s]sh-agent" | wc -l) -eq 0 ] ; then
         # Auto-add ssh keys to your ssh agent
         # Example:
         ssh-add --apple-use-keychain ~/.ssh/id_ed25519_github > /dev/null 2>&1
-        ssh-add --apple-use-keychain ~/.ssh/id_rsa_devops > /dev/null 2>&1
+        ssh-add --apple-use-keychain ~/.ssh/id_rsa_consid > /dev/null 2>&1
+        ssh-add --apple-use-keychain ~/.ssh/id_rsa_ambea > /dev/null 2>&1
     fi
 fi
 
@@ -65,12 +66,12 @@ export PGDATA='/Users/ali/.postgres'
 # Set neovim as EDITOR
 export EDITOR=nvim
 
-# Gemini API Key
-export GEMINI_API_KEY=$(security find-generic-password -s "gemini_api_key" -w)
-
-# DeepSeek API Key
-export GEMINI_API_KEY=$(security find-generic-password -s "gemini_api_key" -w)
-
+# # Gemini API Key
+# export GEMINI_API_KEY=$(security find-generic-password -s "gemini_api_key" -w)
+#
+# # DeepSeek API Key
+# export GEMINI_API_KEY=$(security find-generic-password -s "gemini_api_key" -w)
+#
 
 export ZSH_CUSTOM=$DOTFILES
 # export LANG=en_US.UTF-8
