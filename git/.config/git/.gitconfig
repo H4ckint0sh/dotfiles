@@ -1,3 +1,10 @@
+
+[includeIf "gitdir:~/code/personal/"]
+    path = .gitconfig-personal
+
+[includeIf "gitdir:~/code/professional/"]
+    path = .gitconfig-professional
+
 [commit]
     gpgSign = true
     template = ~/.config/git/template
@@ -54,23 +61,6 @@
 [rebase]
     autoStash = true
 
-# Colors
-[color "blame"]
-    highlightRecent = black bold,1 year ago,white,1 month ago,default,7 days ago,blue
-
-[color "branch"]
-    current  = magenta
-    local    = default
-    remote   = yellow
-    upstream = green
-    plain    = blue
-
-[color "diff"]
-    meta       = black bold
-    frag       = magenta
-    context    = white
-    whitespace = yellow reverse
-
 [interactive]
     diffFilter = diff-so-fancy --patch
     singlekey = true
@@ -79,9 +69,3 @@
 [diff-so-fancy]
     markEmptyLines = false
 
-# URL shortcuts
-[url "git@github.com:"]
-    insteadOf = "gh:"
-
-[url "ssh://git@git.qrator.net:2202/radar/"]
-    insteadOf = "radar:"

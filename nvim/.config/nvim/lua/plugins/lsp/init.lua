@@ -215,7 +215,7 @@ return {
 					"ts_ls",
 					"jdtls",
 					"emmet_language_server",
-					"some-sass-language-server",
+					"somesass_ls",
 				},
 				automatic_enable = {
 					exclude = {
@@ -233,8 +233,6 @@ return {
 					"roslyn",
 				},
 			})
-			-- Emmet language server requires this
-			require("lspconfig").emmet_language_server.setup({})
 		end,
 	},
 	{

@@ -1,13 +1,11 @@
-if [ $(ps ax | grep "[s]sh-agent" | wc -l) -eq 0 ] ; then
-    eval $(ssh-agent -s) > /dev/null
-    if [ "$(ssh-add -l)" = "The agent has no identities." ] ; then
-        # Auto-add ssh keys to your ssh agent
-        # Example:
-        ssh-add --apple-use-keychain ~/.ssh/id_ed25519_github > /dev/null 2>&1
-        ssh-add --apple-use-keychain ~/.ssh/id_rsa_consid > /dev/null 2>&1
-        ssh-add --apple-use-keychain ~/.ssh/id_rsa_ambea > /dev/null 2>&1
-    fi
-fi
+# Start the SSH agent and add keys if it's not already running.
+eval "$(ssh-agent -s)" > /dev/null
+
+# Automatically add all private keys that aren't already added.
+# Find all files in ~/.ssh that look like private keys (no .pub extension).
+# Then, for each key, check if it's already in the agent with 'ssh-add -l | grep -q'.
+# If not, add it with 'ssh-add --apple-use-keychain'.
+find ~/.ssh -type f -not -name "*.pub" -exec sh -c 'ssh-add -l | grep -q "$1" || ssh-add --apple-use-keychain "$1"' _ {} \; > /dev/null 2>&1
 
 # FZF --------------------------------------------------------------
 export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
@@ -67,10 +65,7 @@ export PGDATA='/Users/ali/.postgres'
 export EDITOR=nvim
 
 # # Gemini API Key
-# export GEMINI_API_KEY=$(security find-generic-password -s "gemini_api_key" -w)
-#
-# # DeepSeek API Key
-# export GEMINI_API_KEY=$(security find-generic-password -s "gemini_api_key" -w)
+export GEMINI_API_KEY=$(security find-generic-password -w -s "gemini_api_key")
 #
 
 export ZSH_CUSTOM=$DOTFILES
