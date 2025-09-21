@@ -1,37 +1,24 @@
-
-console_title_template = '{{ .Shell }} in {{ .Folder }}'
 version = 3
 final_space = true
-
-[transient_prompt]
-background = "transparent"
-template = '❯ '
-foreground_templates = [
-  '{{if gt .Code 0}}#BF616A{{end}}',
-  '{{if eq .Code 0}}#88C0D0{{end}}',
-]
-
-[secondary_prompt]
-background = "transparent"
-foreground = "#D8DEE9"
-template = "╰─❯ "
+console_title_template = '{{ .Shell }} in {{ .Folder }}'
 
 [[blocks]]
-alignment = "left"
-type = "prompt"
+type = 'prompt'
+alignment = 'left'
 newline = true
 
 [[blocks.segments]]
-foreground = "#A3BE8C"
-style = "plain"
-template = "<#81A1C1>╭─(</>{{ .Path }}<#81A1C1>)</>"
-type = "path"
+type = 'path'
+style = 'plain'
+background = 'transparent'
+foreground = 'blue'
+template = '{{ .Path }}'
 
 [blocks.segments.properties]
-style = "full"
+style = 'full'
 
 [[blocks.segments]]
-foreground = "#EBCB8B"
+foreground = 'yellow'
 style = "plain"
 template = "<#81A1C1> - (</>{{ if .PackageManagerIcon }}{{ .PackageManagerIcon }}{{ else }}{{ end }} {{ .Full }}<#81A1C1>)</>"
 type = "node"
@@ -41,15 +28,14 @@ type = 'rprompt'
 overflow = 'hidden'
 
 [[blocks.segments]]
-template = '{{ .FormattedMs }}'
-foreground = '#EBCB8B'
-background = 'transparent'
 type = 'executiontime'
 style = 'plain'
+foreground = 'yellow'
+background = 'transparent'
+template = '{{ .FormattedMs }}'
 
 [blocks.segments.properties]
-cache_duration = 'none'
-threshold = 50
+threshold = 5000
 
 [[blocks]]
 type = 'prompt'
@@ -57,26 +43,19 @@ alignment = 'left'
 newline = true
 
 [[blocks.segments]]
-foreground = "#81A1C1"
-style = "plain"
-template = "╰─"
-type = "text"
-
-[[blocks.segments]]
-template = "<#81A1C1>(</>{{ if .Env.POSH_VI_MODE }}{{ .Env.POSH_VI_MODE }}{{ end }}<#81A1C1>)─</>"
+template = "{{if .Env.POSH_VI_MODE}}{{.Env.POSH_VI_MODE}}{{end}}"
 background = 'transparent'
 type = 'text'
 style = 'plain'
 
 [[blocks.segments]]
-template = '❯'
-background = 'transparent'
-foreground_templates = [
-  '{{if gt .Code 0}}#BF616A{{end}}',
-  '{{if eq .Code 0}}#88C0D0{{end}}',
-]
 type = 'text'
 style = 'plain'
+foreground = 'blue'
+background = 'transparent'
+template = ' =>'
 
-[blocks.segments.properties]
-cache_duration = 'none'
+[secondary_prompt]
+foreground = 'magenta'
+background = 'transparent'
+template = '❯❯ '
