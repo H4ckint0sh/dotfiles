@@ -1,7 +1,7 @@
 # #!/usr/bin/env bash
 
 CHOICE=$(
-  sesh list --icons | fzf-tmux -p 80%,70% \
+  sesh list --icons | fzf-tmux -p 80%,80% \
     --no-sort --ansi --border-label ' sesh ' --prompt '⚡  ' \
     --header '  ^a all ^t tmux ^g configs ^x zoxide ^d tmux kill ^f find' \
     --bind 'tab:down,btab:up' \
@@ -11,7 +11,7 @@ CHOICE=$(
     --bind 'ctrl-x:change-prompt(📁  )+reload(sesh list -z --icons)' \
     --bind 'ctrl-f:change-prompt(🔎  )+reload(fd -H -d 2 -t d -E .Trash . ~)' \
     --bind 'ctrl-d:execute(tmux kill-session -t {2..})+change-prompt(⚡  )+reload(sesh list --icons)' \
-    --preview-window 'right:65%' \
+    --preview-window 'right:70%' \
     --preview 'sesh preview {}'
 )
 

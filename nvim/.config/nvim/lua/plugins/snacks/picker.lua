@@ -37,9 +37,9 @@ return {
 			layout = {
 				box = "horizontal",
 				backdrop = false,
-				width = 0.9,
+				width = 0.8,
 				min_width = 120,
-				height = 0.9,
+				height = 0.8,
 				{
 					box = "vertical",
 					border = "rounded",
@@ -47,7 +47,7 @@ return {
 					{ win = "input", height = 1, border = "bottom" },
 					{ win = "list", border = "none" },
 				},
-				{ win = "preview", title = "{preview}", border = "rounded", width = 0.65 },
+				{ win = "preview", title = "{preview}", border = "rounded", width = 0.70 },
 			},
 		},
 		ivy = {
