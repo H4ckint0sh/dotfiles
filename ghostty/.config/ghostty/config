@@ -16,9 +16,9 @@ window-decoration = auto
 macos-titlebar-style = hidden
 window-padding-balance = true
 window-padding-y = 2,2
-window-padding-x = 2,2
+window-padding-x = 5,5
 clipboard-read = "allow"
-background-opacity = .97
+background-opacity = 1
 
 # Other
 confirm-close-surface = false 
