@@ -37,9 +37,9 @@ return {
 			layout = {
 				box = "horizontal",
 				backdrop = false,
-				width = 0.8,
+				width = 0.9,
 				min_width = 120,
-				height = 0.8,
+				height = 0.9,
 				{
 					box = "vertical",
 					border = "rounded",
