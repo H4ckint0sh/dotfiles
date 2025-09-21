@@ -25,7 +25,7 @@ return {
 			lualine_c = { sources.filetype, sources.macro },
 			lualine_x = { sources.lsp_formater_linter, sources.diagnostics },
 			lualine_y = { sources.indentation, sources.encoding, sources.fileformat },
-			lualine_z = { sources.progress, sources.location },
+			lualine_z = { sources.progressr sources.location },
 		},
 	},
 }

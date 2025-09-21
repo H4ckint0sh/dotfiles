@@ -64,27 +64,30 @@ keymap.set("n", "<S-u>", ":redo<CR>", { silent = true })
 -- Save
 keymap.set("n", "<leader>w", ":w<CR>", { silent = true })
 
+keymap.set("n", "<BS>", "^", { desc = "move to first non-blank character of the line" })
 -- Search
+keymap.set("n", "<leaer>ss", ":s/\\v", { silent = false, desc = "search and replace on line" })
+keymap.set("n", "<leaer>SS", ":%s/\\v", { silent = false, desc = "search and replace in file" })
 keymap.set("n", "R", ":%s/\\v/g<left><left>", { silent = false }) -- replace
 keymap.set("v", "<leader>;", ":s/\\%V") -- Search only in visual selection usingb%V atom
 keymap.set("v", "<leader>w", '"hy:%s/\\v<C-r>h//g<left><left>', { silent = false }) -- change selection
 -- Search and replace
-vim.keymap.set({ "n", "v" }, "<leader>rr", [[:%s///gcI<Left><Left><Left><Left><Left>]], { desc = "Replace in Buffer" })
-vim.keymap.set(
+keymap.set({ "n", "v" }, "<leader>rr", [[:%s///gcI<Left><Left><Left><Left><Left>]], { desc = "Replace in Buffer" })
+keymap.set(
 	"n",
 	"<leader>rw",
 	[[:%s/\<<C-r><C-w>\>//gcI<Left><Left><Left><Left>]],
 	{ desc = "Replace in Buffer (Word)" }
 )
-vim.keymap.set("v", "<leader>rs", [[:s///gcI<Left><Left><Left><Left><Left>]], { desc = "Replace in Selection" })
-vim.keymap.set(
+keymap.set("v", "<leader>rs", [[:s///gcI<Left><Left><Left><Left><Left>]], { desc = "Replace in Selection" })
+keymap.set(
 	"n",
 	"<leader>rR",
 	[[:cfdo %s///gcI | update]]
 		.. [[<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>]],
 	{ desc = "Replace in Quickfix List" }
 )
-vim.keymap.set(
+keymap.set(
 	"n",
 	"<leader>rW",
 	[[:cfdo %s/\<<C-r><C-w>\>//gcI | update]]
