@@ -29,10 +29,11 @@ gui:
   skipDiscardChangeWarning: false
   skipStashWarning: true
   showFileTree: true # for rendering changes files in a tree format
-  showListFooter: false # for seeing the '5 of 20' message in list panels
+  showListFooter: true # for seeing the '5 of 20' message in list panels
   showRandomTip: false
   showCommandLog: false
-  showBottomLine: false
+  showBottomLine: true
+  showPanelJumps: true
   commandLogSize: 8
   authorColors:
     "H4ckint0sh": "blue"
@@ -61,7 +62,7 @@ git:
     order: "topo-order"
     # one of always, never, when-maximised
     # this determines whether the git graph is rendered in the commits panel
-    showGraph: "always"
+    showGraph: "when-maximised"
     # displays the whole git graph by default in the commits panel (equivalent to passing the `--all` argument to `git log`)
     showWholeGraph: true
   allBranchesLogCmds:
@@ -79,11 +80,6 @@ disableStartupPopups: false
 notARepository: "prompt" # one of: 'prompt' | 'create' | 'skip'
 promptToReturnFromSubprocess: false # display confirmation when subprocess terminates
 customCommands:
-  - key: "C"
-    command: "nvim +Commit"
-    context: "files"
-    description: "Commit"
-    output: terminal
   - key: "f"
     command: "git fetch --prune --all"
     context: "files"
