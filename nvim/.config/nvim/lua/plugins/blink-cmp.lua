@@ -36,6 +36,12 @@ return {
 			completion = { menu = { auto_show = true } },
 		},
 		completion = {
+			list = {
+				selection = {
+					preselect = true,
+					auto_insert = true,
+				},
+			},
 			ghost_text = {
 				enabled = true,
 			},
