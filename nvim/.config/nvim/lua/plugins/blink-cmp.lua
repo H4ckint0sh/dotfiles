@@ -13,6 +13,7 @@ return {
 			},
 		},
 		{ "huijiro/blink-cmp-supermaven" },
+		"jdrupal-dev/css-vars.nvim",
 		-- add source to dependencies
 	},
 	-- Use nightly build
@@ -25,6 +26,14 @@ return {
 		appearance = {
 			use_nvim_cmp_as_default = true,
 			nerd_font_variant = "normal",
+		},
+		cmdline = {
+			keymap = {
+				["<C-k>"] = { "select_prev", "fallback" },
+				["<C-j>"] = { "select_next", "fallback" },
+				["<Tab>"] = { "show", "accept" },
+			},
+			completion = { menu = { auto_show = true } },
 		},
 		completion = {
 			ghost_text = {
@@ -74,7 +83,7 @@ return {
 			preset = "luasnip",
 		},
 		sources = {
-			default = { "lsp", "path", "supermaven", "buffer", "snippets", "dadbod", "lazydev", "html-css" },
+			default = { "lsp", "path", "snippets", "buffer", "dadbod", "lazydev", "html-css", "supermaven" },
 			providers = {
 				dadbod = { name = "Dadbod", module = "vim_dadbod_completion.blink" },
 				lazydev = {
@@ -91,6 +100,15 @@ return {
 					name = "supermaven",
 					module = "blink-cmp-supermaven",
 					async = true,
+				},
+				css_vars = {
+					name = "css-vars",
+					module = "css-vars.blink",
+					opts = {
+						-- WARNING: The search is not optimized to look for variables in JS files.
+						-- If you change the search_extensions you might get false positives and weird completion results.
+						search_extensions = { ".js", ".ts", ".jsx", ".tsx" },
+					},
 				},
 			},
 		},
