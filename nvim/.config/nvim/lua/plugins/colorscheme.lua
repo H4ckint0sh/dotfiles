@@ -22,77 +22,9 @@ return {
 					modified = { italic = true },
 				},
 			},
-			on_highlights = function(highlights, colors)
-				highlights["@tag.builtin.tsx"] = {
-					fg = colors.aurora.purple,
-				}
-				highlights["SnacksDashboardHeader"] = {
-					fg = colors.aurora.green,
-				}
-				highlights["SnacksDashboardFooter"] = {
-					fg = colors.frost.artic_water,
-				}
-				highlights["Special"] = {
-					fg = colors.frost.ice,
-				}
-				highlights["Pmenu"] = {
-					bg = colors.polar_night.origin,
-				}
-				highlights["BlinkCmpMenuBorder"] = {
-					fg = colors.frost.ice,
-				}
-				highlights["IncSearch"] = {
-					fg = colors.frost.ice,
-				}
-				highlights["NeogitGraphBoldGray"] = {
-					bold = false,
-				}
-				highlights["NeogitGraphBlue"] = {
-					bold = false,
-				}
-				highlights["NeogitGraphCyan"] = {
-					bold = false,
-				}
-				highlights["NeogitGraphGreen"] = {
-					bold = false,
-				}
-				highlights["NeogitGraphYellow"] = {
-					bold = false,
-				}
-				highlights["NeogitGraphWhite"] = {
-					bold = false,
-				}
-				highlights["NeogitGraphOrange"] = {
-					bold = false,
-				}
-				highlights["NormalFloat"] = {
-					bg = "NONE",
-				}
-				highlights["StatusLine"] = {
-					bg = "NONE",
-				}
-				-- ToDo: Find a way to make this work via Nord
-				highlights["FloatBorder"] = {
-					fg = colors.polar_night.brightest,
-					bg = "NONE",
-				}
-				highlights["AvantePromptInputBorder"] = {
-					fg = colors.polar_night.brightest,
-					bg = "NONE",
-				}
-				highlights["AvanteSidebarWinSeparator"] = {
-					fg = colors.polar_night.brightest,
-					bg = "NONE",
-				}
-				highlights["AvanteSidebarWinHorizontalSeparator"] = {
-					fg = colors.polar_night.brightest,
-					bg = "NONE",
-				}
-			end,
+			-- on_highlights = function(highlights, colors)
+			-- end,
 		})
 		vim.cmd.colorscheme("nord")
-		vim.api.nvim_set_hl(0, "SnacksPickerDir", { link = "Text" })
-		vim.api.nvim_set_hl(0, "SnacksPickerPathHidden", { link = "Text" })
-		vim.api.nvim_set_hl(0, "SnacksPickerGitStatusUntracked", { link = "Special" })
 	end,
 }
