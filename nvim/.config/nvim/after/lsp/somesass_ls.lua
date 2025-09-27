@@ -1,3 +1,3 @@
 return {
-	filetypes = { "sass", "scss", "less", "css" },
+	filetypes = { "sass", "scss", "less" },
 }
