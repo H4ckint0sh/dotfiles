@@ -1,3 +1,4 @@
+local filetype = require("vim.filetype")
 return {
 	{
 		"pmizio/typescript-tools.nvim",
@@ -29,6 +30,7 @@ return {
 					vim.lsp.diagnostic.on_publish_diagnostics(err, result, ctx, config)
 				end,
 			},
+			filetype = { "svelte", "typescriptreact", "typescript", "javascript", "javascriptreact" },
 			settings = {
 				separate_diagnostic_server = true,
 				publish_diagnostic_on = "change",
