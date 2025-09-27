@@ -201,7 +201,6 @@ return {
 			require("mason-lspconfig").setup({
 				ensure_installed = {
 					"bashls",
-					"cssls",
 					"eslint",
 					"graphql",
 					"html",
@@ -215,6 +214,7 @@ return {
 					"ts_ls",
 					"jdtls",
 					"emmet_language_server",
+					"svelte-language-server",
 					"somesass_ls",
 				},
 				automatic_enable = {
