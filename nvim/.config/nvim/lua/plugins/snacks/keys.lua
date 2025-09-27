@@ -8,7 +8,7 @@ return {
 		{"<leader>fr", function() Snacks.rename.rename_file() end},
 		{ "<leader>X", function() Snacks.bufdelete.all() end, desc = "Delete all buffer" },
 		{ "<leader>gb", function() Snacks.gitbrowse() end, desc = "Git Browse" },
-		{ "<leader>fh", function() Snacks.lazygit.log_file() end, desc = "Lazygit Current File History" },
+		{ "<leader>g", function() Snacks.lazygit.open() end, desc = "Lazygit" },
 		{ "]]",         function() Snacks.words.jump(vim.v.count1) end, desc = "Next Reference" },
 		{ "[[",         function() Snacks.words.jump(-vim.v.count1) end, desc = "Prev Reference" },
 		{ "<leader>t", function() Snacks.picker.grep({ layout = { preset = "ivy" } , hidden = true }) end, desc = "Grep" },

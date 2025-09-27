@@ -43,7 +43,10 @@ return {
 		},
 		words = { enabled = true },
 		lazygit = {
-			enabled = false,
+			enabled = true,
+			win = {
+				style = "lazygit",
+			},
 		},
 
 		image = {
@@ -58,10 +61,6 @@ return {
 			icon = "",
 		},
 		styles = {
-			lazygit = {
-
-				height = 0,
-			},
 			input = {
 				relative = "cursor",
 				col = 0,

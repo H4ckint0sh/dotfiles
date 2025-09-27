@@ -1,6 +1,5 @@
 local keymap = vim.keymap
 
-keymap.set("n", "<leader>g", "<cmd>RunCommand lazygit<CR>", { desc = "Open lazygit in floating terminal" })
 keymap.set("n", "<leader>z", "<cmd>RunCommand btop<CR>", { desc = "Open btop in floating terminal" })
 
 -- same behavior like alt + up/down in vscode
