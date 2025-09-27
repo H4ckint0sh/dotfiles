@@ -47,7 +47,7 @@ return {
 					{ win = "input", height = 1, border = "bottom" },
 					{ win = "list", border = "none" },
 				},
-				{ win = "preview", title = "{preview}", border = "rounded", width = 0.70 },
+				{ win = "preview", title = "{preview}", border = "rounded", width = 0.65 },
 			},
 		},
 		ivy = {
