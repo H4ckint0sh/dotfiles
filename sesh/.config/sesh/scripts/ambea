@@ -2,10 +2,7 @@
 
 tmux send-keys 'nvim' Enter
 tmux new-window -c "#{session_path}"
-tmux split-window -h -l 50% 
-tmux send-keys 'docker-compose up --build -d --scale frontend=0' Enter
-tmux select-pane -L
-tmux send-keys 'npm run dev' Enter
+tmux send-keys 'docker-compose up --build -d; docker-compose down frontend; npm run dev' Enter
 tmux select-window -p
 
 
