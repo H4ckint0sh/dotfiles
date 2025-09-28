@@ -6,7 +6,7 @@ return {
 		require("nord").setup({
 			transparent = true,
 			errors = { mode = "fg" },
-			diff = { mode = "fg" },
+			diff = { mode = "bg" },
 			styles = {
 				-- Style to be applied to different syntax groups
 				-- Value is any valid attr-list value for `:help nvim_set_hl`
