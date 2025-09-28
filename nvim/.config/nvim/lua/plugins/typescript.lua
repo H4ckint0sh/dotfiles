@@ -1,4 +1,9 @@
-local filetype = require("vim.filetype")
+local filter = require("util.filter").filter
+local filterReactDTS = require("util.filterReactDTS").filterReactDTS
+local on_attach = require("plugins.lsp.on_attach")
+local methods = vim.lsp.protocol.Methods
+local inlay_hint_handler = vim.lsp.handlers[methods.textDocument_inlayHint]
+
 return {
 	{
 		"pmizio/typescript-tools.nvim",
@@ -7,16 +12,54 @@ return {
 			"nvim-lua/plenary.nvim",
 			{
 				"saghen/blink.cmp",
-				-- Ensure blink.cmp is loaded before typescript-tools
 				lazy = false,
 				priority = 1000,
 			},
 		},
 		opts = {
+
+			on_attach = on_attach,
 			handlers = {
+				["textDocument_inlayHint"] = function(err, result, ctx, config)
+					local client = vim.lsp.get_client_by_id(ctx.client_id)
+					if client and client.name == "typescript-tools" then
+						result = vim.iter(result)
+							:map(function(hint)
+								local label = hint.label ---@type string
+								if label:len() >= max_inlay_hint_length then
+									label = label:sub(1, max_inlay_hint_length - 1) .. "..."
+								end
+								hint.label = label
+								return hint
+							end)
+							:totable()
+					end
+
+					inlay_hint_handler(err, result, ctx, config)
+				end,
+				["textDocument/hover"] = function(_, result, ctx, config)
+					config = config or {}
+					config.border = "rounded"
+					config.focusable = false
+					config.silent = true
+					vim.lsp.handlers.hover(_, result, ctx, config)
+				end,
+				["textDocument/signatureHelp"] = function(_, result, ctx, config)
+					config = config or {}
+					config.border = "rounded"
+					config.focusable = false
+					vim.lsp.handlers.signature_help(_, result, ctx, config)
+				end,
+				["textDocument/definition"] = function(err, result, ctx, config)
+					if vim.tbl_islist(result) and #result > 1 then
+						local filtered_result = filter(result, filterReactDTS)
+						return vim.lsp.handlers["textDocument/definition"](err, filtered_result, ctx, config)
+					end
+					vim.lsp.handlers["textDocument/definition"](err, result, ctx, config)
+				end,
 				["textDocument/publishDiagnostics"] = function(err, result, ctx, config)
 					if result and result.diagnostics then
-						-- Filter out specific diagnostic codes (e.g., 6133 for unused var)
+						-- Filter out specific diagnostic codes
 						result.diagnostics = vim.tbl_filter(function(diagnostic)
 							local ignore_codes = {
 								[6133] = true, -- unused variable
@@ -27,27 +70,71 @@ return {
 							return not ignore_codes[diagnostic.code]
 						end, result.diagnostics)
 					end
-					vim.lsp.diagnostic.on_publish_diagnostics(err, result, ctx, config)
+
+					config = config or {}
+					config.virtual_text = true
+					vim.lsp.handlers["textDocument/publishDiagnostics"](err, result, ctx, config)
 				end,
 			},
 			filetype = { "svelte", "typescriptreact", "typescript", "javascript", "javascriptreact" },
 			settings = {
 				separate_diagnostic_server = true,
-				publish_diagnostic_on = "change",
+				publish_diagnostic_on = "insert_leave",
 				tsserver_max_memory = "auto",
 				tsserver_locale = "en",
-				complete_function_calls = true,
-				jsx_close_tag = {
-					enable = true,
-					filetypes = { "javascriptreact", "typescriptreact" },
+
+				tsserver_format_options = {
+					insertSpaceAfterCommaDelimiter = true,
+					insertSpaceAfterConstructor = false,
+					insertSpaceAfterSemicolonInForStatements = true,
+					insertSpaceBeforeAndAfterBinaryOperators = true,
+					insertSpaceAfterKeywordsInControlFlowStatements = true,
+					insertSpaceAfterFunctionKeywordForAnonymousFunctions = true,
+					insertSpaceBeforeFunctionParenthesis = false,
+					insertSpaceAfterOpeningAndBeforeClosingNonemptyParenthesis = false,
+					insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets = false,
+					insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces = true,
+					insertSpaceAfterOpeningAndBeforeClosingEmptyBraces = true,
+					insertSpaceAfterOpeningAndBeforeClosingTemplateStringBraces = false,
+					insertSpaceAfterOpeningAndBeforeClosingJsxExpressionBraces = false,
+					insertSpaceAfterTypeAssertion = false,
+					placeOpenBraceOnNewLineForFunctions = false,
+					placeOpenBraceOnNewLineForControlBlocks = false,
+					semicolons = "ignore",
 				},
+
 				tsserver_file_preferences = {
 					disableSuggestions = true,
+					quotePreference = "auto",
+					importModuleSpecifierPreference = "auto",
+					jsxAttributeCompletionStyle = "auto",
+					allowTextChangesInNewFiles = true,
+					providePrefixAndSuffixTextForRename = true,
+					allowRenameOfImportPath = true,
+					includeAutomaticOptionalChainCompletions = true,
+					provideRefactorNotApplicableReason = true,
+					generateReturnInDocTemplate = true,
+					includeCompletionsForImportStatements = true,
+					includeCompletionsWithSnippetText = true,
+					includeCompletionsWithClassMemberSnippets = true,
+					includeCompletionsWithObjectLiteralMethodSnippets = true,
+					useLabelDetailsInCompletionEntries = true,
+					allowIncompleteCompletions = true,
+					displayPartsForJSDoc = true,
+					includeInlayParameterNameHints = "literals",
+					includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+					includeInlayFunctionParameterTypeHints = true,
+					includeInlayVariableTypeHints = false,
+					includeInlayVariableTypeHintsWhenTypeMatchesName = false,
+					includeInlayPropertyDeclarationTypeHints = true,
+					includeInlayFunctionLikeReturnTypeHints = false,
+					includeInlayEnumMemberValueHints = true,
+					disableLineTextInReferences = true,
 				},
+
+				complete_function_calls = false,
+				include_completions_with_insert_text = true,
 				tsserver_plugins = {
-					-- for TypeScript v4.9+
-					-- "@styled/typescript-styled-plugin",
-					-- or for older TypeScript versions
 					"typescript-styled-plugin",
 				},
 			},
@@ -59,8 +146,14 @@ return {
 			{ "<leader>rf", "<CMD>TSToolsRenameFile<CR>", desc = "Rename File" },
 			{ "<leader>si", "<CMD>TSToolsSortImports<CR>", desc = "Sort Imports" },
 			{ "<leader>fa", "<CMD>TSToolsFixAll<CR>", desc = "Fix All" },
+			{
+				"<leader>i",
+				"<CMD>lua vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())<CR>",
+				desc = "Toggle Inlay Hints",
+			},
 		},
 	},
+	-- ... rest of your plugins remain the same
 	{
 		"razak17/tailwind-fold.nvim",
 		opts = {
