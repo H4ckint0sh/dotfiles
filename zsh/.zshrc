@@ -51,6 +51,7 @@ export DOTFILES=$HOME/.dotfiles
 
 # path to bat config
 export BAT_CONFIG_PATH="$HOME/.config/bat/config"
+export BAT_THEME="Nord"
 
 # JAVA_HOME
 export JAVA_HOME=$(/usr/libexec/java_home)
@@ -138,9 +139,6 @@ zstyle ':fzf-tab:*' fzf-flags --color=fg:#616E88,fg+:#D8DEE9,bg:-1,bg+:-1
 
 
 # FUNCTIONS --------------------------------------------------------------
-function fo() {
-    hx $(find -type f | fzf -m --preview="bat --color=always --style=numbers --line-range=:500 {}")
-}
 
 # fd - cd to selected directory
 fd() {
