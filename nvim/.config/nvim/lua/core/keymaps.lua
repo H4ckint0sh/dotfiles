@@ -43,6 +43,10 @@ keymap.set("n", "Y", "y$")
 -- Easy repeat of q@
 keymap.set("n", "Q", "@q")
 
+-- Comment
+keymap.set("n", "<leader>/", "gcc", { remap = true })
+keymap.set("v", "<leader>/", "gcc", { remap = true })
+
 -- Scape to normal mode from terminal mode
 keymap.set("t", "<esc><esc>", "<C-\\><C-n>")
 
