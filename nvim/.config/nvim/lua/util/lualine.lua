@@ -24,13 +24,13 @@ M.mode = {
 	color = function()
 		local mode = vim.fn.mode()
 		local map = {
-			n = palette.frost.artic_water,
+			n = palette.frost.ice,
 			i = palette.aurora.green,
 			c = palette.aurora.yellow,
-			t = palette.frost.ice,
+			t = palette.frost.artic_water,
 			R = palette.aurora.red,
-			v = palette.aurora.purple,
-			V = palette.aurora.purple,
+			v = palette.aurora.orange,
+			V = palette.aurora.orange,
 			s = palette.aurora.purple,
 			S = palette.aurora.purple,
 		}
