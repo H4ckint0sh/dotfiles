@@ -80,11 +80,12 @@ return {
 			},
 			filetype = { "svelte", "typescriptreact", "typescript", "javascript", "javascriptreact" },
 			settings = {
+				-- Performance settings
 				separate_diagnostic_server = true,
 				publish_diagnostic_on = "insert_leave",
 				tsserver_max_memory = "auto",
-				tsserver_locale = "en",
 
+				-- Formatting preferences (from default_format_options)
 				tsserver_format_options = {
 					insertSpaceAfterCommaDelimiter = true,
 					insertSpaceAfterConstructor = false,
@@ -103,12 +104,23 @@ return {
 					placeOpenBraceOnNewLineForFunctions = false,
 					placeOpenBraceOnNewLineForControlBlocks = false,
 					semicolons = "ignore",
+					indentSwitchCase = true,
 				},
 
+				-- File preferences (combining your inlay hints with default preferences)
 				tsserver_file_preferences = {
-					disableSuggestions = true,
+					includeInlayParameterNameHints = "all",
+					includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+					includeInlayFunctionParameterTypeHints = true,
+					includeInlayVariableTypeHints = true,
+					includeInlayVariableTypeHintsWhenTypeMatchesName = true,
+					includeInlayPropertyDeclarationTypeHints = true,
+					includeInlayFunctionLikeReturnTypeHints = true,
+					includeInlayEnumMemberValueHints = true,
+
+					-- Important default preferences
 					quotePreference = "auto",
-					importModuleSpecifierPreference = "auto",
+					importModuleSpecifierEnding = "auto",
 					jsxAttributeCompletionStyle = "auto",
 					allowTextChangesInNewFiles = true,
 					providePrefixAndSuffixTextForRename = true,
@@ -123,22 +135,14 @@ return {
 					useLabelDetailsInCompletionEntries = true,
 					allowIncompleteCompletions = true,
 					displayPartsForJSDoc = true,
-					includeInlayParameterNameHints = "literals",
-					includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-					includeInlayFunctionParameterTypeHints = true,
-					includeInlayVariableTypeHints = false,
-					includeInlayVariableTypeHintsWhenTypeMatchesName = false,
-					includeInlayPropertyDeclarationTypeHints = true,
-					includeInlayFunctionLikeReturnTypeHints = false,
-					includeInlayEnumMemberValueHints = true,
 					disableLineTextInReferences = true,
 				},
 
-				complete_function_calls = false,
+				-- Feature settings
+				expose_as_code_action = "all",
+				complete_function_calls = true,
 				include_completions_with_insert_text = true,
-				tsserver_plugins = {
-					"typescript-styled-plugin",
-				},
+				code_lens = "implementations_only",
 			},
 		},
 		keys = {
