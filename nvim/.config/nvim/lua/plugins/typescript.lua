@@ -3,6 +3,7 @@ local filterReactDTS = require("util.filterReactDTS").filterReactDTS
 local on_attach = require("plugins.lsp.on_attach")
 local methods = vim.lsp.protocol.Methods
 local inlay_hint_handler = vim.lsp.handlers[methods.textDocument_inlayHint]
+local max_inlay_hint_length = 50
 
 return {
 	{
@@ -17,7 +18,6 @@ return {
 			},
 		},
 		opts = {
-
 			on_attach = on_attach,
 			handlers = {
 				["textDocument_inlayHint"] = function(err, result, ctx, config)
@@ -51,11 +51,13 @@ return {
 					vim.lsp.handlers.signature_help(_, result, ctx, config)
 				end,
 				["textDocument/definition"] = function(err, result, ctx, config)
+					-- If result is a list and has more than one item, apply the filter
 					if vim.tbl_islist(result) and #result > 1 then
 						local filtered_result = filter(result, filterReactDTS)
 						return vim.lsp.handlers["textDocument/definition"](err, filtered_result, ctx, config)
 					end
-					vim.lsp.handlers["textDocument/definition"](err, result, ctx, config)
+					-- If the condition is not met, pass the original result without filtering
+					return vim.lsp.handlers["textDocument/definition"](err, result, ctx, config)
 				end,
 				["textDocument/publishDiagnostics"] = function(err, result, ctx, config)
 					if result and result.diagnostics then
@@ -151,18 +153,6 @@ return {
 				"<CMD>lua vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())<CR>",
 				desc = "Toggle Inlay Hints",
 			},
-		},
-	},
-	-- ... rest of your plugins remain the same
-	{
-		"razak17/tailwind-fold.nvim",
-		opts = {
-			min_chars = 50,
-		},
-		dependencies = { "nvim-treesitter/nvim-treesitter" },
-		ft = { "html", "svelte", "astro", "vue", "typescriptreact" },
-		keys = {
-			{ "<leader>tf", "<CMD>TailwindFoldToggle<CR>", desc = "Toggle Tailwind Fold" },
 		},
 	},
 	{
