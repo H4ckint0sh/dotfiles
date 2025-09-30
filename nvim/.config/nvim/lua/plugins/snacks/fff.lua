@@ -25,9 +25,8 @@ local status_map = {
 ---@field current_file_cache? string
 M.state = {}
 
----@type snacks.picker.finder
 ---@diagnostic disable-next-line: unused-local
-local function finder(opts, ctx)
+local function finder(_opts, ctx)
 	local file_picker = require("fff.file_picker")
 
 	if not M.state.current_file_cache then
