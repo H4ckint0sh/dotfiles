@@ -18,6 +18,10 @@ keymap.set("n", "N", "Nzzzv")
 keymap.set("v", "<", "<gv")
 keymap.set("v", ">", ">gv")
 
+-- greatest remap ever
+keymap.set("x", "<leader>p", '"_dP')
+keymap.set("n", "x", '"_x')
+
 -- Duplicate line(s) up
 keymap.set("i", "<S-A-Up>", "<Esc>yypki")
 keymap.set("n", "<S-A-Up>", "yypk")
