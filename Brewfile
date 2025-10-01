@@ -33,6 +33,7 @@ brew "choose"
 brew "borders"
 brew "yarn"
 brew "fnm"
+brew "fd" # Used by Snacks-nvim
 brew "mailsy"
 brew "imagemagick"
 brew "zoxide"
