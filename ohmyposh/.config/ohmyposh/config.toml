@@ -40,14 +40,13 @@ threshold = 5000
 [[blocks]]
 type = 'prompt'
 alignment = 'left'
-newline = true
 
 [[blocks.segments]]
 type = 'text'
 style = 'plain'
 foreground = 'blue'
 background = 'transparent'
-template = '>'
+template = ' >'
 
 [secondary_prompt]
 foreground = 'magenta'

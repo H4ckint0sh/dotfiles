@@ -156,6 +156,7 @@ export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
     --color=label:#D8DEE9 \
     --color=query:#E5E9F0 \
     "
+eval "$(fzf --zsh)"
 
 # ohmyposh
 eval "$(oh-my-posh init zsh --config ~/.config/ohmyposh/config.toml)"
@@ -209,8 +210,9 @@ zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zstyle ':completion:*' menu no
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
-# fzf options
-zstyle ':fzf-tab:*' 'fzf-flags --color=fg:#616E88,fg+:#D8DEE9,bg:-1,bg+:-1'
+zstyle ':fzf-tab:*' fzf-flags "--color=fg:#616E88,fg+:#D8DEE9,bg:-1,bg+:-1"
+zstyle ':fzf-tab:*' popup-min-size 80 10
+zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
 zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path ~/.cache/zsh/completions
 

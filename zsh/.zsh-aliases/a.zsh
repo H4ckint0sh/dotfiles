@@ -1,4 +1,7 @@
-# Git
+# ================================
+# Git Aliases
+# ================================
+
 alias ga='git add'
 alias gap='ga --patch'
 alias gb='git branch'
@@ -19,10 +22,13 @@ alias gr='git reset'
 alias gs='git status --short'
 alias gu='git pull'
 
-# Other
+# ================================
+# Other Aliases
+# ================================
+
 alias v='nvim'
 alias lg="lazygit"
-alias ls="eza --icons --group-directories-first -1 -T"
+alias ls="eza --icons --group-directories-first -1"
 alias ll="eza --icons --group-directories-first -l -T"
 alias c="clear"
 alias kp="ps aux | fzf | awk '{print \$2}' | xargs kill"
@@ -33,6 +39,10 @@ alias cp='cp -i'
 alias mkdir='mkdir -pv'
 alias path='echo -e ${PATH//:/\\n} | less'
 
+
+# ================================
+# SSH Agent Management
+# ================================
 
 alias sal='ssh_agent_lazy'
 
