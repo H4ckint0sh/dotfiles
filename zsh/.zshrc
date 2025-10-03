@@ -1,13 +1,131 @@
-# Start the SSH agent and add keys if it's not already running.
-eval "$(ssh-agent -s)" > /dev/null
+# !/usr/bin/env zsh
 
-# Automatically add all private keys that aren't already added.
-# Find all files in ~/.ssh that look like private keys (no .pub extension).
-# Then, for each key, check if it's already in the agent with 'ssh-add -l | grep -q'.
-# If not, add it with 'ssh-add --apple-use-keychain'.
-find ~/.ssh -type f -not -name "*.pub" -exec sh -c 'ssh-add -l | grep -q "$1" || ssh-add --apple-use-keychain "$1"' _ {} \; > /dev/null 2>&1
+# ~/.zshrc - Optimized ZSH Configuration
+# ================================================
 
-# FZF --------------------------------------------------------------
+# ================================
+# Performance Optimization
+# ================================
+# Enable profiling (uncomment to debug slow startup)
+zmodload zsh/zprof
+
+# Compile zcompdump for faster startup
+if [[ -f ~/.zcompdump && ! -f ~/.zcompdump.zwc ]]; then
+  zcompile ~/.zcompdump
+fi
+
+# SSH Agent Management
+ssh_agent_lazy() {
+  if ! pgrep -u "$USER" ssh-agent > /dev/null; then
+    eval "$(ssh-agent -s)" > ~/.ssh/agent.env
+    source ~/.ssh/agent.env
+  fi
+  if ! ssh-add -l >/dev/null 2>&1; then
+    ssh-add --apple-load-keychain 2>/dev/null
+  fi
+}
+
+# ================================
+# ZSH Options & Settings
+# ================================
+
+# Directory Navigation
+setopt AUTO_CD              # Type directory name to cd
+setopt AUTO_PUSHD          # Push directories to stack on cd
+setopt PUSHD_IGNORE_DUPS   # Don't push duplicates
+setopt PUSHD_SILENT        # Don't print directory stack
+setopt CDABLE_VARS         # cd to variable values
+
+# History Configuration
+HISTFILE=~/.zsh_history
+HISTSIZE=50000
+SAVEHIST=50000
+setopt EXTENDED_HISTORY          # Write timestamp to history
+setopt HIST_EXPIRE_DUPS_FIRST  # Expire duplicates first
+setopt HIST_IGNORE_DUPS        # Don't record duplicates
+setopt HIST_IGNORE_ALL_DUPS    # Delete old recorded duplicates
+setopt HIST_FIND_NO_DUPS       # Don't display duplicates
+setopt HIST_IGNORE_SPACE       # Don't record lines starting with space
+setopt HIST_SAVE_NO_DUPS       # Don't write duplicates
+setopt HIST_REDUCE_BLANKS      # Remove superfluous blanks
+setopt HIST_VERIFY             # Show command before executing from history
+setopt SHARE_HISTORY           # Share history between sessions
+setopt INC_APPEND_HISTORY      # Add to history immediately
+
+# Completion System
+setopt COMPLETE_IN_WORD     # Complete from cursor position
+setopt ALWAYS_TO_END        # Move cursor to end after completion
+setopt PATH_DIRS            # Search path for completions
+setopt AUTO_MENU            # Show completion menu
+setopt AUTO_LIST            # List choices on ambiguous completion
+setopt AUTO_PARAM_SLASH     # Add trailing slash for directories
+setopt MENU_COMPLETE        # Cycle through completions
+setopt NO_BEEP              # Disable beeping
+
+# Job Control
+setopt NO_BG_NICE           # Don't nice background jobs
+setopt NO_HUP               # Don't kill jobs on shell exit
+setopt NO_CHECK_JOBS        # Don't warn about background jobs on exit
+setopt LONG_LIST_JOBS       # List jobs in long format
+
+# Globbing and Expansion
+setopt EXTENDED_GLOB        # Enable extended globbing
+setopt GLOB_DOTS           # Include dotfiles in globbing
+setopt NO_CASE_GLOB        # Case-insensitive globbing
+setopt NUMERIC_GLOB_SORT   # Sort numerically when relevant
+setopt NO_GLOB_COMPLETE    # Don't expand globs on tab
+
+# Input/Output
+setopt CORRECT             # Correct command spelling
+setopt CORRECT_ALL         # Correct all arguments
+setopt INTERACTIVE_COMMENTS # Allow comments in interactive shell
+setopt RC_QUOTES           # Allow 'Henry's Garage'
+setopt MAIL_WARNING        # Warn if mail file accessed
+
+# ================================
+# Environment Variables
+# ================================
+
+# Set default editor
+export EDITOR="${EDITOR:-nvim}"
+export VISUAL="${VISUAL:-nvim}"
+
+# Set locale
+export LANG="en_US.UTF-8"
+export LC_ALL="en_US.UTF-8"
+
+# ================================
+# PATH Configuration
+# ================================
+
+# Function to add to PATH (avoids duplicates)
+add_to_path() {
+  if [[ -d "$1" && ":$PATH:" != *":$1:"* ]]; then
+    export PATH="$1:$PATH"
+  fi
+}
+
+# Add local paths
+add_to_path "$HOME/.local/bin"
+add_to_path "$HOME/bin"
+add_to_path "/usr/local/bin"
+add_to_path "/opt/homebrew/bin"
+add_to_path "/opt/homebrew/sbin"
+add_to_path "$HOME/.local/bin"
+add_to_path "$HOME/.node/bin"
+add_to_path "$HOME/.dotnet/tools"
+add_to_path "$HOME/.config/sesh/scripts"
+add_to_path "$HOME/.cargo/bin"
+
+# Yarn
+add_to_path "$HOME/.yarn/bin"
+add_to_path "$HOME/.config/yarn/global/node_modules/.bin"
+
+# PNPM
+export PNPM_HOME="$HOME/Library/pnpm"
+add_to_path "$PNPM_HOME"
+
+
 export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
       --height=40% \
       --highlight-line \
@@ -31,103 +149,56 @@ export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
       --color=query:#E5E9F0 \
 "
 
-# Left-pad command output with 2 spaces
-precmd() {
-  tput cuf 2  # Adds 2 spaces before each command output
+# ================================
+# Tool Initializations
+# ================================
+
+# ohmyposh
+eval "$(oh-my-posh init zsh --config ~/.config/ohmyposh/config.toml)"
+
+# zoxide
+eval "$(zoxide init --cmd cd zsh)"
+
+
+# Lazy-load fnm only when a Node command is run for the first time
+_fnm_lazy_load() {
+  eval "$(fnm env --use-on-cd --version-file-strategy=recursive --shell zsh)"
+  unset -f node npm npx yarn pnpm _fnm_lazy_load
 }
 
-precmd()
+for cmd in node npm npx yarn pnpm; do
+  eval "
+    $cmd() {
+      _fnm_lazy_load
+      $cmd \"\$@\"
+    }
+  "
+done
 
-# Node- sass
-export SKIP_SASS_BINARY_DOWNLOAD_FOR_CI=true
-export SKIP_NODE_SASS_TESTS=true
+# ================================
+# Completion System Configuration
+# ================================
 
-#job
-export PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
-export PUPPETEER_EXECUTABLE_PATH=`which chromium`
-
-# Path to your dotfiles.
-export DOTFILES=$HOME/.dotfiles
-
-# path to bat config
-export BAT_CONFIG_PATH="$HOME/.config/bat/config"
-export BAT_THEME="Nord"
-
-# JAVA_HOME
-export JAVA_HOME=$(/usr/libexec/java_home)
-
-# terminal
-export TERM=tmux-256color
-
-# PostgresSQL
-export PGDATA='/Users/ali/.postgres'
-
-# Set neovim as EDITOR
-export EDITOR=nvim
-
-# # Gemini API Key
-export GEMINI_API_KEY=$(security find-generic-password -w -s "gemini_api_key")
-#
-
-export ZSH_CUSTOM=$DOTFILES
-# export LANG=en_US.UTF-8
-# export LC_ALL=$LANG
-
-# Zinit --------------------------------------------------------------
-# Set the directory we want to store zinit and plugins
-ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
-
-# Download Zinit, if it's not there yet
-if [ ! -d "$ZINIT_HOME" ]; then
-   mkdir -p "$(dirname $ZINIT_HOME)"
-   git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+if type brew &>/dev/null; then
+  FPATH="$(brew --prefix)/share/zsh/site-functions:$FPATH"
 fi
 
-# Source/Load zinit
-source "${ZINIT_HOME}/zinit.zsh"
+# Initialize completion system
+autoload -Uz compinit
 
-# Add in zsh plugins
-zinit light zsh-users/zsh-syntax-highlighting
-zinit light zsh-users/zsh-completions
-zinit light zsh-users/zsh-autosuggestions
-zinit light jeffreytse/zsh-vi-mode
-zinit light Aloxaf/fzf-tab
+# Simple optimization: use cached completions if available
+if [[ -f ~/.zcompdump ]]; then
+  compinit -C  # Skip security check for faster startup
+else
+  compinit
+fi
 
-# Add in snippets
-zinit snippet OMZL::git.zsh
-zinit snippet OMZP::git
-zinit snippet OMZP::command-not-found
-zinit snippet OMZP::brew
-zinit snippet OMZP::tmux
-zinit snippet OMZP::yarn
-zinit snippet OMZP::npm
-zinit snippet OMZP::fzf
-zinit snippet OMZP::frontend-search
+# Compile the dump file if needed for faster loading
+if [[ -f ~/.zcompdump && ! -f ~/.zcompdump.zwc ]] || [[ ~/.zcompdump -nt ~/.zcompdump.zwc ]]; then
+  zcompile ~/.zcompdump &!  # Compile in background
+fi
 
-# Load completions
-autoload -Uz compinit && compinit
-
-#The plugin will auto execute this zvm_after_init function
-function zvm_after_init() {
-  bindkey '^p' history-search-backward
-  bindkey '^n' history-search-forward
-  bindkey '^[w' kill-region
-}
-
-# History --------------------------------------------------------------
-export HISTSIZE=10000000
-export HISTIGNORE="rm -rf*:ls:echo:ll:gallery-dl:c"
-HISTFILE=~/.zsh_history
-SAVEHIST=$HISTSIZE
-HISTDUP=erase
-setopt appendhistory
-setopt sharehistory
-setopt hist_ignore_space
-setopt hist_ignore_all_dups
-setopt hist_save_no_dups
-setopt hist_ignore_dups
-setopt hist_find_no_dups
-
+# Completion styling
 # Completion styling
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
@@ -135,18 +206,40 @@ zstyle ':completion:*' menu no
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 # fzf options
-zstyle ':fzf-tab:*' fzf-flags --color=fg:#616E88,fg+:#D8DEE9,bg:-1,bg+:-1
+zstyle ':fzf-tab:*' 'fzf-flags --color=fg:#616E88,fg+:#D8DEE9,bg:-1,bg+:-1'
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path ~/.cache/zsh/completions
 
+# Better SSH/SCP/RSYNC completion
+if [[ -r ~/.ssh/known_hosts ]]; then
+h=($( cat ~/.ssh/known_hosts | cut -f 1 -d ' ' | sed -e 's/,.*//g' | uniq ))
+zstyle ':completion:*:(ssh|scp|rsync):*' hosts $h
+fi
 
-# FUNCTIONS --------------------------------------------------------------
+# Kill command completion
+zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
+zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 
-# fd - cd to selected directory
-fd() {
-  local dir
-  dir=$(find ${1:-.} -path '*/\.*' -prune \
-                  -o -type d -print 2> /dev/null | fzf +m) &&
-  cd "$dir"
-}
+# ================================
+# Key Bindings
+# ================================
+
+# Enable vi mode (optional - comment out if you prefer emacs mode)
+# bindkey -v
+
+# Emacs mode (default)
+bindkey -e
+
+# History search with arrow keys
+bindkey '^[[A' history-search-backward  # Up arrow
+bindkey '^[[B' history-search-forward   # Down arrow
+bindkey '^P' history-search-backward    # Ctrl+P
+bindkey '^N' history-search-forward     # Ctrl+N
+bindkey -v
+
+# ================================
+# Useful Functions
+# ================================
 
 function prs {
   GH_FORCE_TTY=100% gh pr list --limit 300 |
@@ -155,124 +248,63 @@ function prs {
   xargs gh pr checkout
 }
 
-# GIT ALIASES ----------------------------------------------------------------
-# Aliases: git
-alias ga='git add'
-alias gap='ga --patch'
-alias gb='git branch'
-alias gba='gb --all'
-alias gc='git commit'
-alias gca='gc --amend --no-edit'
-alias gce='gc --amend'
-alias gco='git checkout'
-alias gcl='git clone --recursive'
-alias gd='git diff --output-indicator-new=" " --output-indicator-old=" "'
-alias gds='gd --staged'
-alias gi='git init'
-alias gl='git log --graph --all --pretty=format:"%C(magenta)%h %C(white) %an  %ar%C(blue)  %D%n%s%n"'
-alias gm='git merge'
-alias gn='git checkout -b'  # new branch
-alias gp='git push'
-alias gr='git reset'
-alias gs='git status --short'
-alias gu='git pull'
+# ================================
+# Syntax Highlighting & Autosuggestions
+# ================================
 
-# OTHER ALIASES----------------------------------------------------------------
-alias v='nvim'
-alias lg="lazygit"
-alias ls="eza --icons --group-directories-first -1 -T"
-alias ll="eza --icons --group-directories-first -l -T"
-alias c="clear"
-alias kp="ps aux | fzf | awk '{print \$2}' | xargs kill"
-alias delds="find . -name ".DS_Store" -type f -delete"
-alias mv='mv -i'
-alias rm='rm -i'
-alias cp='cp -i'
-alias mkdir='mkdir -pv'
-alias path='echo -e ${PATH//:/\\n} | less'
-
-export HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND="bg=white,fg=black,bold"
-
-#PATH ------------------------------------------------------------------------
-export PATH="$HOME/bin:$PATH"
-# Load Composer tools
-export PATH="$HOME/.composer/vendor/bin:$PATH"
-# Load Node global installed binaries
-export PATH="$HOME/.node/bin:$PATH"
-# Load Node global installed binaries
-export PATH="$HOME/.local/bin:$PATH"
-# Use project specific binaries before global ones
-export PATH="/usr/local/Cellar/llvm/15.0.5/bin:$PATH"
-export PATH="/usr/local/bin:$PATH"
-export PATH="/usr/local/sbin:$PATH"
-export PATH="/opt/homebrew/bin:$PATH"
-export PATH="/opt/homebrew/sbin:$PATH"
-export PATH="/usr/local/opt/llvm/bin:$PATH"
-export PATH="$HOME/.cargo/bin:$PATH"
-export PATH="$HOME/.config/sesh/scripts:$PATH"
-export PATH="$HOME/.dotnet/tools:$PATH"
-export PATH="/usr/local/opt/findutils/libexec/gnubin:$PATH"
-export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
-export PATH="/$HOME/.pyenv/shims/djlint:$PATH"
-
-# ohmyposh
-eval "$(oh-my-posh init zsh --config ~/.config/ohmyposh/config.toml)"
-
-# OMP zsh-vi-mode integration
-_omp_redraw-prompt() {
-  local precmd
-  for precmd in "${precmd_functions[@]}"; do
-    "$precmd"
-  done
-
-  zle .reset-prompt
-}
-
-function zshaddhistory() {
-  emulate -L zsh
-  [[ $1 != *gallery-dl* ]]
-}
-
-export POSH_VI_MODE="I"
-
-function zvm_after_select_vi_mode() {
-  case $ZVM_MODE in
-  $ZVM_MODE_NORMAL)
-    POSH_VI_MODE="N"
-    ;;
-  $ZVM_MODE_INSERT)
-    POSH_VI_MODE="I"
-    ;;
-  $ZVM_MODE_VISUAL)
-    POSH_VI_MODE="V"
-    ;;
-  $ZVM_MODE_VISUAL_LINE)
-    POSH_VI_MODE="V-L"
-    ;;
-  $ZVM_MODE_REPLACE)
-    POSH_VI_MODE="R"
-    ;;
-  esac
-  _omp_redraw-prompt
-}
-
-# zoxide
-eval "$(zoxide init --cmd cd zsh)"
-
-# fzf shell integration
-eval "$(fzf --zsh)"
-
-# TheFuck
-eval $(thefuck --alias)
-
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-if command -v pyenv 1>/dev/null 2>&1; then
-  eval "$(pyenv init --path)"
-  eval "$(pyenv init -)"
+# Install with: brew install zsh-syntax-highlighting zsh-autosuggestions
+if [[ -f /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]]; then
+source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
 
-# fnm
-eval "$(fnm env --use-on-cd --version-file-strategy=recursive --shell zsh)"
+if [[ -f /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]]; then
+source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#666666"
+ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+bindkey '^Y' autosuggest-accept  # Ctrl+Y to accept suggestion
+fi
 
-# source ~/.transient-prompt.zsh
+# fzf-tab
+if [[ -f /opt/homebrew/share/fzf-tab/fzf-tab.plugin.zsh ]]; then
+    source  /opt/homebrew/share/fzf-tab/fzf-tab.plugin.zsh
+fi
+
+if [[ -f /opt/homebrew/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh ]]; then
+    source /opt/homebrew/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+fi
+
+# ================================
+# Load Custom Aliases Files
+# ================================
+
+# Load all alias files from ~/.zsh-aliases/
+if [[ -d ~/.zsh-aliases ]]; then
+for config_file in ~/.zsh-aliases/*.zsh; do
+[[ -f "$config_file" ]] && source "$config_file"
+done
+fi
+
+# ================================
+# Local Machine Specific Config
+# ================================
+
+# Source local config if exists (not tracked in git)
+[[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
+
+# ================================
+# Welcome Message
+# ================================
+
+# Display system info on new shell (optional)
+if command -v fastfetch &>/dev/null; then
+fastfetch --logo small
+elif command -v neofetch &>/dev/null; then
+neofetch --ascii_distro mac_small
+fi
+
+# ================================
+# Performance Profiling
+# ================================
+
+# Uncomment to see startup time analysis
+# zprof

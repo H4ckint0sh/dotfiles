@@ -43,17 +43,11 @@ alignment = 'left'
 newline = true
 
 [[blocks.segments]]
-template = "{{if .Env.POSH_VI_MODE}}{{.Env.POSH_VI_MODE}}{{end}}"
-background = 'transparent'
-type = 'text'
-style = 'plain'
-
-[[blocks.segments]]
 type = 'text'
 style = 'plain'
 foreground = 'blue'
 background = 'transparent'
-template = ' =>'
+template = '>'
 
 [secondary_prompt]
 foreground = 'magenta'

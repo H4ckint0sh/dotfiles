@@ -43,6 +43,12 @@ brew "jq" # Used for spatie/visit
 brew "mas" # Mac App Store manager
 brew "pkg-config" # https://github.com/driesvints/dotfiles/issues/20
 
+# zsh
+brew "zsh-syntax-highlighting" 
+brew "zsh-autosuggestions"
+brew "kortin99/tap/fzf-tab"
+
+
 # Development
 brew "php"
 brew "python@3.9"
