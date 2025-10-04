@@ -93,6 +93,10 @@ setopt MAIL_WARNING          # Warn if mail file accessed
 export EDITOR="${EDITOR:-nvim}"
 export VISUAL="${VISUAL:-nvim}"
 
+# path to bat Configuration
+export BAT_CONFIG_PATH="$HOME/.config/bat/config"
+export BAT_THEME="Nord"
+
 # Set locale
 export LANG="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
