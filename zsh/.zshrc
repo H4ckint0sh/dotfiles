@@ -278,6 +278,7 @@ fi
 
 if [[ -f /opt/homebrew/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh ]]; then
     source /opt/homebrew/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+    ZVM_VI_HIGHLIGHT_BACKGROUND=#3B4252
 fi
 
 # ================================
