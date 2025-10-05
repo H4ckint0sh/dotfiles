@@ -7,10 +7,12 @@
 # Performance Optimization
 # ================================
 # Enable profiling (uncomment to debug slow startup)
-zmodload zsh/zprof
+# zmodload zsh/zprof
 
-# Skip global compinit for faster startup with Zinit
-skip_global_compinit=1
+# Compile zcompdump for faster startup
+if [[ -f ~/.zcompdump && ! -f ~/.zcompdump.zwc ]]; then
+  zcompile ~/.zcompdump
+fi
 
 # ================================
 # Zinit Installation & Setup
@@ -82,6 +84,16 @@ export PNPM_HOME="$HOME/Library/pnpm"
 # Zinit Plugin Loading (Optimized)
 # ================================
 
+# Initialize completion system
+autoload -Uz compinit
+
+# Simple optimization: use cached completions if available
+if [[ -f ~/.zcompdump ]]; then
+    compinit -i -C
+else
+    compinit -i
+fi
+
 # Load zsh-vi-mode lazily
 zinit ice lucid depth=1
 zinit light jeffreytse/zsh-vi-mode
@@ -94,6 +106,10 @@ zinit light Aloxaf/fzf-tab
 # Oh My Posh with deferred loading
 zinit ice lucid wait"0"
 eval "$(oh-my-posh init zsh --config ~/.config/ohmyposh/config.toml)"
+
+# Syntax highlighting (deferred)
+zinit ice lucid wait"0" atinit"zpcompinit; zpcdreplay"
+zinit light zdharma-continuum/fast-syntax-highlighting
 
 # FZF - Lazy load with precompiled resources
 zinit ice as"command" from"gh-r" lucid \
@@ -110,10 +126,6 @@ zinit light ajeetdsouza/zoxide
 zinit ice as"command" from"gh-r" lucid \
     atload'eval "$(fnm env --use-on-cd --version-file-strategy=recursive --shell zsh)"' wait"2"
 zinit light Schniz/fnm
-
-# Syntax highlighting (deferred)
-zinit ice lucid wait"3" atinit"zpcompinit; zpcdreplay"
-zinit light zdharma-continuum/fast-syntax-highlighting
 
 # Autosuggestions (deferred)
 zinit ice lucid wait"2" atload"_zsh_autosuggest_start"
@@ -133,7 +145,7 @@ export FZF_DEFAULT_OPTS="
     --color=fg:#616E88,fg+:#D8DEE9,bg:-1,bg+:-1
     --color=hl:#5E81AC,hl+:#81A1C1,info:#81A1C1
     --color=marker:#B48EAD,prompt:#B48EAD,spinner:#B48EAD
-    --color=pointer:#B48EAD,header:#D08770,border:#616E88
+    --color=pointer:#D8DEE9,header:#D08770,border:#616E88
     --color=label:#D8DEE9,query:#E5E9F0"
 
 # Autosuggestions configuration
@@ -157,9 +169,10 @@ zstyle ':completion:*' cache-path ~/.cache/zsh/completions
 # FZF-tab styling
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
-zstyle ':fzf-tab:*' fzf-flags "--color=fg:#616E88,fg+:#D8DEE9,bg:-1,bg+:-1"
 zstyle ':fzf-tab:*' popup-min-size 80 10
 zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
+zstyle ':fzf-tab:*' fzf-bindings 'tab:accept'
+zstyle ':fzf-tab:*' fzf-flags --pointer '▶' --prompt '  ' --color=fg:#616E88,fg+:#D8DEE9,pointer:#D8DEE9,border:#616E88,prompt:#B48EAD,info:#D08770,hl:#5E81AC,hl+:#81A1C1,bg:-1,bg+:-1
 
 # SSH completion
 if [[ -r ~/.ssh/known_hosts ]]; then
@@ -175,46 +188,11 @@ zvm_after_init() {
     bindkey '^p' history-search-backward
     bindkey '^n' history-search-forward
     bindkey '^[w' kill-region
-    bindkey '^Y' autosuggest-accept  # Accept autosuggestion
 }
 
 # ================================
 # Useful Functions
 # ================================
-
-# SSH Agent Management (lazy)
-ssh_agent_lazy() {
-    # Check if ssh-agent is running; if not, start it
-    if ! pgrep -u "$USER" ssh-agent > /dev/null; then
-        echo "Starting ssh-agent..."
-        eval "$(ssh-agent -s)" > ~/.ssh/agent.env
-        source ~/.ssh/agent.env
-    fi
-
-    # Check if any key is already loaded in ssh-agent
-    if ssh-add -l 2>/dev/null | grep -q "The agent has no identities."; then
-        echo "No keys loaded in ssh-agent. Adding keys..."
-
-        # Find all private keys in ~/.ssh (excluding *.pub files)
-        local ssh_keys
-        ssh_keys=($(find ~/.ssh -type f -name "id_*" ! -name "*.pub"))
-
-        # Add keys to ssh-agent and macOS keychain if not already loaded
-        for key in "${ssh_keys[@]}"; do
-            if [[ -f "$key" ]]; then
-                echo "Adding $key to ssh-agent..."
-                ssh-add --apple-use-keychain "$key"
-            else
-                echo "WARNING: SSH key not found at $key"
-            fi
-        done
-    else
-        # echo "Keys are already loaded in ssh-agent. No action needed."
-    fi
-}
-
-# Run the ssh_agent_lazy function automatically
-ssh_agent_lazy
 
 # PR checkout function
 prs() {
@@ -237,18 +215,6 @@ fi
 
 # Local machine specific config
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
-
-# ================================
-# Welcome Message (Deferred)
-# ================================
-zinit ice lucid wait"1" atload"
-    if command -v fastfetch &>/dev/null; then
-        fastfetch --logo small
-    elif command -v neofetch &>/dev/null; then
-        neofetch --ascii_distro mac_small
-    fi
-"
-zinit light zdharma-continuum/null
 
 # ================================
 # Compile Configuration for Speed
