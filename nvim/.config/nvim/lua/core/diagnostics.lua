@@ -1,5 +1,4 @@
 vim.diagnostic.config({
-	underline = false , -- use custom diagnostic handler instead to filter for which diagnostics to show an underline
 	signs = {
 		text = {
 			[vim.diagnostic.severity.ERROR] = "", -- ◉✘
@@ -33,6 +32,7 @@ vim.diagnostic.config({
 	virtual_lines = true,
 	update_in_insert = true,
 	severity_sort = true,
+	underline = false, -- use custom diagnostic handler instead to filter for which diagnostics to show an underline
 })
 
 vim.keymap.set("n", "[e", function()
