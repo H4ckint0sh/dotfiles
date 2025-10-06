@@ -28,8 +28,10 @@ alias gu='git pull'
 
 alias v='nvim'
 alias lg="lazygit"
-alias ls="eza --icons --group-directories-first -1"
-alias ll="eza --icons --group-directories-first -l -T"
+alias ll="eza -l --icons --git "
+alias ls="eza --color=always --grid --long --git --no-filesize --icons=always --no-time --no-user --no-permissions"
+alias la="eza -a"
+alias lt="eza --tree --level=2 --long --icons --git"
 alias c="clear"
 alias kp="ps aux | fzf | awk '{print \$2}' | xargs kill"
 alias delds="find . -name '.DS_Store' -type f -delete"

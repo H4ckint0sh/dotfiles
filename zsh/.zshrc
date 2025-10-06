@@ -55,10 +55,6 @@ export LC_ALL="en_US.UTF-8"
 # ================================
 # PATH Configuration (Optimized)
 # ================================
-# Function to add to PATH (avoids duplicates)
-add_to_path() {
-    [[ -d "$1" && ":$PATH:" != *":$1:"* ]] && export PATH="$1:$PATH"
-}
 
 # Core paths
 typeset -U path  # Keep PATH unique
