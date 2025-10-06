@@ -1,10 +1,21 @@
 return {
 	{
 		"zbirenbaum/copilot.lua",
+		equires = {
+			"copilotlsp-nvim/copilot-lsp",
+			init = function()
+				vim.g.copilot_nes_debounce = 500
+			end,
+		},
 		cmd = "Copilot",
 		event = "InsertEnter",
 		opts = {
-			suggestion = { enabled = false },
+			suggestion = {
+				enabled = true,
+				auto_trigger = true,
+				debounce = 75,
+				keymap = { accept = "<c-y>" },
+			},
 			panel = { enabled = false },
 			filetypes = {
 				markdown = true,
@@ -19,7 +30,6 @@ return {
 		dependencies = {
 			-- add blink.compat to dependencies
 			"saghen/blink.compat",
-			"fang2hou/blink-copilot",
 			"jdrupal-dev/css-vars.nvim",
 			-- add source to dependencies
 		},
@@ -97,7 +107,7 @@ return {
 				preset = "luasnip",
 			},
 			sources = {
-				default = { "lsp", "copilot", "path", "snippets", "buffer", "dadbod", "lazydev", "html-css" },
+				default = { "lsp", "path", "snippets", "buffer", "dadbod", "lazydev", "html-css" },
 				providers = {
 					dadbod = { name = "Dadbod", module = "vim_dadbod_completion.blink" },
 					lazydev = {
@@ -109,12 +119,6 @@ return {
 					["html-css"] = {
 						name = "html-css",
 						module = "blink.compat.source",
-					},
-					copilot = {
-						name = "copilot",
-						module = "blink-copilot",
-						score_offset = 100,
-						async = true,
 					},
 					css_vars = {
 						name = "css-vars",
