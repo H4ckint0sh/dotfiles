@@ -46,7 +46,7 @@ return {
 					"astro",
 					"jdtls",
 					"emmet_language_server",
-					"svelte-language-server",
+					"svelte",
 					"somesass_ls",
 				},
 				automatic_enable = {
