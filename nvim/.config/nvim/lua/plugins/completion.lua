@@ -33,8 +33,7 @@ return {
 			"jdrupal-dev/css-vars.nvim",
 			-- add source to dependencies
 		},
-		-- Use nightly build
-		build = "cargo +nightly build --release",
+		version = "1.*",
 		opts = {
 			enabled = function()
 				local disabled_filetypes = { "NvimTree", "snacks_input", "snacks_picker_input" } -- Add extra fileypes you do not want blink enabled.
