@@ -42,6 +42,7 @@ return {
 					"ember",
 					"prismals",
 					"tailwindcss",
+					"ts_ls",
 					"astro",
 					"jdtls",
 					"emmet_language_server",
@@ -51,6 +52,7 @@ return {
 				automatic_enable = {
 					exclude = {
 						"emmet_language_server",
+						"ts_ls",
 					},
 				},
 				handlers = {
