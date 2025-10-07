@@ -79,6 +79,29 @@ return {
 				end,
 			},
 			filetype = { "svelte", "typescriptreact", "typescript", "javascript", "javascriptreact" },
+			-- TODO : check if needed
+			init_options = {
+				globalPlugins = {
+					{
+						name = "@vue/typescript-plugin",
+						languages = { "vue" },
+						configNamespace = "typescript",
+						enableForWorkspaceTypeScriptVersions = true,
+					},
+					{
+						name = "@astrojs/ts-plugin",
+						languages = { "astro" },
+						configNamespace = "typescript",
+						enableForWorkspaceTypeScriptVersions = true,
+					},
+					{
+						name = "typescript-svelte-plugin",
+						languages = { "svelte" },
+						configNamespace = "typescript",
+						enableForWorkspaceTypeScriptVersions = true,
+					},
+				},
+			},
 			settings = {
 				-- Performance settings
 				separate_diagnostic_server = true,
