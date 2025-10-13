@@ -60,7 +60,7 @@ return {
 					},
 				},
 				ghost_text = {
-					enabled = true,
+					enabled = false,
 				},
 				menu = {
 					min_width = 25,
