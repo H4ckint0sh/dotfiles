@@ -22,7 +22,7 @@ return {
 		sections = {
 			lualine_a = { sources.mode },
 			lualine_b = { sources.branch, sources.diff },
-			lualine_c = { sources.filetype, sources.macro },
+			lualine_c = { sources.filetype },
 			lualine_x = { sources.lsp_formater_linter, sources.diagnostics },
 			lualine_y = { sources.indentation, sources.encoding, sources.fileformat },
 			lualine_z = { sources.progress, sources.location },
