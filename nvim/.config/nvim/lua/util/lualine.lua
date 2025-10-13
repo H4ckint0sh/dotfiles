@@ -39,7 +39,7 @@ M.mode = {
 			fg = palette.polar_night.origin,
 		}
 	end,
-	separator = { right = "", left = "░▒▓" },
+	separator = { right = "", left = "" },
 }
 
 M.filetype = {
@@ -90,7 +90,7 @@ M.progress = {
 		return vim.trim(location)
 	end,
 	color = function()
-		return { fg = palette.polar_night.origin, bg = palette.snow_storm.origin }
+		return { bg = palette.polar_night.bright, fg = palette.snow_storm.origin }
 	end,
 }
 
@@ -100,7 +100,7 @@ M.location = {
 		return vim.trim(location)
 	end,
 	color = function()
-		return { fg = palette.polar_night.origin, bg = palette.snow_storm.origin }
+		return { bg = palette.polar_night.bright, fg = palette.snow_storm.origin }
 	end,
 }
 
