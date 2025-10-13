@@ -35,6 +35,7 @@ local options = {
 	backspace = "indent,eol,start", --- Making sure backspace works
 	swapfile = false,
 	undofile = true,
+	undodir = vim.fn.expand("~/.local/share/nvim/undo"),
 	timeoutlen = 300, --- Faster completion (cannot be lower than 200 because then commenting doesn't work)
 	updatetime = 100, --- Faster completon
 	conceallevel = 2,
