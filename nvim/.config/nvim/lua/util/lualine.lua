@@ -39,7 +39,7 @@ M.mode = {
 			fg = palette.polar_night.origin,
 		}
 	end,
-	separator = { right = "", left = "" },
+	separator = { right = "", left = "" },
 }
 
 M.filetype = {
@@ -102,6 +102,7 @@ M.location = {
 	color = function()
 		return { bg = palette.polar_night.bright, fg = palette.snow_storm.origin }
 	end,
+	separator = { left = "", right = "" },
 }
 
 M.macro = {
