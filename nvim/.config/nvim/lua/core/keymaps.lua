@@ -36,9 +36,6 @@ keymap.set("n", "<BS>", "^")
 -- Highlight to end of line
 keymap.set("n", "L", "vg_")
 
--- Dont copy the deleted text
-keymap.set("n", "x", '"_x')
-
 -- Y to yank to end of line
 keymap.set("n", "Y", "y$")
 
@@ -69,10 +66,9 @@ keymap.set("n", "<S-u>", ":redo<CR>", { silent = true })
 -- Save
 keymap.set("n", "<leader>w", ":w<CR>", { silent = true })
 
-keymap.set("n", "<BS>", "^", { desc = "move to first non-blank character of the line" })
 -- Search
-keymap.set("n", "<leaer>ss", ":s/\\v", { silent = false, desc = "search and replace on line" })
-keymap.set("n", "<leaer>SS", ":%s/\\v", { silent = false, desc = "search and replace in file" })
+keymap.set("n", "<leader>ss", ":s/\\v", { silent = false, desc = "search and replace on line" })
+keymap.set("n", "<leader>SS", ":%s/\\v", { silent = false, desc = "search and replace in file" })
 keymap.set("n", "R", ":%s/\\v/g<left><left>", { silent = false }) -- replace
 keymap.set("v", "<leader>;", ":s/\\%V") -- Search only in visual selection usingb%V atom
 keymap.set("v", "<leader>w", '"hy:%s/\\v<C-r>h//g<left><left>', { silent = false }) -- change selection

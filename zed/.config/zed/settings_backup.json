@@ -41,7 +41,7 @@
 	"autosave": "on_focus_change",
 	"format_on_save": "on",
 	"ui_font_size": 16,
-	"buffer_font_size": 13,
+	"buffer_font_size": 14,
 	"buffer_font_weight": 400,
 	"soft_wrap": "editor_width",
 	"use_autoclose": false,
@@ -134,29 +134,25 @@
 		// Refer https://zed.dev/docs/languages/javascript and https://zed.dev/docs/languages/typescript for more info
 		"TypeScript": {
 			// Refer https://github.com/jellydn/ts-inlay-hints for how to setup for Neovim and VSCode
-			"formatter": [
-				{
-					"code_action": "source.fixAll.eslint"
-				}
-			],
 			"inlay_hints": {
 				"enabled": true,
 				"show_parameter_hints": false,
 				"show_other_hints": true,
 				"show_type_hints": true
+			},
+			"code_actions_on_format": {
+				"source.fixAll.eslint": true
 			}
 		},
 		"JavaScript": {
-			"formatter": [
-				{
-					"code_action": "source.fixAll.eslint"
-				}
-			],
 			"inlay_hints": {
 				"enabled": true,
 				"show_parameter_hints": false,
 				"show_other_hints": true,
 				"show_type_hints": true
+			},
+			"code_actions_on_format": {
+				"source.fixAll.eslint": true
 			}
 		}
 	},

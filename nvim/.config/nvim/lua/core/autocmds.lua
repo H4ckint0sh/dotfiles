@@ -81,12 +81,6 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 	command = 'silent! normal! g`"zv',
 })
 
--- auto refresh files after Neogit discard
-vim.api.nvim_create_autocmd("CursorHold", {
-	pattern = "*",
-	command = "checktime",
-})
-
 vim.api.nvim_create_autocmd("FileType", {
 	group = vim.api.nvim_create_augroup("UserConfig", {}),
 

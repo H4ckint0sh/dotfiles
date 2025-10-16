@@ -1,3 +1,5 @@
+require("core.performance")
+
 require("util.globals")
 require("core.options")
 
