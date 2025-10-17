@@ -34,8 +34,12 @@ local options = {
 	autoindent = true, --- Good auto indent
 	backspace = "indent,eol,start", --- Making sure backspace works
 	swapfile = false,
-	undofile = true,
-	undodir = vim.fn.expand("~/.local/share/nvim/undo"),
+	-- Undo optimizations
+	undofile = true, -- Persistent undo
+	undodir = vim.fn.stdpath("data") .. "/undo",
+	undolevels = 10000, -- Increase undo history
+	undoreload = 10000, -- Save more lines for undo
+
 	timeoutlen = 300, --- Faster completion (cannot be lower than 200 because then commenting doesn't work)
 	updatetime = 100, --- Faster completon
 	conceallevel = 2,

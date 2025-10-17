@@ -27,6 +27,7 @@
 	},
 	"base_keymap": "VSCode",
 	"theme": "Nord",
+
 	"experimental.theme_overrides": {
 		"editor.document_highlight.bracket_background": "#3B4252",
 		"syntax": {
