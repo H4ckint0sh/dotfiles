@@ -40,9 +40,7 @@ gui:
     "Alijan Adeli": "blue"
 git:
   paging:
-    useConfig: false
-    colorArg: always
-    pager: ""
+    externalDiffCommand: difft --color=always --display=inline --syntax-highlight=off
   merging:
     # only applicable to unix users
     manualCommit: false
