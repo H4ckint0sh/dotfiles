@@ -6,6 +6,7 @@ local options = {
 	expandtab = true, --- Use spaces instead of tabs
 	ignorecase = true, --- Needed for smart case
 	laststatus = 3, --- Have a global status line at the bottom instead of one for each window
+	-- statusline = "[%{(mode()=='n'?'NORMAL':mode()=='i'?'INSERT':mode()=='R'?'REPLACE':mode()=='v'?'VISUAL':mode())}] %<%f%m [%{&ff}:%{&fenc}:%Y] %{getcwd()} %= line:%l/%l Column:%c%V %P",
 	mouse = "a", --- Enable mouse
 	number = false, --- Shows current line number
 	pumheight = 15, --- Max num of items in completion menu
