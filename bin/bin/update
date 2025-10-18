@@ -10,7 +10,7 @@ NOW=$(date +"%Y-%m-%d-%H-%M-%S")
 echo -e "$NOW\n" >> /tmp/u-$NOW.txt
 
 # Update TPM plugins
-gum spin --spinner globe --title "🪟 tpm plugins updating..." --show-output -- ~/.config/tmux/plugins/tpm/bin/update_plugins all >> /tmp/u-$NOW.txt
+gum spin --spinner globe --title "🪟 tpm plugins updating..." --show-output -- ~/.tmux/plugins/tpm/bin/update_plugins all >> /tmp/u-$NOW.txt
 echo "\n" >> /tmp/u-$NOW.txt
 echo "✅ 🪟 tpm plugins updated"
 
