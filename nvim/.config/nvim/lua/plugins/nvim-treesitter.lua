@@ -57,7 +57,6 @@ return {
 						init_selection = "<S-Up>",
 						node_incremental = "<S-Up>",
 						scope_incremental = false,
-						node_decremental = "<bs>",
 					},
 				},
 				indent = {

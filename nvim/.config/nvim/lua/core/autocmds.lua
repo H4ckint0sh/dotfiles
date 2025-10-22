@@ -36,16 +36,12 @@ vim.api.nvim_create_autocmd(
 	{ pattern = "*/node_modules/*", command = "lua vim.diagnostic.disable(0)" }
 )
 
--- Associate .handlebars and .hbs files with Handlebars syntax
-vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
-	pattern = { "*.handlebars", "*.hbs" },
-	command = "set filetype=handlebars",
-})
-
--- Auto reload aerospace config
 vim.api.nvim_create_autocmd("BufWritePost", {
 	pattern = { "aerospace.toml" },
-	command = "!aerospace reload-config",
+	callback = function()
+		-- run asynchronously instead of blocking with !
+		vim.fn.jobstart({ "aerospace", "reload-config" }, { detach = true })
+	end,
 })
 
 -- No comment on new line
@@ -101,22 +97,73 @@ vim.api.nvim_create_autocmd("FileType", {
 	desc = "Maps q to exit on non-filetypes",
 })
 
--- Force diagnostic update
-vim.api.nvim_create_autocmd({ "TextChangedI", "InsertLeave", "TextYankPost" }, {
+-- Debounced diagnostics update for JS/TS — run only after 200ms idle, and skip huge buffers
+local diag_timers = {}
+
+vim.api.nvim_create_autocmd({ "InsertLeave", "TextYankPost" }, {
 	pattern = { "*.ts", "*.tsx", "*.js", "*.jsx" },
-	callback = function()
-		vim.diagnostic.setloclist({ open = false }) -- or vim.diagnostic.show()
+	callback = function(ev)
+		local bufnr = ev.buf
+		if vim.api.nvim_buf_is_valid(bufnr) == false then
+			return
+		end
+		if vim.api.nvim_buf_line_count(bufnr) > 5000 then
+			return
+		end -- skip huge buffers
+
+		-- cancel previous timer for this buffer
+		if diag_timers[bufnr] then
+			diag_timers[bufnr]:stop()
+			diag_timers[bufnr]:close()
+			diag_timers[bufnr] = nil
+		end
+
+		local timer = vim.loop.new_timer()
+		timer:start(
+			200,
+			0,
+			vim.schedule_wrap(function()
+				if vim.api.nvim_buf_is_valid(bufnr) then
+					pcall(vim.diagnostic.setloclist, { open = false })
+				end
+				timer:stop()
+				timer:close()
+				diag_timers[bufnr] = nil
+			end)
+		)
+		diag_timers[bufnr] = timer
 	end,
 })
 
--- Auto nohlsearch
+-- Debounced auto nohlsearch
+local hl_timer = nil
+
 vim.api.nvim_create_autocmd("CursorMoved", {
 	group = vim.api.nvim_create_augroup("auto-hlsearch", { clear = true }),
 	callback = function()
-		if vim.v.hlsearch == 1 and vim.fn.searchcount().exact_match == 0 then
-			vim.schedule(function()
-				vim.cmd.nohlsearch()
-			end)
+		if hl_timer then
+			hl_timer:stop()
+			hl_timer:close()
+			hl_timer = nil
 		end
+		hl_timer = vim.loop.new_timer()
+		hl_timer:start(
+			300,
+			0,
+			vim.schedule_wrap(function()
+				if vim.v.hlsearch == 1 then
+					-- call searchcount only here (infrequent)
+					local ok, sc = pcall(vim.fn.searchcount)
+					if ok and sc and sc.exact_match == 0 then
+						vim.cmd.nohlsearch()
+					end
+				end
+				if hl_timer then
+					hl_timer:stop()
+					hl_timer:close()
+					hl_timer = nil
+				end
+			end)
+		)
 	end,
 })
