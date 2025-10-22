@@ -28,8 +28,8 @@ vim.diagnostic.config({
 		-- prefix = "icons", -- TODO: nvim 0.10.0
 	},
 	float = { header = "", source = true },
-	virtual_text = false,
-	virtual_lines = true,
+	virtual_text = true,
+	virtual_lines = false,
 	update_in_insert = true,
 	severity_sort = true,
 	underline = false, -- use custom diagnostic handler instead to filter for which diagnostics to show an underline
