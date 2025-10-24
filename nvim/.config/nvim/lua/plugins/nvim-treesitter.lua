@@ -3,7 +3,6 @@ return {
 	{
 		"nvim-treesitter/nvim-treesitter",
 		dependencies = {
-			"nvim-treesitter/nvim-treesitter-textobjects",
 			"RRethy/nvim-treesitter-textsubjects",
 		},
 		event = { "BufReadPost", "BufNewFile" },
@@ -16,7 +15,6 @@ return {
 					"html",
 					"css",
 					"vue",
-					"astro",
 					"svelte",
 					"gitcommit",
 					"graphql",
@@ -25,22 +23,16 @@ return {
 					"lua",
 					"markdown",
 					"markdown_inline",
-					"prisma",
-					"glimmer",
 					"regex",
 					"bash",
 					"vim",
 					"astro",
 					"vimdoc",
-					"styled",
-					"zig",
-					"sql",
 					"diff",
 					"git_rebase",
 					"toml",
 					"gitignore",
 					"yaml",
-					"razor",
 					"git_config",
 				}, -- one of "all", or a list of languages
 				sync_install = false, -- install languages synchronously (only applied to `ensure_installed`)
@@ -50,7 +42,6 @@ return {
 					-- disable = { "c", "rust" },  -- list of language that will be disabled
 					-- additional_vim_regex_highlighting = false,
 				},
-
 				incremental_selection = {
 					enable = true,
 					keymaps = {

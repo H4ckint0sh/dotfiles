@@ -64,13 +64,5 @@ vim.keymap.set("n", "]w", function()
 	})
 end, { desc = "Next warning" })
 
-local function refresh_diagnostics_loclist()
-	pcall(vim.diagnostic.setloclist, { open = false })
-	if vim.tbl_isempty(vim.fn.getloclist(0)) then
-		pcall(vim.cmd.lclose)
-	end
-end
-
-vim.api.nvim_create_autocmd("DiagnosticChanged", {
-	callback = refresh_diagnostics_loclist,
-})
+-- Disable LSP logging
+vim.lsp.set_log_level("off")

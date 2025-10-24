@@ -1,42 +1,18 @@
 local filter = require("util.filter").filter
 local filterReactDTS = require("util.filterReactDTS").filterReactDTS
 local on_attach = require("plugins.lsp.on_attach")
-local methods = vim.lsp.protocol.Methods
-local inlay_hint_handler = vim.lsp.handlers[methods.textDocument_inlayHint]
-local max_inlay_hint_length = 50
+local _methods = vim.lsp.protocol.Methods
 
 return {
 	{
 		"pmizio/typescript-tools.nvim",
-		event = { "BufReadPre", "BufNewFile" },
+		event = { "FileType" },
 		dependencies = {
 			"nvim-lua/plenary.nvim",
-			{
-				"saghen/blink.cmp",
-				lazy = false,
-				priority = 1000,
-			},
 		},
 		opts = {
 			on_attach = on_attach,
 			handlers = {
-				["textDocument_inlayHint"] = function(err, result, ctx, config)
-					local client = vim.lsp.get_client_by_id(ctx.client_id)
-					if client and client.name == "typescript-tools" then
-						result = vim.iter(result)
-							:map(function(hint)
-								local label = hint.label ---@type string
-								if label:len() >= max_inlay_hint_length then
-									label = label:sub(1, max_inlay_hint_length - 1) .. "..."
-								end
-								hint.label = label
-								return hint
-							end)
-							:totable()
-					end
-
-					inlay_hint_handler(err, result, ctx, config)
-				end,
 				["textDocument/hover"] = function(_, result, ctx, config)
 					config = config or {}
 					config.border = "rounded"
@@ -60,19 +36,10 @@ return {
 					return vim.lsp.handlers["textDocument/definition"](err, result, ctx, config)
 				end,
 				["textDocument/publishDiagnostics"] = function(err, result, ctx, config)
-					if result and result.diagnostics then
-						-- Filter out specific diagnostic codes
-						result.diagnostics = vim.tbl_filter(function(diagnostic)
-							local ignore_codes = {
-								[6133] = true, -- unused variable
-								[6192] = true, -- unused import
-								[80001] = true, -- convert to ES module
-								[1005] = true,
-							}
-							return not ignore_codes[diagnostic.code]
-						end, result.diagnostics)
-					end
-
+					-- Simply allow the default Neovim handler to process all diagnostics.
+					-- If you still need to hide these, use a separate plugin like 'diagnostic-nvim'
+					-- or the native `vim.diagnostic.config` to filter by source/code globally,
+					-- which is often more performant.
 					config = config or {}
 					config.virtual_text = true
 					vim.lsp.handlers["textDocument/publishDiagnostics"](err, result, ctx, config)
@@ -106,7 +73,7 @@ return {
 				-- Performance settings
 				separate_diagnostic_server = true,
 				publish_diagnostic_on = "insert_leave",
-				tsserver_max_memory = "auto",
+				tsserver_max_memory = "4096",
 
 				-- Formatting preferences (from default_format_options)
 				tsserver_format_options = {
@@ -130,16 +97,17 @@ return {
 					indentSwitchCase = true,
 				},
 
-				-- File preferences (combining your inlay hints with default preferences)
+				-- File preferences (Inlay Hints are disabled here)
 				tsserver_file_preferences = {
-					includeInlayParameterNameHints = "all",
-					includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-					includeInlayFunctionParameterTypeHints = true,
-					includeInlayVariableTypeHints = true,
-					includeInlayVariableTypeHintsWhenTypeMatchesName = true,
-					includeInlayPropertyDeclarationTypeHints = true,
-					includeInlayFunctionLikeReturnTypeHints = true,
-					includeInlayEnumMemberValueHints = true,
+					-- ** INLAY HINTS DISABLED **
+					includeInlayParameterNameHints = "none", -- Changed from "all"
+					includeInlayParameterNameHintsWhenArgumentMatchesName = false, -- Changed from true
+					includeInlayFunctionParameterTypeHints = false, -- Changed from true
+					includeInlayVariableTypeHints = false, -- Changed from true
+					includeInlayVariableTypeHintsWhenTypeMatchesName = false, -- Changed from true
+					includeInlayPropertyDeclarationTypeHints = false, -- Changed from true
+					includeInlayFunctionLikeReturnTypeHints = false, -- Changed from true
+					includeInlayEnumMemberValueHints = false, -- Changed from true
 
 					-- Important default preferences
 					quotePreference = "auto",
@@ -152,7 +120,7 @@ return {
 					provideRefactorNotApplicableReason = true,
 					generateReturnInDocTemplate = true,
 					includeCompletionsForImportStatements = true,
-					includeCompletionsWithSnippetText = true,
+					includeCompletionsWithSnippetText = false,
 					includeCompletionsWithClassMemberSnippets = true,
 					includeCompletionsWithObjectLiteralMethodSnippets = true,
 					useLabelDetailsInCompletionEntries = true,
@@ -165,7 +133,6 @@ return {
 				expose_as_code_action = "all",
 				complete_function_calls = true,
 				include_completions_with_insert_text = true,
-				code_lens = "implementations_only",
 			},
 		},
 		keys = {
@@ -174,22 +141,7 @@ return {
 			{ "<leader>mi", "<CMD>TSToolsAddMissingImports<CR>", desc = "Add Missing Imports" },
 			{ "<leader>rf", "<CMD>TSToolsRenameFile<CR>", desc = "Rename File" },
 			{ "<leader>si", "<CMD>TSToolsSortImports<CR>", desc = "Sort Imports" },
-			{ "<leader>fa", "<CMD>TSToolsFixAll<CR>", desc = "Fix All" },
-			{
-				"<leader>i",
-				"<CMD>lua vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())<CR>",
-				desc = "Toggle Inlay Hints",
-			},
 		},
-	},
-	{
-		"mawkler/jsx-element.nvim",
-		dependencies = {
-			"nvim-treesitter/nvim-treesitter",
-			"nvim-treesitter/nvim-treesitter-textobjects",
-		},
-		ft = { "typescriptreact", "javascriptreact", "javascript" },
-		opts = {},
 	},
 	{
 		"MaximilianLloyd/tw-values.nvim",
@@ -201,12 +153,6 @@ return {
 			show_unknown_classes = true, -- Shows the unknown classes popup
 		},
 	},
-
-	{
-		"js-everts/cmp-tailwind-colors",
-		config = true,
-	},
-
 	{
 		"laytan/tailwind-sorter.nvim",
 		cmd = {
@@ -217,29 +163,5 @@ return {
 		build = "cd formatter && npm i && npm run build",
 		config = true,
 	},
-
-	{
-		"axelvc/template-string.nvim",
-		event = "InsertEnter",
-		ft = {
-			"javascript",
-			"typescript",
-			"javascriptreact",
-			"typescriptreact",
-		},
-		config = true, -- run require("template-string").setup()
-	},
-
-	{
-		"dmmulroy/tsc.nvim",
-		cmd = { "TSC" },
-		config = true,
-	},
-
-	{
-		"styled-components/vim-styled-components",
-		ft = { "typescript", "javascript", "typescriptreact", "javascriptreact" },
-	},
-
 	{ "artemave/workspace-diagnostics.nvim" },
 }

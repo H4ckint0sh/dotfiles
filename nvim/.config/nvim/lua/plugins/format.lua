@@ -1,7 +1,8 @@
 return {
 	"stevearc/conform.nvim",
 	lazy = true,
-	event = { "BufReadPre", "BufNewFile" },
+	-- Optimized event: Load later to speed up startup, relies on manual keymap for quick access
+	event = "VeryLazy",
 	opts = {
 		formatters_by_ft = {
 			css = { "prettier" },
@@ -13,6 +14,7 @@ return {
 			json = { "prettier" },
 			lua = { "stylua" },
 			markdown = { "prettier" },
+			-- isort before black is the common standard
 			python = { "isort", "black" },
 			sql = { "sql-formatter" },
 			svelte = { "prettier" },
@@ -21,6 +23,7 @@ return {
 			yaml = { "prettier" },
 			astro = { "prettier" },
 			handlebars = { "djlint" },
+			lua = { "stylua" },
 			toml = { "taplo" },
 		},
 		format_on_save = function(bufnr)
@@ -28,28 +31,25 @@ return {
 			if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
 				return
 			end
-			return { timeout_ms = 1000, lsp_format = "never", lsp_fallback = true }
+			return {
+				timeout_ms = 500, -- Reduced timeout for faster save response
+				lsp_format = false, -- Explicitly disable LSP formatting to prefer conform
+				lsp_fallback = true,
+			}
 		end,
 	},
 	config = function(_, opts)
 		local conform = require("conform")
 		conform.setup(opts)
 
-		vim.keymap.set({ "n" }, "<leader>F", function()
+		-- Combined and optimized keymap: ASYNC = TRUE is crucial for responsiveness
+		vim.keymap.set({ "n", "v" }, "<leader>F", function()
 			conform.format({
 				lsp_fallback = false,
-				async = false,
-				timeout_ms = 500,
+				async = true, -- MUST be true to prevent UI freeze
+				timeout_ms = 2000, -- Increased timeout for stability with slow formatters
 			})
-		end, { desc = "format file" })
-
-		vim.keymap.set({ "v" }, "<leader>F", function()
-			conform.format({
-				lsp_fallback = false,
-				async = false,
-				timeout_ms = 500,
-			})
-		end, { desc = "format selection" })
+		end, { desc = "format file/selection" })
 
 		vim.api.nvim_create_user_command("FormatDisable", function(args)
 			if args.bang then
@@ -69,6 +69,7 @@ return {
 			desc = "Re-enable autoformat-on-save",
 		})
 
+		-- Existing Format command is good, already uses async = true
 		vim.api.nvim_create_user_command("Format", function(args)
 			local range = nil
 			if args.count ~= -1 then

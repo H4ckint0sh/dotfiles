@@ -4,9 +4,9 @@ return {
 		"kevinhwang91/promise-async",
 	},
 	opts = {
-		-- INFO: Uncomment to use treesitter as fold provider, otherwise nvim lsp is used
+		-- Revert to the original complex, but robust, fallback logic
 		provider_selector = function(bufnr, filetype, _)
-			local fmap = { lua = { "lsp", "treesitter" } }
+			local fmap = { lua = { "lsp", "treesitter" } } -- Keep custom maps
 
 			return fmap[filetype]
 				or function()
@@ -28,57 +28,37 @@ return {
 						end)
 				end
 		end,
-
-		open_fold_hl_timeout = 400,
-		close_fold_kinds_for_ft = { default = { "imports", "comment" } },
-		preview = {
-			win_config = {
-				border = { "", "─", "", "", "", "─", "", "" },
-				-- winhighlight = "Normal:Folded",
-				winblend = 0,
-			},
-			mappings = {
-				scrollU = "<C-u>",
-				scrollD = "<C-d>",
-				jumpTop = "[",
-				jumpBot = "]",
-			},
-		},
 	},
+
 	init = function()
-		vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
-		vim.o.foldcolumn = "1" -- '0' is not bad
-		vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
+		-- Global options are fine here
+		vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,fold: ,foldclose:]]
+		vim.o.foldcolumn = "1"
+		vim.o.foldlevel = 99 -- Large value for providers like ufo/lsp
 		vim.o.foldlevelstart = 99
 		vim.o.foldenable = true
 
-		-- Tell the server the capability of foldingRange,
-		-- Neovim hasn't added foldingRange to default capabilities, users must add it manually
-		local capabilities = vim.lsp.protocol.make_client_capabilities()
-		capabilities.textDocument.foldingRange = {
-			dynamicRegistration = false,
-			lineFoldingOnly = true,
-		}
-		local language_servers = require("lspconfig").util.available_servers() -- or list servers manually like {'gopls', 'clangd'}
-		for _, ls in ipairs(language_servers) do
-			require("lspconfig")[ls].setup({
-				capabilities = capabilities,
-				-- you can add other fields for setting up lsp server in this table
-			})
-		end
+		-- **Removed redundant LSP setup**
+		-- If your main LSP config is set up correctly (which it should be),
+		-- capabilities are already handled.
 	end,
+
 	config = function(_, opts)
+		-- The custom fold handler is complex but achieves a specific visual goal (right alignment and text truncation).
+		-- Keep it if you like the visual result, but be aware it's the most complex part of the config.
 		local handler = function(virtText, lnum, endLnum, width, truncate)
-			local alignLimitByTextWidth = true -- limit the alignment of the fold text by:
-			-- true: the textwidth value, false: the width of the current window
+			local alignLimitByTextWidth = true
 			local alignLimiter = alignLimitByTextWidth and vim.opt.textwidth["_value"] or vim.api.nvim_win_get_width(0)
 			local newVirtText = {}
 			local totalLines = vim.api.nvim_buf_line_count(0)
 			local foldedLines = endLnum - lnum
-			local suffix = (" 󰁂 %d %d%%"):format(foldedLines, foldedLines / totalLines * 100)
+			-- Using better characters and formatting for the suffix
+			local suffix = (" 󰁂 %d lines (%d%%)"):format(foldedLines, math.floor(foldedLines / totalLines * 100))
 			local sufWidth = vim.fn.strdisplaywidth(suffix)
 			local targetWidth = width - sufWidth
 			local curWidth = 0
+
+			-- Truncate and build the main text
 			for _, chunk in ipairs(virtText) do
 				local chunkText = chunk[1]
 				local chunkWidth = vim.fn.strdisplaywidth(chunkText)
@@ -89,7 +69,6 @@ return {
 					local hlGroup = chunk[2]
 					table.insert(newVirtText, { chunkText, hlGroup })
 					chunkWidth = vim.fn.strdisplaywidth(chunkText)
-					-- str width returned from truncate() may less than 2nd argument, need padding
 					if curWidth + chunkWidth < targetWidth then
 						suffix = suffix .. (" "):rep(targetWidth - curWidth - chunkWidth)
 					end
@@ -97,21 +76,29 @@ return {
 				end
 				curWidth = curWidth + chunkWidth
 			end
+
+			-- Calculate and apply right alignment padding
 			local rAlignAppndx = math.max(math.min(alignLimiter, width - 1) - curWidth - sufWidth, 0)
 			suffix = (" "):rep(rAlignAppndx) .. suffix
 			table.insert(newVirtText, { suffix, "MoreMsg" })
 			return newVirtText
 		end
-		opts["fold_virt_text_handler"] = handler
+		opts.fold_virt_text_handler = handler
 		require("ufo").setup(opts)
-		vim.keymap.set("n", "zR", require("ufo").openAllFolds)
-		vim.keymap.set("n", "zM", require("ufo").closeAllFolds)
-		vim.keymap.set("n", "zs", require("ufo").openFoldsExceptKinds)
+
+		-- Keymaps are good, but consider using <leader> for less common commands
+		vim.keymap.set("n", "zR", require("ufo").openAllFolds, { desc = "UFO: Open all folds" })
+		vim.keymap.set("n", "zM", require("ufo").closeAllFolds, { desc = "UFO: Close all folds" })
+		vim.keymap.set("n", "zs", require("ufo").openFoldsExceptKinds, { desc = "UFO: Open folds except kinds" })
+
+		-- Enhanced 'K' mapping for hover/peek
 		vim.keymap.set("n", "K", function()
+			-- First, try to peek a folded line
 			local winid = require("ufo").peekFoldedLinesUnderCursor()
+			-- If no fold was peeked, fall back to LSP hover
 			if not winid then
 				vim.lsp.buf.hover()
 			end
-		end)
+		end, { desc = "UFO/LSP: Peek fold/LSP Hover" })
 	end,
 }

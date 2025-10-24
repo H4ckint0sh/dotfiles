@@ -32,9 +32,21 @@
 			// Search word under cursor
 			"space s w": "pane::DeploySearch",
 			// Chat with AI
-			"space a a": "agent::ToggleFocus",
+			"space c": "agent::Chat",
 			// Go to file with `gf`
 			"g f": "editor::OpenExcerpts"
+		}
+	},
+	{
+		"context": "vim_operator == a || vim_operator == i || vim_operator == cs",
+		"bindings": {
+			// Traditional Vim behavior
+			"Q": "vim::AnyQuotes",
+			"B": "vim::AnyBrackets",
+
+			// mini.ai plugin behavior
+			"q": "vim::MiniQuotes",
+			"b": "vim::MiniBrackets"
 		}
 	},
 	{
@@ -218,14 +230,14 @@
 				{
 					"create_new_window": false
 				}
+			],
+			"cmd g": [
+				"task::Spawn",
+				{
+					"task_name": "lazygit",
+					"reveal_target": "center"
+				}
 			]
-			// "space t": [
-			// 	"task::Spawn",
-			// 	{
-			// 		"task_name": "lazygit",
-			// 		"reveal_target": "center"
-			// 	}
-			// ]
 		}
 	},
 	// Run nearest task
