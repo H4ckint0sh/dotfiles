@@ -23,13 +23,12 @@
 	},
 	// "icon_theme": "Tokyo Night Storm",
 	"features": {
-		"edit_prediction_provider": "zed"
+		"edit_prediction_provider": "copilot"
 	},
 	"base_keymap": "VSCode",
 	"theme": "Nord",
 
 	"experimental.theme_overrides": {
-		"editor.document_highlight.bracket_background": "#3B4252",
 		"syntax": {
 			"comment": {
 				"font_style": "italic"
@@ -41,7 +40,7 @@
 	},
 	"autosave": "on_focus_change",
 	"format_on_save": "on",
-	"ui_font_size": 16,
+	"ui_font_size": 18,
 	"buffer_font_size": 13,
 	"buffer_font_weight": 400,
 	"soft_wrap": "editor_width",
@@ -60,6 +59,9 @@
 	},
 	// Vim mode settings
 	"vim_mode": true,
+	"vim": {
+		"highlight_on_yank_duration": 200
+	},
 	// use relative line numbers
 	"relative_line_numbers": true,
 	"vertical_scroll_margin": 0,
@@ -96,8 +98,8 @@
 	// Use Copilot Chat AI as default
 	"agent": {
 		"default_model": {
-			"provider": "google",
-			"model": "gemini-2.5-flash"
+			"provider": "copilot_chat",
+			"model": "gpt-5-mini"
 		},
 		"button": true
 	},
@@ -135,11 +137,9 @@
 		// Refer https://zed.dev/docs/languages/javascript and https://zed.dev/docs/languages/typescript for more info
 		"TypeScript": {
 			// Refer https://github.com/jellydn/ts-inlay-hints for how to setup for Neovim and VSCode
-			"formatter": [
-				{
-					"code_action": "source.fixAll.eslint"
-				}
-			],
+			"code_actions_on_format": {
+				"source.fixAll.eslint": true
+			},
 			"inlay_hints": {
 				"enabled": true,
 				"show_parameter_hints": false,
@@ -148,11 +148,9 @@
 			}
 		},
 		"JavaScript": {
-			"formatter": [
-				{
-					"code_action": "source.fixAll.eslint"
-				}
-			],
+			"code_actions_on_format": {
+				"source.fixAll.eslint": true
+			},
 			"inlay_hints": {
 				"enabled": true,
 				"show_parameter_hints": false,
@@ -164,7 +162,8 @@
 	// Use zed commit editor
 	"terminal": {
 		"font_family": "Maple Mono",
-		"font_fallbacks": ["Symbols Nerd Font Mono"],
+		"font_size": 16,
+		"font_fallbacks": ["Symbols Nerd Font"],
 		"env": {
 			"EDITOR": "zed --wait"
 		},
@@ -210,7 +209,8 @@
 	"project_panel": {
 		"button": false,
 		"dock": "right",
-		"git_status": true
+		"git_status": true,
+		"default_width": 300
 	},
 	"outline_panel": {
 		"dock": "right",
@@ -224,10 +224,6 @@
 	"notification_panel": {
 		"dock": "left",
 		"button": false
-	},
-	"chat_panel": {
-		"dock": "left",
-		"button": "always"
 	},
 	"formatter": "prettier"
 }

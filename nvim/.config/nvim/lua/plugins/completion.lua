@@ -106,9 +106,8 @@ return {
 				preset = "luasnip",
 			},
 			sources = {
-				default = { "lsp", "path", "snippets", "buffer", "dadbod", "lazydev", "html-css" },
+				default = { "lsp", "path", "snippets", "buffer", "lazydev", "html-css" },
 				providers = {
-					dadbod = { name = "Dadbod", module = "vim_dadbod_completion.blink" },
 					lazydev = {
 						name = "LazyDev",
 						module = "lazydev.integrations.blink",

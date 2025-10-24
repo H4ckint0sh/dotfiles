@@ -1,24 +1,22 @@
 return {
 	"lewis6991/gitsigns.nvim",
+	-- Excellent for performance: load only when a buffer is read
 	event = "BufRead",
 	dependencies = { "nvim-lua/plenary.nvim" },
 	config = function()
-		local present, signs = pcall(require, "gitsigns")
-		if not present then
-			return
-		end
+		local signs = require("gitsigns") -- Simplified require
 
 		signs.setup({
-			signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
-			numhl = false, -- Toggle with `:Gitsigns toggle_numhl`
-			linehl = false, -- Toggle with `:Gitsigns toggle_linehl`
-			word_diff = false, -- Toggle with `:Gitsigns toggle_word_diff`
+			signcolumn = true,
+			numhl = false,
+			linehl = false,
+			word_diff = false,
 			watch_gitdir = {
 				interval = 700,
 				follow_files = true,
 			},
 			attach_to_untracked = true,
-			current_line_blame = true, -- Toggle with `:Gitsigns toggle_current_line_blame`
+			current_line_blame = true,
 			current_line_blame_opts = {
 				virt_text = true,
 				virt_text_pos = "eol", -- 'eol' | 'overlay' | 'right_align'
@@ -28,10 +26,8 @@ return {
 			current_line_blame_formatter = "<author>, <author_time:%Y-%m-%d> - <summary>",
 			sign_priority = 6,
 			update_debounce = 100,
-			status_formatter = nil, -- Use default
 			max_file_length = 40000,
 			preview_config = {
-				-- Options passed to nvim_open_win
 				border = "rounded",
 				style = "minimal",
 				relative = "cursor",
@@ -39,25 +35,18 @@ return {
 				col = 1,
 			},
 			diff_opts = {
-				-- Use neovim's builtin diff (see diffopt in vimrc)
-				internal = true,
-				-- smarter diff algorithm that is semantically better
+				-- internal = true is default, removed for clarity
 				algorithm = "patience",
-				-- Equivalent as git diff --indent-heuristic
 				indent_heuristic = true,
-				-- Use line matching algorithm (neovim#14537)
-				-- Include whitespace-only changes in git hunks
-				-- regardless of &diffopt (gitsigns.nvim#696)
+				-- Keeping the granular whitespace control, which is the most explicit
 				ignore_whitespace_change = true,
-				ignore_blank_lines = false,
-				ignore_whitespace = true,
 				ignore_whitespace_change_at_eol = true,
 			},
 			on_attach = function(bufnr)
 				local gitsigns = require("gitsigns")
 
 				local function map(mode, l, r, opts)
-					opts = opts or {}
+					opts = opts or { noremap = true, silent = true } -- Add silent/noremap defaults for keymaps
 					opts.buffer = bufnr
 					vim.keymap.set(mode, l, r, opts)
 				end
@@ -65,43 +54,41 @@ return {
 				-- Navigation
 				map("n", "]c", function()
 					if vim.wo.diff then
-						vim.cmd.normal({ "]c", bang = true })
-					else -- Navigate to the next hunk
-						gitsigns.nav_hunk("next")
+						return "]c"
 					end
-				end)
+					gitsigns.nav_hunk("next")
+				end, { expr = true, desc = "Next Hunk" }) -- Use {expr = true} for conditional mapping
 
 				map("n", "[c", function()
 					if vim.wo.diff then
-						vim.cmd.normal({ "[c", bang = true })
-					else -- Navigate to the previous hunk
-						gitsigns.nav_hunk("prev")
+						return "[c"
 					end
-				end)
+					gitsigns.nav_hunk("prev")
+				end, { expr = true, desc = "Prev Hunk" })
 
-				-- Actions
-				map("n", "<leader>hs", gitsigns.stage_hunk) -- Stage the current hunk
-				map("n", "<leader>hr", gitsigns.reset_hunk) -- Reset the current hunk
-				map("v", "<leader>hs", function() -- Stage the visually selected lines
+				-- Actions (Using standard <leader>hX convention)
+				map("n", "<leader>hs", gitsigns.stage_hunk, { desc = "Stage Hunk" })
+				map("n", "<leader>hr", gitsigns.reset_hunk, { desc = "Reset Hunk" })
+				map("v", "<leader>hs", function()
 					gitsigns.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
-				end)
-				map("v", "<leader>hr", function() -- Reset the visually selected lines
+				end, { desc = "Stage Selection" })
+				map("v", "<leader>hr", function()
 					gitsigns.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
-				end)
-				map("n", "<leader>hS", gitsigns.stage_buffer) -- Stage the entire buffer
-				map("n", "<leader>hR", gitsigns.reset_buffer) -- Reset the entire buffer
-				map("n", "<leader>hp", gitsigns.preview_hunk) -- Preview the current hunk
-				map("n", "<leader>hb", function() -- Show blame for the current line
+				end, { desc = "Reset Selection" })
+				map("n", "<leader>hS", gitsigns.stage_buffer, { desc = "Stage Buffer" })
+				map("n", "<leader>hR", gitsigns.reset_buffer, { desc = "Reset Buffer" })
+				map("n", "<leader>hp", gitsigns.preview_hunk, { desc = "Preview Hunk" })
+				map("n", "<leader>hb", function()
 					gitsigns.blame_line({ full = true })
-				end)
-				map("n", "<leader>tb", gitsigns.toggle_current_line_blame) -- Toggle current line blame
-				map("n", "<leader>hd", gitsigns.diffthis) -- Diff the current file against the index
-				map("n", "<leader>hD", function() -- Diff the current file against the last commit
+				end, { desc = "Blame Line (Full)" })
+				map("n", "<leader>tb", gitsigns.toggle_current_line_blame, { desc = "Toggle Blame" })
+				map("n", "<leader>hd", gitsigns.diffthis, { desc = "Diff Index" })
+				map("n", "<leader>hD", function()
 					gitsigns.diffthis("~")
-				end)
+				end, { desc = "Diff Last Commit" })
 
 				-- Text object
-				map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>") -- Select the current hunk
+				map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", { desc = "Select Hunk" })
 			end,
 		})
 	end,

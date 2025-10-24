@@ -38,16 +38,11 @@ return {
 					"html",
 					"jsonls",
 					"emmylua_ls",
-					"zls",
-					"ember",
-					"prismals",
 					"tailwindcss",
 					"ts_ls",
 					"astro",
-					"jdtls",
 					"emmet_language_server",
 					"svelte",
-					"somesass_ls",
 				},
 				automatic_enable = {
 					exclude = {
@@ -68,17 +63,9 @@ return {
 				ensure_installed = {
 					"prettier",
 					"djlint",
-					"eslint",
-					"rzls",
-					"roslyn",
 				},
 			})
 		end,
-	},
-	{
-		"folke/neoconf.nvim",
-		cmd = "Neoconf",
-		opts = {},
 	},
 	{
 		"folke/lazydev.nvim",
@@ -89,34 +76,5 @@ return {
 				{ path = "snacks.nvim", words = { "Snacks" } },
 			},
 		},
-	},
-	{
-		"antosha417/nvim-lsp-file-operations",
-		name = "nvim-lsp-file-operations",
-		dependencies = { "nvim-lua/plenary.nvim" },
-		lazy = true,
-		opts = {},
-	},
-	{
-		"joechrisellis/lsp-format-modifications.nvim",
-		lazy = true,
-		dependencies = { "nvim-lua/plenary.nvim" },
-		init = function()
-			vim.api.nvim_create_user_command("FormatModified", function()
-				local bufnr = vim.api.nvim_get_current_buf()
-				local clients = vim.lsp.get_clients({
-					bufnr = bufnr,
-					method = "textDocument/rangeFormatting",
-				})
-
-				if #clients == 0 then
-					Snacks.notify.error("Format request failed, no matching language servers", { title = "LSP" })
-				end
-
-				for _, client in pairs(clients) do
-					require("lsp-format-modifications").format_modifications(client, bufnr)
-				end
-			end, {})
-		end,
 	},
 }
