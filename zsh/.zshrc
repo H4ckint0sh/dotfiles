@@ -113,6 +113,7 @@ eval "$(oh-my-posh init zsh --config ~/.config/ohmyposh/config.toml)"
 # Syntax highlighting (deferred)
 zinit ice lucid wait"0" atinit"zpcompinit; zpcdreplay"
 zinit light zdharma-continuum/fast-syntax-highlighting
+zle_highlight=('paste:none')
 
 # FZF - Lazy load with precompiled resources
 zinit ice as"command" from"gh-r" lucid \
