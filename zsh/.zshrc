@@ -146,12 +146,13 @@ export FZF_DEFAULT_OPTS="
     --info=inline-right
     --ansi
     --layout=reverse
+    --gutter ' '
     --color=fg:#616E88,fg+:#D8DEE9,bg:-1,bg+:-1
     --color=hl:#5E81AC,hl+:#81A1C1,info:#81A1C1
     --color=marker:#B48EAD,prompt:#B48EAD,spinner:#B48EAD
     --color=pointer:#D8DEE9,header:#D08770,border:#616E88
     --color=label:#D8DEE9,query:#E5E9F0"
-
+    
 # Autosuggestions configuration
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#616E88"
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
@@ -176,8 +177,7 @@ zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 zstyle ':fzf-tab:*' popup-min-size 80 10
 zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
 zstyle ':fzf-tab:*' fzf-bindings 'tab:accept'
-zstyle ':fzf-tab:*' fzf-flags --pointer '▶' --prompt '  ' --color=fg:#616E88,fg+:#D8DEE9,pointer:#D8DEE9,border:#616E88,prompt:#B48EAD,info:#D08770,hl:#5E81AC,hl+:#81A1C1,bg:-1,bg+:-1
-
+zstyle ':fzf-tab:*' fzf-flags --pointer '▶' --prompt ' ' --gutter ' ' --color=fg:#616E88,fg+:#D8DEE9,pointer:#D8DEE9,border:#616E88,prompt:#B48EAD,info:#D08770,hl:#5E81AC,hl+:#81A1C1,bg:-1,bg+:-1
 # SSH completion
 if [[ -r ~/.ssh/known_hosts ]]; then
     h=($(cat ~/.ssh/known_hosts | cut -f 1 -d ' ' | sed -e 's/,.*//g' | uniq))
