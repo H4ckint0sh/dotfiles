@@ -83,7 +83,20 @@ return {
 		{ "<leader>u", function() Snacks.picker.colorschemes() end, desc = "Colorschemes" },
 		{ "<leader>qp", function() Snacks.picker.projects() end, desc = "Projects" },
 		-- LSP
-		{ "gd", function() Snacks.picker.lsp_definitions() end, desc = "Custom Goto Definition" },
+        {
+            'gd',
+            function() 
+                Snacks.picker.lsp_definitions({
+                    filter = {
+                        filter = function(item, self)
+                            -- Filter out .d.ts files
+                            return not (item.file and item.file:match("%.d%.ts$"))
+                        end,
+                    },
+                })
+            end,
+            desc = "LSP Definitions"
+        },
 		{ "gr", function() Snacks.picker.lsp_references() end, nowait = true, desc = "References" },
 		{ "gi", function() Snacks.picker.lsp_implementations() end, desc = "Goto Implementation" },
 		{ "gy", function() Snacks.picker.lsp_type_definitions() end, desc = "Goto T[y]pe Definition" },
