@@ -110,6 +110,9 @@ zinit light Aloxaf/fzf-tab
 zinit ice lucid wait"0"
 eval "$(oh-my-posh init zsh --config ~/.config/ohmyposh/config.toml)"
 
+# FNM 
+eval "$(fnm env --use-on-cd --version-file-strategy=recursive --shell zsh)"
+
 # Syntax highlighting (deferred)
 zinit ice lucid wait"0" atinit"zpcompinit; zpcdreplay"
 zinit light zdharma-continuum/fast-syntax-highlighting
@@ -126,10 +129,6 @@ zinit ice as"command" from"gh-r" lucid \
     atclone"./zoxide init --cmd cd zsh > init.zsh" src"init.zsh" compile"init.zsh" wait"1"
 zinit light ajeetdsouza/zoxide
 
-# FNM - Lazy load with environment setup
-zinit ice as"command" from"gh-r" lucid \
-    atload'eval "$(fnm env --use-on-cd --version-file-strategy=recursive --shell zsh)"' wait"2"
-zinit light Schniz/fnm
 
 # Autosuggestions (deferred)
 zinit ice lucid wait"2" atload"_zsh_autosuggest_start"
