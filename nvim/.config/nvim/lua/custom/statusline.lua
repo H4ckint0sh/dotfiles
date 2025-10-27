@@ -58,6 +58,9 @@ local function setup_statusline_highlights()
 			palette.polar_night.lighter
 		)
 	)
+
+	-- LSP clients highlight (shows the active LSPs attached to the buffer)
+	vim.cmd(string.format("highlight StatusLineLSP guifg=%s guibg=NONE gui=bold", palette.aurora.green))
 end
 
 -- Mode text & icon (no highlights)
@@ -136,6 +139,33 @@ local function git_changes()
 	return msg
 end
 
+-- Active LSP clients for the current buffer
+local function lsp_clients()
+	-- Prefer the buffer-local API to get clients attached to this buffer
+	local bufnr = vim.api.nvim_get_current_buf()
+	-- Uses older but compatible API: vim.lsp.buf_get_clients(bufnr)
+	local clients = vim.lsp.buf_get_clients(bufnr) or {}
+	if next(clients) == nil then
+		return ""
+	end
+
+	-- Collect unique names
+	local seen = {}
+	local names = {}
+	for _, client in pairs(clients) do
+		local name = client.name or "unknown"
+		if not seen[name] then
+			seen[name] = true
+			table.insert(names, name)
+		end
+	end
+
+	-- Shorten common names (optional): show "ts", "pyright" -> leave as-is for clarity
+	local text = table.concat(names, ", ")
+	-- Prepend an icon (gear) and use LSP highlight group
+	return " %#StatusLineLSP# " .. text .. "%*"
+end
+
 local function statusline()
 	setup_statusline_highlights()
 
@@ -144,6 +174,7 @@ local function statusline()
 	local branch_part = git_branch()
 	local diagnostics_part = diagnostics_summary()
 	local git_changes_part = git_changes()
+	local lsp_part = lsp_clients()
 	local file_name = " %<%f"
 	local modified = "%m"
 	local align_right = "%="
@@ -162,6 +193,7 @@ local function statusline()
 		.. filetype
 		.. fileencoding
 		.. fileformat
+		.. lsp_part
 		.. loc
 end
 
