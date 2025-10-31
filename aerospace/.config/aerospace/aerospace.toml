@@ -4,7 +4,7 @@ start-at-login = true
 after-login-command = []
 
 after-startup-command = [
-  'exec-and-forget open -a Ghostty & open -a Microsoft\ Teams & open -a firefox',
+  'exec-and-forget open -a Zed & open -a Microsoft\ Teams & open -a firefox',
   'exec-and-forget borders active_color=0xffD8DEE9 inactive_color=0xff616E88 width=5.0',
   # 'exec-and-forget /opt/homebrew/bin/sketchybar',
 ]
