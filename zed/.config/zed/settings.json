@@ -9,21 +9,9 @@
 // from the command palette or from `Zed` application menu.
 {
   "icon_theme": "Zed (Default)",
-  "edit_predictions": {
-    "mode": "eager",
-    "copilot": {
-      "proxy": null,
-      "proxy_no_verify": null
-    },
-    "enabled_in_text_threads": false
-  },
   "git_panel": {
     "dock": "right",
     "button": true
-  },
-  // "icon_theme": "Tokyo Night Storm",
-  "features": {
-    "edit_prediction_provider": "copilot"
   },
   "base_keymap": "VSCode",
   "theme": "Nord",
@@ -100,12 +88,19 @@
     "right_padding": 0.15
   },
   // Use Copilot Chat AI as default
+  "features": {
+    "edit_prediction_provider": "copilot"
+  },
+  "edit_predictions": {
+    "mode": "eager"
+  },
   "agent": {
+    "default_profile": "write",
+    "model_parameters": [],
     "default_model": {
       "provider": "copilot_chat",
       "model": "gemini-2.5-pro"
-    },
-    "button": true
+    }
   },
   // Inlay hints preconfigured by Zed: Go, Rust, Typescript and Svelte
   "inlay_hints": {
@@ -141,7 +136,7 @@
     // Refer https://zed.dev/docs/languages/javascript and https://zed.dev/docs/languages/typescript for more info
     "TypeScript": {
       // Refer https://github.com/jellydn/ts-inlay-hints for how to setup for Neovim and VSCode
-      "language_servers": ["tsgo", "vtsls"],
+      "language_servers": ["vtsls"],
       "code_actions_on_format": {
         "source.fixAll.eslint": true
       },
@@ -153,7 +148,7 @@
       }
     },
     "JavaScript": {
-      "language_servers": ["tsgo", "vtsls"],
+      "language_servers": ["vtsls"],
       "code_actions_on_format": {
         "source.fixAll.eslint": true
       },

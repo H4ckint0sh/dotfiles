@@ -3,10 +3,10 @@
   {
     "context": "Dock || Terminal || Editor || ProjectPanel || AssistantPanel || CollabPanel || OutlinePanel || ChatPanel || VimControl || EmptyPane || SharedScreen || MarkdownPreview || KeyContextView || Workspace",
     "bindings": {
-      "ctrl-h": "workspace::ActivatePaneLeft",
-      "ctrl-l": "workspace::ActivatePaneRight",
-      "ctrl-k": "workspace::ActivatePaneUp",
-      "ctrl-j": "workspace::ActivatePaneDown",
+      "ctrl-cmd-alt-shift-h": "workspace::ActivatePaneLeft",
+      "ctrl-cmd-alt-shift-l": "workspace::ActivatePaneRight",
+      "ctrl-cmd-alt-shift-k": "workspace::ActivatePaneUp",
+      "ctrl-cmd-alt-shift-j": "workspace::ActivatePaneDown",
       // "tab": "pane::ActivateNextItem",
       // "shift-tab": "pane::ActivatePreviousItem",
       "cmd-left": "vim::ResizePaneRight",
@@ -90,6 +90,10 @@
       "space /": "pane::DeploySearch",
       // TODO: Open other files
       // Show project panel with current file
+      "ctrl-p": [
+        "task::Spawn",
+        { "task_name": "file_finder", "reveal_target": "center" }
+      ],
       "space e": "pane::RevealInProjectPanel",
       // Code folding
       "z a": "editor::ToggleFold",
@@ -98,10 +102,10 @@
       // Move to enclosing bracket
       "m m": "editor::MoveToEnclosingBracket",
       // Redo
-      "U": "editor::Redo",
+      "U": "editor::Redo"
       // Splits
-      "space l": "pane::SplitRight",
-      "space j": "pane::SplitDown"
+      // "space l": "pane::SplitRight",
+      // "space j": "pane::SplitDown"
       // Central terminal
       // "space t": "workspace::NewCenterTerminal"
       // replace file_finder::Toggle
@@ -128,8 +132,8 @@
     "context": "Editor && showing_code_actions",
     "bindings": {
       "enter": "editor::ConfirmCodeAction",
-      "k": "editor::ContextMenuPrevious",
-      "j": "editor::ContextMenuNext",
+      "ctrl-k": "editor::ContextMenuPrevious",
+      "ctrl-j": "editor::ContextMenuNext",
       "shift-tab": "editor::ContextMenuPrevious",
       "tab": "editor::ContextMenuNext"
     }
@@ -201,20 +205,24 @@
       "x": "project_panel::Cut",
       "c": "project_panel::Copy",
       "p": "project_panel::Paste",
-      "o": "project_panel::Open",
+      "o": "project_panel::OpenPermanent",
       "ctrl-v": "project_panel::OpenSplitVertical",
       "ctrl-s": "project_panel::OpenSplitHorizontal",
       // Close project panel as project file panel on the right
       "q": "workspace::ToggleRightDock",
       "space e": "workspace::ToggleRightDock",
+      "ctrl-p": [
+        "task::Spawn",
+        { "task_name": "file_finder", "reveal_target": "center" }
+      ],
       "space f": "file_finder::Toggle"
     }
   },
   {
     "context": "TabSwitcher",
     "bindings": {
-      "k": "menu::SelectPrevious",
-      "j": "menu::SelectNext",
+      "ctrl-k": "menu::SelectPrevious",
+      "ctrl-j": "menu::SelectNext",
       "d": "tab_switcher::CloseSelectedItem"
     }
   },
@@ -229,7 +237,7 @@
           "create_new_window": true
         }
       ],
-      "cmd-g": [
+      "ctrl-cmd-alt-shift-g": [
         "task::Spawn",
         {
           "task_name": "lazygit",
@@ -261,9 +269,9 @@
   {
     "bindings": {
       "shift-tab": "menu::SelectPrevious",
-      "k": "menu::SelectPrevious",
+      "ctrl-k": "menu::SelectPrevious",
       "tab": "menu::SelectNext",
-      "j": "menu::SelectNext",
+      "ctrl-j": "menu::SelectNext",
       "cmd-up": "menu::SelectFirst",
       "cmd-down": "menu::SelectLast",
       "enter": "menu::Confirm",

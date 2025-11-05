@@ -39,8 +39,8 @@ gui:
     "H4ckint0sh": "blue"
     "Alijan Adeli": "blue"
 git:
-  paging:
-    externalDiffCommand: difft --color=always --display=inline --syntax-highlight=off
+  pagers:
+    - externalDiffCommand: difft --color=always --display=inline --syntax-highlight=off
   merging:
     # only applicable to unix users
     manualCommit: false

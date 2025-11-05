@@ -138,26 +138,6 @@ const rules: KarabinerRules[] = [
       o: app("Microsoft Outlook"),
     },
 
-    // K to swutch worksoace in Zen browser
-    k: {
-      to: [
-        {
-          key_code: "q",
-          modifiers: ["left_option", "left_command"],
-        },
-      ],
-    },
-
-    // J to change between tabs in Zen browser
-    j: {
-      to: [
-        {
-          key_code: "tab",
-          modifiers: ["left_control"],
-        },
-      ],
-    },
-
     // write the swedish letters more like swedish keyboards
     w: {
       semicolon: {
@@ -189,7 +169,7 @@ const rules: KarabinerRules[] = [
     // r = "Raycast"
     r: {
       y: open(
-        "raycast://extensions/tonka3000/youtube/search-videos?arguments=%7B%22query%22%3A%22%22%7D"
+        "raycast://extensions/tonka3000/youtube/search-videos?arguments=%7B%22query%22%3A%22%22%7D",
       ),
       b: open("raycast://extensions/nhojb/brew/search"),
     },
@@ -256,7 +236,7 @@ const rules: KarabinerRules[] = [
       },
       // Dismiss notifications on macos
       k: open(
-        "btt://execute_assigned_actions_for_trigger/?uuid=92B63395-5930-463A-9301-57BA344D6981"
+        "btt://execute_assigned_actions_for_trigger/?uuid=92B63395-5930-463A-9301-57BA344D6981",
       ),
     },
   }),
@@ -311,6 +291,6 @@ fs.writeFileSync(
       ],
     },
     null,
-    2
-  )
+    2,
+  ),
 );

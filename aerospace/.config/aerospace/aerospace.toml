@@ -4,7 +4,7 @@ start-at-login = true
 after-login-command = []
 
 after-startup-command = [
-  'exec-and-forget open -a Zed & open -a Microsoft\ Teams & open -a firefox',
+  'exec-and-forget open -a Zed & open -a Microsoft\ Teams & open -a Google\ Chrome',
   'exec-and-forget borders active_color=0xffD8DEE9 inactive_color=0xff616E88 width=5.0',
   # 'exec-and-forget /opt/homebrew/bin/sketchybar',
 ]
@@ -74,7 +74,7 @@ alt-shift-l = 'move right'
 ctrl-alt-shift-cmd-c = 'workspace C'
 ctrl-alt-shift-cmd-x = 'workspace X'
 ctrl-alt-shift-cmd-b = 'workspace B'
-ctrl-alt-shift-cmd-t = 'workspace T'
+ctrl-alt-shift-cmd-e = 'workspace E'
 ctrl-alt-shift-cmd-d = 'workspace D'
 ctrl-alt-shift-cmd-m = 'workspace M'
 ctrl-alt-shift-cmd-y = 'workspace Y'
@@ -84,7 +84,7 @@ ctrl-alt-shift-cmd-z = 'workspace Z'
 alt-shift-c = ['move-node-to-workspace C', 'workspace C']
 alt-shift-x = ['move-node-to-workspace X', 'workspace X']
 alt-shift-b = ['move-node-to-workspace B', 'workspace B']
-alt-shift-t = ['move-node-to-workspace T', 'workspace T']
+alt-shift-e = ['move-node-to-workspace E', 'workspace E']
 alt-shift-d = ['move-node-to-workspace D', 'workspace D']
 alt-shift-m = ['move-node-to-workspace M', 'workspace M']
 alt-shift-y = ['move-node-to-workspace Y', 'workspace Y']
@@ -139,7 +139,7 @@ l = ['join-with right', 'mode main']
 C = ['Built-in Retina Display']
 X = ['Built-in Retina Display']
 B = ['U32J59x', 'DELL U2723QE \(2\)', 'Built-in Retina Display']
-T = ['U32J59x', 'DELL U2723QE \(1\)', 'Built-in Retina Display']
+E = ['U32J59x', 'DELL U2723QE \(1\)', 'Built-in Retina Display']
 D = ['U32J59x', 'DELL U2723QE \(1\)', 'Built-in Retina Display']
 M = ['U32J59x', 'DELL U2723QE \(2\)', 'Built-in Retina Display']
 Y = ['U32J59x', 'DELL U2723QE \(1\)', 'Built-in Retina Display']
@@ -160,18 +160,14 @@ run = 'move-node-to-workspace M'
 
 [[on-window-detected]]
 if.app-id = 'com.mitchellh.ghostty'
-run = 'move-node-to-workspace T'
+run = 'move-node-to-workspace E'
 
 [[on-window-detected]]
 if.app-id = 'org.chromium.Chromium'
 run = 'move-node-to-workspace B'
 
 [[on-window-detected]]
-if.app-id = 'app.zen-browser.zen'
-run = 'move-node-to-workspace B'
-
-[[on-window-detected]] # Goole Chrome
-if.app-id = 'org.mozilla.firefox'
+if.app-id = 'com.google.Chrome'
 run = 'move-node-to-workspace B'
 
 [[on-window-detected]] # Bruno
@@ -208,9 +204,5 @@ if.app-id = 'com.colliderli.iina'
 run = 'layout floating'
 
 [[on-window-detected]]
-if.app-id = 'dev.zed.Zed '
-run = 'move-node-to-workspace Z'
-
-[[on-window-detected]]
-if.app-id = "com.mitchellh.ghostty"
-run = ["layout tiling"]
+if.app-id = 'dev.zed.Zed'
+run = 'move-node-to-workspace E'

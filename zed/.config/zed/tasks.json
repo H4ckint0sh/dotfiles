@@ -1,9 +1,16 @@
 [
-	{
-		"label": "lazygit",
-		"command": "lazygit -p $ZED_WORKTREE_ROOT",
-		"use_new_terminal": true,
-		"shell": "system",
-		"hide": "on_success"
-	}
+  {
+    "label": "lazygit",
+    "command": "lazygit",
+    "use_new_terminal": true,
+    "shell": "system",
+    "hide": "on_success"
+  },
+  {
+    "label": "file_finder",
+    "command": "zed \"$(tv files)\"",
+    "hide": "always",
+    "allow_concurrent_runs": true,
+    "use_new_terminal": true
+  }
 ]
