@@ -1,6 +1,6 @@
 local M = {}
 
-M.filter = function(arr, fn)
+M.filter = function (arr, fn)
 	if type(arr) ~= "table" then
 		return arr
 	end

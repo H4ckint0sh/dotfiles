@@ -1,10 +1,3 @@
--- File: lua/plugins/lsp.lua
-local on_attach = require("plugins.lsp.on_attach")
-
-vim.api.nvim_create_user_command("LspFormat", function()
-	vim.lsp.buf.format({ async = false })
-end, {})
-
 return {
 	{
 		"neovim/nvim-lspconfig",
@@ -15,6 +8,11 @@ return {
 			"WhoIsSethDaniel/mason-tool-installer.nvim",
 		},
 		config = function()
+			-- Load diagnostic configuration
+			require("core.lsp.config")
+			-- Load LSP functions
+			require("core.lsp.functions")
+
 			require("mason").setup({
 				registries = {
 					"github:mason-org/mason-registry",
@@ -37,7 +35,7 @@ return {
 					"graphql",
 					"html",
 					"jsonls",
-					"emmylua_ls",
+					"lua_ls",
 					"tailwindcss",
 					"ts_ls",
 					"astro",
@@ -50,13 +48,9 @@ return {
 						"ts_ls",
 					},
 				},
-				handlers = {
-					function(server_name)
-						require("lspconfig")[server_name].setup({
-							on_attach = on_attach,
-						})
-					end,
-				},
+
+				-- Load LSP configurations using vim.lsp.config API
+				require("core.lsp"),
 			})
 
 			require("mason-tool-installer").setup({
@@ -76,5 +70,16 @@ return {
 				{ path = "snacks.nvim", words = { "Snacks" } },
 			},
 		},
+	},
+	{
+		"antosha417/nvim-lsp-file-operations",
+		event = "LspAttach",
+		dependencies = {
+			{ "nvim-lua/plenary.nvim" },
+			{ "folke/snacks.nvim" },
+		},
+		config = function()
+			require("lsp-file-operations").setup()
+		end,
 	},
 }

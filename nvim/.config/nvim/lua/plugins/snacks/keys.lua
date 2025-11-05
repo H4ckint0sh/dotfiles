@@ -86,14 +86,7 @@ return {
         {
             'gd',
             function() 
-                Snacks.picker.lsp_definitions({
-                    filter = {
-                        filter = function(item, self)
-                            -- Filter out .d.ts files
-                            return not (item.file and item.file:match("%.d%.ts$"))
-                        end,
-                    },
-                })
+                Snacks.picker.lsp_definitions()
             end,
             desc = "LSP Definitions"
         },

@@ -8,7 +8,7 @@ return {
 			end,
 		},
 		cmd = "Copilot",
-		event = "InsertEnter",
+		event = "BufReadPre",
 		opts = {
 			suggestion = {
 				enabled = true,
@@ -17,10 +17,6 @@ return {
 				keymap = { accept = "<c-y>" },
 			},
 			panel = { enabled = false },
-			filetypes = {
-				markdown = true,
-				help = true,
-			},
 		},
 	},
 	{

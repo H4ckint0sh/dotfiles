@@ -12,4 +12,3 @@ require("custom.statusline") -- Substitutes in the statusline
 -- These are not Loaded by lazy.nvim
 require("core.autocmds")
 require("core.keymaps")
-require("core.diagnostics")

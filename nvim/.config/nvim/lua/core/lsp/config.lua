@@ -1,0 +1,185 @@
+-- Diagnostic config
+
+local codes = {
+	-- Lua
+	no_matching_function = {
+		message = " Can't find a matching function",
+		"redundant-parameter",
+		"ovl_no_viable_function_in_call",
+	},
+	empty_block = {
+		message = " That shouldn't be empty here",
+		"empty-block",
+	},
+	missing_symbol = {
+		message = " Here should be a symbol",
+		"miss-symbol",
+	},
+	expected_semi_colon = {
+		message = " Please put the `;` or `,`",
+		"expected_semi_declaration",
+		"miss-sep-in-table",
+		"invalid_token_after_toplevel_declarator",
+	},
+	redefinition = {
+		message = " That variable was defined before",
+		icon = " ",
+		"redefinition",
+		"redefined-local",
+		"no-duplicate-imports",
+		"@typescript-eslint/no-redeclare",
+		"import/no-duplicates",
+	},
+	no_matching_variable = {
+		message = " Can't find that variable",
+		"undefined-global",
+		"reportUndefinedVariable",
+	},
+	trailing_whitespace = {
+		message = "  Whitespaces are useless",
+		"trailing-whitespace",
+		"trailing-space",
+	},
+	unused_variable = {
+		message = "󰂭  Don't define variables you don't use",
+		icon = "󰂭  ",
+		"unused-local",
+		"@typescript-eslint/no-unused-vars",
+		"no-unused-vars",
+	},
+	unused_function = {
+		message = "  Don't define functions you don't use",
+		"unused-function",
+	},
+	useless_symbols = {
+		message = " Remove that useless symbols",
+		"unknown-symbol",
+	},
+	wrong_type = {
+		message = " Try to use the correct types",
+		"init_conversion_failed",
+	},
+	undeclared_variable = {
+		message = " Have you delcared that variable somewhere?",
+		"undeclared_var_use",
+	},
+	lowercase_global = {
+		message = " Should that be a global? (if so make it uppercase)",
+		"lowercase-global",
+	},
+	-- Typescript
+	no_console = {
+		icon = "  ",
+		"no-console",
+	},
+	-- Prettier
+	prettier = {
+		icon = "  ",
+		"prettier/prettier",
+	},
+}
+
+vim.diagnostic.config({
+	signs = {
+		text = {
+			[vim.diagnostic.severity.ERROR] = "", -- ◉✘
+			[vim.diagnostic.severity.WARN] = "", -- ●▲
+			[vim.diagnostic.severity.INFO] = "", -- •
+			[vim.diagnostic.severity.HINT] = "", -- ·⚑
+		},
+		linehl = {
+			[vim.diagnostic.severity.ERROR] = "",
+			[vim.diagnostic.severity.WARN] = "",
+			[vim.diagnostic.severity.INFO] = "",
+			[vim.diagnostic.severity.HINT] = "",
+		},
+		texthl = {
+			[vim.diagnostic.severity.ERROR] = "DiagnosticSignError",
+			[vim.diagnostic.severity.WARN] = "DiagnosticSignWarn",
+			[vim.diagnostic.severity.INFO] = "DiagnosticSignInfo",
+			[vim.diagnostic.severity.HINT] = "DiagnosticSignHint",
+		},
+		numhl = {
+			[vim.diagnostic.severity.ERROR] = "DiagnosticSignError",
+			[vim.diagnostic.severity.WARN] = "DiagnosticSignWarn",
+			[vim.diagnostic.severity.INFO] = "DiagnosticSignInfo",
+			[vim.diagnostic.severity.HINT] = "DiagnosticSignHint",
+		},
+		severity = { min = vim.diagnostic.severity.WARN },
+		-- prefix = "icons", -- TODO: nvim 0.10.0
+	},
+	float = { header = "", source = true },
+	virtual_text = true,
+	virtual_lines = false,
+	update_in_insert = true,
+	severity_sort = true,
+	underline = false, -- use custom diagnostic handler instead to filter for which diagnostics to show an underline
+})
+
+vim.keymap.set("n", "[e", function()
+	vim.diagnostic.jump({
+		count = -1,
+		enable_popup = false,
+		severity = vim.diagnostic.severity.ERROR,
+	})
+end, { desc = "Prev error" })
+vim.keymap.set("n", "]e", function()
+	vim.diagnostic.jump({
+		count = 1,
+		enable_popup = false,
+		severity = vim.diagnostic.severity.ERROR,
+	})
+end, { desc = "Next error" })
+vim.keymap.set("n", "[w", function()
+	vim.diagnostic.jump({
+		count = -1,
+		enable_popup = false,
+		severity = vim.diagnostic.severity.WARN,
+	})
+end, { desc = "Prev warning" })
+vim.keymap.set("n", "]w", function()
+	vim.diagnostic.jump({
+		count = 1,
+		enable_popup = false,
+		severity = vim.diagnostic.severity.WARN,
+	})
+end, { desc = "Next warning" })
+
+-- Disable LSP logging
+vim.lsp.set_log_level("off")
+
+local group = vim.api.nvim_create_augroup("OoO", {})
+
+local function au(typ, pattern, cmdOrFn)
+	if type(cmdOrFn) == "function" then
+		vim.api.nvim_create_autocmd(typ, { pattern = pattern, callback = cmdOrFn, group = group })
+	else
+		vim.api.nvim_create_autocmd(typ, { pattern = pattern, command = cmdOrFn, group = group })
+	end
+end
+
+au({ "CursorHold", "InsertLeave" }, nil, function()
+	local opts = {
+		focusable = false,
+		scope = "cursor",
+		close_events = { "BufLeave", "CursorMoved", "InsertEnter" },
+	}
+	vim.diagnostic.open_float(nil, opts)
+end)
+
+au("InsertEnter", nil, function()
+	vim.diagnostic.enable(false)
+end)
+
+au("InsertLeave", nil, function()
+	vim.diagnostic.enable(true)
+end)
+
+-- UI
+
+local lspui_ok, lspui = pcall(require, "lspconfig.ui.windows")
+if not lspui_ok then
+	return
+end
+
+lspui.default_options.border = "rounded"

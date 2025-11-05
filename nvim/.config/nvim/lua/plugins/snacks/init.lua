@@ -20,7 +20,6 @@ return {
 		bigfile = {
 			enabled = true,
 			notify = true,
-			size = 100 * 1024, -- 100 KB
 		},
 		picker = require("plugins.snacks.picker"),
 		explorer = require("plugins.snacks.explorer"),
