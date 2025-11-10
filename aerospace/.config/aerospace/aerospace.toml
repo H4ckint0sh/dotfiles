@@ -4,7 +4,7 @@ start-at-login = true
 after-login-command = []
 
 after-startup-command = [
-  'exec-and-forget open -a Zed & open -a Microsoft\ Teams & open -a Google\ Chrome',
+  'exec-and-forget open -a Zed & open -a Microsoft\ Teams & open -a Firefox',
   'exec-and-forget borders active_color=0xffD8DEE9 inactive_color=0xff616E88 width=5.0',
   # 'exec-and-forget /opt/homebrew/bin/sketchybar',
 ]
@@ -167,7 +167,7 @@ if.app-id = 'org.chromium.Chromium'
 run = 'move-node-to-workspace B'
 
 [[on-window-detected]]
-if.app-id = 'com.google.Chrome'
+if.app-id = 'org.mozilla.firefox'
 run = 'move-node-to-workspace B'
 
 [[on-window-detected]] # Bruno
