@@ -1,0 +1,28 @@
+[
+    {
+        "label": "Next.js: debug full stack",
+        "adapter": "JavaScript",
+        "name": "Next.js: debug full stack",
+        "type": "node",
+        "request": "launch",
+        "program": "${ZED_WORKTREE_ROOT}/node_modules/next/dist/bin/next",
+        "runtimeArgs": ["--inspect"],
+        "skipFiles": ["<node_internals>/**"],
+        "serverReadyAction": {
+            "action": "debugWithChrome",
+            "killOnServerStop": true,
+            "pattern": "- Local:.+(https?://.+)",
+            "uriFormat": "%s",
+            "webRoot": "${ZED_WORKTREE_ROOT}"
+        }
+    },
+    {
+        "label": "Inspect",
+        "adapter": "JavaScript",
+        "type": "pwa-chrome",
+        "request": "launch",
+        "url": "http://localhost:5500", // Fill your URL here.
+        "program": "$ZED_FILE",
+        "webRoot": "${ZED_WORKTREE_ROOT}"
+    }
+]

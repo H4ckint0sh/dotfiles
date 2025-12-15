@@ -27,7 +27,7 @@
         }
     },
     "search": {
-        // "center_on_match": true
+        "center_on_match": true
     },
     "autosave": "on_focus_change",
     "format_on_save": "on",
@@ -58,7 +58,7 @@
         "highlight_on_yank_duration": 200
     },
     // use relative line numbers
-    "relative_line_numbers": true,
+    "relative_line_numbers": "enabled",
     "vertical_scroll_margin": 0,
     "scroll_beyond_last_line": "off",
     "cursor_blink": false,
@@ -99,23 +99,30 @@
         "mode": "eager"
     },
     "agent": {
+        "always_allow_tool_actions": true,
+        "inline_assistant_model": {
+            "provider": "copilot_chat",
+            "model": "claude-haiku-4.5"
+        },
         "default_profile": "write",
         "model_parameters": [],
         "default_model": {
             "provider": "copilot_chat",
-            "model": "gpt-5-codex"
+            "model": "claude-sonnet-4.5"
         }
     },
     // Inlay hints preconfigured by Zed: Go, Rust, Typescript and Svelte
     "inlay_hints": {
-        "enabled": true,
+        "enabled": false,
         "show_background": false
     },
     // LSP
     "lsp": {
         "tailwindcss-language-server": {
             "settings": {
-                "classAttributes": ["class", "className", "ngClass", "styles"]
+                "experimental": {
+                    "classRegex": ["\\bclass:\\s*['\"]([^'\"]*)['\"]"]
+                }
             }
         },
         "omnisharp": {
@@ -140,7 +147,7 @@
         // Refer https://zed.dev/docs/languages/javascript and https://zed.dev/docs/languages/typescript for more info
         "TypeScript": {
             // Refer https://github.com/jellydn/ts-inlay-hints for how to setup for Neovim and VSCode
-            "language_servers": ["vtsls"],
+            "language_servers": ["tsgo"],
             "code_actions_on_format": {
                 "source.fixAll.eslint": true
             },
@@ -152,7 +159,7 @@
             }
         },
         "JavaScript": {
-            "language_servers": ["vtsls"],
+            "language_servers": ["tsgo"],
             "code_actions_on_format": {
                 "source.fixAll.eslint": true
             },

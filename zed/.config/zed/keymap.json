@@ -54,7 +54,7 @@
     {
         "context": "GitPanel",
         "bindings": {
-            "q": "git_panel::Close"
+            "ctrl-q": "git_panel::Close"
         }
     },
     {
@@ -94,6 +94,7 @@
             "space f": "file_finder::Toggle",
             // Project search
             "space /": "pane::DeploySearch",
+            "space -": "project_search::ToggleFocus",
             // TODO: Open other files
             // Show project panel with current file
             "space e": "pane::RevealInProjectPanel",
@@ -111,7 +112,6 @@
             // Central terminal
             // "space t": "workspace::NewCenterTerminal"
             // replace file_finder::Toggle
-            //
         }
     },
     {
@@ -169,8 +169,8 @@
         "bindings": {
             "ctrl-d": ["workspace::SendKeystrokes", "ctrl-d z z"],
             "ctrl-u": ["workspace::SendKeystrokes", "ctrl-u z z"],
-            "n": ["workspace::SendKeystrokes", "n z z z v"],
-            "shift-n": ["workspace::SendKeystrokes", "shift-n z z z v"],
+            // "n": ["workspace::SendKeystrokes", "n z z z v"],
+            // "shift-n": ["workspace::SendKeystrokes", "shift-n z z z v"],
             "shift-g": ["workspace::SendKeystrokes", "shift-g z z"],
             "g r": "editor::FindAllReferences"
         }
