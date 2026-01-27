@@ -1,7 +1,9 @@
 return {
 	"CopilotC-Nvim/CopilotChat.nvim",
-	build = "make tiktoken",
-	cmd = "CopilotChat",
+	dependencies = {
+		{ "zbirenbaum/copilot.lua" },
+		{ "nvim-lua/plenary.nvim" },
+	},
 	keys = {
 		-- { "<>", "<cmd>Copilot enable<cr>", mode = { "n", "v" }, desc = "Enable Copilot" },
 		-- { "<C-c>", "<cmd>Copilot disable<cr>", mode = { "n", "v" }, desc = "Disable Copilot" },

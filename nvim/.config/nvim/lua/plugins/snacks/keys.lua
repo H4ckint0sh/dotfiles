@@ -28,7 +28,7 @@ return {
             -- In case you want to override the layout for this keymap
             layout = "custom",
           }) end, desc = "Find Files" },
-		{ '<Space>f', function() require('plugins.snacks.fff').fff() end, desc = 'Smart Find Files', },
+		{ '<Space>f', function() Snacks.picker(require('plugins.snacks.fff').source) end, desc = 'Smart Find Files', },
 		{ "<leader>c", function() require("plugins.snacks.command-palette").show_commands() end, desc = "Command Palette", },
 		-- find
 		{ "<leader>b", function() Snacks.picker.buffers({
@@ -85,7 +85,7 @@ return {
 		-- LSP
         {
             'gd',
-            function() 
+            function()
                 Snacks.picker.lsp_definitions()
             end,
             desc = "LSP Definitions"
