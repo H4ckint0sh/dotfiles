@@ -30,7 +30,6 @@ brew "ripgrep"
 brew "pandoc"
 brew "wget"
 brew "choose"
-brew "borders"
 brew "yarn"
 brew "fnm"
 brew "fd" # Used by Snacks-nvim

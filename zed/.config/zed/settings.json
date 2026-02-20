@@ -8,6 +8,11 @@
 // custom settings, run the `open default settings` command
 // from the command palette or from `Zed` application menu.
 {
+  "edit_predictions": {
+    "copilot": {
+      "enable_next_edit_suggestions": false
+    }
+  },
   "icon_theme": "Zed (Default)",
   "git_panel": {
     "tree_view": true,
