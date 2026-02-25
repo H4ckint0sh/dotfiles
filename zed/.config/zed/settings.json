@@ -9,6 +9,7 @@
 // from the command palette or from `Zed` application menu.
 {
   "edit_predictions": {
+    "provider": "copilot",
     "copilot": {
       "enable_next_edit_suggestions": false
     }
@@ -111,7 +112,7 @@
     "model_parameters": [],
     "default_model": {
       "provider": "copilot_chat",
-      "model": "claude-haiku-4.5",
+      "model": "gpt-5.2-codex",
     },
   },
   // Inlay hints preconfigured by Zed: Go, Rust, Typescript and Svelte
