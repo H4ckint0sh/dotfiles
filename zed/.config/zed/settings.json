@@ -11,8 +11,8 @@
   "edit_predictions": {
     "provider": "copilot",
     "copilot": {
-      "enable_next_edit_suggestions": false
-    }
+      "enable_next_edit_suggestions": false,
+    },
   },
   "icon_theme": "Zed (Default)",
   "git_panel": {
@@ -99,11 +99,10 @@
     "right_padding": 0.15,
   },
   // Use Copilot Chat AI as default
-  "features": {
-    "edit_prediction_provider": "copilot",
-  },
   "agent": {
-    "always_allow_tool_actions": true,
+    "tool_permissions": {
+      "default": "allow",
+    },
     "inline_assistant_model": {
       "provider": "zed.dev",
       "model": "",
@@ -112,7 +111,7 @@
     "model_parameters": [],
     "default_model": {
       "provider": "copilot_chat",
-      "model": "gpt-5.2-codex",
+      "model": "gpt-5.1-codex-max",
     },
   },
   // Inlay hints preconfigured by Zed: Go, Rust, Typescript and Svelte
@@ -172,7 +171,7 @@
   },
   // Use zed commit editor
   "terminal": {
-    "font_family": "JetMaple Mono",
+    "font_family": "Maple Mono",
     "font_size": 13,
     "font_fallbacks": ["Symbols Nerd Font"],
     "env": {
