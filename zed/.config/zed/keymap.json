@@ -175,6 +175,22 @@
       "g r": "editor::FindAllReferences",
     },
   },
+  // - f/t/F/T: multiline find (can jump across lines)
+  {
+    "context": "VimControl && !menu",
+    "bindings": {
+      "f": ["vim::PushFindForward", { "before": false, "multiline": true }],
+      "t": ["vim::PushFindForward", { "before": true, "multiline": true }],
+      "shift-f": [
+        "vim::PushFindBackward",
+        { "after": false, "multiline": true },
+      ],
+      "shift-t": [
+        "vim::PushFindBackward",
+        { "after": true, "multiline": true },
+      ],
+    },
+  },
   // Rename
   {
     "context": "Editor && vim_operator == c",
