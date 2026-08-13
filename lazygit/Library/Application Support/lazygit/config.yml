@@ -1,76 +1,77 @@
 gui:
-    # stuff relating to the UI
-    nerdFontsVersion: "3"
-    scrollHeight: 20 # how many lines you scroll by
-    scrollPastBottom: true # enable scrolling past the bottom
-    sidePanelWidth: 0.30 # number from 0 to 1
-    expandFocusedSidePanel: true
-    mainPanelSplitMode: "flexible" # one of 'horizontal' | 'flexible' | 'vertical'
-    language: "auto"
-    border: "rounded"
-    theme:
-        activeBorderColor:
-            - "#88C0D0"
-        inactiveBorderColor:
-            - "#4C566A"
-        optionsTextColor:
-            - "#88C0D0"
-        selectedLineBgColor:
-            - "#4C566A"
-        cherryPickedCommitBgColor:
-            - "#3B4252"
-        cherryPickedCommitFgColor:
-            - "#3B4252"
-        unstagedChangesColor:
-            - "#4C566A"
-    commitLength:
-        show: true
-    mouseEvents: true
-    skipDiscardChangeWarning: false
-    skipStashWarning: true
-    showFileTree: true # for rendering changes files in a tree format
-    showListFooter: true # for seeing the '5 of 20' message in list panels
-    showRandomTip: false
-    showCommandLog: false
-    showBottomLine: true
-    showPanelJumps: true
-    commandLogSize: 8
-    authorColors:
-        "H4ckint0sh": "blue"
-        "Alijan Adeli": "blue"
+  # stuff relating to the UI
+  nerdFontsVersion: "3"
+  scrollHeight: 20 # how many lines you scroll by
+  scrollPastBottom: true # enable scrolling past the bottom
+  sidePanelWidth: 0.30 # number from 0 to 1
+  expandFocusedSidePanel: true
+  mainPanelSplitMode: "flexible" # one of 'horizontal' | 'flexible' | 'vertical'
+  language: "auto"
+  border: "rounded"
+  theme:
+    activeBorderColor:
+      - "#88C0D0"
+    inactiveBorderColor:
+      - "#4C566A"
+    optionsTextColor:
+      - "#88C0D0"
+    selectedLineBgColor:
+      - "#4C566A"
+    cherryPickedCommitBgColor:
+      - "#3B4252"
+    cherryPickedCommitFgColor:
+      - "#3B4252"
+    unstagedChangesColor:
+      - "#4C566A"
+  commitLength:
+    show: true
+  mouseEvents: true
+  skipDiscardChangeWarning: false
+  skipStashWarning: true
+  showFileTree: true # for rendering changes files in a tree format
+  showListFooter: true # for seeing the '5 of 20' message in list panels
+  showRandomTip: false
+  showCommandLog: false
+  showBottomLine: true
+  showPanelJumps: true
+  commandLogSize: 8
+  authorColors:
+    "H4ckint0sh": "blue"
+    "Alijan Adeli": "blue"
 git:
-    pagers:
-        - externalDiffCommand: difft --color=always --display=inline --syntax-highlight=off
-    merging:
-        # only applicable to unix users
-        manualCommit: false
-        # extra args passed to `git merge`, e.g. --no-ff
-        args: ""
-    skipHookPrefix: WIP
-    autoFetch: true
-    autoRefresh: true
-    # branchLogCmd: "git log --graph --color=always --abbrev-commit --decorate --date=relative --pretty=medium {{branchName}} --"
-    overrideGpg: true # prevents lazygit from spawning a separate process when using GPG
-    disableForcePushing: false
-    parseEmoji: true
-    log:
-        # one of date-order, author-date-order, topo-order.
-        # topo-order makes it easier to read the git log graph, but commits may not
-        # appear chronologically. See https://git-scm.com/docs/git-log#_commit_ordering
-        order: "topo-order"
-        # one of always, never, when-maximised
-        # this determines whether the git graph is rendered in the commits panel
-        showGraph: "when-maximised"
-        # displays the whole git graph by default in the commits panel (equivalent to passing the `--all` argument to `git log`)
-        showWholeGraph: true
-    allBranchesLogCmds:
-        - git log --graph --all --color=always --abbrev-commit --decorate --date=relative  --pretty=medium
+  diffRenderers:
+    - command: difft --color=always --display=inline --syntax-highlight=off
+      type: extDiff
+  merging:
+    # only applicable to unix users
+    manualCommit: false
+    # extra args passed to `git merge`, e.g. --no-ff
+    args: ""
+  skipHookPrefix: WIP
+  autoFetch: true
+  autoRefresh: true
+  # branchLogCmd: "git log --graph --color=always --abbrev-commit --decorate --date=relative --pretty=medium {{branchName}} --"
+  overrideGpg: true # prevents lazygit from spawning a separate process when using GPG
+  disableForcePushing: false
+  parseEmoji: true
+  log:
+    # one of date-order, author-date-order, topo-order.
+    # topo-order makes it easier to read the git log graph, but commits may not
+    # appear chronologically. See https://git-scm.com/docs/git-log#_commit_ordering
+    order: "topo-order"
+    # one of always, never, when-maximised
+    # this determines whether the git graph is rendered in the commits panel
+    showGraph: "when-maximised"
+    # displays the whole git graph by default in the commits panel (equivalent to passing the `--all` argument to `git log`)
+    showWholeGraph: true
+  allBranchesLogCmds:
+    - git log --graph --all --color=always --abbrev-commit --decorate --date=relative  --pretty=medium
 refresher:
-    refreshInterval: 10 # file/submodule refresh interval in seconds
-    fetchInterval: 60 # re-fetch interval in seconds
+  refreshInterval: 10 # file/submodule refresh interval in seconds
+  fetchInterval: 60 # re-fetch interval in seconds
 update:
-    method: prompt # can be: prompt | background | never
-    days: 14 # how often an update is checked for
+  method: prompt # can be: prompt | background | never
+  days: 14 # how often an update is checked for
 confirmOnQuit: false
 # determines whether hitting 'esc' will quit the application when there is nothing to cancel/close
 quitOnTopLevelReturn: true
@@ -78,49 +79,40 @@ disableStartupPopups: false
 notARepository: "prompt" # one of: 'prompt' | 'create' | 'skip'
 promptToReturnFromSubprocess: false # display confirmation when subprocess terminates
 customCommands:
-    - key: "f"
-      command: "git fetch --prune --all"
-      context: "files"
-      description: "Fetch with prune all"
-    - key: "o"
-      command: "sesh connect '{{.SelectedWorktree.Path}}'"
-      context: "worktrees"
-      description: "Open with sesh"
-    - key: "f"
-      command: "git difftool -y {{.SelectedLocalCommit.Sha}} -- {{.SelectedCommitFile.Name}}"
-      context: "commitFiles"
-      description: "Compare (difftool) with local copy"
-    - key: "s"
-      command: "sesh connect '{{.SelectedWorktree.Path}}'"
-      context: "worktrees"
-      description: "Connect to session"
-    - key: "O"
-      command: "nvim -c ':Octo pr create'"
-      context: "localBranches"
-      loadingText: "Loading Octo"
-      description: "Open pull request with Octo"
-      output: terminal
-    - key: "E"
-      context: "files"
-      command: "gitmoji -c"
-      loadingText: "Loading gitmoji"
-      output: terminal
-    - key: "z"
-      command: "~/.config/bin/gc"
-      context: "files"
-      loadingText: "Commitizen prompt"
-      output: terminal
-    - key: "<c-g>"
-      context: "files"
-      command: "lumen draft | tee >(pbcopy)"
-      loadingText: "Generating message..."
-      output: popup
-    - key: "<c-G>"
-      context: "files"
-      command: "lumen draft -c {{.Form.Context | quote}} | tee >(pbcopy)"
-      loadingText: "Generating message..."
-      prompts:
-          - type: "input"
-            title: "Context"
-            key: "Context"
-      output: popup
+  - key: "f"
+    command: "git fetch --prune --all"
+    context: "files"
+    description: "Fetch with prune all"
+  - key: "o"
+    command: "sesh connect '{{.SelectedWorktree.Path}}'"
+    context: "worktrees"
+    description: "Open with sesh"
+  - key: "f"
+    command: "git difftool -y {{.SelectedLocalCommit.Sha}} -- {{.SelectedCommitFile.Name}}"
+    context: "commitFiles"
+    description: "Compare (difftool) with local copy"
+  - key: "s"
+    command: "sesh connect '{{.SelectedWorktree.Path}}'"
+    context: "worktrees"
+    description: "Connect to session"
+  - key: "O"
+    command: "nvim -c ':Octo pr create'"
+    context: "localBranches"
+    loadingText: "Loading Octo"
+    description: "Open pull request with Octo"
+    output: terminal
+  - key: "E"
+    context: "files"
+    command: "gitmoji -c"
+    loadingText: "Loading gitmoji"
+    output: terminal
+  - key: "z"
+    command: "~/.config/bin/gc"
+    context: "files"
+    loadingText: "Commitizen prompt"
+    output: terminal
+  - key: "<c-g>"
+    context: "files"
+    command: "lumen draft | tee >(pbcopy)"
+    loadingText: "Generating message..."
+    output: popup

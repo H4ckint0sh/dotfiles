@@ -110,7 +110,7 @@ zinit light Aloxaf/fzf-tab
 zinit ice lucid wait"0"
 eval "$(oh-my-posh init zsh --config ~/.config/ohmyposh/config.toml)"
 
-# FNM 
+# FNM
 eval "$(fnm env --use-on-cd --version-file-strategy=recursive --shell zsh)"
 
 # Syntax highlighting (deferred)
@@ -151,7 +151,7 @@ export FZF_DEFAULT_OPTS="
     --color=marker:#B48EAD,prompt:#B48EAD,spinner:#B48EAD
     --color=pointer:#D8DEE9,header:#D08770,border:#616E88
     --color=label:#D8DEE9,query:#E5E9F0"
-    
+
 # Autosuggestions configuration
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#616E88"
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)

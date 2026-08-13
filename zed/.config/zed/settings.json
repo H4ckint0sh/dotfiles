@@ -8,6 +8,25 @@
 // custom settings, run the `open default settings` command
 // from the command palette or from `Zed` application menu.
 {
+  "cli_default_open_behavior": "new_window",
+  "agent_servers": {
+    "github-copilot-cli": {
+      "type": "registry",
+    },
+    "claude-acp": {
+      "default_config_options": {
+        "mode": "acceptEdits",
+      },
+      "type": "registry",
+    },
+  },
+  "ssh_connections": [
+    {
+      "host": "azure-ambea",
+      "args": [],
+      "projects": [],
+    },
+  ],
   "edit_predictions": {
     "provider": "copilot",
     "copilot": {
@@ -43,7 +62,7 @@
   },
   "autosave": "on_focus_change",
   "format_on_save": "on",
-  "ui_font_size": 16,
+  "ui_font_size": 17.0,
   "buffer_font_size": 12,
   "buffer_font_weight": 400,
   "soft_wrap": "editor_width",
@@ -105,6 +124,8 @@
   },
   // Use Copilot Chat AI as default
   "agent": {
+    "dock": "right",
+    "sidebar_side": "right",
     "tool_permissions": {
       "default": "allow",
     },
@@ -127,6 +148,21 @@
   },
   // LSP
   "lsp": {
+    "vtsls": {
+      "settings": {
+        "typescript": {
+          "updateImportsOnFileMove": {
+            "enabled": "always",
+          },
+        },
+        "javascript": {
+          "updateImportsOnFileMove": {
+            "enabled": "always",
+          },
+        },
+      },
+      "enable_lsp_tasks": true,
+    },
     "tailwindcss-language-server": {
       "settings": {
         "experimental": {
@@ -151,7 +187,11 @@
     // Refer https://zed.dev/docs/languages/javascript and https://zed.dev/docs/languages/typescript for more info
     "TypeScript": {
       // Refer https://github.com/jellydn/ts-inlay-hints for how to setup for Neovim and VSCode
-      "language_servers": ["tsgo"],
+      "language_servers": [
+        "vtsls",
+        "emmet-language-server",
+        "tailwindcss-language-server",
+      ],
       "code_actions_on_format": {
         "source.fixAll.eslint": true,
       },
@@ -163,7 +203,11 @@
       },
     },
     "JavaScript": {
-      "language_servers": ["tsgo"],
+      "language_servers": [
+        "vtsls",
+        "emmet-language-server",
+        "tailwindcss-language-server",
+      ],
       "code_actions_on_format": {
         "source.fixAll.eslint": true,
       },
@@ -190,6 +234,7 @@
   "file_types": {
     "Dockerfile": ["Dockerfile", "Dockerfile.*"],
     "JSON": ["json", "jsonc", "*.code-snippets"],
+    "HTML": ["hbs"],
   },
   // File scan exclusions, hide on the file explorer and search
   "file_scan_exclusions": [
@@ -205,6 +250,8 @@
     ".env*",
     "**/out",
     "**/dist",
+    "**/build",
+    "**/output",
     "**/.husky",
     "**/.turbo",
     "**/.vscode-test",
@@ -216,6 +263,7 @@
     "**/report",
     "**/node_modules",
   ],
+  "file_scan_inclusions": [".venv", ".git"],
   // Turn off telemetry
   "telemetry": {
     "diagnostics": false,
@@ -227,17 +275,13 @@
     "dock": "right",
     "git_status": true,
     "default_width": 300,
+    "hide_hidden": false,
   },
   "outline_panel": {
     "dock": "right",
     "button": false,
   },
   "collaboration_panel": {
-    "dock": "left",
-    "button": false,
-  },
-  // Move some unnecessary panels to the left
-  "notification_panel": {
     "dock": "left",
     "button": false,
   },
