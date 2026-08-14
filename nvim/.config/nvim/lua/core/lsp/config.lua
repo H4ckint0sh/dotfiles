@@ -146,7 +146,7 @@ vim.keymap.set("n", "]w", function()
 end, { desc = "Next warning" })
 
 -- Disable LSP logging
-vim.lsp.set_log_level("off")
+vim.lsp.log.set_level("off")
 
 local group = vim.api.nvim_create_augroup("OoO", {})
 

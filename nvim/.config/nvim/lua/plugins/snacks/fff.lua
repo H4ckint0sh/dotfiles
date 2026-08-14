@@ -98,13 +98,13 @@ M.source = {
 
 		local search_query = tostring(ctx.filter.search or "")
 
-		local fff_result = file_picker.search_files(search_query, limit)
+		local fff_result = file_picker.search_files(search_query, M.state.current_file_cache, limit, max_threads)
 
 		local items = {} ---@type snacks.picker.finder.Item[]
 		for _, fff_item in ipairs(fff_result) do
 			local item = {
 				text = fff_item.name,
-				file = fff_item.path,
+				file = require("fff.utils").canonicalize_fff_path(fff_item.path or fff_item.relative_path),
 				score = fff_item.total_frecency_score,
 				status = status_map[fff_item.git_status] and {
 					status = status_map[fff_item.git_status],

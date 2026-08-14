@@ -2,58 +2,68 @@
 return {
 	{
 		"nvim-treesitter/nvim-treesitter",
-		dependencies = {
-			"RRethy/nvim-treesitter-textsubjects",
-		},
-		event = { "BufReadPost", "BufNewFile" },
+		lazy = false,
+		build = ":TSUpdate",
 		config = function()
-			require("nvim-treesitter.configs").setup({
-				ensure_installed = {
-					"tsx",
-					"typescript",
-					"javascript",
-					"html",
-					"css",
-					"vue",
-					"svelte",
-					"gitcommit",
-					"graphql",
-					"json",
-					"json5",
-					"lua",
-					"markdown",
-					"markdown_inline",
-					"regex",
-					"bash",
-					"vim",
-					"astro",
-					"vimdoc",
-					"diff",
-					"git_rebase",
-					"toml",
-					"gitignore",
-					"yaml",
-					"git_config",
-				}, -- one of "all", or a list of languages
-				sync_install = false, -- install languages synchronously (only applied to `ensure_installed`)
-				ignore_install = { "haskell" }, -- list of parsers to ignore installing
-				highlight = {
-					enable = true,
-					-- disable = { "c", "rust" },  -- list of language that will be disabled
-					-- additional_vim_regex_highlighting = false,
-				},
-				incremental_selection = {
-					enable = true,
-					keymaps = {
-						init_selection = "<S-Up>",
-						node_incremental = "<S-Up>",
-						scope_incremental = false,
-					},
-				},
-				indent = {
-					enable = true,
-				},
+			local treesitter = require("nvim-treesitter")
+			local parsers = {
+				"tsx",
+				"typescript",
+				"javascript",
+				"html",
+				"css",
+				"vue",
+				"svelte",
+				"gitcommit",
+				"graphql",
+				"json",
+				"json5",
+				"lua",
+				"markdown",
+				"markdown_inline",
+				"regex",
+				"bash",
+				"vim",
+				"astro",
+				"vimdoc",
+				"diff",
+				"git_rebase",
+				"toml",
+				"gitignore",
+				"yaml",
+				"git_config",
+			}
+
+			treesitter.setup()
+
+			local function enable_treesitter()
+				local language = vim.treesitter.language.get_lang(vim.bo.filetype)
+				if not language or not vim.list_contains(treesitter.get_installed("parsers"), language) then
+					return
+				end
+
+				vim.treesitter.start()
+				vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+			end
+
+			local group = vim.api.nvim_create_augroup("nvim-treesitter", { clear = true })
+			vim.api.nvim_create_autocmd("FileType", {
+				group = group,
+				callback = enable_treesitter,
 			})
+			vim.api.nvim_create_autocmd("User", {
+				group = group,
+				pattern = "TSUpdate",
+				callback = function()
+					for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
+						if vim.api.nvim_buf_is_loaded(bufnr) then
+							vim.api.nvim_buf_call(bufnr, enable_treesitter)
+						end
+					end
+				end,
+			})
+
+			treesitter.install(parsers)
 		end,
 	},
 
