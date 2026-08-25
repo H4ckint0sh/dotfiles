@@ -2,6 +2,7 @@
 
 # ~/.zshrc - Optimized ZSH Configuration with Zinit
 # ================================================
+typeset -g ZSH_START_PWD="$PWD"
 
 # ================================
 # Performance Optimization
@@ -114,8 +115,12 @@ eval "$(oh-my-posh init zsh --config ~/.config/ohmyposh/config.toml)"
 eval "$(fnm env --use-on-cd --version-file-strategy=recursive --shell zsh)"
 
 # Syntax highlighting (deferred)
-zinit ice lucid wait"0" atinit"zpcompinit; zpcdreplay"
-zinit light zdharma-continuum/fast-syntax-highlighting
+{
+  local __cwd_before_fsh="$PWD"
+  zinit ice lucid wait"0" atinit"zpcompinit; zpcdreplay"
+  zinit light zdharma-continuum/fast-syntax-highlighting
+  builtin cd "$__cwd_before_fsh" 2>/dev/null || true
+}
 zle_highlight=('paste:none')
 
 # FZF - Lazy load with precompiled resources
@@ -205,6 +210,14 @@ prs() {
         awk '{print $1}' | xargs gh pr checkout
 }
 
+# spotDL: download URL/query from clipboard
+spotdlclip() {
+  local url
+  url="$(pbpaste)"
+  [[ -z "$url" ]] && { echo "Clipboard is empty"; return 1; }
+  spotdl download "$url"
+}
+
 # ================================
 # Load Custom Configuration
 # ================================
@@ -232,3 +245,11 @@ fi
 # ================================
 # Enable profiling (uncomment to debug slow startup)
 # zprof
+
+# Final guard: restore original cwd right before prompt is shown
+autoload -Uz add-zsh-hook
+_restore_cwd_once() {
+  builtin cd "$ZSH_START_PWD" 2>/dev/null || builtin cd "$HOME"
+  add-zsh-hook -d precmd _restore_cwd_once
+}
+add-zsh-hook precmd _restore_cwd_once

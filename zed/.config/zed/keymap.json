@@ -304,4 +304,10 @@
       "ctrl-cmd-alt-shift-v": "pane::SplitAndMoveRight",
     },
   },
+  {
+    "context": "Editor && extension == md",
+    "bindings": {
+      "ctrl-cmd-alt-shift-v": "markdown::OpenPreviewToTheSide",
+    },
+  },
 ]

@@ -47,4 +47,3 @@ alias path='echo -e ${PATH//:/\\n} | less'
 # ================================
 
 alias sal='ssh_agent_lazy'
-

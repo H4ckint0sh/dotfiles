@@ -15,7 +15,8 @@
     },
     "claude-acp": {
       "default_config_options": {
-        "mode": "acceptEdits",
+        "model": "default",
+        "mode": "bypassPermissions",
       },
       "type": "registry",
     },
@@ -188,6 +189,7 @@
     "TypeScript": {
       // Refer https://github.com/jellydn/ts-inlay-hints for how to setup for Neovim and VSCode
       "language_servers": [
+        "typescript-ls",
         "vtsls",
         "emmet-language-server",
         "tailwindcss-language-server",
@@ -204,6 +206,24 @@
     },
     "JavaScript": {
       "language_servers": [
+        "typescript-ls",
+        "vtsls",
+        "emmet-language-server",
+        "tailwindcss-language-server",
+      ],
+      "code_actions_on_format": {
+        "source.fixAll.eslint": true,
+      },
+      "inlay_hints": {
+        "enabled": true,
+        "show_parameter_hints": false,
+        "show_other_hints": true,
+        "show_type_hints": true,
+      },
+    },
+    "TSX": {
+      "language_servers": [
+        "typescript-ls",
         "vtsls",
         "emmet-language-server",
         "tailwindcss-language-server",
@@ -224,11 +244,9 @@
     "font_family": "Maple Mono",
     "font_size": 13,
     "font_fallbacks": ["Symbols Nerd Font"],
-    "env": {
-      "EDITOR": "zed --wait",
-    },
     "working_directory": "current_project_directory",
     "button": true,
+    "shell": null,
   },
   // File syntax highlighting
   "file_types": {
