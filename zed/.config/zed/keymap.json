@@ -67,19 +67,6 @@
       "space a": "editor::ToggleCodeActions",
       "space .": "editor::ToggleCodeActions",
       "space r": "editor::Rename",
-      "g d": "editor::GoToDefinition",
-      "g D": "editor::GoToDefinitionSplit",
-      "g i": "editor::GoToImplementation",
-      "g I": "editor::GoToImplementationSplit",
-      "g t": "editor::GoToTypeDefinition",
-      "g T": "editor::GoToTypeDefinitionSplit",
-      "g r": "editor::FindAllReferences",
-      "] d": "editor::GoToDiagnostic",
-      "[ d": "editor::GoToPreviousDiagnostic",
-      // Symbol search
-      "s s": "outline::Toggle",
-      "s S": "project_symbols::Toggle",
-      // Diagnostic
       "space d": "diagnostics::Deploy",
       // + Buffers
       // Close active panel
@@ -98,20 +85,10 @@
       // TODO: Open other files
       // Show project panel with current file
       "space e": "pane::RevealInProjectPanel",
-      // Code folding
-      "z a": "editor::ToggleFold",
-      "z M": "editor::FoldAll",
-      "z A": "editor::UnfoldAll",
       // Move to enclosing bracket
       "m m": "editor::MoveToEnclosingBracket",
       // Redo
       "U": "editor::Redo",
-      // Splits
-      // "space l": "pane::SplitRight",
-      // "space j": "pane::SplitDown"
-      // Central terminal
-      // "space t": "workspace::NewCenterTerminal"
-      // replace file_finder::Toggle
     },
   },
   {
