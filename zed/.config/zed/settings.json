@@ -11,6 +11,9 @@
   "cli_default_open_behavior": "new_window",
   "agent_servers": {
     "github-copilot-cli": {
+      "default_config_options": {
+        "model": "claude-sonnet-5.5",
+      },
       "type": "registry",
     },
     "claude-acp": {
@@ -125,14 +128,16 @@
   },
   // Use Copilot Chat AI as default
   "agent": {
+    "threads_sidebar": {
+      "position": "right",
+    },
     "dock": "right",
-    "sidebar_side": "right",
     "tool_permissions": {
       "default": "allow",
     },
     "inline_assistant_model": {
-      "provider": "zed.dev",
-      "model": "",
+      "provider": "copilot_chat",
+      "model": "gpt-6-luna",
     },
     "default_profile": "write",
     "model_parameters": [],
@@ -246,7 +251,9 @@
     "font_fallbacks": ["Symbols Nerd Font"],
     "working_directory": "current_project_directory",
     "button": true,
-    "shell": null,
+    "shell": {
+      "program": "/bin/zsh",
+    },
   },
   // File syntax highlighting
   "file_types": {
@@ -304,4 +311,7 @@
     "button": false,
   },
   "formatter": "prettier",
+  "node": {
+    "path": "/Users/alijanadeli/.local/share/fnm/node-versions/v24.21.0/installation/bin/node",
+  },
 }

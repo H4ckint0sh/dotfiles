@@ -8,11 +8,34 @@
 // custom settings, run the `open default settings` command
 // from the command palette or from `Zed` application menu.
 {
+  "cli_default_open_behavior": "new_window",
+  "agent_servers": {
+    "github-copilot-cli": {
+      "default_config_options": {
+        "model": "claude-sonnet-5.5"
+      },
+      "type": "registry",
+    },
+    "claude-acp": {
+      "default_config_options": {
+        "model": "default",
+        "mode": "bypassPermissions",
+      },
+      "type": "registry",
+    },
+  },
+  "ssh_connections": [
+    {
+      "host": "azure-ambea",
+      "args": [],
+      "projects": [],
+    },
+  ],
   "edit_predictions": {
     "provider": "copilot",
     "copilot": {
-      "enable_next_edit_suggestions": false
-    }
+      "enable_next_edit_suggestions": true,
+    },
   },
   "icon_theme": "Zed (Default)",
   "git_panel": {
@@ -35,10 +58,15 @@
   },
   "search": {
     "center_on_match": true,
+    "button": true,
+    "whole_word": true,
+    "case_sensitive": false,
+    "include_ignored": true,
+    "regex": false,
   },
   "autosave": "on_focus_change",
   "format_on_save": "on",
-  "ui_font_size": 16,
+  "ui_font_size": 17.0,
   "buffer_font_size": 12,
   "buffer_font_weight": 400,
   "soft_wrap": "editor_width",
@@ -99,11 +127,12 @@
     "right_padding": 0.15,
   },
   // Use Copilot Chat AI as default
-  "features": {
-    "edit_prediction_provider": "copilot",
-  },
   "agent": {
-    "always_allow_tool_actions": true,
+    "dock": "right",
+    "sidebar_side": "right",
+    "tool_permissions": {
+      "default": "allow",
+    },
     "inline_assistant_model": {
       "provider": "zed.dev",
       "model": "",
@@ -111,8 +140,9 @@
     "default_profile": "write",
     "model_parameters": [],
     "default_model": {
+      "enable_thinking": true,
       "provider": "copilot_chat",
-      "model": "claude-opus-4.6",
+      "model": "claude-haiku-4.5",
     },
   },
   // Inlay hints preconfigured by Zed: Go, Rust, Typescript and Svelte
@@ -122,6 +152,21 @@
   },
   // LSP
   "lsp": {
+    "vtsls": {
+      "settings": {
+        "typescript": {
+          "updateImportsOnFileMove": {
+            "enabled": "always",
+          },
+        },
+        "javascript": {
+          "updateImportsOnFileMove": {
+            "enabled": "always",
+          },
+        },
+      },
+      "enable_lsp_tasks": true,
+    },
     "tailwindcss-language-server": {
       "settings": {
         "experimental": {
@@ -146,7 +191,29 @@
     // Refer https://zed.dev/docs/languages/javascript and https://zed.dev/docs/languages/typescript for more info
     "TypeScript": {
       // Refer https://github.com/jellydn/ts-inlay-hints for how to setup for Neovim and VSCode
-      "language_servers": ["tsgo"],
+      "language_servers": [
+        "typescript-ls",
+        "vtsls",
+        "emmet-language-server",
+        "tailwindcss-language-server",
+      ],
+      "code_actions_on_format": {
+        "source.fixAll.eslint": true,
+      },
+      "inlay_hints": {
+        "enabled": false,
+        "show_parameter_hints": false,
+        "show_other_hints": true,
+        "show_type_hints": true,
+      },
+    },
+    "JavaScript": {
+      "language_servers": [
+        "typescript-ls",
+        "vtsls",
+        "emmet-language-server",
+        "tailwindcss-language-server",
+      ],
       "code_actions_on_format": {
         "source.fixAll.eslint": true,
       },
@@ -157,8 +224,13 @@
         "show_type_hints": true,
       },
     },
-    "JavaScript": {
-      "language_servers": ["tsgo"],
+    "TSX": {
+      "language_servers": [
+        "typescript-ls",
+        "vtsls",
+        "emmet-language-server",
+        "tailwindcss-language-server",
+      ],
       "code_actions_on_format": {
         "source.fixAll.eslint": true,
       },
@@ -172,19 +244,18 @@
   },
   // Use zed commit editor
   "terminal": {
-    "font_family": "JetMaple Mono",
+    "font_family": "Maple Mono",
     "font_size": 13,
     "font_fallbacks": ["Symbols Nerd Font"],
-    "env": {
-      "EDITOR": "zed --wait",
-    },
     "working_directory": "current_project_directory",
     "button": true,
+    "shell": null,
   },
   // File syntax highlighting
   "file_types": {
     "Dockerfile": ["Dockerfile", "Dockerfile.*"],
     "JSON": ["json", "jsonc", "*.code-snippets"],
+    "HTML": ["hbs"],
   },
   // File scan exclusions, hide on the file explorer and search
   "file_scan_exclusions": [
@@ -200,6 +271,8 @@
     ".env*",
     "**/out",
     "**/dist",
+    "**/build",
+    "**/output",
     "**/.husky",
     "**/.turbo",
     "**/.vscode-test",
@@ -211,6 +284,7 @@
     "**/report",
     "**/node_modules",
   ],
+  "file_scan_inclusions": [".venv", ".git"],
   // Turn off telemetry
   "telemetry": {
     "diagnostics": false,
@@ -222,17 +296,13 @@
     "dock": "right",
     "git_status": true,
     "default_width": 300,
+    "hide_hidden": false,
   },
   "outline_panel": {
     "dock": "right",
     "button": false,
   },
   "collaboration_panel": {
-    "dock": "left",
-    "button": false,
-  },
-  // Move some unnecessary panels to the left
-  "notification_panel": {
     "dock": "left",
     "button": false,
   },

@@ -199,6 +199,8 @@
       "cmd-t": "workspace::NewTerminal",
       "cmd-n": "workspace::NewCenterTerminal",
       "alt-p": "pane::TogglePinTab",
+      "ctrl-j": ["terminal::SendKeystroke", "ctrl-j"],
+      "ctrl-k": ["terminal::SendKeystroke", "ctrl-k"],
     },
   },
   // File panel (netrw)

@@ -1,3 +1,7 @@
+# The following lines were added by Docker Desktop to add commands to your PATH.
+export PATH="$PATH:/Users/alijanadeli/.docker/bin"
+# End of Docker Desktop section.
+
 # SSH Agent Management (lazy)
 ssh_agent_lazy() {
     # Start ssh-agent if not running

@@ -2,7 +2,10 @@
 
 # ~/.zshrc - Optimized ZSH Configuration with Zinit
 # ================================================
+
+# Remember where the shell started, but never inside zinit's plugin folders
 typeset -g ZSH_START_PWD="$PWD"
+[[ $ZSH_START_PWD == ${XDG_DATA_HOME:-$HOME/.local/share}/zinit/* ]] && ZSH_START_PWD=$HOME
 
 # ================================
 # Performance Optimization
@@ -35,13 +38,19 @@ source "${ZINIT_HOME}/zinit.zsh"
 
 # History Configuration
 HISTFILE=~/.zsh_history
-export HISTIGNORE="rm -rf*:ls:echo:ll:gallery-dl:c"
 HISTSIZE=100000000000
-SAVEHIST=$SAVEHIST
+SAVEHIST=$HISTSIZE
 setopt EXTENDED_HISTORY APPEND_HISTORY HIST_EXPIRE_DUPS_FIRST
 setopt HIST_IGNORE_DUPS HIST_IGNORE_ALL_DUPS HIST_FIND_NO_DUPS
 setopt HIST_IGNORE_SPACE HIST_SAVE_NO_DUPS HIST_REDUCE_BLANKS
 setopt HIST_VERIFY SHARE_HISTORY INC_APPEND_HISTORY
+
+# zsh equivalent of bash's HISTIGNORE
+zshaddhistory() {
+  local line=${1%%$'\n'}
+  [[ $line == ('rm -rf'*|ls|echo|ll|gallery-dl|c) ]] && return 1
+  return 0
+}
 
 # ================================
 # Environment Variables
@@ -98,7 +107,7 @@ else
     compinit -i
 fi
 
-# Load zsh-vi-mode lazily
+# Load zsh-vi-mode
 zinit ice lucid depth=1
 zinit light jeffreytse/zsh-vi-mode
 bindkey -v  # Enable vi keybindings
@@ -107,20 +116,18 @@ bindkey -v  # Enable vi keybindings
 zinit ice lucid wait"0"
 zinit light Aloxaf/fzf-tab
 
-# Oh My Posh with deferred loading
-zinit ice lucid wait"0"
+# Oh My Posh
 eval "$(oh-my-posh init zsh --config ~/.config/ohmyposh/config.toml)"
 
-# FNM
-eval "$(fnm env --use-on-cd --version-file-strategy=recursive --shell zsh)"
+# FNM (switches on cd; prompts to install a missing .nvmrc version)
+autoload -Uz add-zsh-hook
+eval "$(fnm env --version-file-strategy=recursive --shell zsh)"
+_fnm_autoload_hook() { fnm use --silent-if-unchanged }
+add-zsh-hook chpwd _fnm_autoload_hook
 
 # Syntax highlighting (deferred)
-{
-  local __cwd_before_fsh="$PWD"
-  zinit ice lucid wait"0" atinit"zpcompinit; zpcdreplay"
-  zinit light zdharma-continuum/fast-syntax-highlighting
-  builtin cd "$__cwd_before_fsh" 2>/dev/null || true
-}
+zinit ice lucid wait"0" atinit"zpcompinit; zpcdreplay"
+zinit light zdharma-continuum/fast-syntax-highlighting
 zle_highlight=('paste:none')
 
 # FZF - Lazy load with precompiled resources
@@ -128,12 +135,10 @@ zinit ice as"command" from"gh-r" lucid \
     compile"shell/{completion,key-bindings}.zsh" wait"1"
 zinit light junegunn/fzf
 
-
 # Zoxide - Lazy load with precompiled initialization
 zinit ice as"command" from"gh-r" lucid \
     atclone"./zoxide init --cmd cd zsh > init.zsh" src"init.zsh" compile"init.zsh" wait"1"
 zinit light ajeetdsouza/zoxide
-
 
 # Autosuggestions (deferred)
 zinit ice lucid wait"2" atload"_zsh_autosuggest_start"
@@ -182,6 +187,7 @@ zstyle ':fzf-tab:*' popup-min-size 80 10
 zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
 zstyle ':fzf-tab:*' fzf-bindings 'tab:accept'
 zstyle ':fzf-tab:*' fzf-flags --pointer '▶' --prompt ' ' --gutter ' ' --color=fg:#616E88,fg+:#D8DEE9,pointer:#D8DEE9,border:#616E88,prompt:#B48EAD,info:#D08770,hl:#5E81AC,hl+:#81A1C1,bg:-1,bg+:-1
+
 # SSH completion
 if [[ -r ~/.ssh/known_hosts ]]; then
     h=($(cat ~/.ssh/known_hosts | cut -f 1 -d ' ' | sed -e 's/,.*//g' | uniq))
@@ -246,10 +252,25 @@ fi
 # Enable profiling (uncomment to debug slow startup)
 # zprof
 
-# Final guard: restore original cwd right before prompt is shown
-autoload -Uz add-zsh-hook
+# ================================
+# First Prompt: restore cwd + fnm
+# ================================
+# Restore the start directory, then let fnm pick (and offer to install)
+# the version from .nvmrc. Runs before other prompt hooks so the first
+# prompt already shows the right node version.
 _restore_cwd_once() {
-  builtin cd "$ZSH_START_PWD" 2>/dev/null || builtin cd "$HOME"
   add-zsh-hook -d precmd _restore_cwd_once
+  if [[ $PWD != $ZSH_START_PWD ]]; then
+    builtin cd -q "$ZSH_START_PWD" 2>/dev/null || builtin cd -q "$HOME"
+  fi
+  (( $+functions[_fnm_autoload_hook] )) && _fnm_autoload_hook
 }
-add-zsh-hook precmd _restore_cwd_once
+precmd_functions=(_restore_cwd_once $precmd_functions)
+
+# pnpm
+export PNPM_HOME='/Users/alijanadeli/Library/pnpm'
+case ":$PATH:" in
+  *":$PNPM_HOME/bin:"*) ;;
+  *) export PATH="$PNPM_HOME/bin:$PATH" ;;
+esac
+# pnpm end

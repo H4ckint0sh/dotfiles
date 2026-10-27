@@ -23,6 +23,9 @@ gui:
       - "#3B4252"
     unstagedChangesColor:
       - "#4C566A"
+    authorColors:
+      "H4ckint0sh": "blue"
+      "Alijan Adeli": "blue"
   commitLength:
     show: true
   mouseEvents: true
@@ -35,9 +38,6 @@ gui:
   showBottomLine: true
   showPanelJumps: true
   commandLogSize: 8
-  authorColors:
-    "H4ckint0sh": "blue"
-    "Alijan Adeli": "blue"
 git:
   diffRenderers:
     - command: difft --color=always --display=inline --syntax-highlight=off
