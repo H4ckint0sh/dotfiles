@@ -12,7 +12,7 @@
   "agent_servers": {
     "github-copilot-cli": {
       "default_config_options": {
-        "model": "claude-sonnet-5.5",
+        "model": "gpt-6.1-terra",
       },
       "type": "registry",
     },
@@ -154,6 +154,17 @@
   },
   // LSP
   "lsp": {
+    "dexter": {
+      "binary": {
+        "path": "/opt/homebrew/bin/dexter",
+        "arguments": ["lsp"],
+      },
+      "settings": {
+        "workspaceSymbols": {
+          "minQueryLength": 0,
+        },
+      },
+    },
     "vtsls": {
       "settings": {
         "typescript": {
@@ -190,6 +201,18 @@
     },
   },
   "languages": {
+    "Elixir": {
+      "language_servers": ["dexter", "tailwindcss-language-server"],
+      "format_on_save": "on",
+      "formatter": "language_server",
+    },
+    "HEEx": {
+      "language_servers": [
+        "dexter",
+        "tailwindcss-language-server",
+        "emmet-language-server",
+      ],
+    },
     // Refer https://zed.dev/docs/languages/javascript and https://zed.dev/docs/languages/typescript for more info
     "TypeScript": {
       // Refer https://github.com/jellydn/ts-inlay-hints for how to setup for Neovim and VSCode

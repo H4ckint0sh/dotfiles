@@ -32,6 +32,8 @@ brew "pandoc"
 brew "wget"
 brew "choose"
 brew "yarn"
+brew "elixir"
+brew "remoteoss/tap/dexter"
 brew "fnm"
 brew "fd" # Used by Snacks-nvim
 brew "mailsy"
