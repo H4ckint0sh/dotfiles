@@ -3,6 +3,10 @@ local palette = require("nord.colors").palette
 
 return {
 	"petertriho/nvim-scrollbar",
+	branch = "v1", -- v2 lands on main 2026-11-16 with breaking config changes; see issue #121
+	init = function()
+		vim.g.scrollbar_v2_notice = false
+	end,
 	config = function()
 		require("scrollbar").setup({
 			show = true,

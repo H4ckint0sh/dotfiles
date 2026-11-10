@@ -23,3 +23,18 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 	pattern = "*",
 	command = 'silent! normal! g`"zv',
 })
+
+
+vim.api.nvim_create_user_command( "Ai", function ( opts )
+    local range = ""
+
+    if opts.range > 0 then
+        range = "'<,'>"
+    else
+        range = "%"
+    end
+
+    vim.cmd( string.format( "%sCodeCompanion %s", range, opts.args ) )
+end, { nargs = "*", range = true } )
+
+

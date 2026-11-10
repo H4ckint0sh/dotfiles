@@ -37,7 +37,7 @@ return {
 					"jsonls",
 					"lua_ls",
 					"tailwindcss",
-					"ts_ls",
+					"tsc", -- TypeScript 7 native (Go) language server
 					"astro",
 					"emmet_language_server",
 					"svelte",
@@ -45,7 +45,8 @@ return {
 				automatic_enable = {
 					exclude = {
 						"emmet_language_server",
-						"ts_ls",
+						"ts_ls", -- replaced by tsc (TypeScript 7)
+						"tsgo", -- deprecated alias of tsc
 					},
 				},
 

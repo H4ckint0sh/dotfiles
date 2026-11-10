@@ -53,6 +53,7 @@ require("core.lsp.servers.bashls")
 require("core.lsp.servers.graphql")
 require("core.lsp.servers.prismals")
 require("core.lsp.servers.denols")
+require("core.lsp.servers.tsc")
 
 -- Note: Server enabling is now handled by mason-lspconfig's automatic_enable feature
 return {}
