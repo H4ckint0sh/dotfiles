@@ -154,17 +154,6 @@
   },
   // LSP
   "lsp": {
-    "dexter": {
-      "binary": {
-        "path": "/opt/homebrew/bin/dexter",
-        "arguments": ["lsp"],
-      },
-      "settings": {
-        "workspaceSymbols": {
-          "minQueryLength": 0,
-        },
-      },
-    },
     "vtsls": {
       "settings": {
         "typescript": {
@@ -202,16 +191,19 @@
   },
   "languages": {
     "Elixir": {
-      "language_servers": ["dexter", "tailwindcss-language-server"],
+      "language_servers": ["elixir-ls"],
+      "format_on_save": "on",
+      "formatter": "language_server",
+    },
+    "EEx": {
+      "language_servers": ["elixir-ls"],
       "format_on_save": "on",
       "formatter": "language_server",
     },
     "HEEx": {
-      "language_servers": [
-        "dexter",
-        "tailwindcss-language-server",
-        "emmet-language-server",
-      ],
+      "language_servers": ["elixir-ls"],
+      "format_on_save": "on",
+      "formatter": "language_server",
     },
     // Refer https://zed.dev/docs/languages/javascript and https://zed.dev/docs/languages/typescript for more info
     "TypeScript": {

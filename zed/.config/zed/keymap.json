@@ -42,13 +42,13 @@
   {
     "context": "vim_operator == a || vim_operator == i || vim_operator == cs",
     "bindings": {
-      // Traditional Vim betavior
-      "Q": "vim::AnyQuotes",
-      "B": "vim::AnyBrackets",
+      // Traditional Vim behavior
+      "q": "vim::AnyQuotes",
+      "b": "vim::AnyBrackets",
 
       // mini.ai plugin behavior
-      "q": "vim::MiniQuotes",
-      "b": "vim::MiniBrackets",
+      "Q": "vim::MiniQuotes",
+      "B": "vim::MiniBrackets",
     },
   },
   {
@@ -81,7 +81,6 @@
       "space f": "file_finder::Toggle",
       // Project search
       "space /": "pane::DeploySearch",
-      "space -": "project_search::ToggleFocus",
       // TODO: Open other files
       // Show project panel with current file
       "space e": "pane::RevealInProjectPanel",
