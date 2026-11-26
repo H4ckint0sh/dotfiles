@@ -37,7 +37,7 @@
       "enable_next_edit_suggestions": true,
     },
   },
-  "icon_theme": "Zed (Default)",
+  "icon_theme": "Colored Zed Icons Theme Dark",
   "git_panel": {
     "tree_view": true,
     "dock": "right",
@@ -55,6 +55,15 @@
         "font_style": "italic",
       },
     },
+    "panel.background": "#2e3440",
+    "element.background": "#2e3440",
+    "element.hover": "#434c5e",
+    "element.selected": "#4c566a",
+    "element.active": "#4c566a",
+    "ghost_element.background": "#00000000",
+    "ghost_element.hover": "#434c5e",
+    "ghost_element.selected": "#4c566a",
+    "ghost_element.active": "#4c566a",
   },
   "search": {
     "center_on_match": true,
@@ -152,6 +161,14 @@
     "enabled": false,
     "show_background": false,
   },
+
+  //MCP
+  "context_servers": {
+    "Astro docs": {
+      "enabled": true,
+      "url": "https://mcp.docs.astro.build/mcp",
+    },
+  },
   // LSP
   "lsp": {
     "vtsls": {
@@ -205,12 +222,23 @@
       "format_on_save": "on",
       "formatter": "language_server",
     },
+    // Prettier has no Razor parser; disable formatting for .cshtml/.razor
+    "Razor": {
+      // No real Razor formatter exists for Zed; just squeeze repeated blank lines
+      "format_on_save": "on",
+      "formatter": {
+        "external": { "command": "/bin/cat", "arguments": ["-s"] },
+      },
+      "prettier": { "allowed": false },
+      "remove_trailing_whitespace_on_save": true,
+      "ensure_final_newline_on_save": true,
+    },
     // Refer https://zed.dev/docs/languages/javascript and https://zed.dev/docs/languages/typescript for more info
     "TypeScript": {
       // Refer https://github.com/jellydn/ts-inlay-hints for how to setup for Neovim and VSCode
       "language_servers": [
-        "typescript-ls",
         "vtsls",
+        "!typescript-language-server",
         "emmet-language-server",
         "tailwindcss-language-server",
       ],
@@ -226,8 +254,8 @@
     },
     "JavaScript": {
       "language_servers": [
-        "typescript-ls",
         "vtsls",
+        "!typescript-language-server",
         "emmet-language-server",
         "tailwindcss-language-server",
       ],
@@ -243,8 +271,8 @@
     },
     "TSX": {
       "language_servers": [
-        "typescript-ls",
         "vtsls",
+        "!typescript-language-server",
         "emmet-language-server",
         "tailwindcss-language-server",
       ],
