@@ -57,7 +57,22 @@ return {
           end
         },
         panel = { enabled = false },
-      }
+      },
+    config = function(_, opts)
+      require('copilot').setup(opts)
+      -- copilot.lua attaches on BufEnter, which for a quickfix/help/terminal
+      -- buffer fires before 'buftype' is set, so it attaches to them anyway.
+      -- Edits to an attached quickfix list (setqflist from a snacks picker)
+      -- then crash in vim/lsp/sync.lua. Detach once the buffer type is known.
+      vim.api.nvim_create_autocmd({ 'BufWinEnter', 'FileType', 'TermOpen' }, {
+        group = vim.api.nvim_create_augroup('copilot_special_buffers', { clear = true }),
+        callback = function(args)
+          if vim.bo[args.buf].buftype ~= '' then
+            require('copilot.client').buf_detach_if_attached(args.buf)
+          end
+        end,
+      })
+    end,
   },
 
   { -- LLMs

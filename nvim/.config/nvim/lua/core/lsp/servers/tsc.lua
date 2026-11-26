@@ -17,3 +17,9 @@ vim.lsp.config("tsc", {
 		},
 	},
 })
+
+-- Older projects (tsconfig options TypeScript 7 removed) use ts_ls instead.
+local legacy = require("core.lsp.servers.ts_legacy")
+legacy.only_when("tsc", function(bufnr)
+	return not legacy.is_legacy(bufnr)
+end)

@@ -31,6 +31,7 @@ return {
 			require("mason-lspconfig").setup({
 				ensure_installed = {
 					"bashls",
+					"elixirls",
 					"eslint",
 					"graphql",
 					"html",
@@ -38,6 +39,7 @@ return {
 					"lua_ls",
 					"tailwindcss",
 					"tsc", -- TypeScript 7 native (Go) language server
+					"ts_ls", -- for older projects tsc can't handle (core/lsp/servers/ts_legacy.lua)
 					"astro",
 					"emmet_language_server",
 					"svelte",
@@ -45,7 +47,6 @@ return {
 				automatic_enable = {
 					exclude = {
 						"emmet_language_server",
-						"ts_ls", -- replaced by tsc (TypeScript 7)
 						"tsgo", -- deprecated alias of tsc
 					},
 				},
@@ -58,6 +59,7 @@ return {
 				ensure_installed = {
 					"prettier",
 					"djlint",
+					"mix",
 				},
 			})
 		end,

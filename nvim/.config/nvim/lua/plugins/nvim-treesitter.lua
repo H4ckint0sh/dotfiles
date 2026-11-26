@@ -32,6 +32,9 @@ return {
 				"gitignore",
 				"yaml",
 				"git_config",
+				"elixir",
+				"heex",
+				"eex",
 			}
 
 			treesitter.setup()

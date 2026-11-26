@@ -37,4 +37,13 @@ vim.api.nvim_create_user_command( "Ai", function ( opts )
     vim.cmd( string.format( "%sCodeCompanion %s", range, opts.args ) )
 end, { nargs = "*", range = true } )
 
+-- :QFilter pattern   keep quickfix entries whose file name matches pattern
+-- :QFilter! pattern  drop them instead (Vim regex, case-sensitive)
+vim.cmd([[
+function! s:FilterQuickfixList(bang, pattern)
+  let cmp = a:bang ? '!~#' : '=~#'
+  call setqflist(filter(getqflist(), "bufname(v:val['bufnr']) " . cmp . " a:pattern"))
+endfunction
+command! -bang -nargs=1 -complete=file QFilter call s:FilterQuickfixList(<bang>0, <q-args>)
+]])
 

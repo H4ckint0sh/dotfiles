@@ -3,6 +3,7 @@ tap "epk/epk"
 tap "arl/arl"
 tap "jesseduffield/lazygit"
 tap "FelixKratz/formulae"
+tap "acsandmann/tap"
 
 # Binaries
 brew "bash" # Latest Bash version
@@ -16,14 +17,11 @@ brew "bat"
 brew "eza"
 brew "gh"
 brew "git"
-brew "sesh"
 brew "cmake"
 brew "findutils"
 brew "luajit", args: ["HEAD"]
 brew "neovim"
 brew "stow"
-brew "tmux"
-brew "gitmux"
 brew "gum"
 brew "ast-grep"
 brew "difftastic"
@@ -43,6 +41,7 @@ brew "jesseduffield/lazygit/lazygit"
 brew "grep"
 brew "jq" # Used for spatie/visit
 brew "mas" # Mac App Store manager
+brew "acsandmann/tap/rift" # Tiling window manager (config mirrors aerospace)
 brew "pkg-config" # https://github.com/driesvints/dotfiles/issues/20
 
 # Development
