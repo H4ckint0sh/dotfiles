@@ -76,13 +76,51 @@ path=(
     "/usr/local/bin"
     "$HOME/.node/bin"
     "$HOME/.dotnet/tools"
-    "$HOME/.config/sesh/scripts"
     "$HOME/.cargo/bin"
     "$HOME/.yarn/bin"
     "$HOME/.config/yarn/global/node_modules/.bin"
     "$HOME/Library/pnpm"
     $path
 )
+
+# Rex terminals: keep the matching `rex` command first on PATH
+if [[ -n "$REX_BIN_DIR" ]]; then
+    path=("$REX_BIN_DIR" $path)
+fi
+# Rex sets only REX_BLOCK in its terminals; look up the session for the
+# hooks below and for scripts (update, rex-session-init, rex-cht).
+if [[ -n "$REX_BLOCK" && -z "$REX_SESSION" ]] && (( $+commands[rex] )); then
+    export REX_SESSION=$(rex block inspect "$REX_BLOCK" --json 2>/dev/null | jq -r '.session_id // empty')
+    [[ -n "$REX_SESSION" ]] || unset REX_SESSION
+fi
+
+# Rex: name the session after its project folder (git root, else the
+# directory), e.g. ~/projects/alijan -> "alijan". Only renames sessions that
+# still have Rex's generated name (like "quiet-cedar") or are still named
+# after $HOME, so names you set yourself are kept.
+_rex_name_session() {
+    [[ -n "$REX_SESSION" ]] && (( $+commands[rex] )) || return
+    local mark="$HOME/.cache/rex/session-names/${REX_SESSION#session:}"
+    local home=${HOME:t}
+    [[ -f $mark && "$(<$mark)" != "$home" ]] && return  # already named after a project
+    local label
+    label=$(rex session inspect "$REX_SESSION" --json 2>/dev/null | jq -r '.label // empty') || return
+    [[ -n $label ]] || return
+    if [[ $label != "$home" && ! ( ! -f $mark && $label =~ '^[a-z]+-[a-z]+$' ) ]]; then
+        return  # named by you, or by cmd+ctrl+n
+    fi
+    local dir name
+    dir=$(git rev-parse --show-toplevel 2>/dev/null) || dir=$PWD
+    name=${dir:t}
+    [[ $dir == "$HOME" ]] && name=$home
+    [[ $name == "$label" ]] || rex session rename "$REX_SESSION" "$name" >/dev/null 2>&1
+    mkdir -p "${mark:h}" && print -r -- "$name" >| "$mark"
+}
+if [[ -n "$REX_SESSION" ]]; then
+    autoload -Uz add-zsh-hook
+    add-zsh-hook chpwd _rex_name_session
+    _rex_name_session
+fi
 
 export PNPM_HOME="$HOME/Library/pnpm"
 
@@ -184,7 +222,6 @@ zstyle ':completion:*' cache-path ~/.cache/zsh/completions
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 zstyle ':fzf-tab:*' popup-min-size 80 10
-zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
 zstyle ':fzf-tab:*' fzf-bindings 'tab:accept'
 zstyle ':fzf-tab:*' fzf-flags --pointer '▶' --prompt ' ' --gutter ' ' --color=fg:#616E88,fg+:#D8DEE9,pointer:#D8DEE9,border:#616E88,prompt:#B48EAD,info:#D08770,hl:#5E81AC,hl+:#81A1C1,bg:-1,bg+:-1
 
@@ -207,6 +244,19 @@ zvm_after_init() {
 # ================================
 # Useful Functions
 # ================================
+
+# 
+fzf-history-file() {
+  setopt localoptions extendedglob
+  local selected
+  selected=$(print -rl -- "${(@u)${(@Oa)${(@f)$(<~/.zsh_history)}#*: [0-9]##:[0-9]##;}}" | fzf --no-sort --query="$LBUFFER")
+  if [[ -n "$selected" ]]; then
+    LBUFFER="$selected"
+  fi
+  zle reset-prompt
+}
+zle -N fzf-history-file
+bindkey '^R' fzf-history-file
 
 # PR checkout function
 prs() {
@@ -274,3 +324,12 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME/bin:$PATH" ;;
 esac
 # pnpm end
+
+# Rex: a brand-new session (cmd+n) asks for a directory, then opens nvim there
+# with a terminal split beside it.
+# See ~/bin/rex-session-init.
+if [[ -o interactive && -n "$REX_BLOCK" ]] && _rex_dir=$(rex-session-init); then
+  ZSH_START_PWD="$_rex_dir"
+  unset _rex_dir
+  builtin cd -q "$ZSH_START_PWD" && nvim
+fi
