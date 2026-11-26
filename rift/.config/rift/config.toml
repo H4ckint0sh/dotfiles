@@ -1,0 +1,225 @@
+# Rift configuration - mirrors ~/.config/aerospace/aerospace.toml
+# Keep the two in sync: every AeroSpace setting is noted next to its Rift equivalent.
+# Reference: /opt/homebrew/share/rift/rift.default.toml
+
+[modifier_combinations]
+main = "Alt"
+main_shift = "Alt + Shift"
+hyper = "Ctrl + Alt + Shift + Meta" # ctrl-alt-shift-cmd
+
+# ============================================================================
+# GENERAL
+# ============================================================================
+[settings]
+# start-at-login = true -> the launchd service (rift service install) runs at login
+animate = false
+
+# AeroSpace manages every space; Rift must too
+default_disable = false
+
+# on-focus-changed = 'move-mouse window-lazy-center'
+# on-focused-monitor-changed = 'move-mouse monitor-lazy-center'
+mouse_follows_focus = true
+mouse_hides_on_focus = false
+focus_follows_mouse = false
+
+# after-startup-command
+# Rift runs these without a shell, so wrap shell syntax in sh -c
+run_on_start = [
+  "/bin/sh -c 'open -a Zed; open -a \"Microsoft Teams\"; open -a Firefox; open -a \"Microsoft Outlook\"'",
+]
+
+hot_reload = true
+
+# ============================================================================
+# LAYOUT
+# ============================================================================
+[settings.layout]
+# default-root-container-layout = 'accordion'  (Rift's "stack" layout)
+mode = "stack"
+window_insertion_point = "next_to_selection"
+
+[settings.layout.traditional]
+# enable-normalization-flatten-containers / opposite-orientation-for-nested-containers
+equalize_nodes = true
+
+[settings.layout.stack]
+# accordion-padding = 30
+stack_offset = 30.0
+# default-root-container-orientation = 'vertical'
+default_orientation = "vertical"
+
+[settings.layout.gaps.outer]
+top = 12
+left = 12
+bottom = 12
+right = 12
+
+[settings.layout.gaps.inner]
+horizontal = 12
+vertical = 12
+
+# AeroSpace shows no tabs, menu bar items or overview
+[settings.ui.stack_line]
+enabled = false
+
+# Workspaces in the menu bar (not part of AeroSpace)
+[settings.ui.menu_bar]
+enabled = true
+# "layout" draws each workspace's windows; "label" shows just the names (C, X, B ...)
+display_style = "label"
+# "all" workspaces, or only the "active" one per display
+mode = "all"
+# also show workspaces with no windows
+show_empty = false
+# name to show for label style: "name" (C, X, B ...) or "index" (1, 2, 3 ...)
+active_label = "name"
+# show "resize"/"service" next to the workspaces while in that mode
+show_binding_mode = true
+current_display_only = false
+show_fullscreen_indicator = false
+
+[settings.ui.mission_control]
+enabled = false
+
+[settings.gestures]
+enabled = false
+
+[settings.drag_drop]
+enabled = true
+modifier = "Meta"
+preview = true
+
+# ============================================================================
+# WORKSPACES
+# ============================================================================
+[virtual_workspaces]
+# AeroSpace workspaces are global and pinned to monitors
+mode = "global"
+default_workspace_count = 8
+workspace_names = ["C", "X", "B", "E", "D", "M", "Y", "Z"]
+default_workspace = 0
+# AeroSpace: auto-back-and-forth is off; 'workspace next/prev' doesn't wrap
+workspace_auto_back_and_forth = false
+prevent_wrapping = true
+
+# [workspace-to-monitor-force-assignment]
+workspace_rules = [
+  { workspace = "C", display = ["Built-in Retina Display"] },
+  { workspace = "X", display = ["Built-in Retina Display"] },
+  { workspace = "B", display = ["U32J59x", "DELL U2723QE (2)", "Built-in Retina Display"] },
+  { workspace = "E", display = ["U32J59x", "DELL U2723QE (1)", "Built-in Retina Display"] },
+  { workspace = "D", display = ["U32J59x", "DELL U2723QE (1)", "Built-in Retina Display"] },
+  { workspace = "M", display = ["U32J59x", "DELL U2723QE (2)", "Built-in Retina Display"] },
+  { workspace = "Y", display = ["U32J59x", "DELL U2723QE (1)", "Built-in Retina Display"] },
+  { workspace = "Z", display = ["U32J59x", "DELL U2723QE (2)", "Built-in Retina Display"] },
+]
+
+# [[on-window-detected]]
+app_rules = [
+  { app_id = "com.microsoft.teams2", workspace = "C" },
+  { app_id = "com.apple.mail", workspace = "M" },
+  { app_id = "com.microsoft.Outlook", workspace = "M" },
+  { app_id = "com.mitchellh.ghostty", workspace = "E" },
+  { app_id = "org.chromium.Chromium", workspace = "B" },
+  { app_id = "org.mozilla.firefox", workspace = "B" },
+  { app_id = "com.usebruno.app", workspace = "B" }, # Bruno
+  { app_id = "com.hnc.Discord", workspace = "D" },
+  { app_id = "com.electron.dockerdesktop", workspace = "D" },
+  { app_id = "dev.zed.Zed", workspace = "E" },
+  # layout floating
+  { app_id = "com.apple.systempreferences", floating = true },
+  { app_id = "org.m0k.transmission", floating = true },
+  { app_id = "com.apple.iphonesimulator", floating = true },
+  { app_id = "com.cockos.LICEcap", floating = true },
+  { app_id = "com.colliderli.iina", floating = true },
+]
+
+# ============================================================================
+# KEYS - [mode.main.binding]
+# ============================================================================
+[keys]
+# alt-space = 'layout tiles horizontal vertical'
+# alt-comma = 'layout accordion horizontal vertical'
+"main + Space" = { exec = ["/bin/bash", "-c", "exec \"$HOME/bin/rift-aerospace\" tiles"] }
+"main + Comma" = { exec = ["/bin/bash", "-c", "exec \"$HOME/bin/rift-aerospace\" accordion"] }
+
+# focus
+"main + H" = { move_focus = "left" }
+"main + J" = { move_focus = "down" }
+"main + K" = { move_focus = "up" }
+"main + L" = { move_focus = "right" }
+
+# move
+"main_shift + H" = { move_node = "left" }
+"main_shift + J" = { move_node = "down" }
+"main_shift + K" = { move_node = "up" }
+"main_shift + L" = { move_node = "right" }
+
+# workspace C..Z
+"hyper + C" = { switch_to_workspace = 0 }
+"hyper + X" = { switch_to_workspace = 1 }
+"hyper + B" = { switch_to_workspace = 2 }
+"hyper + E" = { switch_to_workspace = 3 }
+"hyper + D" = { switch_to_workspace = 4 }
+"hyper + M" = { switch_to_workspace = 5 }
+"hyper + Y" = { switch_to_workspace = 6 }
+"hyper + Z" = { switch_to_workspace = 7 }
+
+# ['move-node-to-workspace C', 'workspace C']
+"main_shift + C" = { move_window_to_workspace = { workspace = 0, follow = true } }
+"main_shift + X" = { move_window_to_workspace = { workspace = 1, follow = true } }
+"main_shift + B" = { move_window_to_workspace = { workspace = 2, follow = true } }
+"main_shift + E" = { move_window_to_workspace = { workspace = 3, follow = true } }
+"main_shift + D" = { move_window_to_workspace = { workspace = 4, follow = true } }
+"main_shift + M" = { move_window_to_workspace = { workspace = 5, follow = true } }
+"main_shift + Y" = { move_window_to_workspace = { workspace = 6, follow = true } }
+"main_shift + Z" = { move_window_to_workspace = { workspace = 7, follow = true } }
+
+# alt-shift-f = 'fullscreen'
+"main_shift + F" = "toggle_fullscreen"
+# alt-f = 'layout floating tiling'
+"main + F" = "toggle_window_floating"
+
+# alt-tab = 'workspace-back-and-forth'
+"main + Tab" = "switch_to_last_workspace"
+# alt-shift-tab = 'move-workspace-to-monitor --wrap-around next'
+"main_shift + Tab" = { move_workspace_to_display = { selector = "right", wrap_around = true } }
+
+# modes
+"main_shift + S" = { binding_mode = "service" }
+"main_shift + R" = { binding_mode = "resize" }
+
+# 'aerospace list-workspaces --monitor focused --empty no | aerospace workspace prev/next'
+# (right = prev, left = next, as in aerospace.toml)
+"main_shift + Right" = { prev_workspace = true }
+"main_shift + Left" = { next_workspace = true }
+
+# ============================================================================
+# MODES (keep below [keys]: a TOML table header starts a new scope)
+# ============================================================================
+[binding_modes.resize]
+"H" = { resize_window_shrink = "horizontal" } # resize width -50
+"J" = { resize_window_grow = "vertical" }     # resize height +50
+"K" = { resize_window_shrink = "vertical" }   # resize height -50
+"L" = { resize_window_grow = "horizontal" }   # resize width +50
+"B" = "balance"                               # balance-sizes
+"Minus" = { resize_window_shrink = "smart" }  # resize smart -50
+"Equal" = { resize_window_grow = "smart" }    # resize smart +50
+# AeroSpace's resize mode has no exit key; Escape keeps you from getting stuck
+"Escape" = { binding_mode = "default" }
+
+[binding_modes.service]
+# esc = ['reload-config', 'mode main']
+"Escape" = ["reload_config", { binding_mode = "default" }]
+# r = ['flatten-workspace-tree', 'mode main']  (closest: reset to the default layout)
+"R" = [{ set_workspace_layout = { mode = "traditional" } }, { set_workspace_layout = { mode = "stack" } }, "balance", { binding_mode = "default" }]
+# backspace = ['close-all-windows-but-current', 'mode main']
+"Backspace" = [{ exec = ["/bin/bash", "-c", "exec \"$HOME/bin/rift-aerospace\" close-others"] }, { binding_mode = "default" }]
+
+# [mode.join.binding] (no key enters it in aerospace.toml either)
+[binding_modes.join]
+"H" = [{ join_window = "left" }, { binding_mode = "default" }]
+"J" = [{ join_window = "down" }, { binding_mode = "default" }]
+"K" = [{ join_window = "up" }, { binding_mode = "default" }]
+"L" = [{ join_window = "right" }, { binding_mode = "default" }]
