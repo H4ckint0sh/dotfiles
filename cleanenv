@@ -1,10 +1,13 @@
-#! /bin/sh
+#!/bin/sh
 
-pushd $DOTFILES
-for folder in $(echo $STOW_FOLDERS | sed "s/,/ /g")
-do
+STOW_FOLDERS="exported-defaults,lazygit,rift,rex,zsh,ohmyposh,eza,git,bin,nvim,karabiner,bat,bash,gitu,helix,zed,ssh"
+DOTFILES="${DOTFILES:-$HOME/.dotfiles}"
+
+pushd "$DOTFILES" >/dev/null
+for folder in ${STOW_FOLDERS//,/ }; do
     echo "Removing $folder"
-    stow -D $folder
+    stow -D "$folder" 2>/dev/null || true
 done
-popd
+popd >/dev/null
 
+echo "All stow folders unlinked."

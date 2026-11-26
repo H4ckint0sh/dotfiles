@@ -52,31 +52,26 @@ Custom scripts in `bin/bin/`:
 
 ```
 .dotfiles/
-├── bash/           # Bash configuration
-├── bat/            # bat themes/config
-├── bin/            # Custom scripts (stowed to ~/.local/bin)
+├── bash/               # Bash configuration
+├── bat/                # bat themes/config
+├── bin/                # Custom scripts (stowed to ~/.local/bin)
 ├── exported-defaults/  # macOS defaults export
-├── eza/            # eza configuration
-├── git/            # Git configuration
-├── gitu/           # gitu configuration
-├── helix/          # Helix editor config
-├── karabiner/      # Karabiner-Elements config
-├── lazygit/        # lazygit config
-├── nvim/           # Neovim config (lazy.nvim)
-├── ohmyposh/       # oh-my-posh themes
-├── rex/            # Rex terminal multiplexer config
-├── rift/           # Rift window manager config
-├── ssh/            # SSH config
-├── wallpapers/     # Wallpaper images
-├── zed/            # Zed editor config
-├── zsh/            # Zsh configuration
-├── install         # Stow installation script
-├── linkfolders     # Defines STOW_FOLDERS
-├── quickstart.sh   # Main setup script
-├── macsetup        # Homebrew/packages setup
-├── functions       # Shared shell functions
+├── eza/                # eza configuration
+├── git/                # Git configuration
+├── gitu/               # gitu configuration
+├── helix/              # Helix editor config
+├── karabiner/          # Karabiner-Elements config
+├── lazygit/            # lazygit config
+├── nvim/               # Neovim config (lazy.nvim)
+├── ohmyposh/           # oh-my-posh themes
+├── rex/                # Rex terminal multiplexer config
+├── rift/               # Rift window manager config
+├── ssh/                # SSH config
+├── wallpapers/         # Wallpaper images
+├── zed/                # Zed editor config
+├── zsh/                # Zsh configuration
+├── quickstart.sh       # Main setup script (self-contained)
 ├── import-defaults.sh  # Import macOS defaults
-├── cleanenv        # Unlink all stow folders
-├── Makefile        # Build helpers
-└── Brewfile        # Homebrew bundle
+├── cleanenv            # Unlink all stow folders
+└── Brewfile            # Homebrew bundle
 ```

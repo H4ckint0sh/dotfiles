@@ -2,6 +2,7 @@
 
 function importDefaults {
     local zipPath=$1
+    local force=${2:-false}
     local extractDir="$HOME/defaults"
     local appleDir="$extractDir/apple"
     local userDir="$extractDir/user"
@@ -34,13 +35,19 @@ function importDefaults {
 
     if [[ -d "$extractDir" && -n "$(ls -A "$extractDir")" ]]; then
         echo "The extraction directory '$extractDir' is not empty."
-        read -p "Do you want to delete the directory and continue? (y/N): " confirmDelete
-        if [[ $confirmDelete == [Yy] ]]; then
+        if [[ "$force" == "true" ]]; then
+            echo "Force flag set, removing existing directory..."
             rm -rf "$extractDir"
             echo -e "Deleted the existing directory '$extractDir'.\n"
         else
-            echo "Script canceled. Exiting..."
-            exit 0
+            read -p "Do you want to delete the directory and continue? (y/N): " confirmDelete
+            if [[ $confirmDelete == [Yy] ]]; then
+                rm -rf "$extractDir"
+                echo -e "Deleted the existing directory '$extractDir'.\n"
+            else
+                echo "Script canceled. Exiting..."
+                exit 0
+            fi
         fi
     fi
 
@@ -60,7 +67,12 @@ function importDefaults {
 }
 
 if [ -z "$1" ]; then
-    echo "Please provide the path to the zip file."
+    echo "Usage: $0 <zip-file> [--force]"
+    echo "  --force  Skip confirmation prompt (for automation)"
 else
-    importDefaults "$1"
+    force=false
+    if [[ "$2" == "--force" ]] || [[ "$2" == "-y" ]]; then
+        force=true
+    fi
+    importDefaults "$1" "$force"
 fi
