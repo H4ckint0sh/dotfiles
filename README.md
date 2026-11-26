@@ -24,12 +24,11 @@ Run `./cleanenv` to unlink the configs.
 
 ## Apps
 
-- Text editors: [Neovim](https://neovim.io/), [Helix](https://helix-editor.com/), [Zed](https://zed.dev/)
-- Terminal emulator: [Ghostty](https://ghostty.org/) (config in `ghostty/`, not yet stowed)
-- Terminal multiplexer: [Rex](https://www.superlogical.com/rex) (old tmux config archived in `old/tmux`)
-- Window manager: [Rift](https://github.com/acsandmann/rift) (config mirrors [aerospace](https://github.com/nikitabobko/AeroSpace), keep them in sync)
-- Git TUI: [lazygit](https://github.com/jesseduffield/lazygit), [gitu](https://github.com/gitu-dev/gitu)
-- Shell: [zsh](https://www.zsh.org), [bash](https://www.gnu.org/software/bash/)
+- Text editors: [Neovim](https://neovim.io/)
+- Terminal and multiplexer: [Rex](https://www.superlogical.com/rex)
+- Window manager: [Rift](https://github.com/acsandmann/rift) 
+- Git TUI: [lazygit](https://github.com/jesseduffield/lazygit)
+- Shell: [zsh](https://www.zsh.org)
 - Prompt: [oh-my-posh](https://ohmyposh.dev/)
 - Symlink manager: [stow](https://www.gnu.org/software/stow/)
 - Better cat: [bat](https://github.com/sharkdp/bat)
