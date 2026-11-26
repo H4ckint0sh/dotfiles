@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# Rex version of tmux-fzf-url: list the URLs in a pane and open the chosen ones.
+#   rex-fzf-url SESSION_ID BLOCK_ID
+session=$1
+block=$2
+limit=2000
+
+urls=$(rex capture -s "$session" -b "$block" --unwrap 2>/dev/null |
+  tail -n "$limit" |
+  grep -oE '(https?|ftp|file)://[-A-Za-z0-9+&@#/%?=~_|!:,.;]*[-A-Za-z0-9+&@#/%=~_|]' |
+  awk '!seen[$0]++' | tail -r)
+
+if [[ -z $urls ]]; then
+  echo "No URLs found"
+  sleep 1
+  exit 0
+fi
+
+echo "$urls" | fzf --multi --prompt="   " --border-label=" Open URL " |
+  while read -r url; do open "$url"; done
+exit 0

@@ -49,16 +49,6 @@ source ./install
 echo "Importing defaults..."
 ./import-defaults.sh ~/defaults.zip
 
-echo "Checking if ~/.tmux/plugins/tpm directory exists..."
-DIR=~/.tmux/plugins/tpm
-if [ -d "$DIR" ]; then
-  echo "$DIR directory exists, skipping tmux plugins installation."
-else
-  echo "$DIR directory does not exist, installing tmux plugins..."
-  git clone https://github.com/tmux-plugins/tpm "$DIR"
-  "$DIR"/bin/install_plugins
-fi
-
 echo "Installing Rust..."
 if command -v rustup &> /dev/null; then
   echo "Rust is already installed. Updating..."

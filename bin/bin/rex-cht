@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# Rex version of tmux-cht.sh: pick a language/command, query cht.sh,
+# and show the answer in a new Rex tab.
+dir=~/.config/rex/cht
+# Rex sets only REX_BLOCK in its terminals
+[[ -n $REX_SESSION || -z $REX_BLOCK ]] ||
+  REX_SESSION=$(rex block inspect "$REX_BLOCK" --json 2>/dev/null | jq -r '.session_id // empty')
+selected=$(cat "$dir/languages" "$dir/commands" | fzf --border-label ' cht.sh ')
+if [[ -z $selected ]]; then
+  exit 0
+fi
+
+read -rp "Enter Query: " query
+
+if grep -qs "$selected" "$dir/languages"; then
+  query=$(echo "$query" | tr ' ' '+')
+  rex window new -s "$REX_SESSION" "cht.sh" -- bash -c "echo \"curl cht.sh/$selected/$query/\" & curl cht.sh/$selected/$query & while [ : ]; do sleep 1; done" >/dev/null
+else
+  rex window new -s "$REX_SESSION" "cht.sh" -- bash -c "curl -s cht.sh/$selected~$query | less -R" >/dev/null
+fi
+exit 0

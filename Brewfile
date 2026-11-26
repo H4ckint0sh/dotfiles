@@ -2,7 +2,6 @@
 tap "epk/epk"
 tap "arl/arl"
 tap "jesseduffield/lazygit"
-tap "FelixKratz/formulae"
 tap "acsandmann/tap"
 
 # Binaries
@@ -57,6 +56,5 @@ cask "transmission"
 cask "raycast"
 cask "mouse-fix"
 cask "karabiner-elements"
-cask "nikitabobko/tap/aerospace"
 cask "ace-link"
 cask "polypane"

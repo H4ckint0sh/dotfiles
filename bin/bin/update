@@ -1,18 +1,13 @@
 #!/usr/bin/env zsh
 
-# Save the current tmux session name
-ORIGINAL_SESSION_NAME=$(tmux display-message -p '#S')
-
-# Rename the current tmux session to indicate updating
-tmux rename-session -t "$ORIGINAL_SESSION_NAME" "🌎 Updating"
+# Rename the current Rex session to indicate updating
+if [[ -n "$REX_SESSION" ]]; then
+    ORIGINAL_SESSION_NAME=$(rex session inspect "$REX_SESSION" --json | jq -r '.label')
+    rex session rename "$REX_SESSION" "🌎 Updating"
+fi
 
 NOW=$(date +"%Y-%m-%d-%H-%M-%S")
 echo -e "$NOW\n" >> /tmp/u-$NOW.txt
-
-# Update TPM plugins
-gum spin --spinner globe --title "🪟 tpm plugins updating..." --show-output -- ~/.tmux/plugins/tpm/bin/update_plugins all >> /tmp/u-$NOW.txt
-echo "\n" >> /tmp/u-$NOW.txt
-echo "✅ 🪟 tpm plugins updated"
 
 # Sync lazy.nvim
 gum spin --spinner globe --title "💤 lazy.nvim syncing..." -- nvim --headless "+Lazy! sync" +qa
@@ -61,4 +56,6 @@ if gum confirm "Do you want to view the update log?"; then
 fi
 
 # Restore the original session name
-tmux rename-session -t "🌎 Updating" "$ORIGINAL_SESSION_NAME"
+if [[ -n "$REX_SESSION" ]]; then
+    rex session rename "$REX_SESSION" "$ORIGINAL_SESSION_NAME"
+fi

@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+# AeroSpace commands Rift has no single command for. Called from ~/.config/rift/config.toml.
+#   rift-aerospace tiles         alt-space: 'layout tiles horizontal vertical'
+#   rift-aerospace accordion     alt-comma: 'layout accordion horizontal vertical'
+#   rift-aerospace close-others  service backspace: 'close-all-windows-but-current'
+# tiles/accordion switch the focused workspace to that layout, or flip its
+# orientation when it already uses it (like AeroSpace).
+export PATH="/opt/homebrew/bin:$PATH"
+
+focused() { rift-cli query workspaces | jq -r ".[] | select(.is_focused) | $1"; }
+
+layout() {
+  if [[ $(focused .layout_mode) == "$1" ]]; then
+    rift-cli execute layout toggle-orientation
+  else
+    rift-cli execute workspace set-layout "$1"
+  fi
+}
+
+case $1 in
+  tiles) layout traditional ;;
+  accordion) layout stack ;;
+  close-others)
+    focused '.windows[] | select(.is_focused | not) | .window_server_id' |
+      while read -r id; do rift-cli execute window close --window-id "$id"; done
+    ;;
+  *) echo "usage: rift-aerospace tiles|accordion|close-others" >&2; exit 2 ;;
+esac

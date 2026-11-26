@@ -1,0 +1,56 @@
+#!/usr/bin/env bash
+# Rex can't turn on OpenType features, so build a copy of MonoLisa with the
+# features from Zed's buffer_font_features built in ("frozen"):
+#   ss02  script variant (cursive italics)    zero  slashed zero
+# (liga is on by default.) Installs the family "MonoLisa Rex" into
+# ~/Library/Fonts; ~/.config/rex/init.lua uses it. Rerun after updating MonoLisa.
+set -euo pipefail
+fonts=~/Library/Fonts
+features=ss02,zero
+venv=${XDG_CACHE_HOME:-$HOME/.cache}/rex-font-venv
+
+[[ -x $venv/bin/python ]] || python3 -m venv "$venv"
+"$venv/bin/python" -c 'import fontTools' 2>/dev/null || "$venv/bin/pip" -q install fonttools
+
+for style in normal italic; do
+  "$venv/bin/python" - "$fonts/MonoLisa-$style.ttf" "$fonts/MonoLisaRex-$style.ttf" "$features" <<'PY'
+import sys
+from fontTools.ttLib import TTFont
+
+src, dst, features = sys.argv[1], sys.argv[2], set(sys.argv[3].split(","))
+font = TTFont(src)
+gsub = font["GSUB"].table
+
+# Glyph substitutions of the wanted features (single substitutions only).
+subst = {}
+for record in gsub.FeatureList.FeatureRecord:
+    if record.FeatureTag in features:
+        for index in record.Feature.LookupListIndex:
+            lookup = gsub.LookupList.Lookup[index]
+            for table in lookup.SubTable:
+                if lookup.LookupType == 7:  # extension
+                    table = table.ExtSubTable
+                if hasattr(table, "mapping"):
+                    subst.update(table.mapping)
+
+# Point the characters at the substituted glyphs.
+changed = 0
+for cmap in font["cmap"].tables:
+    if cmap.isUnicode():
+        for code, glyph in cmap.cmap.items():
+            if glyph in subst:
+                cmap.cmap[code] = subst[glyph]
+                changed += 1
+
+# Rename the family so it installs next to the original.
+names = font["name"]
+for record in names.names:
+    if record.nameID in (1, 3, 4, 16, 18, 21, 25):
+        record.string = record.toUnicode().replace("MonoLisa", "MonoLisa Rex", 1)
+    elif record.nameID == 6:
+        record.string = record.toUnicode().replace("MonoLisa", "MonoLisaRex", 1)
+font.save(dst)
+print(f"{dst}: {changed} character mappings changed")
+PY
+done
+echo "Installed MonoLisa Rex ($features). Restart Rex to pick it up."

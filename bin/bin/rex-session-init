@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+# Run from ~/.zshrc in every Rex terminal. When this shell is the only pane of
+# a brand-new session (first launch of Rex, or "New Session" in cmd+k), show
+# the same "New session" picker as cmd+n (the new_session action in
+# ~/.config/rex/init.lua) and lay this session out as:
+#   left (75%)           this shell, which then starts nvim in the directory
+#   right (25%), top     a shell in the directory
+#   right (25%), bottom  a shell in the directory
+# Pick a directory in ~/projects or type a name: a plain name means
+# ~/projects/NAME, and ~/... or /... paths are used as they are. A directory
+# that doesn't exist yet is created. The session is renamed after it.
+# Prints the directory and exits 0 when the caller should cd there and start
+# nvim; exits 1 otherwise (not a new session, or it went to an open session).
+# Esc, or no picker at all, makes it the ~/.dotfiles session (or goes to the
+# open one), so the empty session Rex starts with is never left behind.
+# Rex sets only REX_BLOCK; ~/.zshrc exports REX_SESSION, this covers other callers.
+# At app launch the server can be slow to answer, so try for a few seconds.
+for _ in 1 2 3 4 5 6 7 8 9 10; do
+  [[ -n $REX_SESSION || -z $REX_BLOCK ]] && break
+  REX_SESSION=$(rex block inspect "$REX_BLOCK" --json 2>/dev/null | jq -r '.session_id // empty')
+  [[ -n $REX_SESSION ]] || sleep 0.5
+done
+log="$HOME/.cache/rex/session-init.log"
+mkdir -p "${log%/*}"
+note() { printf '%s %s %s\n' "$(date '+%F %T')" "${REX_SESSION#session:}" "$*" >>"$log"; }
+[[ -n $REX_SESSION && -n $REX_BLOCK ]] || { note "no REX_SESSION/REX_BLOCK (block=$REX_BLOCK)"; exit 1; }
+
+json=$(rex session inspect "$REX_SESSION" --json 2>/dev/null) || { note "session inspect failed"; exit 1; }
+fresh=$(jq -r --arg b "$REX_BLOCK" '
+  [.windows[].layers[].blocks[]] as $blocks
+  | (.windows | length) == 1 and ($blocks | length) == 1
+    and $blocks[0].block_id == $b and $blocks[0].label == "shell"
+' <<<"$json")
+[[ $fresh == true ]] || { note "not fresh: $(jq -c '[.windows[].layers[].blocks[] | .label]' <<<"$json")"; exit 1; }
+
+# Waits until the picker is answered; prints {"session_id":..., "dir":...},
+# or nothing when it was cancelled.
+note "asking"
+out=$(rex do -s "$REX_SESSION" -b "$REX_BLOCK" new_session here=true 2>&1)
+note "answer: $out"
+dir=$(jq -r '.dir // empty' 2>/dev/null <<<"$out")
+# Went to an open session (this one is closed), or Esc / no picker: don't
+# leave an empty session behind, make this one the ~/.dotfiles session.
+if [[ -z $dir ]] && ! jq -e '.session_id' >/dev/null 2>&1 <<<"$out"; then
+  out=$(rex do -s "$REX_SESSION" -b "$REX_BLOCK" new_session here=true dir="$HOME/.dotfiles" 2>&1)
+  note "fallback: $out"
+  dir=$(jq -r '.dir // empty' 2>/dev/null <<<"$out")
+fi
+[[ -n $dir && -d $dir ]] || exit 1
+printf '%s\n' "$dir"
