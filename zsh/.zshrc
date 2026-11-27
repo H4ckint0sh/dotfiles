@@ -246,7 +246,7 @@ zvm_after_init() {
 # ================================
 
 # 
-fzf-history-file() {
+fhf() {
   setopt localoptions extendedglob
   local selected
   selected=$(print -rl -- "${(@u)${(@Oa)${(@f)$(<~/.zsh_history)}#*: [0-9]##:[0-9]##;}}" | fzf --no-sort --query="$LBUFFER")

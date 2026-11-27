@@ -523,7 +523,12 @@ rex.bind("ctrl+q", "close_pane_unless_vim")
 -- cmd keys (the ghostty `keybind = cmd+x=text:\x02...` lines)
 -- ============================================================================
 
-rex.bind("cmd+alt+left", "client.tab.previous")                  -- C-b p
+-- Rex's defaults also put pane focus on cmd+alt+arrows; drop them so these only switch
+-- tabs (Rex windows) and pane focus lives on hyper+h/j/k/l
+for _, dir in ipairs({ "left", "right", "up", "down" }) do
+  rex.unbind("cmd+alt+" .. dir)
+end
+rex.bind("cmd+alt+left", "client.tab.previous")                 -- C-b p
 rex.bind("cmd+alt+right", "client.tab.next")                     -- C-b n
 -- cmd+k: Rex's session switcher (Rex default, not rebound)
 rex.bind("cmd+shift+k", "close_sessions")                         -- pick sessions to close

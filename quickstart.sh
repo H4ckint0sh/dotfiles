@@ -133,6 +133,8 @@ defaults write com.superlogical.rex Workspace.balancesSplitsOnCreation -bool fal
 defaults write com.superlogical.rex AppleShowScrollBars -string WhenScrolling
 # open the "Sessions" picker every time Rex starts (launchd agent)
 "$HOME/bin/rex-startup-picker" install
+# the Nord theme (matches nvim) and font need the app running: open Rex, then
+echo "Rex: once Rex.app is open, run 'rex do appearance' to apply the Nord theme and font"
 
 echo "Installing Rust..."
 if command -v rustup &> /dev/null; then
