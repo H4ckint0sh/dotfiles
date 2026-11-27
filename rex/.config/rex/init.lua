@@ -36,14 +36,40 @@ local TABS = {
   fill = false, -- true stretches tabs to fill the bar
 }
 
+local data = os.getenv('XDG_DATA_HOME') or (os.getenv('HOME') .. '/.local/share')
+local plugin = data .. '/nvim/lazy/rex-navigator.nvim'
+local ok, err = pcall(function()
+  dofile(plugin .. '/rex/navigator.lua').setup()
+end)
+if not ok then
+  rex.log('warn', 'rex-navigator not loaded: ' .. tostring(err))
+end
 -- ============================================================================
 -- Helpers
 -- ============================================================================
 
 -- Open a command in a floating layer over the current window, like
 -- `display-popup` / `fzf-tmux -p`. The layer closes when the command exits.
+-- When the command exits, focus goes back to the pane the popup was opened from
+-- (otherwise Rex picks the window's last pane as the layer closes).
+local REX_CLI = HOME .. "/Library/Application Support/com.superlogical.rex/RexServer/Versions/Current/Rex Server.app/Contents/MacOS/rex"
+local RETURN_FOCUS = [[
+s=$1 b=$2 cli=$3; shift 3
+"$@"; status=$?
+[ -n "$REX_BIN_DIR" ] && cli="$REX_BIN_DIR/rex"
+[ -n "$s" ] && [ -n "$b" ] && "$cli" focus -s "$s" "$b" >/dev/null 2>&1
+exit $status
+]]
+
 local function popup(ctx, argv, opts)
   opts = opts or {}
+  if ctx.session_id and ctx.block_id then
+    local wrapped = { "/bin/sh", "-c", RETURN_FOCUS, "sh", ctx.session_id, ctx.block_id, REX_CLI }
+    for _, a in ipairs(argv) do
+      wrapped[#wrapped + 1] = a
+    end
+    argv = wrapped
+  end
   return rex.call("session.new_layer", {
     session_id = ctx.session_id,
     bounds = opts.bounds or { 0.1, 0.1, 0.8, 0.8 },
@@ -403,11 +429,83 @@ rex.action({
 })
 
 -- tmux.conf: bind -r i run-shell "tmux neww tmux-cht.sh"
+-- Rex native UI: pick a topic, type a query in the command palette, then read the
+-- answer in a floating pane (q closes it). Topics: ~/.config/rex/cht/{languages,commands}.
+local CHT = HOME .. "/.config/rex/cht"
+
+local function cht_topics(file, icon, detail)
+  local items = {}
+  local r = rex.exec({ "/bin/cat", CHT .. "/" .. file })
+  for line in ((r and r.ok and r.stdout) or ""):gmatch("[^\r\n]+") do
+    local name = line:match("^%s*(.-)%s*$")
+    if name ~= "" then
+      items[#items + 1] = { name = name, icon = icon, detail = detail }
+    end
+  end
+  return items
+end
+
 rex.action({
   name = "cheat_sheet",
   title = "cht.sh Cheat Sheet",
   run = function(ctx)
-    popup(ctx, { BIN .. "/rex-cht" }, { label = "cht.sh", bounds = { 0.2, 0.15, 0.6, 0.7 } })
+    local items, seen = {}, {}
+    for _, t in ipairs(cht_topics("languages", "code", "language")) do
+      items[#items + 1] = { id = "lang:" .. t.name, title = t.name, icon = t.icon, detail = t.detail }
+    end
+    for _, t in ipairs(cht_topics("commands", "terminal", "command")) do
+      if not seen[t.name] then -- the list has duplicates (cp)
+        seen[t.name] = true
+        items[#items + 1] = { id = "cmd:" .. t.name, title = t.name, icon = t.icon, detail = t.detail }
+      end
+    end
+
+    local picked = rex.ui.pick({
+      title = "cht.sh",
+      placeholder = "Language or command",
+      confirm = "Choose",
+      items = items,
+      allow_other = true, -- any other cht.sh topic
+    })
+    if picked == nil then
+      return
+    end
+    local kind, topic
+    if type(picked) == "table" then
+      kind, topic = "cmd", picked.text
+    else
+      kind, topic = picked:match("^(%a+):(.*)$")
+    end
+    if not topic or topic == "" then
+      return
+    end
+
+    local query = rex.ui.input({
+      title = "cht.sh " .. topic,
+      placeholder = kind == "lang" and "e.g. reverse a list (empty: overview)" or "e.g. delete branch (empty: whole sheet)",
+      confirm = "Search",
+    })
+    if query == nil then
+      return
+    end
+    query = query:match("^%s*(.-)%s*$")
+
+    -- languages: cht.sh/lua/reverse+a+list   commands: cht.sh/git~delete+branch
+    local url = "cht.sh/" .. topic
+    if query ~= "" then
+      url = url .. (kind == "lang" and "/" or "~") .. query:gsub("%s+", "+")
+    end
+    local layer = popup(ctx, { "/bin/sh", "-c", 'curl -s "$1" | less -R', "sh", url }, {
+      label = "cht.sh " .. topic .. (query ~= "" and (" " .. query) or ""),
+      bounds = { 0.15, 0.1, 0.7, 0.8 },
+    })
+    -- The command palette hands focus back to the pane it was opened from as it
+    -- closes, after the layer appears; take it back once the palette is gone.
+    local block = layer and layer.block_ids and layer.block_ids[1]
+    if block then
+      rex.exec({ "/bin/sleep", "0.3" })
+      rex.call("session.focus_block", { session_id = ctx.session_id, block_id = block })
+    end
   end,
 })
 
@@ -511,12 +609,39 @@ end
 -- No-prefix bindings (tmux `bind -n`)
 -- ============================================================================
 
--- Pane navigation: hyper (caps lock, Karabiner) + h/j/k/l moves between Rex panes, so
--- ctrl+h/j/k/l are left to nvim and the shell
-rex.bind("ctrl+alt+shift+cmd+h", "pane.focus", { direction = "left" })
-rex.bind("ctrl+alt+shift+cmd+j", "pane.focus", { direction = "down" })
-rex.bind("ctrl+alt+shift+cmd+k", "pane.focus", { direction = "up" })
-rex.bind("ctrl+alt+shift+cmd+l", "pane.focus", { direction = "right" })
+-- Pane navigation: ctrl+h/j/k/l moves between Rex panes
+-- Vim aware (like vim-tmux-navigator): when nvim runs in the pane, the key goes on to nvim
+-- as ctrl+<key>; nvim moves between its splits and calls `rex focus <dir>`
+-- at the edge (rex-navigator.nvim, nvim/.config/nvim/lua/plugins/rex-navigator.lua).
+local IS_NVIM = [[
+tty=$(ps -o tty= -p "$1" 2>/dev/null | tr -d ' ')
+[ -n "$tty" ] || exit 1
+ps -o state= -o comm= -t "$tty" | grep -iqE '^[^TXZ ]+ +(\S+/)?n?vim$'
+]]
+
+local function nvim_running(ctx)
+  local fg = foreground(ctx)
+  if not (fg and fg.pid) then
+    return false
+  end
+  local r = rex.exec({ "/bin/sh", "-c", IS_NVIM, "sh", tostring(fg.pid) }, { timeout = 2 })
+  return r ~= nil and r.ok == true
+end
+
+for key, dir in pairs({ h = "left", j = "down", k = "up", l = "right" }) do
+  rex.action({
+    name = "navigate_" .. dir,
+    title = "Focus Pane " .. dir .. " (vim aware)",
+    run = function(ctx)
+      if nvim_running(ctx) then
+        rex.client.queue("pane.send_key", { key = "ctrl+" .. key }) -- send_key skips Rex bindings, so no loop
+      else
+        rex.client.queue("pane.focus", { direction = dir })
+      end
+    end,
+  })
+  rex.bind("ctrl+" .. key, "navigate_" .. dir)
+end
 rex.bind("ctrl+q", "close_pane_unless_vim")
 
 -- ============================================================================
@@ -524,7 +649,7 @@ rex.bind("ctrl+q", "close_pane_unless_vim")
 -- ============================================================================
 
 -- Rex's defaults also put pane focus on cmd+alt+arrows; drop them so these only switch
--- tabs (Rex windows) and pane focus lives on hyper+h/j/k/l
+-- tabs (Rex windows) and pane focus lives on ctrl+h/j/k/l
 for _, dir in ipairs({ "left", "right", "up", "down" }) do
   rex.unbind("cmd+alt+" .. dir)
 end

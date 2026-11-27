@@ -142,7 +142,7 @@ M.commands = {
 	},
 	{
 		name = "LSP: Actions",
-		action = "<leader>a",
+		action = "<leader>.",
 	},
 	{
 		name = "LSP: Format",

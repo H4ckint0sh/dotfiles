@@ -3,7 +3,7 @@
 # Exit immediately if a command exits with a non-zero status.
 set -e
 
-STOW_FOLDERS="exported-defaults,lazygit,rift,rex,zsh,ohmyposh,eza,git,bin,nvim,karabiner,bat,bash,gitu,helix,zed,ssh"
+STOW_FOLDERS="lazygit,rift,rex,zsh,ohmyposh,git,bin,nvim,karabiner,bat,bash,zed,ssh"
 DOTFILES=~/.dotfiles
 
 running_macos() {
