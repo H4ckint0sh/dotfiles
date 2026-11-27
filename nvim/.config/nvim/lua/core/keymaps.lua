@@ -39,8 +39,8 @@ keymap.set("n", "L", "vg_")
 -- Y to yank to end of line
 keymap.set("n", "Y", "y$")
 
--- Easy repeat of q@
-keymap.set("n", "Q", "@q")
+-- Q is Neovim's own multicursor key (0.13): Q adds a cursor, CTRL-L clears
+-- them, gQ restores them. Replay the q macro with @q (and @@ to repeat).
 
 -- Comment
 keymap.set("n", "<leader>/", "gcc", { remap = true })

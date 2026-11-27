@@ -6,7 +6,7 @@ function M.format()
 	local eslintrc_js = root_dir .. "/.eslintrc.js"
 
 	-- Check if eslint LSP is active
-	local active_clients = vim.lsp.buf_get_clients()
+	local active_clients = vim.lsp.get_clients({ bufnr = 0 })
 	local eslint_is_active = false
 
 	for _, client in ipairs(active_clients) do

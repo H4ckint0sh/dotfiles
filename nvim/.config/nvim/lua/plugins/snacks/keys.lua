@@ -71,7 +71,15 @@ return {
 		{ "<leader>sc", function() Snacks.picker.command_history() end, desc = "Command History" },
 		{ "<leader>sC", function() Snacks.picker.commands({ layout = { preset = "vscode" } }) end, desc = "Commands" },
 		{ "<leader>d", function() Snacks.picker.diagnostics() end, desc = "Diagnostics" },
-		{ "<leader>h", function() Snacks.picker.help() end, desc = "Help Pages" },
+		{ "<leader>H", function() Snacks.picker.help() end, desc = "Help Pages" },
+		{
+			"<leader>h",
+			function()
+				vim.cmd("nohlsearch") -- search matches
+				vim.lsp.buf.clear_references() -- LSP highlights of the word under the cursor
+			end,
+			desc = "Clear highlights",
+		},
 		{ "<leader>sn", function() Snacks.picker.highlights({pattern = "hl_group:^Snacks"}) end, desc = "Highlights" },
 		{ "<leader>j", function() Snacks.picker.jumps() end, desc = "Jumps" },
 		{ "<leader>k", function() Snacks.picker.keymaps() end, desc = "Keymaps" },

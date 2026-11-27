@@ -96,22 +96,6 @@ end
 -- Custom actions
 -- ============================================================================
 
--- vim-tmux-navigator: ctrl+h/j/k/l moves between panes, unless vim or fzf is
--- running in the pane, which gets the key instead (ctrl+j/k move in fzf lists). nvim hands focus back to Rex
--- at its edges (see nvim/.config/nvim/lua/custom/rex_navigator.lua).
-rex.action({
-  name = "navigate",
-  title = "Navigate Pane (vim aware)",
-  args = { direction = "string", key = "string" },
-  run = function(ctx, args)
-    if vim_or_fzf_running(ctx) then
-      rex.client.queue("pane.send_key", { key = args.key })
-    else
-      rex.client.queue("pane.focus", { direction = args.direction })
-    end
-  end,
-})
-
 -- Resize in small steps (Rex's pane.resize jumps too far): move the border of
 -- the nearest split around the focused pane. left/up move it left/up,
 -- right/down move it right/down, like tmux resize-pane.
@@ -400,8 +384,10 @@ rex.action({
       label = name,
       initial_windows = { {
         window_label = name,
-        -- nvim is typed into a login shell so it gets your PATH and env
-        layout = rex.layout.horizontal(0.75, shell({ initial_input = "nvim\n" }),
+        -- nvim is typed into a login shell so it gets your PATH and env;
+        -- nvim-pane (~/.zshrc) clears the scrollback first: no Rex scrollbar
+        -- (the leading space keeps it out of the shell history)
+        layout = rex.layout.horizontal(0.75, shell({ initial_input = " nvim-pane\n" }),
           rex.layout.vertical(0.5, shell({}), shell({}))),
       } },
     })
@@ -494,9 +480,6 @@ rex.bind(P .. ">shift+n", "new_session")
 -- tmux-fzf-url default key
 rex.bind(P .. ">u", "fzf_url")
 
--- vim-tmux-navigator: bind C-l send-keys 'C-l' (clear screen with prefix)
-rex.bind(P .. ">ctrl+l", "pane.send_key", { key = "ctrl+l" })
-
 -- tmux defaults that were in use
 rex.bind(P .. ">c", "client.tab.new")                                -- new-window
 rex.bind(P .. ">shift+'", "pane.split", { direction = "down" })      -- "  split-window
@@ -528,11 +511,12 @@ end
 -- No-prefix bindings (tmux `bind -n`)
 -- ============================================================================
 
--- vim-tmux-navigator
-rex.bind("ctrl+h", "navigate", { direction = "left", key = "ctrl+h" })
-rex.bind("ctrl+j", "navigate", { direction = "down", key = "ctrl+j" })
-rex.bind("ctrl+k", "navigate", { direction = "up", key = "ctrl+k" })
-rex.bind("ctrl+l", "navigate", { direction = "right", key = "ctrl+l" })
+-- Pane navigation: hyper (caps lock, Karabiner) + h/j/k/l moves between Rex panes, so
+-- ctrl+h/j/k/l are left to nvim and the shell
+rex.bind("ctrl+alt+shift+cmd+h", "pane.focus", { direction = "left" })
+rex.bind("ctrl+alt+shift+cmd+j", "pane.focus", { direction = "down" })
+rex.bind("ctrl+alt+shift+cmd+k", "pane.focus", { direction = "up" })
+rex.bind("ctrl+alt+shift+cmd+l", "pane.focus", { direction = "right" })
 rex.bind("ctrl+q", "close_pane_unless_vim")
 
 -- ============================================================================

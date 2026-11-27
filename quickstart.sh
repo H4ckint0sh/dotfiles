@@ -121,6 +121,19 @@ fi
 echo "Importing defaults..."
 ./import-defaults.sh ~/defaults.zip --force
 
+# Rex app settings the config in rex/ relies on (not in defaults.zip)
+echo "Setting Rex app preferences..."
+# Settings > General "Let Rex and other clients perform actions in this app":
+# lets the startup session picker (bin/rex-session-init) switch sessions
+defaults write com.superlogical.rex rex.client.remoteControl -bool true
+# don't even out every pane on each split (keeps the 75/25 session layout)
+defaults write com.superlogical.rex Workspace.balancesSplitsOnCreation -bool false
+# overlay scroll bars that only show while scrolling (with a mouse attached
+# macOS otherwise draws thick always-visible ones, e.g. beside nvim)
+defaults write com.superlogical.rex AppleShowScrollBars -string WhenScrolling
+# open the "Sessions" picker every time Rex starts (launchd agent)
+"$HOME/bin/rex-startup-picker" install
+
 echo "Installing Rust..."
 if command -v rustup &> /dev/null; then
   echo "Rust is already installed. Updating..."

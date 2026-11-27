@@ -116,17 +116,18 @@ workspace_rules = [
 ]
 
 # [[on-window-detected]]
+# focus = true: when the app opens a window, switch to its workspace (and display) and focus it
 app_rules = [
-  { app_id = "com.microsoft.teams2", workspace = "C" },
-  { app_id = "com.apple.mail", workspace = "M" },
-  { app_id = "com.microsoft.Outlook", workspace = "M" },
-  { app_id = "com.mitchellh.ghostty", workspace = "E" },
-  { app_id = "org.chromium.Chromium", workspace = "B" },
-  { app_id = "org.mozilla.firefox", workspace = "B" },
-  { app_id = "com.usebruno.app", workspace = "B" }, # Bruno
-  { app_id = "com.hnc.Discord", workspace = "D" },
-  { app_id = "com.electron.dockerdesktop", workspace = "D" },
-  { app_id = "dev.zed.Zed", workspace = "E" },
+  { app_id = "com.microsoft.teams2", workspace = "C", focus = true },
+  { app_id = "com.apple.mail", workspace = "M", focus = true },
+  { app_id = "com.microsoft.Outlook", workspace = "M", focus = true },
+  { app_id = "com.mitchellh.ghostty", workspace = "E", focus = true },
+  { app_id = "org.chromium.Chromium", workspace = "B", focus = true },
+  { app_id = "org.mozilla.firefox", workspace = "B", focus = true },
+  { app_id = "com.usebruno.app", workspace = "B", focus = true }, # Bruno
+  { app_id = "com.hnc.Discord", workspace = "D", focus = true },
+  { app_id = "com.electron.dockerdesktop", workspace = "D", focus = true },
+  { app_id = "dev.zed.Zed", workspace = "E", focus = true },
   # layout floating
   { app_id = "com.apple.systempreferences", floating = true },
   { app_id = "org.m0k.transmission", floating = true },

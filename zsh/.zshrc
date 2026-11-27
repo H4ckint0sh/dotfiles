@@ -327,9 +327,16 @@ esac
 
 # Rex: a brand-new session (cmd+n) asks for a directory, then opens nvim there
 # with a terminal split beside it.
+# nvim for the editor pane of a Rex session layout: clear the screen and the
+# scrollback first, so Rex has nothing to scroll and shows no scrollbar there.
+nvim-pane() {
+  printf '\e[H\e[2J\e[3J'
+  nvim "$@"
+}
+
 # See ~/bin/rex-session-init.
 if [[ -o interactive && -n "$REX_BLOCK" ]] && _rex_dir=$(rex-session-init); then
   ZSH_START_PWD="$_rex_dir"
   unset _rex_dir
-  builtin cd -q "$ZSH_START_PWD" && nvim
+  builtin cd -q "$ZSH_START_PWD" && nvim-pane
 fi

@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+# Show the Rex "Sessions" picker every time the Rex app starts, by keeping
+# ~/.config/rex/startup-picker.lua running as a launchd agent.
+#   rex-startup-picker install    install and start the agent
+#   rex-startup-picker uninstall  stop and remove it
+set -euo pipefail
+label=com.superlogical.rex.startup-picker
+plist="$HOME/Library/LaunchAgents/$label.plist"
+rex="$HOME/Library/Application Support/com.superlogical.rex/RexServer/Versions/Current/Rex Server.app/Contents/MacOS/rex"
+script="$HOME/.config/rex/startup-picker.lua"
+
+case ${1:-} in
+  install)
+    mkdir -p "${plist%/*}" "$HOME/.cache/rex"
+    cat >"$plist" <<PLIST
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key><string>$label</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>$rex</string>
+    <string>--autostart=false</string>
+    <string>do</string>
+    <string>--all</string>
+    <string>$script</string>
+  </array>
+  <key>RunAtLoad</key><true/>
+  <!-- restarts it when the Rex server restarts (updates) -->
+  <key>KeepAlive</key><true/>
+  <key>ThrottleInterval</key><integer>15</integer>
+  <key>StandardErrorPath</key><string>$HOME/.cache/rex/startup-picker.log</string>
+</dict>
+</plist>
+PLIST
+    launchctl bootout "gui/$(id -u)/$label" 2>/dev/null || true
+    launchctl bootstrap "gui/$(id -u)" "$plist"
+    echo "installed $plist"
+    ;;
+  uninstall)
+    launchctl bootout "gui/$(id -u)/$label" 2>/dev/null || true
+    rm -f "$plist"
+    echo "removed $plist"
+    ;;
+  *)
+    echo "usage: ${0##*/} install|uninstall" >&2
+    exit 2
+    ;;
+esac

@@ -22,8 +22,12 @@ return {
 					modified = { italic = true },
 				},
 			},
-			-- on_highlights = function(highlights, colors)
-			-- end,
+			on_highlights = function(highlights, colors)
+				-- Neovim 0.13 multicursor (Q, see :h multicursor). Without these the
+				-- extra cursors borrow CurSearch and look like the current search match.
+				highlights.MCursor = { fg = colors.polar_night.origin, bg = colors.frost.ice } -- extra cursors
+				highlights.MCursorVisual = { bg = colors.polar_night.brightest } -- their Visual selections
+			end,
 		})
 		vim.cmd.colorscheme("nord")
 	end,

@@ -143,8 +143,7 @@ end
 local function lsp_clients()
 	-- Prefer the buffer-local API to get clients attached to this buffer
 	local bufnr = vim.api.nvim_get_current_buf()
-	-- Uses older but compatible API: vim.lsp.buf_get_clients(bufnr)
-	local clients = vim.lsp.buf_get_clients(bufnr) or {}
+	local clients = vim.lsp.get_clients({ bufnr = bufnr })
 	if next(clients) == nil then
 		return ""
 	end

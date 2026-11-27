@@ -1,7 +1,11 @@
 -- Setup default configs for all LSP clients
 vim.lsp.config("*", {
 	handlers = {
-		["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" }),
+		-- (vim.lsp.with was removed in Neovim 0.13)
+		["textDocument/signatureHelp"] = function(err, result, ctx, config)
+			config = vim.tbl_extend("force", config or {}, { border = "rounded" })
+			return vim.lsp.handlers.signature_help(err, result, ctx, config)
+		end,
 	},
 	capabilities = (function()
 		local capabilities = require("blink.cmp").get_lsp_capabilities()
